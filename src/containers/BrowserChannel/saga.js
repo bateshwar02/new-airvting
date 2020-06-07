@@ -4,11 +4,11 @@
 
 import { takeLatest, call, put } from 'redux-saga/effects';
 import Utils from '../../utils/common';
-import { notifyError } from '../App/action';
+import { notifyError, notifySuccess } from '../App/action';
 
 import { GET_USER_DATA_BY_ID, GET_POST_DATA_BY_ID, BOOKMARK_ACTION } from './constants';
 import { updatePostData, updateInProcess, updateUserData } from './actions';
-import { addBookMark } from '../Home/action';
+import { addBookMark } from '../../lib/addBookMark';
 import api from './api';
 
 function* getChannelUser({ id }) {
@@ -46,9 +46,14 @@ function* getPostDataByUser({ id }) {
 function* bookMarkActionSaga({ id }) {
   yield put(updateInProcess(true));
   try {
-    yield put(addBookMark({ id }));
+    const bookMarkApiAction = yield call(addBookMark, id);
+    if (bookMarkApiAction.success) {
+      yield put(notifySuccess('Bookmark action perform successfully.'));
+      yield put(updateInProcess(false));
+      return;
+    }
+    yield put(notifyError({ message: bookMarkApiAction.message }));
     yield put(updateInProcess(false));
-    return;
   } catch (e) {
     yield put(updateInProcess(false));
     yield put(notifyError(e));

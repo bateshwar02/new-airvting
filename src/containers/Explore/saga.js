@@ -9,7 +9,7 @@ import {
   updateData, updateInProcess, updateFilter, getExploreData
 } from './actions';
 import api from './api';
-import commonApi from '../../lib/api';
+import { addBookMark } from '../../lib/addBookMark';
 
 function* getExploreDataSaga({ filter }) {
   try {
@@ -30,7 +30,7 @@ function* getExploreDataSaga({ filter }) {
 function* bookMarkActionSaga({ id }) {
   yield put(updateInProcess(true));
   try {
-    const bookMarkApiAction = yield call(commonApi.bookMarkApiAction, id);
+    const bookMarkApiAction = yield call(addBookMark, id);
     if (bookMarkApiAction.success) {
       yield put(notifySuccess('Bookmark action perform successfully.'));
       yield put(updateInProcess(false));
@@ -38,7 +38,6 @@ function* bookMarkActionSaga({ id }) {
     }
     yield put(notifyError({ message: bookMarkApiAction.message }));
     yield put(updateInProcess(false));
-    return;
   } catch (e) {
     yield put(updateInProcess(false));
     yield put(notifyError(e));

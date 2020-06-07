@@ -2,11 +2,11 @@
 
 import { takeLatest, call, put } from 'redux-saga/effects';
 import Utils from '../../utils/common';
-import { notifyError, updateMediaObj } from '../App/action';
-import { addBookMark } from '../Home/action';
+import { notifyError, updateMediaObj, notifySuccess } from '../App/action';
 import { GET_LIKED_VIDEOS_DATA, BOOKMARK_ACTION, UPDATE_VIDEO } from './constants';
 import { updateData, updateInProcess } from './actions';
 import api from './api';
+import { addBookMark } from '../../lib/addBookMark';
 
 function* getLickedVideos() {
   try {
@@ -28,9 +28,14 @@ function* getLickedVideos() {
 function* bookMarkActionSaga({ id }) {
   yield put(updateInProcess({ inProcess: true }));
   try {
-    yield put(addBookMark({ id }));
+    const bookMarkApiAction = yield call(addBookMark, id);
+    if (bookMarkApiAction.success) {
+      yield put(notifySuccess('Bookmark action perform successfully.'));
+      yield put(updateInProcess({ inProcess: false }));
+      return;
+    }
+    yield put(notifyError({ message: bookMarkApiAction.message }));
     yield put(updateInProcess({ inProcess: false }));
-    return;
   } catch (e) {
     yield put(updateInProcess({ inProcess: false }));
     yield put(notifyError(e));

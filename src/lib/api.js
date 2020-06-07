@@ -21,10 +21,5 @@ const Service = {
     };
     return Request.get(url, header);
   },
-
-  bookMarkApiAction(id) {
-    const url = `api/v1/posts/${id}/bookmark `;
-    return Request.get(url);
-  },
 };
 export default Service;

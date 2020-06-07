@@ -1,17 +1,17 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { notifySuccess, notifyError, updateMediaObj } from '../App/action';
+import { addBookMark } from '../../lib/addBookMark';
 
 import {
   BOOKMARK_ACTION, GET_CATEGORY, GET_DATA_BY_CATEGORY, UPDATE_VIDEO
 } from './constatnt';
 import { updateInProcess, updateCategoryData } from './action';
 import api from './api';
-import commonApi from '../../lib/api';
 
 function* bookMarkActionSaga({ id }) {
   yield put(updateInProcess(true));
   try {
-    const bookMarkApiAction = yield call(commonApi.bookMarkApiAction, id);
+    const bookMarkApiAction = yield call(addBookMark, id);
     if (bookMarkApiAction.success) {
       yield put(notifySuccess('Bookmark action perform successfully.'));
       yield put(updateInProcess(false));

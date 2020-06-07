@@ -41,7 +41,7 @@ function Category({ id, addBookMark }) {
     }
 
     return childData.map((item, index) => {
-      const keys = `keys-${index}-${id}`;
+      const keys = `keys-${index}-${id}-${item.title}`;
       const date = new Date(item.createdAt);
       const ticks = date.getTime();
       return (
@@ -56,7 +56,7 @@ function Category({ id, addBookMark }) {
               <div className="dropdown-option-nav" uk-dropdown="pos: bottom-right ;mode : hover ;animation: uk-animation-slide-bottom-small">
                 <ul>
                   <li>
-                    <span role="button" tabIndex={0} onClick={() => addBookMark(item._id)}>
+                    <span role="button" tabIndex={0} onClick={() => addBookMark({ id: item._id })}>
                       {' '}
                       <i className="uil-bookmark" />
                       {' '}
