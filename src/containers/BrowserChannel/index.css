@@ -1,0 +1,12 @@
+.channal-image  img{height: 40px;}
+.uk-grid-large {display: flex;
+    justify-content: space-between;
+    margin-top: 25px;}
+
+.section-small {
+    display: flex;
+    flex-wrap: wrap;
+}    
+
+.imageWrapper {min-width: 260px; margin: 10px;}
+.video-post-thumbnail {cursor: pointer;}

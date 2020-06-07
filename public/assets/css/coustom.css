@@ -1,0 +1,1448 @@
+ body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Alata', sans-serif;
+}
+[class~=button][class~=default] {
+    background: #f07015;
+}
+[class~=button][class~=default]:hover, [class~=button][class~=default]:focus, [class~=button][class~=default][class~=active] {
+    background: black;
+}
+header .btn-upgrade {
+    background: #f07015;
+    border-right: 1px solid white;
+}
+header [class~=icon-browse] [class~=icon-menu-item]:hover, header [class~=btn-upload] {
+    color: white;
+}
+
+header .btn-upgrade:hover, header .btn-upload:hover {
+    background: #171717;
+}
+header [class~=btn-upload] {
+    background-color: #f07015;
+}
+.live-vid-slide {
+    width: 70%;
+    float: left;
+}
+.live-chat-slide {
+    width: 30%;
+    float: right;
+}
+.chat-text-box {
+    color: black;
+    float: right;
+    width: 80%;
+    font-size: 12px;
+    
+}
+.chat-text-box p{
+font-size: 10px;
+    line-height: 12px;
+
+}
+.chat-img {
+    width: 20%;
+    float: left;
+}
+.chat-img img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.chat-inp-box {
+    /*position: absolute;*/
+    bottom: 0;
+    width: 100%;
+    border-top: 1px solid gainsboro;
+}
+.chat-icon {
+    width: 12%;
+    float: left;
+    background: gainsboro;
+    height: 34px;
+    line-height: 35px;
+    padding: 3px;
+    text-align: center;
+    font-size: 20px;
+}
+.chat-icon i {
+    color: black;
+    background: #dcdcdc;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    padding: 0px;
+}
+.chat-send-icon{color: black;width: 30px;height: 30px;line-height: 30px;padding: 3px;float: right;}
+.chat-send-icon i {
+    color: black;
+    background: #dcdcdc;
+    width: 38px;
+    text-align: center;
+    font-size: 18px;
+    height: 40px;
+    line-height: 35px;
+}
+.chat-box-con {
+        float: left;
+        width: 88%;
+        border-bottom: 1px solid gainsboro;
+}
+.chat-box-con input {
+   width: 100%;
+   border: none;
+   outline: none;
+   padding: 12px;
+}
+.chat-li-box {
+    display: flex;
+    height: 57px;
+}
+.chat-ul-box {
+    min-height: 298px;
+    width: 100%;
+}
+.head_user a {
+    margin: 0px 5px;
+}
+a#night-mode i {
+    font-size: 18px;
+    color: #545454;
+    padding-right: 5px;
+}
+
+
+.custom-link {
+    color: black;
+    font-size: 18px;
+    margin-right: 14px !important;
+}
+.custom-link:hover {
+    color: #f27c26;
+    transition: 0.5s;
+}
+.head_search_cont {
+    border: 1px solid gainsboro;
+    line-height: 40px;
+    border-radius: 40px;
+}
+.top-bar-box {
+    background: #ba4b00;
+    color: #fff;
+    display: flow-root;
+}
+.with-50{
+    width: 50%;
+    float: left;
+}
+.social-icon ul li a {
+    font-size: 20px;
+    color: #fff;
+}
+.social-icon ul li {
+    display: inline;
+    margin: 10px;
+}
+.social-icon ul {
+    list-style: none;
+    line-height: 40px;
+    margin-bottom: 0;
+    padding-left: 20px;
+}
+[class~=main_content_inner] {
+    padding-top: 2.5625pc !important;
+}
+.top-bar-link ul li a i {
+    margin-right: 7px;
+    margin-left: 20px;
+}
+
+.top-bar-link ul li a {
+    color: #fff;
+}
+.top-bar-link ul li {
+    display: inline;
+}
+.top-bar-link ul {
+    list-style: none;
+    padding-right: 38px;
+    padding-left: 0;
+    line-height: 40px;
+    margin-bottom: 0;
+    display: inline-block;
+}
+.single-chat-ul-box {
+padding-left: 4px;
+    height: 318px;
+    padding: 10px;
+    width: 100%;
+}
+.live-chat-single {
+    padding-left: 0px;
+}
+[class~=sidebar] [class~=sidebar_innr] [class~=sections]:last-child {
+    padding-bottom: 1.15625in !important;
+}
+.chat-vedio-icon-box{
+    position: absolute;
+    bottom: 0;
+    background: #000;
+    width: 68%;
+    padding: 5px 10px;
+    z-index: 99;
+}
+.w50 {
+    width: 50%;
+    float: left;
+}
+/*css gift*/
+.gift-section li img {
+    width: 30px;
+}
+.gift-section li {
+    display: inline;
+    margin-left: 10px;
+}
+.gift-section {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+.chat-video-gift-box{
+   position: absolute;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.65);
+    width: 68%;
+    height: 230px;
+    padding: 5px 10px;
+    z-index: 99;
+        display: none;
+}
+.chat-video-gift-box li {
+    display: inline;
+    margin-left: 10px;
+}
+.chat-video-gift-box ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+.gift-icon-all span img {
+    width: 45px;
+}
+.gifts-icon {
+   float: left;
+    border: 1px solid rgba(220, 220, 220, 0.09);
+    border-radius: 4px;
+    width: 70px;
+    height: 92px;
+    text-align: center;
+    padding: 10px;
+    margin-left: 15px;
+}
+
+.gifts-icon img { width: 45px; height: 45px; } .gilf-active-icon { border: 1px
+solid #ff8000; border-radius: 4px; } .tootal-coin{ position: absolute; right:
+0; top: 10px; } .gifts-icon p i { color: #ff8000; } /*golive section css*/
+.golive-gift-box { width: 96%; } .golive-gift-popup-box { width: 96%; }
+
+
+.golive-option-box {
+    border: 1px solid #efefef;
+    padding: 10px;
+    background: #fff2db;
+} 
+
+
+.golive-input {
+border-bottom: 1px solid gainsboro; padding: 6px; background: white;
+box-shadow: 2px 0px 9px #f1f0f0; } 
+.golive-input input {
+    width: 66%;
+    padding: 7px;
+    border-radius: 4px;
+    border: 1px solid gainsboro;
+    outline: none;
+
+} 
+.golive-btn {
+    margin-top: 17px;
+}
+.golive-say-somthing img { width: 50px;
+border-radius: 50%; border: 2px solid #ba4b00; 
+
+} 
+
+.golive-say-somthing input {
+    margin-left: 5px;
+    padding: 15px;
+    width: 80%;
+    outline: none;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+.golive-say-somthing { margin-bottom: 7px;
+    
+}
+.golive-input {width: 95%;margin-bottom: 10px;padding: 7px;border-radius: 4px;box-shadow: none;}
+.frm-golive-label {
+    width: 138px;
+    float: left;
+}
+.product-box img {
+    width: 200px;
+}
+.product-box {
+    border: 1px solid gainsboro;
+    padding: 15px;
+    border-radius: 10px;
+    background: #ffffff;
+    box-shadow: 1px 1px 7px #dcdcdc;
+        position: relative;
+}
+.product-title {
+        color: #b94b00;
+        font-size: 30px;
+}
+.like-icon {
+    position: absolute;
+    top: 12px;
+    right: 15px;
+}
+.like-icon i {
+   
+    font-size: 20px;
+}
+.product-box:hover .like-icon i{
+     color: red;
+}
+.product-price {
+    width: 50%;
+    float: left;
+}
+.time-ago {
+    width: 50%;
+    float: right;
+    display: contents;
+}
+.store-inner-addcart-box {
+    margin-top: 25px;
+}
+
+.inc-dec-number {
+       border: 1px solid gainsboro;
+    position: relative;
+    top: -3px;
+    text-align: center;
+    margin: -4px;
+    height: 36px;
+    line-height: 40px;
+    width: 40px;
+}
+.decriment-btn {
+   padding: 2px 10px;
+    font-size: 20px;
+    background: #f07015;
+    color: white;
+    border: none;
+    height: 40px;
+    width: 40px;
+}
+.incriment-btm {
+    padding: 2px 10px;
+    font-size: 20px;
+    background: #f07015;
+    color: white;
+    border: none;
+    height: 40px;
+    width: 40px;
+}
+.store-inner-like i {
+    color: red;
+    font-size: 18px;
+}
+.golive-video-img-w{
+     width: 100%;
+     height: 465px;
+}
+
+
+.btn-addcart.button.default {
+    margin: 0px 15px;
+}
+.store-inner-img img {
+    width: 100%;
+    border: 1px solid gainsboro;
+    padding: 20px;
+    border-radius: 10px;
+    background: #ffffff;
+    box-shadow: 1px 1px 7px #dcdcdc;
+}
+.discount-price {
+    text-decoration: line-through;
+}
+.store-inner-price {
+    padding: 15px 0;
+}
+.store-inner-price span {
+    margin: 0px 5px;
+    font-size: 20px;
+}
+span.sale-price {
+    color: #ba4b00;
+    font-weight: 600;
+}
+.mycart-table-img img {
+    width: 150px;
+}
+.mycart-tokan-img img {
+    width: 60px;
+    height: 60px;
+    background: #f07015;
+    border-radius: 50%;
+    padding: 6px;
+}
+.mycart-total-token {
+    background: #1b1b1b;
+    color: white;
+}
+.mycart-your-token p i {
+    color: #f07015;
+    font-size: 18px;
+}
+.btn-mycart-payment {
+    text-align: center;
+}
+.btn-mycart-payment button {
+    width: 150px;
+}
+/*my-card-css*/
+.add-card-box {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+}
+.add-card-main-content {
+    position: relative;
+}
+.add-card-btn.button.default {
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    padding: 0px;
+    line-height: 35px;
+    text-align: center;
+}
+.my-card-table-img img {
+    width: 70px;
+}
+.my-card-table-cheak i {
+    font-size: 25px;
+}
+.my-card-table-img {
+    text-align: end;
+}
+.my-card-table-img-td {
+    width: 100px;
+}
+/*message css page*/
+.message-person-img img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.message-person-img {
+    width: 20%;
+    float: left;
+}
+.message-persoin-text {
+    width: 80%;
+    float: right;
+    position: relative;
+}
+.message-persoin-total-message {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    background: #f07015;
+    color: white;
+    border-radius: 50%;
+    padding: 3px;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+}
+.message-text-time {
+    color: #259211;
+}
+.message-persoin-name {
+    line-height: 0px;
+}
+.all-message-box ul li {
+list-style: none;
+    display: inline-block;
+    padding: 10px;
+    border-bottom: 1px solid #ececec;
+    width: 95%;
+}
+.all-message-box {
+    font-size: 12px;
+}
+.all-message-box {
+    background: #f7f7f7;
+    border: 1px solid #ececec;
+    padding: 10px 0px;
+    
+}
+.single-message-box ul li {
+    list-style: none;
+    display: flex;
+    position: relative;
+}
+.single-message-person-img img {
+    width: 50px;
+     border-radius: 50%;
+   
+}
+.single-message-persoin-text-left p {
+       padding-right: 55px;
+    font-size: 12px;
+    line-height: 15px;
+    display: flex;
+    margin: 0px;
+}
+.single-message-persoin-text-right p {
+   
+    font-size: 12px;
+    margin-bottom: 0px;
+    background: #ffffff;
+    padding: 5px 0px 5px 80px;
+    margin: 3px 0px;
+
+}
+.single-message-text-time {
+    text-align: center;
+    font-size: 10px;
+    color: #259211;
+    padding: 5px;
+    position: absolute;
+    right: 0;
+    top: 0px;
+}
+.single-message-person-img {
+        width: 12%;
+   
+    float: left;
+}
+
+.single-message-box-main-name p {
+    background: #ef7117;
+    padding: 10px;
+    color: white;
+    font-size: 16px;
+}
+.single-message-box-main-name h3 {
+    text-align: center;
+    background: #fff2db;
+    padding: 20px;
+    margin-bottom: 0;
+    color: #ff8000;
+    text-transform: uppercase;
+}
+.single-message-box {
+    border: 1px solid #efefef;
+    
+}
+
+.single-message-input-box input {
+    width: 81%;
+    padding: 20px;
+    border: 1px solid gainsboro;
+    outline: none;
+}
+.single-message-input-box {
+        position: sticky;
+    bottom: 0px;
+
+}
+.single-message-input-box i {
+    position: absolute;
+    right: 0;
+    top: 0px;
+    font-size: 30px;
+    background: #ff8000;
+    padding: 11px 30px;
+    color: white;
+    height: 35px;
+    line-height: 35px;
+}
+.message-page-content-box {
+    position: relative;
+}
+.add-new-message-box {
+position: absolute;
+    right: 0px;
+    top: 22px;
+}
+.add-new-message-inputs {
+    margin: 10px 0px;
+}
+.message-filedset {
+    border: 1px solid gainsboro;
+}
+.add-new-message-inputs input {
+padding: 10px;
+    border: none;
+    border-bottom: 1px solid gainsboro;
+    outline: none;
+}
+.btn-subs:before {
+    display: none !important;
+}
+.message-page-content-box {
+    padding: 40px 0;
+}
+.single-message-left {
+    background: #fff;
+    padding: 20px;
+}
+.color-box{
+    background: #fff2db !important;
+    padding: 20px;
+}
+.single-message-box ul {
+    padding-left: 0;
+    padding: 15px;
+}
+.all-message-box ul {
+    padding-left: 0;
+}
+.uk-form-row.add-new-message-inputs textarea {
+    font-family: arial;
+    font-weight: 600;
+    padding: 5px;
+    border: none;
+    border-bottom: 1px solid gainsboro;
+    outline: none;
+}
+.m-cart-box {
+    padding: 40px 0;
+}
+.add-card-main-content {
+    padding: 40px 0;
+}
+.card-box select {
+    width: 100%;
+    border: 1px solid gainsboro;
+    padding: 10px;
+}
+
+.card-box input {
+    width: 80%;
+    float: right;
+    padding: 10px;
+    border: 1px solid gainsboro;
+}
+.go-live-bxo {
+    padding: 0px 0;
+}
+.store-box-div {
+    padding: 10px 0;
+    position: relative;
+}
+.store-box-div h3 {
+    font-size: 30px;
+    color: #ba4b00;
+    padding-left: 5px;
+}
+.product-text h3 {
+    font-size: 20px !important;
+    padding: 0 !important;
+}
+.product-details-box {
+    padding: 40px 0;
+}
+.add-stor-itme-box {
+    position: absolute;
+    top: 15px;
+    right: 12px;
+}
+.stor-item-textarea{
+    width: 100%;
+    border: 1px solid gainsboro;
+    height: 100px;
+}
+/*.add-item-dis-time-right {
+    width: 49%;
+    float: right;
+}*/
+.add-item-dis-time {
+   width: 38%;
+    float: right;
+    margin: 2px;
+}
+.add-itam-upload-input input {
+    padding: 39px;
+}
+.add-itam-upload-input {
+    float: left;
+    width: 80%;
+}
+.add-itam-upload-input-img img {
+    width: 100px;
+    float: left;
+}
+.add-itam-upload-input-img i {
+    position: absolute;
+    top: 0px;
+    color: white;
+    left: 81px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.add-itam-upload-input-img {
+    position: relative;
+}
+.my-gift-store-box ul li {
+    list-style: none;
+}
+.my-gift-store-icon img {
+    width: 70px;
+    height: 70px;
+    border: 1px solid #ff9898;
+    border-radius: 50%;
+    padding: 10px;
+}
+.my-gift-store-icon {
+    float: left;
+    border: 1px solid rgba(220, 220, 220, 0.09);
+    border-radius: 4px;
+    width: 70px;
+    height: 92px;
+    text-align: center;
+    padding: 10px;
+    margin: 13px;
+}
+.my-gift-store-icon  p i {
+    color: #ff8000;
+}
+.my-gift-store-active img {
+    border: 2px solid #ff8005;
+    position: relative;
+}
+.my-gift-store-active  {
+    position: relative;
+}
+.my-gift-store-main-hadding span i {
+    color: #f07015;
+    margin-right: 5px;
+}
+.my-gift-store-main-hadding span {
+    margin-left: 10px;
+}
+span.my-gift-store-icon-no {
+    position: absolute;
+    top: 0px;
+    right: 32px;
+    background: #fe7605;
+    padding: 2px;
+    width: 14px;
+    height: 14px;
+    line-height: 14px;
+    text-align: center;
+    border-radius: 50%;
+    color: white;
+    z-index: 99;
+}
+.my-gift-store-main-hadding {
+    color: #000;
+    font-size: 25px;
+    text-align: right;
+}
+.my-gift-store-box h2 {
+    color: #ba4b00;
+    text-transform: uppercase;
+    font-size: 25px;
+}
+.my-gift-store-wallet-box h2 {
+    color: #ba4b00;
+    font-size: 25px;
+}
+.my-gift-store-table-icon i {
+    color: #ff8000;
+    margin-right: 5px;
+}
+.my-gift-store-wallet-box {
+    background: white;
+    padding: 10px;
+}
+.edit-cover-photo {
+    width: 100%;
+    height: 125px;
+    background: #a09e9e;
+        position: relative;
+}
+
+.edit-cover-photo {
+    height: 180px;
+    text-align: center;
+    position: relative;
+}
+.user-edit-box {
+    border: 2px solid rebeccapurple;
+    border-radius: 50%;
+    line-height: 80px;
+    height: 100px;
+    width: 100px;
+    text-align: center;
+    position: relative;
+    top: 120px;
+    left: 43%;
+}
+.user-edit-box h3 {
+    color: red;
+    font-size: 40px;
+    padding-top: 20px;
+}
+.user-edit-icon {
+    width: 30px;
+    height: 30px;
+    background: #fff;
+    border: 1px solid red;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.user-edit-icon i {
+    font-size: 20px;
+    position: relative;
+    top: -24px;
+    color: red;
+}
+.user-bac-img-edit {
+    width: 30px;
+    height: 30px;
+    border: 1px solid red;
+    border-radius: 50%;
+    position: absolute;
+    top: 109px;
+    right: 16px;
+}
+.user-bac-img-edit i {
+    font-size: 20px;
+    position: relative;
+    top: 5px;
+    color: red;
+}
+.user-edit-from input {
+    width: 45%;
+    float: left;
+    padding: 10px;
+    border: 1px solid gainsboro;
+    margin-bottom: 5px;
+    margin-left: 2px;
+    margin-right: 2px;
+    outline: none;
+}
+
+.user-edit-from {
+    margin-top: 70px;
+}
+.user-edit-from textarea {
+width: 95%;
+    margin-bottom: 5px;
+    padding: 10px;
+    font-family: arial;
+    border: 1px solid gainsboro;
+    margin-left: 2px;
+    margin-right: 2px;
+    height: 80px;
+}
+
+
+/*====Loader Css Start====*/
+body.loaded .ms_loader {
+    display: none;
+}
+.ms_loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000000;
+    background-color: #14182a;
+    transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+}
+.ms_inner_loader .ms_loader {
+    background-color: #14182a;
+}
+.ms_inner_loader .ms_loader .bar {
+    background: #ff4865;
+}
+.ms_loader .wrap {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+.ms_loader .wrap .lines {
+    background: linear-gradient(to top, #f85032 0%, #db1ba8 82%, #db1ba8 100%);
+}
+.ms_loader .wrap .lines:nth-child(1) {
+    -webkit-animation: lines 1s 0.1s ease-in-out infinite alternate;
+    animation: lines 1s 0.1s ease-in-out infinite alternate;
+}
+
+/*====Loader Css Stop====*/
+
+
+/*followers buttton popup css start*/
+.followers-popup-table-img img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.followers-popup-table-follow-btn {
+    padding: 2px 10px;
+    margin: 0px;
+    font-size: 12px;
+}
+.followers-popup-table-remove-btn {
+    padding: 2px 10px;
+    margin: 0px;
+    font-size: 12px;
+}
+.followers-popup-table, tr {
+    border: 1px solid gainsboro;
+}
+.follow-follwing-popup-btn {
+    text-align: right;
+}
+
+/*followers buttton popup css stop*/
+
+
+/*follwing buttton popup css start*/
+.following-popup-table-img img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.following-popup-table-follow-btn {
+    padding: 2px 10px;
+    margin: 0px;
+    font-size: 12px;
+    width: 100px
+}
+.following-popup-table-following-btn {
+    padding: 2px 10px;
+    margin: 0px;
+    font-size: 12px;
+    width: 100px
+}
+.following-popup-table, tr {
+    border: 1px solid gainsboro;
+}
+.follow-follwing-popup-btn {
+    text-align: right;
+}
+/*follwing buttton popup css stop*/
+.btn-subscribe {
+    display: flex;
+}
+.followers-popup-box {
+    margin-right: 10px;
+}
+.time-ago {
+    text-align: right;
+}
+.edit-cover-photo {
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.user-edit-box{
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.follow-follwing-channal-btn {
+    margin-left: 10px;
+}
+.channal-btn {
+    width: 120px;
+}
+.edit-profile-radio-btn-left {
+   border: 1px solid gainsboro;
+    width: 46%;
+    float: left;
+    padding: 7px;
+    margin-bottom: 5px;
+    margin-left: 2px;
+}
+.edit-profile-radio-btn-left input {
+    margin: 5px;
+    height: 18px;
+    width: 18px;
+}
+.edit-profile-radio-btn-right {
+   border: 1px solid gainsboro;
+    width: 46%;
+    float: left;
+    padding: 7px;
+    margin-bottom: 5px;
+    margin-left: 6px;
+}
+.edit-profile-radio-btn-right input {
+    margin: 5px;
+   height: 18px;
+    width: 18px;
+}
+.custom-btn {
+    padding: 0px 10px;
+    height: 25px;
+    line-height: 24px;
+    font-size: 10px !important;
+    width: 58px;
+}
+.followe-box {
+    padding: 0px 0;
+}
+.golive-option-box form select {
+    margin-bottom: 10px !important;
+}
+.main_content {
+    padding-top: 70.75pt !important;
+}
+/*.sections ul li a {
+    color: #2f2f2f !important;
+}*/
+table.uk-table thead tr th {
+    color: black;
+    font-size: 16px;
+}
+
+table.uk-table thead {
+    background: #ffa365;
+}
+.grid-slider-header div h3 {
+    font-size: 30px;
+    color: #ba4b00;
+    height: 40px !important;
+    margin-bottom: 0px !IMPORTANT;
+}
+.section-header-left p {
+    color: #2f2f2f;
+}
+
+.section-header-left h3 {
+    font-size: 30px;
+    color: #ba4b00 !important;
+}
+.followe-box h3 {
+    font-size: 30px;
+    color: #ba4b00;
+}
+.uk-form.home-uplod-frm {
+    padding: 15px 0px;
+}
+.uk-form.home-uplod-frm textarea {
+    width: 93%;
+    margin-top: 8px;
+    padding: 10px;
+    border: 1px solid gainsboro;
+}
+.uk-form.home-uplod-frm input {
+    width: 93%;
+    padding: 10px;
+    border: 1px solid gainsboro;
+}
+[class~=dropdown-notifications-content] {
+    height: inherit !important;
+}
+.upload-img-icon-close {
+    position: absolute;
+    top: -6px;
+    right: 0px;
+    color: white;
+    font-size: 22px;
+}
+.upload-img-popup {
+    position: relative;
+}
+.edit-profile-upload-file {
+    vertical-align: inherit;
+    height: 30px !important;
+}
+.inc-dec-box {
+    float: left;
+}
+
+.relative-stroe-ineer-img img {
+    width: 130px;
+    border: 1px solid gainsboro;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.relative-stroe-ineer-img {
+    width: 20%;
+    float: left;
+    margin-top: 10px;
+    border: 1px solid gainsboro;
+    padding: 10px;
+}
+.relative-stroe-ineer-img ul li {
+    list-style: none;
+}
+.relative-stroe-ineer-main-img {
+    float: right;
+    width: 70%;
+    padding: 10px;
+}
+.relative-stroe-ineer-img ul {
+    padding: 0px;
+    margin: 0px;
+}
+.my-cart-hadder-total {
+    float: right;
+    background: #ff8000;
+    width: 25px;
+    height: 25px;
+    line-height: 15px;
+    color: white;
+    padding: 5px;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 12px;
+}
+.store-inner-stars ul li i {
+    color: #ff8000;
+    font-size: 20px;
+}
+.store-inner-stars ul li {
+    list-style: none;
+    display: inline;
+}
+.store-inner-stars h4 {
+    margin: 0;
+    float: left;
+    margin-right: 5px;
+}
+.store-inner-stars ul {
+    margin: 0;
+    padding: 0;
+}
+.store-inner-stars {
+    padding-bottom: 10px;
+}
+.store-inner-related-product-img img {
+    padding: 5px;
+    width: 150px;
+    border: 1px solid gainsboro;
+}
+.store-inner-related-product-box {
+    border: 1px solid gainsboro;
+    text-align: center;
+    padding: 10px;
+    box-shadow: 1px 1px 7px #c5c5c5;
+}
+.btn-addcart-related {
+    font-size: 10px;
+    width: 90px;
+    height: 30px;
+    line-height: 25px;
+    text-align: center;
+    padding: 0px;
+}
+.store-inner-related-product-box h4 {
+    margin: 0;
+    padding: 5px 0px;
+}
+#mobile-logo {
+    display: none;
+}
+.video-info-title h1 {
+    font-size: 14px;
+}
+.total-earning-ul-box {
+    border: 1px solid gainsboro;
+    height: 120px;
+    width: 100px;
+    padding: 8px;
+}
+.total-earning-ul {
+    display: flow-root;
+}
+.total-earning-hadding {
+    margin-left: 43px;
+    margin-top: 10px;
+    position: relative;
+}
+.total-earning-price-box i {
+    color: #ff8000;
+    font-size: 18px;
+    padding: 5px;
+}
+.total-earning-price-box {
+    position: absolute;
+    top: 63px;
+    right: 108px;
+    font-size: 16px;
+}
+.delete-account-hadding h5 {
+    color: #ff7000;
+}
+
+.delete-account-hadding {
+    text-align: center;
+    padding-top: 20px;
+}
+.delete-account-reason textarea {
+    width: 100%;
+    height: 100px;
+}
+/*mobile media query strt*/
+@media screen and (min-device-width: 320px) and (max-device-width: 480px) { 
+   .head_user a {
+    font-size: 16px;
+    margin: 0px;
+    padding: 0px;
+}
+#mobile-logo {
+    display: block !important;
+}
+#mobile-logo a img {
+    width: 38px;
+    margin-left: 10px;
+}
+.mobile-with-30 {
+    width: 26%;
+    float: left;
+}
+.mobile-with-70 {
+    width: 74%;
+}
+.top-bar-link ul {
+    padding-right: 10px;
+}
+.live-vid-slide {
+    width: 100%;
+    float: left;
+}
+.chat-video-gift-box {
+    position: absolute;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.65);
+    width: 95%;
+    height: 230px;
+    padding: 5px 10px;
+    z-index: 99;
+    display: none;
+}
+.chat-vedio-icon-box {
+    position: absolute;
+    bottom: 0;
+    background: #000;
+    width: 94% !important;
+    padding: 5px 10px;
+    z-index: 99;
+}
+.live-chat-slide {
+    width: 100%;
+    float: right;
+    margin-top: 15px;
+}
+.slide-mobile-item li iframe {
+    height: 179px;
+}
+.slide-mobile-item li {
+    position: inherit !important;
+}
+.chat-ul-box {
+    padding-left: 0;
+}
+[class~=main_content_inner] {
+    padding-top: 0.5625pc !important;
+}
+.chat-ul-box {
+    min-height: 280px;
+    width: 100%;
+}
+.uk-tab.gift-tab-box li a {
+    padding: 0;
+}
+.gifts-icon img {
+    width: 22px;
+    height: 22px;
+}
+.gifts-icon {
+    float: left;
+    width: 40px;
+    height: 70px;
+    text-align: center;
+    margin-left: 5px;
+}
+.tootal-coin {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.gifts-icon p {
+    font-size: 10px;
+}
+.product-box {
+    border: 1px solid gainsboro;
+    padding: 15px;
+    border-radius: 10px;
+    background: #ffffff;
+    box-shadow: 1px 1px 7px #dcdcdc;
+    position: relative;
+    text-align: center;
+    width: 70%;
+    margin: 0 auto;
+}
+.btn-subscribe {
+    display: inherit;
+}
+.followers-popup-box {
+   margin-bottom: 5px;
+    float: left;
+}
+.user-edit-box {
+  left: 32%;
+}
+.user-edit-from input {
+    width: 90%;
+}
+.edit-profile-radio-btn-left {
+   width: 90%;
+
+}
+.edit-profile-radio-btn-right {
+    width: 90%;
+
+}
+.golive-say-somthing input {
+    width: 68%;
+}
+button.button.default {
+    font-size: 10px;
+    width: 70px;
+    height: 25px;
+    text-align: center;
+    line-height: 24px;
+    padding: 0px !important;
+    margin: 2px  !important;
+}
+.right-side {
+    padding-top: 65px;
+}
+.following-popup-box {
+    float: left;
+}
+.btn-mobile.btn-dekstop a {
+    margin: 0;
+    padding: 0;
+}
+.btn-mobile.btn-dekstop {
+    float: left;
+}
+.followers-popup-table-img img {
+    width: 90px;
+  
+}
+.following-popup-table-img img {
+    width: 90px;
+}
+.m-cart-box {
+    text-align: center;
+}
+.mycart-ceakbox input {
+    width: 15px;
+    height: 15px;
+}
+.mycart-ceakbox {
+    text-align: right;
+}
+.mycart-table-img img {
+    width: 210px;
+}
+.inc-dec-number {
+   
+    height: 26px;
+    line-height: 26px;
+    width: 30px;
+    top: -2px;
+}
+.decriment-btn {
+ 
+    height: 30px;
+    width: 30px;
+}
+.incriment-btm {
+   
+    height: 30px;
+    width: 30px;
+}
+[class*='uk-dropdown-bottom'] {
+    margin-top: -1px !important;
+}
+.message-mobile-box {
+    width: 100%;
+}
+.single-message-mobile-box {
+    width: 100%;
+}.single-message-input-box input {
+    width: 72%;
+    padding: 16px;
+}
+.single-message-input-box i {
+    font-size: 25px;
+    padding: 11px 16px;
+    height: 25px;
+    line-height: 25px;
+}
+.mobile-with-30 img {
+    width: 40px !important;
+}
+div#video-box {
+    height: 200px;
+}
+.edit-profile-radio-btn-right input {
+    width: 14px;
+}
+.edit-profile-radio-btn-right {
+    width: 45%;
+}
+.edit-profile-radio-btn-left {
+    width: 40%;
+}
+.edit-profile-radio-btn-left input {
+    width: 14px;
+}
+.my-card-table-cheak {
+    text-align: center;
+    margin: 10px;
+}
+.card-box input {
+    width: 90%;
+}
+.uk-form-width-large {
+    width: 225px !important;
+}
+.golive-input input {
+    width: 94%;
+}
+}
+/*mobile media query stop*/

@@ -1,0 +1,9 @@
+export const USER_DATA = 'app/Home/USER_DATA';
+export const DATA_BY_CATEGORY = 'app/Home/DATA_BY_CATEGORY';
+export const BOOKMARK_ACTION = 'app/Home/BOOKMARK_ACTION';
+export const GET_CATEGORY = 'app/Home/GET_CATEGORY';
+export const GET_DATA_BY_CATEGORY = 'app/Home/GET_DATA_BY_CATEGORY';
+export const Is_PROCESS_ACTION = 'app/Home/Is_PROCESS_ACTION';
+export const UPDATE_CATEGORY_DATA = 'app/Home/UPDATE_CATEGORY_DATA';
+export const UPDATE_DATA_BY_CATEGORY = 'app/Home/UPDATE_DATA_BY_CATEGORY';
+export const UPDATE_VIDEO = 'app/Home/UPDATE_VIDEO';

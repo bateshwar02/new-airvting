@@ -1,0 +1,43 @@
+.videoWrapper{
+    display: flex;
+    flex-wrap: wrap !important;
+}
+
+.videoList { margin: 20px 0px;}
+
+.buttonWrapper{ display: flex; flex-direction: row; align-items: center; }
+
+.buttonWrapper .listWrapper {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: auto auto auto auto;
+    grid-template-rows: auto;
+    grid-column-gap: 5px;
+    grid-row-gap: 15px;
+    justify-content: space-around;
+    padding: 2px 0px;
+}
+
+.buttonWrapper .listWrapper .actionButton {
+    box-shadow: 0 2px 1px 0 rgba(99,99,99,0.2);
+    height: 25px;
+    min-width: 70px;
+    background: #ffffff;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-content: center;
+    text-align: center;
+    align-items: center;
+    padding: 5px;
+    font-size: 11px;
+    outline: none;
+}
+
+.buttonWrapper .active {
+    color: #f07015;
+    border: 1px solid #f07015;
+}
+
+.actionSpan {cursor: pointer;}

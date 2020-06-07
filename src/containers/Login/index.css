@@ -1,0 +1,66 @@
+
+
+@import "../../style/form.css";
+
+span.input-group-addon {
+    background-color: #ffffff !important;
+}
+
+.form-group label.control-label {
+    margin-bottom: 5px;
+    display: block;
+    font-weight: 600;
+    font-family: 'Alata', sans-serif;
+    font-size: 16px;
+}
+
+.form-group input {font-family: 'Alata', sans-serif;}
+.form-group input {font-family: 'Alata', sans-serif;}
+.form-group.checkbox-group { display: flex;}
+.form-group.checkbox-group div {margin-right: 50px;}
+.form-group.checkbox-group div span{font-family: 'Alata', sans-serif;}
+.loginWrapper{min-height: calc(100vh); }
+.loginWrapper.button.warning{ border-radius: 4px;} 
+.checkboxLabel span, .radioLabel span {font-family: 'Alata', sans-serif;}
+
+label.checkboxLabel input[type="checkbox"]:checked +span:after {
+    content: "";
+    width: 5px;
+    height: 7px;
+    border: 2px solid #ff6200;
+    position: absolute;
+    left: 4px;
+    top: 5px;
+    display: block;
+    border-top: none;
+    background-color: #ff6200;
+    border-radius: 50%;
+}
+
+.actionPointer {cursor: pointer;}
+
+label.checkboxLabel input[type="radio"]:checked +span:after {
+    content: "";
+    width: 5px;
+    height: 7px;
+    border: 2px solid #ff6200;
+    position: absolute;
+    left: 4px;
+    top: 5px;
+    display: block;
+    border-top: none;
+    background-color: #ff6200;
+    border-radius: 50%;
+}
+
+.radioLabel > span:before {
+    content: "";
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    border: 2px solid #A8B7C7;
+    position: absolute;
+    left: 0;
+    top: 1px;
+    border-radius: 50%;
+}
