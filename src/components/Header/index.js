@@ -7,14 +7,12 @@ import { compose, bindActionCreators } from 'redux';
 import Utils from '../../utils/common';
 import * as Actions from '../../containers/App/action';
 import Navigation from '../../utils/navigation';
+import Search from '../search';
 import './header.css';
 
-function Header({ userData, getUserData }) {
+function Header({ userData }) {
   let userProfileImg = 'assets/images/avatars/avatar-1.jpg';
   useEffect(() => {
-    if (Utils.isUndefinedOrNullOrEmptyObject(userData)) {
-      getUserData();
-    }
     if (!Utils.isUndefinedOrNullOrEmptyObject(userData)) {
       const { userDetail } = userData;
       if (!Utils.isUndefinedOrNullOrEmptyObject(userDetail) && !Utils.isUndefinedOrNullOrEmpty(userDetail.coverImage)) {
@@ -69,14 +67,19 @@ function Header({ userData, getUserData }) {
 
       <ul className="dropdown-user-menu">
         <li>
-          <a href="my-channal.php">
+          <Link to={`/browser-channel/${userDetail._id}`}>
+            <i className="uil-user" />
+            {' '}
+            My Channal
+          </Link>
+          {/* <a href="my-channal.php">
             {' '}
             <i className="uil-user" />
             {' '}
             My Channal
             {' '}
           </a>
-          {' '}
+          {' '} */}
         </li>
         <li>
           <a href="my-cart.php">
@@ -435,9 +438,7 @@ function Header({ userData, getUserData }) {
       </div>
       <header>
         <i className="header-traiger uil-bars" uk-toggle="target: #wrapper ; cls: collapse-sidebar mobile-visible" />
-
         <div id="logo">
-          {/* <Link to={Navigation.home}> */}
           <Link to="/sh/airvtingweb/">
             <span className="buttonWrapper" onClick={() => Navigation.push(Navigation.home)} role="button" tabIndex={0}>
               {' '}
@@ -450,45 +451,7 @@ function Header({ userData, getUserData }) {
             <img src="assets/images/logo-light.png" className="logo-inverse" alt="" />
           </span>
         </div>
-
-        <div className="head_search">
-          <form>
-            <div className="head_search_cont">
-              <input value="" type="text" className="form-control" placeholder="Search for Videos, Games, Movies and more.." autoComplete="off" />
-              <i className="s_icon uil-search-alt" />
-            </div>
-
-            <div uk-dropdown="pos:top;mode:click;animation:uk-animation-slide-bottom-small" className="dropdown-search">
-              <ul className="dropdown-search-list">
-                <li className="list-title"> Recent Searches </li>
-                <li>
-                  {' '}
-                  <a href="video.php"> Adobe XD Design Free Tutorial .. </a>
-                  {' '}
-                </li>
-                <li>
-                  {' '}
-                  <a href="video.php"> How to create a basic Sticky HTML element .. </a>
-                </li>
-                <li>
-                  {' '}
-                  <a href="video.php"> Learn How to Prototype Faster with Mockplus! in 2020</a>
-                </li>
-                <li>
-                  {' '}
-                  <a href="video.php"> Adobe XD Design Tutorial Company Website Landing Page .. </a>
-                </li>
-                <div className="menu-divider">
-                  <li className="list-footer">
-                    {' '}
-                    <a href="your-history.php"> Searches History </a>
-                  </li>
-                </div>
-              </ul>
-            </div>
-          </form>
-        </div>
-
+        <Search />
         {!Utils.isUndefinedOrNullOrEmptyObject(userData) && withLoginContent()}
         {Utils.isUndefinedOrNullOrEmptyObject(userData) && withoutLoginContent()}
       </header>
@@ -498,7 +461,6 @@ function Header({ userData, getUserData }) {
 
 Header.propTypes = {
   userData: PropTypes.object.isRequired,
-  getUserData: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ userDetails: { userData } }) => ({ userData });

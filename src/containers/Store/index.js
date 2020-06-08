@@ -263,7 +263,7 @@ export function Store() {
   return (
     <div id="wrapper">
       <Sidebar />
-      <Header isLogin />
+      <Header />
       {getStoreContent()}
     </div>
   );

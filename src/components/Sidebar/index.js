@@ -1,11 +1,16 @@
+import cookie from 'cookies-js';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import Navigation from '../../utils/navigation';
 import Followers from './components/followers';
+import Utils from '../../utils/common';
 import './sidebar.css';
 
 function Sidebar() {
+  const token = cookie.get('token');
+  const userId = cookie.get('userId');
+
   const getLocationParams = () => {
     if (!window.location) {
       return '';
@@ -102,7 +107,7 @@ function Sidebar() {
               </li>
             </ul>
           </div>
-          <Followers />
+          {!Utils.isUndefinedOrNullOrEmpty(token) && !Utils.isUndefinedOrNullOrEmpty(userId) && <Followers /> }
           <div className="sections">
             <h3> PAGES </h3>
             <ul>

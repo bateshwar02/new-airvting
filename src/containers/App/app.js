@@ -37,7 +37,8 @@ export function App({ userData, getUserData }) {
       setIsLogin(false);
       return;
     }
-    if (Utils.isUndefinedOrNullOrEmptyObject(userData)) {
+
+    if (Utils.isUndefinedOrNullOrEmptyObject(userData) && !Utils.isUndefinedOrNullOrEmpty(token) && !Utils.isUndefinedOrNullOrEmpty(userId)) {
       getUserData();
     }
   }, []);

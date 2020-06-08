@@ -38,11 +38,13 @@ header.head_user{display: flex; flex-direction: row; flex-flow: row; justify-con
     padding-top: .083333333in;
     padding-bottom: .083333333in;
     transition: .3s;
-    font-size: .875pc;
+    font-size: .975pc;
     margin: 0px 5px;
     text-decoration: none;
     cursor: pointer;
 }
+
+.profileMenu .icon-feather-moon {padding-bottom: 10px;}
 
 .night-mode .custom-link{ color: #c7c7c7 !important; }
 .night-mode .btn-night-mode .uk-switch-button:before {

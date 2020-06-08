@@ -3,11 +3,6 @@ import cookie from 'cookies-js';
 import Request from '../../utils/request';
 import Utils from '../../utils/common';
 
-// export async function getUsers() {
-//   const response = await fetch('https://jsonplaceholder.typicode.com/users');
-//   return response.json();
-// }
-
 const Service = {
   getUserProfileDetails() {
     const token = cookie.get('token');

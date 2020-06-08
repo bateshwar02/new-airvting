@@ -1,0 +1,13 @@
+.form-group.form-group-depth-1.form-group-search {
+    border: 0px solid #fff;
+}
+.form-group-search .input-group {position: relative; border: 0px solid #fff; }
+.form-group-search .input-group span.input-group-addon {position: absolute;
+	background-color: #F4F6FC !important; top: 8px; left: 4px;}
+	
+.night-mode	.form-group-search .input-group span.input-group-addon {position: absolute;
+	background-color: #08090f !important; top: 8px; left: 4px;}
+	
+	.form-group-search label.control-label span{ display: none; }	
+	.head_search_cont {border: 0px solid #fff;}
+	.form-group-search .input-group{ border-radius: 40px !important;}
