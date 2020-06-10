@@ -10,7 +10,7 @@ import Navigation from '../../utils/navigation';
 import Search from '../search';
 import './header.css';
 
-function Header({ userData }) {
+function Header({ userData, logout }) {
   let userProfileImg = 'assets/images/avatars/avatar-1.jpg';
   useEffect(() => {
     if (!Utils.isUndefinedOrNullOrEmptyObject(userData)) {
@@ -69,50 +69,30 @@ function Header({ userData }) {
         <li>
           <Link to={`/browser-channel/${userDetail._id}`}>
             <i className="uil-user" />
-            {' '}
-            My Channal
+            My Channel
           </Link>
-          {/* <a href="my-channal.php">
-            {' '}
-            <i className="uil-user" />
-            {' '}
-            My Channal
-            {' '}
-          </a>
-          {' '} */}
         </li>
         <li>
-          <a href="my-cart.php">
-            {' '}
+          <Link to="/cart">
             <i className="icon-material-outline-add-shopping-cart" />
-            {' '}
             My Cart
             <div className="my-cart-hadder-total">10</div>
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="my-card.php">
-            {' '}
+          <Link to="/cards">
             <i className="icon-material-outline-credit-card" />
-            {' '}
             My Cards
-            {' '}
-          </a>
-          {' '}
+          </Link>
         </li>
 
         <li>
-          <a href="message.php">
-            {' '}
+          <Link to="/message">
             <i className="icon-material-baseline-mail-outline" />
-            {' '}
             Messages
-            {' '}
-          </a>
-          {' '}
+          </Link>
         </li>
         <li>
-
 
           <span id="night-mode" className="btn-night-mode profileMenu">
             <i className="icon-feather-moon" />
@@ -124,11 +104,11 @@ function Header({ userData }) {
           </span>
         </li>
         <li>
-          <a href="my-card.php">
+          <span className="profileMenu" role="button" onClick={logout} tabIndex={-1}>
             <i className="icon-feather-log-out" />
             {' '}
-            Sing Out
-          </a>
+            Sign-out
+          </span>
         </li>
       </ul>
     </div>
@@ -159,7 +139,7 @@ function Header({ userData }) {
             <i className="icon-feather-settings" uk-tooltip="title: Message settings ; pos: left" />
           </span>
         </div>
-        <div className="dropdown-notifications-content" data-simplebar>
+        <div className="dropdown-notifications-content data-simplebar">
           <ul>
             <li>
               <span className="notificationWrapper">
@@ -461,6 +441,7 @@ function Header({ userData }) {
 
 Header.propTypes = {
   userData: PropTypes.object.isRequired,
+  logout: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ userDetails: { userData } }) => ({ userData });

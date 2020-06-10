@@ -21,13 +21,10 @@ const Service = {
     }
   },
 
-  logout() {
-    return Service.clearCredentials('auth-token', 'organisationId');
-  },
+  socialLogin(formData) {
+    const url = '/api/v1/socialSignIn';
+    return Request.post(url, formData);
+  }
 
-  clearCredentials(key, organisationKey) {
-    cookie.expire(key);
-    cookie.expire(organisationKey);
-  },
 };
 export default Service;

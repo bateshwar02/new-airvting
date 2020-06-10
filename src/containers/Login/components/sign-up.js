@@ -122,7 +122,7 @@ function Signup({ setAction, signUp }) {
         attrs: {
           validateRegex: /^(\d{1}){0,10}$/,
         },
-        type: 'number',
+        type: 'text',
       },
       password: {
         label: 'Password',
@@ -148,6 +148,10 @@ function Signup({ setAction, signUp }) {
           timeFormat: false,
           placeholder: 'Date Of Birth',
           dateFormat: 'dd MMM yyyy',
+          isValidDate(current) {
+            const currentDate = new Date();
+            return current.getTime() <= currentDate.getTime();
+          },
         },
         transformer: airvForm.transformers.dateTransformer,
         error: (val) => {

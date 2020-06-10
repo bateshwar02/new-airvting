@@ -64,3 +64,5 @@ label.checkboxLabel input[type="radio"]:checked +span:after {
     top: 1px;
     border-radius: 50%;
 }
+
+.date-input-group span.inputIcon{padding: 0px 5px 5px 0px;}

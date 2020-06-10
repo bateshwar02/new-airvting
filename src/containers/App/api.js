@@ -16,5 +16,13 @@ const Service = {
     };
     return Request.get(url, header);
   },
+
+  logout() {
+    return Service.clearCredentials('token', 'userId');
+  },
+  clearCredentials(token, userId) {
+    cookie.expire(token);
+    cookie.expire(userId);
+  },
 };
 export default Service;

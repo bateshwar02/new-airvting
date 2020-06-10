@@ -21,6 +21,7 @@ const Navigation = {
   videoDetails: '/video/:id',
   goLive: '/live',
   browserChannel: '/browser-channel/:id',
+  message: '/message',
   push: (url) => {
     history.push(url);
   },

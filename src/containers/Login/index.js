@@ -16,12 +16,12 @@ import Loader from '../../components/Loader';
 import './index.css';
 
 export function Login({
-  signIn, signUp, action, updateActions, inProcess
+  signIn, signUp, action, updateActions, inProcess, socialLogin
 }) {
   const getComponent = () => {
     switch (action) {
       case 1:
-        return <Signin setAction={updateActions} signIn={signIn} />;
+        return <Signin setAction={updateActions} signIn={signIn} socialLogin={socialLogin} />;
       default:
         return <Singnup setAction={updateActions} signUp={signUp} />;
     }
@@ -41,6 +41,7 @@ Login.propTypes = {
   updateActions: PropTypes.func.isRequired,
   action: PropTypes.number.isRequired,
   inProcess: PropTypes.bool.isRequired,
+  socialLogin: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ login: { action, inProcess }, userDetails: { userData } }) => ({ userData, action, inProcess });

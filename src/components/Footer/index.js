@@ -13,10 +13,10 @@ function Footer() {
         <div id="foot" className="uk-width-expand@s uk-first-column">
           <div className="foot-content">
             <p>
-                            © 2019
+              © 2019
               {' '}
               <strong>AirVting</strong>
-. All Rights Reserved.
+              . All Rights Reserved.
               {' '}
             </p>
           </div>

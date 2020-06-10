@@ -5,7 +5,7 @@
  */
 
 import {
-  DEFAULT_ACTION, UPDATE_ACTION, SIGNUP, SIGNIN, PROCESS_ACTION
+  DEFAULT_ACTION, UPDATE_ACTION, SIGNUP, SIGNIN, PROCESS_ACTION, SOCIAL_LOGIN
 } from './constants';
 
 export function defaultAction() {
@@ -40,5 +40,12 @@ export function updateProcessAction(data) {
   return {
     type: PROCESS_ACTION,
     inProcess: data,
+  };
+}
+
+export function socialLogin(formData) {
+  return {
+    type: SOCIAL_LOGIN,
+    formData,
   };
 }

@@ -80,7 +80,7 @@ function Sidebar() {
                 <Link to={Navigation.likedVideos}>
                   <i className="uil-thumbs-up" />
                   {' '}
-                  Likded Videos
+                  Liked Videos
                 </Link>
               </li>
               <li

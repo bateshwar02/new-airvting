@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
 import {
-  NOTIFICATION_SUCCESS, NOTIFICATION_ERROR, NOTIFICATION_WARN, IN_PROCESS_ACTION, UPDATE_USER_DATA, GET_USERS_SAGA, UPDATE_VIDEO_OBJ
+  NOTIFICATION_SUCCESS, NOTIFICATION_ERROR, NOTIFICATION_WARN, IN_PROCESS_ACTION, UPDATE_USER_DATA, GET_USERS_SAGA, UPDATE_VIDEO_OBJ, LOGOUT
 } from './constants';
 
 
@@ -49,5 +49,11 @@ export function updateMediaObj({ mediaObj }) {
   return {
     type: UPDATE_VIDEO_OBJ,
     mediaObj,
+  };
+}
+
+export function logout() {
+  return {
+    type: LOGOUT,
   };
 }

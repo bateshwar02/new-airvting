@@ -4,8 +4,10 @@ import PropTypes from 'prop-types';
 import t from 'tcomb-form';
 import airvForm from '../../../components/form';
 import Utils from '../../../utils/common';
+import Facebook from '../../../components/SocialLogin/facebook';
+import GoogleLogin from '../../../components/SocialLogin/google';
 
-function Login({ setAction, signIn }) {
+function Login({ setAction, signIn, socialLogin }) {
   const loginForm = useRef(null);
   const [loginFormValue, setLoginForm] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -111,6 +113,10 @@ function Login({ setAction, signIn }) {
                 </span>
               </div>
             </div>
+            <div className="socialLogin">
+              <Facebook socialLogin={socialLogin} />
+              <GoogleLogin socialLogin={socialLogin} />
+            </div>
           </div>
         </div>
       </div>
@@ -121,6 +127,7 @@ function Login({ setAction, signIn }) {
 Login.propTypes = {
   setAction: PropTypes.func.isRequired,
   signIn: PropTypes.func.isRequired,
+  socialLogin: PropTypes.func.isRequired,
 };
 
 export default memo(Login);
