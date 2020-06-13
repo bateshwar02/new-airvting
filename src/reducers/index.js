@@ -16,6 +16,7 @@ import videoReducer from '../containers/DetailsVideos/reducer';
 import exploreReducer from '../containers/Explore/reducer';
 import settingReducer from '../containers/Settings/reducer';
 import browserReducer from '../containers/BrowserChannel/reducer';
+import productReducer from '../containers/Product/reducer';
 import history from '../utils/history';
 
 export default combineReducers({
@@ -35,4 +36,5 @@ export default combineReducers({
   store: storeReducer,
   setting: settingReducer,
   browserChannel: browserReducer,
+  product: productReducer
 });

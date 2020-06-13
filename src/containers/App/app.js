@@ -27,6 +27,7 @@ import GoLive from '../Live';
 import DetailVideo from '../DetailsVideos';
 import BrowserChannelComp from '../BrowserChannel';
 import MessageComp from '../Message';
+import AddProduct from '../Product';
 
 export function App({ userData, getUserData }) {
   const [isLogin, setIsLogin] = useState(true);
@@ -58,6 +59,7 @@ export function App({ userData, getUserData }) {
     <>
       <Loader />
       <Notification />
+      <AddProduct />
       <Switch>
         <Route exact path={Navigation.home} component={Home} />
         <PrivateRoute isLoggedIn={isLogin} exact path={Navigation.explore} defaultPath={Navigation.login} component={ExploreComp} />

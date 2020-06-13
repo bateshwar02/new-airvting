@@ -8,9 +8,9 @@
  */
 
 
-import { UPDATE_USER_DATA, UPDATE_VIDEO_OBJ } from './constants';
+import { UPDATE_USER_DATA, UPDATE_VIDEO_OBJ, IS_ADD_PRODUCT } from './constants';
 
-const initialState = { userData: {}, mediaObj: {} };
+const initialState = { userData: {}, mediaObj: {}, isAddProduct: false };
 
 export default function setBrowserInfo(state = initialState, action) {
   switch (action.type) {
@@ -23,6 +23,11 @@ export default function setBrowserInfo(state = initialState, action) {
       return {
         ...state,
         mediaObj: action.mediaObj
+      };
+    case IS_ADD_PRODUCT:
+      return {
+        ...state,
+        isAddProduct: action.isAddProduct
       };
     default:
       return state;

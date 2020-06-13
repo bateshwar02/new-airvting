@@ -19,3 +19,4 @@ export const UPDATE_USER_DATA = 'app/App/UPDATE_USER_DATA';
 export const GET_USERS_SAGA = 'app/App/GET_USERS_SAGA';
 export const UPDATE_VIDEO_OBJ = 'app/App/UPDATE_VIDEO_OBJ';
 export const LOGOUT = 'app/App/LOGOUT';
+export const IS_ADD_PRODUCT = 'app/App/IS_ADD_PRODUCT';

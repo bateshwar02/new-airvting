@@ -18,7 +18,8 @@ const Service = {
   },
 
   logout() {
-    return Service.clearCredentials('token', 'userId');
+    Service.clearCredentials('token', 'userId');
+    return Request.get('api/v1/signOut');
   },
   clearCredentials(token, userId) {
     cookie.expire(token);

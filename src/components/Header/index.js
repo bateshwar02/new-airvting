@@ -10,7 +10,7 @@ import Navigation from '../../utils/navigation';
 import Search from '../search';
 import './header.css';
 
-function Header({ userData, logout }) {
+function Header({ userData, logout, addProductAction }) {
   let userProfileImg = 'assets/images/avatars/avatar-1.jpg';
   useEffect(() => {
     if (!Utils.isUndefinedOrNullOrEmptyObject(userData)) {
@@ -126,6 +126,8 @@ function Header({ userData, logout }) {
       {/* <Link to={Navigation.store}>
         <span className="custom-link"> Store </span>
       </Link> */}
+
+      <span className="header-menu" onClick={() => { addProductAction(true); }}> Add Product </span>
       <span role="button" tabIndex={0} onClick={() => false} className="opts_icon">
         <i className="uil-envelope-alt" />
         {' '}
@@ -442,6 +444,7 @@ function Header({ userData, logout }) {
 Header.propTypes = {
   userData: PropTypes.object.isRequired,
   logout: PropTypes.func.isRequired,
+  addProductAction: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ userDetails: { userData } }) => ({ userData });

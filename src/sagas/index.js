@@ -18,6 +18,7 @@ import watchMyChannelSaga from '../containers/MyChannel/saga';
 import watchVideoDetailsSaga from '../containers/DetailsVideos/saga';
 import watchSettingSaga from '../containers/Settings/saga';
 import watchBrowserChannelSaga from '../containers/BrowserChannel/saga';
+import watchProductSaga from '../containers/Product/saga';
 
 
 // export default function* root() {
@@ -57,4 +58,5 @@ export default function* rootSaga() {
   yield spawn(watchVideoDetailsSaga);
   yield spawn(watchSettingSaga);
   yield spawn(watchBrowserChannelSaga);
+  yield spawn(watchProductSaga);
 }

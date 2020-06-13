@@ -159,3 +159,4 @@ input[type="checkbox"].switch:checked + div > div {
 ul.dropdown-user-menu {display: flex; flex-direction: column; justify-content: center;}
 ul.dropdown-user-menu li {margin: 8px 0px;}
 ul[class~=dropdown-user-menu] li a{ padding-top: 0px !important; padding-bottom: 0px !important;}
+.header-menu {color: black; font-size: 18px;  margin-right: 14px !important; cursor: pointer;}
