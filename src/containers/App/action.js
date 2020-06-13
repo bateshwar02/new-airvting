@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
 import {
-  NOTIFICATION_SUCCESS, NOTIFICATION_ERROR, NOTIFICATION_WARN, IN_PROCESS_ACTION, UPDATE_USER_DATA, GET_USERS_SAGA, UPDATE_VIDEO_OBJ, LOGOUT, IS_ADD_PRODUCT
+  NOTIFICATION_SUCCESS, NOTIFICATION_ERROR, NOTIFICATION_WARN, IN_PROCESS_ACTION, UPDATE_USER_DATA, GET_USERS_SAGA, UPDATE_VIDEO_OBJ, LOGOUT, IS_ADD_PRODUCT, GET_NOTIFICATION, UPDATE_NOTIFICATION, UPDATE_MESSAGE, GET_MESSAGE
 } from './constants';
 
 
@@ -62,5 +62,31 @@ export function addProductAction(isAddProduct) {
   return {
     type: IS_ADD_PRODUCT,
     isAddProduct
+  };
+}
+
+export function getNotification() {
+  return {
+    type: GET_NOTIFICATION,
+  };
+}
+
+export function updateNotification(notification) {
+  return {
+    type: UPDATE_NOTIFICATION,
+    notification,
+  };
+}
+
+export function getMessage() {
+  return {
+    type: GET_MESSAGE,
+  };
+}
+
+export function updateMessage(message) {
+  return {
+    type: UPDATE_MESSAGE,
+    message,
   };
 }

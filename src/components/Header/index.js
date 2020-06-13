@@ -8,9 +8,13 @@ import Utils from '../../utils/common';
 import * as Actions from '../../containers/App/action';
 import Navigation from '../../utils/navigation';
 import Search from '../search';
+import Notification from './components/notification';
+import MessageComp from './components/message';
 import './header.css';
 
-function Header({ userData, logout, addProductAction }) {
+function Header({
+  userData, logout, addProductAction, notification, getNotification, message, getMessage
+}) {
   let userProfileImg = 'assets/images/avatars/avatar-1.jpg';
   useEffect(() => {
     if (!Utils.isUndefinedOrNullOrEmptyObject(userData)) {
@@ -114,6 +118,7 @@ function Header({ userData, logout, addProductAction }) {
     </div>
   );
 
+
   const withLoginContent = () => (
     <div className="head_user">
       <Link to={Navigation.home}>
@@ -128,164 +133,8 @@ function Header({ userData, logout, addProductAction }) {
       </Link> */}
 
       <span className="header-menu" onClick={() => { addProductAction(true); }}> Add Product </span>
-      <span role="button" tabIndex={0} onClick={() => false} className="opts_icon">
-        <i className="uil-envelope-alt" />
-        {' '}
-        <span>4</span>
-      </span>
-
-      <div uk-dropdown="pos: top-right;mode:click ; animation: uk-animation-slide-bottom-small" className="dropdown-notifications">
-        <div className="dropdown-notifications-headline">
-          <h4>Messages</h4>
-          <span>
-            <i className="icon-feather-settings" uk-tooltip="title: Message settings ; pos: left" />
-          </span>
-        </div>
-        <div className="dropdown-notifications-content data-simplebar">
-          <ul>
-            <li>
-              <span className="notificationWrapper">
-                <span className="notification-avatar">
-                  <img src="assets/images/avatars/avatar-2.jpg" alt="" />
-                </span>
-                <div className="notification-text notification-msg-text">
-                  <strong>Jonathan Madano</strong>
-                  <p>Okay.. Thanks for The Answer I will be waiting for your...</p>
-                  <span className="time-ago"> 2 hours ago </span>
-                </div>
-              </span>
-            </li>
-            <li>
-              <span className="notificationWrapper">
-                <span className="notification-avatar">
-                  <img src="assets/images/avatars/avatar-3.jpg" alt="" />
-                </span>
-                <div className="notification-text notification-msg-text">
-                  <strong>Stella Johnson</strong>
-                  <p> Alex will explain you how to keep your videos privatly and all that...</p>
-                  <span className="time-ago"> 7 hours ago </span>
-                </div>
-              </span>
-            </li>
-            <li>
-              <span className="notificationWrapper">
-                <span className="notification-avatar">
-                  <img src="assets/images/avatars/avatar-1.jpg" alt="" />
-                </span>
-                <div className="notification-text notification-msg-text">
-                  <strong>Alex Dolgove</strong>
-                  <p> Alia just joined Messenger! Be the first to send a welcome message..</p>
-                  <span className="time-ago"> 19 hours ago </span>
-                </div>
-              </span>
-            </li>
-            <li>
-              <span className="notificationWrapper">
-                <span className="notification-avatar">
-                  <img src="assets/images/avatars/avatar-4.jpg" alt=" " />
-                </span>
-                <div className="notification-text notification-msg-text">
-                  <strong>Adrian Mohani</strong>
-                  <p> Okay.. Thanks for The Answer I will be waiting for your... </p>
-                  <span className="time-ago"> Yesterday </span>
-                </div>
-              </span>
-            </li>
-          </ul>
-        </div>
-        <div className="dropdown-notifications-footer">
-          <span>
-            {' '}
-            sell all
-            {' '}
-            <i className="icon-line-awesome-long-arrow-right" />
-            {' '}
-          </span>
-        </div>
-      </div>
-
-      <span role="button" tabIndex={0} onClick={() => false} className="opts_icon">
-        <i className="uil-bell" />
-        {' '}
-        <span>3</span>
-      </span>
-      <div uk-dropdown="pos: top-right;mode:click ; animation: uk-animation-slide-bottom-small" className="dropdown-notifications">
-        <div className="dropdown-notifications-headline">
-          <h4>Notifications </h4>
-          <span>
-            <i className="icon-feather-settings" uk-tooltip="title: Notifications settings ; pos: left" />
-          </span>
-        </div>
-        <div className="dropdown-notifications-content" data-simplebar>
-          <ul>
-            <li className="notifications-not-read">
-              <span className="notificationWrapper">
-                <span className="notification-icon">
-                  <i className="icon-feather-thumbs-up" />
-                </span>
-                <span className="notification-text">
-                  <strong>Adrian Mohani</strong>
-                  {' '}
-                  Like Your Comment On Video
-                  <span className="text-primary">Learn Prototype Faster</span>
-                  <br />
-                  {' '}
-                  <span className="time-ago"> 9 hours ago </span>
-                </span>
-              </span>
-            </li>
-            <li>
-              <span className="notificationWrapper">
-                <span className="notification-icon">
-                  <i className="icon-feather-star" />
-                </span>
-                <span className="notification-text">
-                  <strong>Alex Dolgove</strong>
-                  {' '}
-                  Added New Review In Video
-                  <span className="text-primary">Full Stack PHP Developer</span>
-                  <br />
-                  {' '}
-                  <span className="time-ago"> 19 hours ago </span>
-                </span>
-              </span>
-            </li>
-            <li>
-              <span className="notificationWrapper">
-                <span className="notification-icon">
-                  <i className="icon-feather-message-circle" />
-                </span>
-                <span className="notification-text">
-                  <strong>Stella Johnson</strong>
-                  {' '}
-                  Replay Your Comments in
-                  <span className="text-primary">Adobe XD Tutorial</span>
-                  <br />
-                  {' '}
-                  <span className="time-ago"> 12 hours ago </span>
-                </span>
-              </span>
-            </li>
-            <li>
-              <span className="notificationWrapper">
-                <span className="notification-icon">
-                  <i className="icon-feather-share-2" />
-                </span>
-                <span className="notification-text">
-                  <strong>Adrian Mohani</strong>
-                  {' '}
-                  Like Your Comment On Video
-                  <span className="text-primary">Learn Prototype Faster</span>
-                  <br />
-                  {' '}
-                  <span className="time-ago"> Yesterday </span>
-                </span>
-              </span>
-            </li>
-          </ul>
-        </div>
-      </div>
-
+      <MessageComp message={message} getMessage={getMessage} />
+      <Notification notification={notification} getNotification={getNotification} />
       <span role="button" tabIndex={0} onClick={() => false} className="opts_account">
         <img src={userProfileImg} alt="" />
       </span>
@@ -445,9 +294,13 @@ Header.propTypes = {
   userData: PropTypes.object.isRequired,
   logout: PropTypes.func.isRequired,
   addProductAction: PropTypes.func.isRequired,
+  notification: PropTypes.object.isRequired,
+  getNotification: PropTypes.func.isRequired,
+  message: PropTypes.object.isRequired,
+  getMessage: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({ userDetails: { userData } }) => ({ userData });
+const mapStateToProps = ({ userDetails: { userData, notification, message } }) => ({ userData, notification, message });
 
 const mapDispatchToProps = dispatch => bindActionCreators(Actions, dispatch);
 

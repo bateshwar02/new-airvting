@@ -28,6 +28,8 @@ import DetailVideo from '../DetailsVideos';
 import BrowserChannelComp from '../BrowserChannel';
 import MessageComp from '../Message';
 import AddProduct from '../Product';
+import MyCart from '../MyCart';
+import MyCardsComp from '../MyCards';
 
 export function App({ userData, getUserData }) {
   const [isLogin, setIsLogin] = useState(true);
@@ -72,6 +74,8 @@ export function App({ userData, getUserData }) {
         <PrivateRoute isLoggedIn={isLogin} exact path={Navigation.featured} defaultPath={Navigation.login} component={FeaturedComp} />
         <PrivateRoute isLoggedIn={isLogin} exact path={Navigation.message} defaultPath={Navigation.login} component={MessageComp} />
         <PrivateRoute isLoggedIn={isLogin} exact path={Navigation.setting} defaultPath={Navigation.login} component={Setting} />
+        <PrivateRoute isLoggedIn={isLogin} exact path={Navigation.cart} defaultPath={Navigation.login} component={MyCart} />
+        <PrivateRoute isLoggedIn={isLogin} exact path={Navigation.card} defaultPath={Navigation.login} component={MyCardsComp} />
         <Route exact path={Navigation.browserChannel} component={BrowserChannelComp} />
         <Route exact path={Navigation.videoDetails} component={DetailVideo} />
         <Route exact path={Navigation.login} component={LoginComp} />

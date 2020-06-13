@@ -192,7 +192,6 @@ function HomePage({ inProcess }) {
           {/* <a className="uk-position-center-left-out uk-position-small uk-hidden-hover slidenav-prev" href="void(0)" uk-slideshow-item="previous"></a>
                     <a className="uk-position-center-right-out uk-position-small uk-hidden-hover slidenav-next" href="void(0)" uk-slideshow-item="next"></a> */}
         </div>
-
         <Category />
 
         {/* <div className="section-small">

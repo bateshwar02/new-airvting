@@ -17,6 +17,24 @@ const Service = {
     return Request.get(url, header);
   },
 
+  updateNotification() {
+    const token = cookie.get('token');
+    const userId = cookie.get('userId');
+    if (Utils.isUndefinedOrNullOrEmpty(token) || Utils.isUndefinedOrNullOrEmpty(userId)) {
+      return null;
+    }
+    return Request.get(`api/v1/users/${userId}/notifications?paginate=1&perPage=10&isMessage=false`);
+  },
+
+  getMessageData() {
+    const token = cookie.get('token');
+    const userId = cookie.get('userId');
+    if (Utils.isUndefinedOrNullOrEmpty(token) || Utils.isUndefinedOrNullOrEmpty(userId)) {
+      return null;
+    }
+    return Request.get(`api/v1/users/${userId}/notifications?paginate=1&perPage=10&isMessage=true`);
+  },
+
   logout() {
     Service.clearCredentials('token', 'userId');
     return Request.get('api/v1/signOut');

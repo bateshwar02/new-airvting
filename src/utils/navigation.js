@@ -22,6 +22,8 @@ const Navigation = {
   goLive: '/live',
   browserChannel: '/browser-channel/:id',
   message: '/message',
+  cart: '/cart',
+  card: '/cards',
   push: (url) => {
     history.push(url);
   },

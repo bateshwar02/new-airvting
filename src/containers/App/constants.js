@@ -20,3 +20,7 @@ export const GET_USERS_SAGA = 'app/App/GET_USERS_SAGA';
 export const UPDATE_VIDEO_OBJ = 'app/App/UPDATE_VIDEO_OBJ';
 export const LOGOUT = 'app/App/LOGOUT';
 export const IS_ADD_PRODUCT = 'app/App/IS_ADD_PRODUCT';
+export const GET_NOTIFICATION = 'app/App/GET_NOTIFICATION';
+export const UPDATE_NOTIFICATION = 'app/App/UPDATE_NOTIFICATION';
+export const GET_MESSAGE = 'app/App/GET_MESSAGE';
+export const UPDATE_MESSAGE = 'app/App/UPDATE_MESSAGE';
