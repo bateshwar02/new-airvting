@@ -36,14 +36,14 @@ function Signup({ setAction, signUp }) {
 
   const getLoginFormTemplate = locals => (
     <>
-      <div className="uk-form-group">{locals.inputs.firstName}</div>
-      <div className="uk-form-group">{locals.inputs.lastName}</div>
-      <div className="uk-form-group">{locals.inputs.email}</div>
-      <div className="uk-form-group">{locals.inputs.username}</div>
-      <div className="uk-form-group">{locals.inputs.phoneNumber}</div>
-      <div className="uk-form-group">{locals.inputs.password}</div>
-      <div className="uk-form-group">{locals.inputs.birth}</div>
-      <div className="uk-form-group">{locals.inputs.gender}</div>
+      <div className="formField">{locals.inputs.firstName}</div>
+      <div className="formField">{locals.inputs.lastName}</div>
+      <div className="formField">{locals.inputs.email}</div>
+      <div className="formField">{locals.inputs.username}</div>
+      <div className="formField">{locals.inputs.phoneNumber}</div>
+      <div className="formField">{locals.inputs.password}</div>
+      <div className="formField">{locals.inputs.birth}</div>
+      <div className="formField">{locals.inputs.gender}</div>
     </>
   );
 

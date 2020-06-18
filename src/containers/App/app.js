@@ -30,6 +30,9 @@ import MessageComp from '../Message';
 import AddProduct from '../Product';
 import MyCart from '../MyCart';
 import MyCardsComp from '../MyCards';
+import ChangePass from '../../components/common/changePass';
+import VerifyEmailTemp from '../../components/common/verifyEmailTemp';
+import NotFoundPage from '../NotFoundPage/index';
 
 export function App({ userData, getUserData }) {
   const [isLogin, setIsLogin] = useState(true);
@@ -82,6 +85,9 @@ export function App({ userData, getUserData }) {
         <Route exact path={Navigation.aboutUs} component={AboutUs} />
         <Route exact path={Navigation.privacyPolice} component={PrivacyPolice} />
         <Route exact path={Navigation.termsCondition} component={TermsCondition} />
+        <Route exact path={Navigation.veryEmail} component={VerifyEmailTemp} />
+        <Route exact path={Navigation.changePass} component={ChangePass} />
+        {/* <Route component={NotFoundPage} /> */}
       </Switch>
     </>
   );

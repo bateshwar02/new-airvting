@@ -9,7 +9,7 @@ import React, { memo } from 'react';
 function Footer() {
   return (
     <div className="footer">
-      <div className="uk-grid-collapse uk-grid">
+      <div className="uk-grid-collapse uk-grid footerWrapper">
         <div id="foot" className="uk-width-expand@s uk-first-column">
           <div className="foot-content">
             <p>

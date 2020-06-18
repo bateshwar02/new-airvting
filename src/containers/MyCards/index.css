@@ -1,0 +1,13 @@
+.headerWrapper {
+    margin: 20px 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+span.add-card-btn.button.default {
+    margin-right: 10px;
+}
+.childData{min-height: 38vh}
+.ButtonWrapper {cursor: pointer;}
+.modal .modalInnerContent {max-height:70%; margin-top: 20px}
+.alert {margin: 10px; color:#ff6200;}

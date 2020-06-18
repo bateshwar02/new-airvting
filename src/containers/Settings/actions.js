@@ -4,7 +4,7 @@
  *
  */
 
-import { UPDATE_USER_DATA, UPDATE_PASSWORD, IS_PROCESS_ACTION } from './constants';
+import { UPDATE_USER_DATA, UPDATE_PASSWORD, IS_PROCESS_ACTION, FORGATE_PASSWORD } from './constants';
 
 export function updateUser(userData, id) {
   return {
@@ -26,5 +26,13 @@ export function updatePassword(passData, id) {
     type: UPDATE_PASSWORD,
     passData,
     id
+  };
+}
+
+export function forgatePassword(passData, token) {
+  return {
+    type: FORGATE_PASSWORD,
+    passData,
+    token
   };
 }

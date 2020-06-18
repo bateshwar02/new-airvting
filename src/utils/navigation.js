@@ -24,6 +24,8 @@ const Navigation = {
   message: '/message',
   cart: '/cart',
   card: '/cards',
+  veryEmail: '/verify-email',
+  changePass: '/change-pass/:token?',
   push: (url) => {
     history.push(url);
   },

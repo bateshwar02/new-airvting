@@ -23,8 +23,8 @@ function Login({ setAction, signIn, socialLogin }) {
 
   const getLoginFormTemplate = locals => (
     <>
-      <div className="uk-form-group">{locals.inputs.email}</div>
-      <div className="uk-form-group">{locals.inputs.password}</div>
+      <div className="formField">{locals.inputs.email}</div>
+      <div className="formField">{locals.inputs.password}</div>
     </>
   );
 
