@@ -17,21 +17,21 @@ function Password({ forgatePassword, inProcess, userData, match }) {
   const onChange = (formValue, element) => {
     if (isSubmitted) {
       passRef.current.validate();
-      if (element.includes('confirmPassword') && passFormData.confirmPassword === passFormData.password) {
+      if (element.includes('confirm_password') && passFormData.confirm_password === passFormData.password) {
         setPassAction(false)
       }
     }
     setPassFormData(formValue);
   };
 
-  const formSchema = { confirmPassword: t.String, password: airvForm.refinements.pass };
+  const formSchema = { confirm_password: t.String, password: airvForm.refinements.pass };
 
   const formTemplate = locals => (
     <>
       <div className="formField">{locals.inputs.password}</div>
       <div className="formField">
-      {locals.inputs.confirmPassword}
-      {isPassSame &&  <span class="help-block error-block">Confirm Password should be same.</span>}
+      {locals.inputs.confirm_password}
+      {isPassSame &&  <span className="help-block error-block">Confirm Password should be same.</span>}
       </div>
     </>
   );
@@ -57,7 +57,7 @@ function Password({ forgatePassword, inProcess, userData, match }) {
         },
         type: 'password',
       },
-      confirmPassword: {
+      confirm_password: {
         label: 'Confirm Password',
         template: airvForm.templates.textbox,
         attrs: {
@@ -78,14 +78,17 @@ function Password({ forgatePassword, inProcess, userData, match }) {
     if (!Utils.isEmptyList(errors)) {
       return;
     }
-    if (Utils.isUndefinedOrNullOrEmptyObject(userData)) {
-      return;
-    }
+
+    console.log(passFormData, passFormData.confirmPassword.localeCompare(passFormData.password));
+    
     if(passFormData.confirmPassword !== passFormData.password){
       setPassAction(true);
+      return;
     }
-    const { userDetail: { _id } } = userData;
-    forgatePassword(passFormData, _id);
+    const { token } = match.params;
+    const formData = Utils.deepCopy(passFormData);
+    formData.token = token;
+    forgatePassword(formData);
   };
 
   return (
@@ -99,14 +102,14 @@ function Password({ forgatePassword, inProcess, userData, match }) {
           </div>
           <div className="uk-card-default p-6">
             <div className="my-4 uk-text-center">
-              <p className="my-2">Change Password.</p>
+              <p className="my-2">Reset Password.</p>
             </div>
             <t.form.Form ref={passRef} type={getFormSchema()} value={passFormData} options={getFormOptions()} onChange={onChange} />
             <div className="mt-4 uk-flex-middle -small uk-grid">
               <div className="uk-width-expand@s">  </div>
               <div className="uk-width-auto@s">
                 <span className="button warning" onClick={submit} role="button" tabIndex={0}>
-                Save Changes
+                Reset Password
                 {inProcess && (
                 <div className="loaderWrapper">
                   <div className="customLoader" />

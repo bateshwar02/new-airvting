@@ -9,6 +9,11 @@ const Service = {
   updatePass(passData, id) {
     const url = `api/v1/users/changePass/${id}`;
     return Request.post(url, passData);
+  },
+
+  resetPass(passData){
+    const url ='api/v1/reset_password';
+    return Request.post(url, passData);
   }
 };
 export default Service;

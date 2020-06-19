@@ -41,10 +41,10 @@ function* updatePassData({ passData, id }) {
   }
 }
 
-function* changePassData({ passData, token }) {
+function* resetPassSaga({ passData }) {
   yield put(updateInProcess({ inProcess: true }));
   try {
-    const changePass = yield call(api.updatePass, passData, token);
+    const changePass = yield call(api.resetPass, passData);
     if (changePass.success) {
       yield put(notifySuccess('Password updated successfully.'));
       yield put(updateInProcess({ inProcess: false }));
@@ -62,5 +62,5 @@ function* changePassData({ passData, token }) {
 export default function* settingSaga() {
   yield takeLatest(UPDATE_USER_DATA, updateUserData); 
   yield takeLatest(UPDATE_PASSWORD, updatePassData);
-  yield takeLatest(FORGATE_PASSWORD, changePassData);
+  yield takeLatest(FORGATE_PASSWORD, resetPassSaga);
 }
