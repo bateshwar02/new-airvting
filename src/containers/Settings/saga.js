@@ -4,6 +4,7 @@ import { notifyError, notifySuccess } from '../App/action';
 import { UPDATE_USER_DATA, UPDATE_PASSWORD, FORGATE_PASSWORD } from './constants';
 import { updateInProcess } from './actions';
 import api from './api';
+import Navigation from '../../utils/navigation';
 
 function* updateUserData({ userData, id }) {
   yield put(updateInProcess({ inProcess: true }));
@@ -48,6 +49,7 @@ function* resetPassSaga({ passData }) {
     if (changePass.success) {
       yield put(notifySuccess('Password updated successfully.'));
       yield put(updateInProcess({ inProcess: false }));
+      Navigation.push('/sh/airvtingweb');
       return;
     }
     yield put(notifyError({ message: changePass.message }));
@@ -60,7 +62,7 @@ function* resetPassSaga({ passData }) {
 }
 
 export default function* settingSaga() {
-  yield takeLatest(UPDATE_USER_DATA, updateUserData); 
+  yield takeLatest(UPDATE_USER_DATA, updateUserData);
   yield takeLatest(UPDATE_PASSWORD, updatePassData);
   yield takeLatest(FORGATE_PASSWORD, resetPassSaga);
 }

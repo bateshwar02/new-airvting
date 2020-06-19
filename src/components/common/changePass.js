@@ -1,4 +1,7 @@
-import React, { memo, useRef, useState, useEffect } from 'react';
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import React, {
+  memo, useRef, useState
+} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose, bindActionCreators } from 'redux';
@@ -7,18 +10,20 @@ import airvForm from '../form';
 import Utils from '../../utils/common';
 import * as Actions from '../../containers/Settings/actions';
 
-function Password({ forgatePassword, inProcess, userData, match }) {
+function Password({
+  forgatePassword, inProcess, match
+}) {
   const passRef = useRef(null);
   const [passFormData, setPassFormData] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isPassSame, setPassAction] = useState(false);
- 
+
 
   const onChange = (formValue, element) => {
     if (isSubmitted) {
       passRef.current.validate();
-      if (element.includes('confirm_password') && passFormData.confirm_password === passFormData.password) {
-        setPassAction(false)
+      if (element.includes('confirm_password') && formValue.confirm_password === formValue.password) {
+        setPassAction(false);
       }
     }
     setPassFormData(formValue);
@@ -30,8 +35,8 @@ function Password({ forgatePassword, inProcess, userData, match }) {
     <>
       <div className="formField">{locals.inputs.password}</div>
       <div className="formField">
-      {locals.inputs.confirm_password}
-      {isPassSame &&  <span className="help-block error-block">Confirm Password should be same.</span>}
+        {locals.inputs.confirm_password}
+        {isPassSame && <span className="help-block error-block">Confirm Password should be same.</span>}
       </div>
     </>
   );
@@ -45,6 +50,7 @@ function Password({ forgatePassword, inProcess, userData, match }) {
         template: airvForm.templates.textbox,
         attrs: {
           placeholder: 'Enter Password',
+          autoFocus: 'autofocus',
         },
         config: {
           addonBefore: <i className="icon-feather-lock" />,
@@ -66,7 +72,7 @@ function Password({ forgatePassword, inProcess, userData, match }) {
         config: {
           addonBefore: <i className="icon-feather-lock" />,
         },
-        error:'Confirm Password is required',
+        error: 'Confirm Password is required',
         type: 'password',
       },
     }
@@ -78,15 +84,12 @@ function Password({ forgatePassword, inProcess, userData, match }) {
     if (!Utils.isEmptyList(errors)) {
       return;
     }
-
-    console.log(passFormData, passFormData.confirmPassword.localeCompare(passFormData.password));
-    
-    if(passFormData.confirmPassword !== passFormData.password){
+    const formData = Utils.deepCopy(passFormData);
+    if (formData.confirm_password !== formData.password) {
       setPassAction(true);
       return;
     }
     const { token } = match.params;
-    const formData = Utils.deepCopy(passFormData);
     formData.token = token;
     forgatePassword(formData);
   };
@@ -102,19 +105,19 @@ function Password({ forgatePassword, inProcess, userData, match }) {
           </div>
           <div className="uk-card-default p-6">
             <div className="my-4 uk-text-center">
-              <p className="my-2">Reset Password.</p>
+              <h3 className="my-2">Reset Password.</h3>
             </div>
             <t.form.Form ref={passRef} type={getFormSchema()} value={passFormData} options={getFormOptions()} onChange={onChange} />
             <div className="mt-4 uk-flex-middle -small uk-grid">
               <div className="uk-width-expand@s">  </div>
               <div className="uk-width-auto@s">
                 <span className="button warning" onClick={submit} role="button" tabIndex={0}>
-                Reset Password
-                {inProcess && (
-                <div className="loaderWrapper">
-                  <div className="customLoader" />
-                </div>
-                )}
+                  Reset Password
+                  {inProcess && (
+                  <div className="loaderWrapper">
+                    <div className="customLoader" />
+                  </div>
+                  )}
                 </span>
               </div>
             </div>
@@ -126,7 +129,6 @@ function Password({ forgatePassword, inProcess, userData, match }) {
 }
 
 Password.propTypes = {
-  userData: PropTypes.object.isRequired,
   forgatePassword: PropTypes.func.isRequired,
   inProcess: PropTypes.bool.isRequired,
   match: PropTypes.object.isRequired,

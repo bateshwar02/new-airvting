@@ -15,7 +15,7 @@ span.input-group-addon {
     font-size: 16px;
 }
 
-.form-group input {font-family: 'Alata', sans-serif;}
+.form-group input {font-family: 'Alata', sans-serif; width: 100%;}
 .form-group input {font-family: 'Alata', sans-serif;}
 .loginWrapper{min-height: calc(100vh); }
 .loginWrapper.button.warning{ border-radius: 4px;} 
