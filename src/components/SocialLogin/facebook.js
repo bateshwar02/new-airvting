@@ -19,7 +19,7 @@ function Facebook({ socialLogin }) {
     formData.socialId = !Utils.isUndefinedOrNullOrEmpty(response.userId) ? response.userId : '';
     formData.socialToken = !Utils.isUndefinedOrNullOrEmpty(response.accessToken) ? response.accessToken : '';
     formData.socialType = 'facebook';
-    formData.username = '';
+    formData.username = !Utils.isUndefinedOrNullOrEmpty(response.name) ? response.name : '';
     socialLogin(formData);
   };
 
@@ -27,11 +27,10 @@ function Facebook({ socialLogin }) {
     <div className="facebookWrapper">
       <FacebookLogin
         appId="251306312866915"
-        autoLoad
+        autoLoad={false}
         fields="name,email,picture"
         callback={responseFacebook}
         cssClass="facebook-button"
-        // scope="public_profile, email, user_birthday"
       />
     </div>
   );

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/label-has-for */
 /**
@@ -19,26 +20,32 @@ import Addcard from './components/addCard';
 import CardList from './components/cardList';
 import './index.css';
 
-export function MyCards({isCardAdd, isAddCard}) {
+export function MyCards({ isCardAdd, isAddCard }) {
   const getStoreContent = () => (
     <div className="main_content">
       <div className="main_content_inner ">
-      <div className="headerWrapper">
-              <span className='headerText'>  <h2> MY CARD </h2> </span>
-              <span className="ButtonWrapper" onClick={()=>isAddCard(true)} role="button" tabIndex={0}>
-              <span className="add-card-btn  button default">+</span>
-              Add New Card
-              </span>
-            </div>
-            <div className="childData">
-              <CardList />
-              {isCardAdd &&  <Modal
-                  onCancel={() => isAddCard(false)}
-                  modalContent={<Addcard />}
-                  modalHeader={<h2 className="uk-modal-title">Add Cards</h2>}
-                  hasFooter={false}
-        />}
-            </div>
+        <div className="headerWrapper">
+          <span className="headerText">
+            {' '}
+            <h2> MY CARD </h2>
+            {' '}
+          </span>
+          <span className="ButtonWrapper" onClick={() => isAddCard(true)} role="button" tabIndex={0}>
+            <span className="add-card-btn  button default">+</span>
+            Add New Card
+          </span>
+        </div>
+        <div className="childData">
+          <CardList />
+          {isCardAdd && (
+          <Modal
+            onCancel={() => isAddCard(false)}
+            modalContent={<Addcard />}
+            modalHeader={<h2 className="uk-modal-title">Add Cards</h2>}
+            hasFooter={false}
+          />
+          )}
+        </div>
       </div>
       <Footer />
     </div>
@@ -59,7 +66,7 @@ MyCards.propTypes = {
 };
 
 
-const mapStateToProps = ({ cards: {isCardAdd} }) => ({ isCardAdd });
+const mapStateToProps = ({ cards: { isCardAdd } }) => ({ isCardAdd });
 const mapDispatchToProps = dispatch => bindActionCreators(Actions, dispatch);
 
 const withConnect = connect(

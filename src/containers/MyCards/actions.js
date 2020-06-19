@@ -4,12 +4,14 @@
  *
  */
 
-import { UPDATE_CARDS, GET_CARDS_DETAILS, ADD_CARDS_DETAILS, IN_PROCESS, ADD_CARD_IN_PROCESS, IS_ADD_CARD } from './constants';
+import {
+  UPDATE_CARDS, GET_CARDS_DETAILS, ADD_CARDS_DETAILS, IN_PROCESS, ADD_CARD_IN_PROCESS, IS_ADD_CARD, DELETE_CARD, GET_CARD_DETAILS, UPDATE_CARD_DETAILS
+} from './constants';
 
-export function updateCards(cardDetails) {
+export function updateCards(cardsData) {
   return {
     type: UPDATE_CARDS,
-    cardDetails,
+    cardsData,
   };
 }
 export function gertCards() {
@@ -36,9 +38,29 @@ export function updateAddCardsProcessAction(inAddCradProcess) {
   };
 }
 
-export function isAddCard (isCardAdd){
-  return{
-    type:IS_ADD_CARD,
+export function isAddCard(isCardAdd) {
+  return {
+    type: IS_ADD_CARD,
     isCardAdd
-  }
+  };
+}
+export function deleteCard(id) {
+  return {
+    type: DELETE_CARD,
+    id
+  };
+}
+
+export function getCardDetails(id) {
+  return {
+    type: GET_CARD_DETAILS,
+    id
+  };
+}
+
+export function updateCardDetails(cardDetails) {
+  return {
+    type: UPDATE_CARD_DETAILS,
+    cardDetails
+  };
 }

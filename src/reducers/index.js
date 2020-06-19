@@ -17,7 +17,8 @@ import exploreReducer from '../containers/Explore/reducer';
 import settingReducer from '../containers/Settings/reducer';
 import browserReducer from '../containers/BrowserChannel/reducer';
 import productReducer from '../containers/Product/reducer';
-import cardReducer from '../containers/MyCards/reducer'; 
+import cardReducer from '../containers/MyCards/reducer';
+import cartReducer from '../containers/MyCart/reducer';
 import history from '../utils/history';
 
 export default combineReducers({
@@ -38,5 +39,6 @@ export default combineReducers({
   setting: settingReducer,
   browserChannel: browserReducer,
   product: productReducer,
-  cards: cardReducer
+  cards: cardReducer,
+  carts: cartReducer
 });

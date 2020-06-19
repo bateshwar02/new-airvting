@@ -64,7 +64,7 @@ function Login({ setAction, signIn, socialLogin }) {
           if (Utils.isUndefinedOrNullOrEmpty(val)) {
             return 'Password is required';
           }
-          return 'Invalid Password';
+          return 'Invalid Password (Password should be aplphanumeric.)';
         },
         type: 'password',
       },

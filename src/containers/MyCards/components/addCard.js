@@ -4,7 +4,9 @@
  *
  */
 
-import React, { memo, useRef, useState } from 'react';
+import React, {
+  memo, useRef, useState, useEffect
+} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose, bindActionCreators } from 'redux';
@@ -13,24 +15,42 @@ import airvForm from '../../../components/form';
 import * as Actions from '../actions';
 import Utils from '../../../utils/common';
 
-function Addcard({addCards, inAddCradProcess}) {
+function Addcard({ addCards, inAddCradProcess, cardDetails }) {
   const cardForm = useRef(null);
-  const [cardFormValue, setCardsForm] = useState({});
+  const cardFormData = {};
+
+  useEffect(() => {
+    if (Utils.isUndefinedOrNullOrEmptyObject(cardDetails)) {
+      const { paymentDetail } = cardDetails;
+      cardFormData.defaultPaymentMethod = paymentDetail[0].defaultPaymentMethod;
+      cardFormData.cardType = paymentDetail[0].cardType;
+      cardFormData.last4 = paymentDetail[0].last4;
+      cardFormData.expiryDate = paymentDetail[0].expiryDate;
+      cardFormData.csv = paymentDetail[0].csv;
+    }
+  }, [cardDetails]);
+
+  const [cardFormValue, setCardsForm] = useState(cardFormData);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const onChange = (formValue) => {
     if (isSubmitted) {
-        cardForm.current.validate();
+      cardForm.current.validate();
     }
     setCardsForm(formValue);
   };
 
-  const formSchema = { email: airvForm.refinements.email, password: airvForm.refinements.pass };
+  const formSchema = {
+    cardType: t.String, defaultPaymentMethod: t.Boolean, last4: airvForm.refinements.card, expiryDate: t.Number, csv: airvForm.refinements.csv,
+  };
 
   const getLoginFormTemplate = locals => (
     <>
-      <div className="formField">{locals.inputs.email}</div>
-      <div className="formField">{locals.inputs.password}</div>
+      <div className="formField">{locals.inputs.last4}</div>
+      <div className="formField">{locals.inputs.expiryDate}</div>
+      <div className="formField">{locals.inputs.csv}</div>
+      <div className="formField">{locals.inputs.cardType}</div>
+      <div className="formField">{locals.inputs.defaultPaymentMethod}</div>
     </>
   );
 
@@ -39,40 +59,55 @@ function Addcard({addCards, inAddCradProcess}) {
   const getFormOptions = () => ({
     template: getLoginFormTemplate,
     fields: {
-      email: {
-        label: 'Email',
+      last4: {
+        label: 'Enter Card Number',
         template: airvForm.templates.textbox,
-        error: (val) => {
-          if (Utils.isUndefinedOrNullOrEmpty(val)) {
-            return 'Email Id is required';
-          }
-          return 'Invalid Email Id';
-        },
+        error: 'Card Number is Required.',
         config: {
-          addonBefore: <i className="icon-feather-mail" />,
+          addonBefore: <i className="icon-feather-credit-card" />,
         },
         attrs: {
           autoFocus: 'autofocus',
-          placeholder: 'Enter Email Id',
+          placeholder: 'Enter card number',
+          validateRegex: /^([a-zA-Z0-9_-]){0,16}$/,
         },
-        type: 'email',
+        type: 'number',
       },
-      password: {
-        label: 'Password',
-        template: airvForm.templates.textbox,
+      cardType: {
+        label: 'Select Card Type',
+        template: airvForm.templates.select,
         attrs: {
-          placeholder: 'Enter Password',
+          simpleValue: true,
+          clearable: true,
         },
-        config: {
-          addonBefore: <i className="icon-feather-lock" />,
+        options: [{ label: 'Personal', value: 'personal' }, { label: 'Corporate', value: 'corporate' }],
+        factory: t.form.Radio,
+      },
+      defaultPaymentMethod: {
+        template: airvForm.templates.checkbox,
+        nullOption: false,
+        options: [{ text: 'Default Payment Method', value: true }],
+        factory: t.form.Radio,
+        error: () => 'Gender is required',
+      },
+      csv: {
+        template: airvForm.templates.textbox,
+        label: 'CSV',
+        attrs: {
+          validateRegex: /^([a-zA-Z0-9_-]){3}$/,
+          placeholder: 'CSV',
         },
-        error: (val) => {
-          if (Utils.isUndefinedOrNullOrEmpty(val)) {
-            return 'Password is required';
-          }
-          return 'Invalid Password';
+        error: 'CSV is Required',
+      },
+      expiryDate: {
+        template: airvForm.templates.date,
+        label: 'Card Expiry Date',
+        attrs: {
+          timeFormat: false,
+          placeholder: 'Card Expiry Date',
+          dateFormat: 'MM yyyy',
         },
-        type: 'password',
+        error: 'Expiry Date is required.',
       },
     },
   });
@@ -86,96 +121,30 @@ function Addcard({addCards, inAddCradProcess}) {
     const formData = Utils.deepCopy(cardFormValue);
     addCards(formData);
   };
+
   const getContent = () => (
     <div id="modal-close-default uk-modal">
-    <div className="uk-modal-dialog uk-modal-body">
-      <button className="uk-modal-close-default uk-close" type="button"  />
-      <h2 className="uk-modal-title">Cart fill</h2>
-      <t.form.Form ref={cardForm} type={getFormSchema()} value={cardFormValue} options={getFormOptions()} onChange={onChange} />
-      <form className="uk-form card-box">
-        <fieldset className="message-filedset">
-
-          <div className="uk-form-row">
-            <label>
-              Fill Cart No
-              <input type="text" placeholder=" 1234 1234 1234 1234" />
-            </label>
-          </div>
-        </fieldset>
-        <fieldset className="message-filedset">
-
-          <div className="uk-form-row">
-            <label>
-              Expiration
-              <input type="text" placeholder=" MM / yyyy" />
-            </label>
-          </div>
-
-        </fieldset>
-        <fieldset className="message-filedset">
-
-          <div className="uk-form-row">
-            <label>
-              CVC Code
-              <input type="text" placeholder=" CVC" />
-            </label>
-          </div>
-
-        </fieldset>
-        <fieldset className="message-filedset">
-
-          <div className="uk-form-row">
-            <label>
-              Countery
-              <select>
-                <option>Select country</option>
-                <option>Select country</option>
-                <option>Select country</option>
-              </select>
-
-            </label>
-          </div>
-
-        </fieldset>
-        <fieldset className="message-filedset">
-
-          <div className="uk-form-row">
-            <label>
-              Postal code
-              <input type="text" placeholder=" 12345" />
-            </label>
-          </div>
-
-        </fieldset>
-
-        <fieldset className="message-filedset">
-
-          <div className="uk-form-row">
-            <input type="checkbox" style={{ width: '20px' }} />
-            {' '}
-            Save my cart for future purchases
-          </div>
-
-        </fieldset>
-        <button className="btn-mycart-remove button default ">Payment</button>
-      </form>
+      <div className="cardWrapper">
+        <t.form.Form ref={cardForm} type={getFormSchema()} value={cardFormValue} options={getFormOptions()} onChange={onChange} />
+      </div>
+      <button type="button" className="btn-mycart-remove button default " onClick={submit}>Payment</button>
     </div>
-  </div>
   );
 
   return (
-      <>
-       {getContent()}
-      </>
+    <>
+      {getContent()}
+    </>
   );
 }
 
 Addcard.propTypes = {
-    addCards: PropTypes.func.isRequired,
-    inAddCradProcess:PropTypes.bool.isRequired, 
+  addCards: PropTypes.func.isRequired,
+  inAddCradProcess: PropTypes.bool.isRequired,
+  cardDetails: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = ({ cards:{inAddCradProcess} }) => ({ inAddCradProcess });
+const mapStateToProps = ({ cards: { inAddCradProcess, cardDetails } }) => ({ inAddCradProcess, cardDetails });
 const mapDispatchToProps = dispatch => bindActionCreators(Actions, dispatch);
 
 const withConnect = connect(

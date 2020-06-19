@@ -46,6 +46,8 @@ export default {
     mobile: t.subtype(t.Str, s => Regex.mobile.test(s)),
     pass: t.subtype(t.Str, s => Regex.password.test(s)),
     name: t.subtype(t.Str, s => Regex.name.test(s)),
+    card: t.subtype(t.Str, s => Regex.card.test(s)),
+    csv: t.subtype(t.Str, s => Regex.csv.test(s)),
 
     pinCode: t.refinement(t.Str, s => Regex.pincode.test(s)),
     year: t.refinement(t.Str, s => Regex.year.test(s)),

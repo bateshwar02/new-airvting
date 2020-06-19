@@ -13,18 +13,23 @@ const Service = {
     return Request.post(url, formData);
   },
 
-  getCards(formData) {
+  getCards() {
     const userId = cookie.get('userId');
-    if(Utils.isUndefinedOrNullOrEmpty(userId)){
-        return false;
-    }    
+    if (Utils.isUndefinedOrNullOrEmpty(userId)) {
+      return false;
+    }
     const url = `api/v1/users/${userId}/paymentMethods?paginate=1&perPage=20`;
     return Request.get(url);
   },
 
-  deleteCard(id){
-      const url=`api/v1/paymentMethods/${id}`;
-      return Request.get(url);
+  deleteCard(id) {
+    const url = `api/v1/paymentMethods/${id}`;
+    return Request.get(url);
+  },
+
+  getCardDetailsCall(id) {
+    const url = `api/v1/users/${id}/paymentMethods?paginate=1&perPage=20`;
+    return Request.get(url);
   }
 
 };

@@ -37,7 +37,7 @@ export function MyCarts() {
                         <div className="mycart-table-remove">
                           <h4>Navy-Off-Shoulder</h4>
                           <p>$142.50</p>
-                          <p><button className="btn-mycart-remove button default ">Remove</button></p>
+                          <p><button type="button" className="btn-mycart-remove button default ">Remove</button></p>
                         </div>
                       </td>
                       <td>
@@ -68,7 +68,7 @@ export function MyCarts() {
                         <div className="mycart-table-remove">
                           <h4>Navy-Off-Shoulder</h4>
                           <p>$142.50</p>
-                          <p><button className="btn-mycart-remove button default ">Remove</button></p>
+                          <p><button type="button" className="btn-mycart-remove button default ">Remove</button></p>
                         </div>
                       </td>
                       <td>
@@ -97,7 +97,7 @@ export function MyCarts() {
                         <div className="mycart-table-remove">
                           <h4>Navy-Off-Shoulder</h4>
                           <p>$142.50</p>
-                          <p><button className="btn-mycart-remove button default ">Remove</button></p>
+                          <p><button type="button" className="btn-mycart-remove button default ">Remove</button></p>
                         </div>
                       </td>
                       <td>
@@ -172,7 +172,7 @@ export function MyCarts() {
                       </table>
                       <a href="my-card.php">
                         <div className="btn-mycart-payment">
-                          <button className=" button default ">Payment</button>
+                          <button type="button" className=" button default ">Payment</button>
                         </div>
                       </a>
                     </div>
