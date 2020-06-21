@@ -30,7 +30,6 @@ export function BrowserChannel({ match }) {
 
   return (
     <div id="wrapper">
-      {console.log(' browser channel')}
       <Helmet>
         <title>Browser Channel</title>
         <meta name="description" content="Description of Followers" />

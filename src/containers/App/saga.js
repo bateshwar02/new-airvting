@@ -45,7 +45,7 @@ function* getNotificationSaga() {
               receiverId: 'd241ffd6-9394-11ea-93ad-fa163eeeaebe',
               type: 'tagUser',
               post: {
-                commentId: null, content: null, description: null, featuredImage: 'https:\/\/s3-ap-southeast-1.amazonaws.com\/airvting-media-prod\/image\/image-05b1ffe0-0f3b-11ea-8f24-d16c512066ad.jpg', mediaUrl: null, postId: '66453d34-a65f-11ea-93ad-fa163eeeaebe', type: 'stream'
+                commentId: null, content: null, description: null, featuredImage: 'https://s3-ap-southeast-1.amazonaws.com/airvting-media-prod/image/image-05b1ffe0-0f3b-11ea-8f24-d16c512066ad.jpg', mediaUrl: null, postId: '66453d34-a65f-11ea-93ad-fa163eeeaebe', type: 'stream'
               }
             }, {
               _id: '131088dd-a736-11ea-93ad-fa163eeeaebe',
@@ -78,7 +78,7 @@ function* getNotificationSaga() {
               receiverId: 'd241ffd6-9394-11ea-93ad-fa163eeeaebe',
               type: 'comment',
               post: {
-                commentId: null, content: null, description: null, featuredImage: 'https:\/\/s3-ap-southeast-1.amazonaws.com\/airvting-media-prod\/image\/image-05b1ffe0-0f3b-11ea-8f24-d16c512066ad.jpg', mediaUrl: null, postId: '0ee431b3-a974-11ea-93ad-fa163eeeaebe', type: 'stream'
+                commentId: null, content: null, description: null, featuredImage: 'https://s3-ap-southeast-1.amazonaws.com/airvting-media-prod/image/image-05b1ffe0-0f3b-11ea-8f24-d16c512066ad.jpg', mediaUrl: null, postId: '0ee431b3-a974-11ea-93ad-fa163eeeaebe', type: 'stream'
               }
             }],
             pageCount: 1,

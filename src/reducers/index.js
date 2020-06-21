@@ -20,6 +20,7 @@ import productReducer from '../containers/Product/reducer';
 import cardReducer from '../containers/MyCards/reducer';
 import cartReducer from '../containers/MyCart/reducer';
 import history from '../utils/history';
+import messageReducer from '../containers/Message/reducer';
 
 export default combineReducers({
   router: connectRouter(history),
@@ -40,5 +41,6 @@ export default combineReducers({
   browserChannel: browserReducer,
   product: productReducer,
   cards: cardReducer,
-  carts: cartReducer
+  carts: cartReducer,
+  message: messageReducer,
 });

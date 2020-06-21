@@ -12,6 +12,7 @@ import t from 'tcomb-form';
 import * as Actions from '../actions';
 import Utils from '../../../utils/common';
 import airvForm from '../../../components/form';
+import Services from '../api';
 
 export function Add() {
   const msgForm = useRef(null);
@@ -35,19 +36,48 @@ export function Add() {
     </>
   );
 
+  const getUserData = (input, callback) => {
+    if (Utils.isUndefinedOrNullOrEmpty(input)) {
+      callback(null, []);
+      return;
+    }
+    const query = input;
+    Services.searchUser(query)
+      .then((response) => {
+        console.log('response ========= ', response);
+        if (Utils.isUndefinedOrNullOrEmptyList(response.data.userDetail)) {
+          callback([]);
+        }
+        const options = response.data.userDetail.map(item => ({ value: item._id, label: item.displayName }));
+        callback(options);
+      })
+      .catch((error) => {
+        callback(error, null);
+      });
+  };
+
 
   const getFormSchema = () => t.struct(formSchema);
   const getFormOptions = () => ({
     template: addMsgTemplate,
     fields: {
       to: {
+        template: airvForm.templates.select,
         label: 'To',
-        template: airvForm.templates.textbox,
-        error: 'To field is required',
         attrs: {
+          placeholder: 'Search user',
+          simpleValue: true,
+          clearable: true,
           autoFocus: 'autofocus',
+          loadOptions: (input, callback) => {
+            if (input.length < 2) {
+              getUserData(input, callback);
+            }
+          },
         },
-        type: 'test',
+        options: [],
+        error: 'To field is required',
+        factory: t.form.Select,
       },
       title: {
         label: 'Title',

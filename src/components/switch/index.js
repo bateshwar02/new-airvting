@@ -15,7 +15,6 @@ function Switch() {
   const steSwitchCase = () => {
     const isNightMode = localStorage.getItem('gmtNightMode');
     localStorage.setItem('gmtNightMode', !isNightMode);
-    console.log('isNightMode =======', isNightMode);
     setSwitchCheck(!isNightMode);
   };
 

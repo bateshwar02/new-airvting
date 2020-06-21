@@ -10,3 +10,9 @@
     width: 100%;
     padding: 10px;
 }
+
+.single-message-left{
+  width: 100%; margin: 5px 0px;
+}
+.single-message-text-time { top: 5px }
+.reply {cursor: pointer;}
