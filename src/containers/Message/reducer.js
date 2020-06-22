@@ -4,9 +4,13 @@
  *
  */
 
-import { UPDATE_DATA, UPDATE_IN_PROCESS, UPDATE_CONVERSATION } from './constants';
+import {
+  UPDATE_DATA, UPDATE_IN_PROCESS, UPDATE_CONVERSATION, IS_ADD_MESSAGE, ADD_MESSAGE_ACTION
+} from './constants';
 
-export const initialState = { messageData: {}, inProcess: true, conversionDataById: {} };
+export const initialState = {
+  messageData: {}, inProcess: true, conversionDataById: {}, isAddMessage: false, actionInProcess: false
+};
 
 /* eslint-disable default-case, no-param-reassign */
 export default function setBrowserInfo(state = initialState, action) {
@@ -25,6 +29,16 @@ export default function setBrowserInfo(state = initialState, action) {
       return {
         ...state,
         conversionDataById: action.conversionDataById
+      };
+    case IS_ADD_MESSAGE:
+      return {
+        ...state,
+        isAddMessage: action.isAddMessage
+      };
+    case ADD_MESSAGE_ACTION:
+      return {
+        ...state,
+        actionInProcess: action.actionInProcess
       };
     default:
       return state;

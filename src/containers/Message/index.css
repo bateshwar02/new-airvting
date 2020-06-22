@@ -16,3 +16,15 @@
 }
 .single-message-text-time { top: 5px }
 .reply {cursor: pointer;}
+
+.default{ display: flex;
+  justify-content: space-between;
+  align-items: center;}
+
+  .add-message-modal {
+    min-height: 60vh !important;
+}
+
+.add-message-modal .add-message-form{
+  margin: 20px 0px;
+}

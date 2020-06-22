@@ -15,10 +15,11 @@ export function conversationById({
   const [content, setContent] = useState('');
 
   useEffect(() => {
-    if (Utils.isUndefinedOrNullOrEmptyObject(conversionDataById) && !Utils.isUndefinedOrNullOrEmpty(msgId)) {
+    if (!Utils.isUndefinedOrNullOrEmpty(msgId)) {
       getConversationById(msgId);
     }
-  }, []);
+    setContent('');
+  }, [msgId]);
 
   const onchange = (event) => {
     setContent(event.target.value);
@@ -30,7 +31,7 @@ export function conversationById({
       const contentObj = {
         height: 0, type: 'text', width: 0, message: content
       };
-      formData.content = JSON.stringify(contentObj);
+      formData.content = contentObj;
       addReply(formData, id);
     }
   };
@@ -80,7 +81,7 @@ export function conversationById({
           {messageList(messages, sender.featuredImage)}
         </ul>
         <div className="single-message-input-box">
-          <input type="text" placeholder="Comments.." name="message-enter-text" onChange={onchange} />
+          <input type="text" placeholder="Comments.." name="message-enter-text" onChange={onchange} value={content} />
           <span className="reply" onClick={() => submitReply(_id)} role="button" tabIndex={0}><i className="fa fa-paper-plane-o" /></span>
         </div>
       </div>

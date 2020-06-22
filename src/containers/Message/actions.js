@@ -5,7 +5,7 @@
  */
 
 import {
-  UPDATE_DATA, UPDATE_IN_PROCESS, GET_CONVERSATION_DATA, ADD_CONVERSATION, UPDATE_CONVERSATION, GET_CONVERSATION_BY_ID
+  UPDATE_DATA, UPDATE_IN_PROCESS, GET_CONVERSATION_DATA, ADD_CONVERSATION, ADD_CONVERSATION_REPLLY, UPDATE_CONVERSATION, GET_CONVERSATION_BY_ID, IS_ADD_MESSAGE, ADD_MESSAGE_ACTION
 } from './constants';
 
 export function updateData(messageData) {
@@ -30,9 +30,16 @@ export function getConversation() {
 
 export function addReply(formData, id) {
   return {
-    type: ADD_CONVERSATION,
+    type: ADD_CONVERSATION_REPLLY,
     formData,
     id
+  };
+}
+
+export function addConversation(formData) {
+  return {
+    type: ADD_CONVERSATION,
+    formData,
   };
 }
 
@@ -47,5 +54,19 @@ export function getConversationById(id) {
   return {
     type: GET_CONVERSATION_BY_ID,
     id
+  };
+}
+
+export function addMessageAction(isAddMessage) {
+  return {
+    type: IS_ADD_MESSAGE,
+    isAddMessage
+  };
+}
+
+export function messageAction(actionInProcess) {
+  return {
+    type: ADD_MESSAGE_ACTION,
+    actionInProcess
   };
 }

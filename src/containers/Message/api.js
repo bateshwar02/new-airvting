@@ -18,7 +18,7 @@ const Service = {
 
   searchUser(userName) {
     const url = `api/v1/users?username=${userName}&paginate=1&perPage=20&maxId=null`;
-    return Request.get(url);
+    return Request.post(url, {});
   },
 
   addConversation(convData) {

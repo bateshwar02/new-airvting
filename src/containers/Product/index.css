@@ -12,3 +12,6 @@
 .modalHeader {min-height: 40px !important;}
 /* input{width: 100% !important;} */
 input#productCategories-input-tfid-0-0 { width:2px !important}
+.modalInnerContent {
+    min-height: 60vh !important;
+}

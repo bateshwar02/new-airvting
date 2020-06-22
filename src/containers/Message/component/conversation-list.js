@@ -61,6 +61,8 @@ export function conversationList({ getConversation, messageData, inProcess }) {
     });
   };
 
+  console.log('msgId ===', msgId);
+
   return (
     <div className="uk-grid">
       <div className="uk-width-1-3 message-mobile-box">
