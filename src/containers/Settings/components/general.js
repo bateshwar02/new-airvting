@@ -60,15 +60,15 @@ function General({ userData, updateUser, inProcess }) {
 
   const getLoginFormTemplate = locals => (
     <>
-      <div className="uk-form-group">{locals.inputs.firstName}</div>
-      <div className="uk-form-group">{locals.inputs.lastName}</div>
-      <div className="uk-form-group">{locals.inputs.email}</div>
-      <div className="uk-form-group">{locals.inputs.birth}</div>
-      <div className="uk-form-group">{locals.inputs.coverImage}</div>
-      <div className="uk-form-group">{locals.inputs.featuredImage}</div>
-      <div className="uk-form-group">{locals.inputs.location}</div>
-      <div className="uk-form-group">{locals.inputs.description}</div>
-      <div className="uk-form-group">{locals.inputs.gender}</div>
+      <div className="uk-form-group fieldWrap">{locals.inputs.firstName}</div>
+      <div className="uk-form-group fieldWrap">{locals.inputs.lastName}</div>
+      <div className="uk-form-group fieldWrap">{locals.inputs.email}</div>
+      <div className="uk-form-group fieldWrap">{locals.inputs.birth}</div>
+      <div className="uk-form-group fieldWrap">{locals.inputs.coverImage}</div>
+      <div className="uk-form-group fieldWrap">{locals.inputs.featuredImage}</div>
+      <div className="uk-form-group fieldWrap">{locals.inputs.location}</div>
+      <div className="uk-form-group fieldWrap">{locals.inputs.description}</div>
+      <div className="uk-form-group fieldWrap">{locals.inputs.gender}</div>
     </>
   );
 

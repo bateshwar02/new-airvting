@@ -4,17 +4,26 @@
  *
  */
 
-import { IS_PROCESS_ACTION } from './constants';
-import Setting from '../../components/Setting';
+import { IS_PROCESS_ACTION, UPDATE_GIFT, UPDATE_VERIFY_MSG } from './constants';
 
-export const initialState = { inProcess: false };
+export const initialState = { inProcess: false, gift: {}, emailVerifyMsg: 'Your email has been verified successfully.' };
 /* eslint-disable default-case, no-param-reassign */
 export default function setBrowserInfo(state = initialState, action) {
   switch (action.type) {
     case IS_PROCESS_ACTION:
       return {
-        ...Setting,
+        ...state,
         inProcess: action.inProcess
+      };
+    case UPDATE_GIFT:
+      return {
+        ...state,
+        gift: action.gift
+      };
+    case UPDATE_VERIFY_MSG:
+      return {
+        ...state,
+        emailVerifyMsg: action.emailVerifyMsg
       };
     default:
       return state;

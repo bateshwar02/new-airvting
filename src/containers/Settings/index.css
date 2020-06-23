@@ -38,3 +38,5 @@ textarea{
 
 .uk-form-group{ margin: 10px 0px; }
 .input-group {padding: 0px !important;}
+.fieldWrap .input-group{min-width: 324px;}
+.delete-account-reason textarea{border: 1px solid #eceff5; width: 97% !important;}

@@ -7,11 +7,11 @@
 // import { DEFAULT_ACTION } from './constants';
 
 import {
-  UPDATE_VIDEO_DATA, Is_PROCESS_ACTION, UPDATE_COMMENT, ADD_COMMENT_ACTION_IN_PROCESS, FOLLOW_IN_PROCESS
+  UPDATE_VIDEO_DATA, Is_PROCESS_ACTION, UPDATE_COMMENT, ADD_COMMENT_ACTION_IN_PROCESS, FOLLOW_IN_PROCESS, MY_GIFT_UPDATE, STORE_GIFT_UPDATE
 } from './constants';
 
 export const initialState = {
-  videoData: {}, inProcess: true, commentData: {}, actionInProcess: false, fallowInProcess: false
+  videoData: {}, inProcess: true, commentData: {}, actionInProcess: false, fallowInProcess: false, storGift: {}, myGift: {}
 };
 /* eslint-disable default-case, no-param-reassign */
 export default function setBrowserInfo(state = initialState, action) {
@@ -41,6 +41,16 @@ export default function setBrowserInfo(state = initialState, action) {
       return {
         ...state,
         fallowInProcess: action.fallowInProcess
+      };
+    case MY_GIFT_UPDATE:
+      return {
+        ...state,
+        myGift: action.myGift
+      };
+    case STORE_GIFT_UPDATE:
+      return {
+        ...state,
+        storGift: action.storGift
       };
     default:
       return state;

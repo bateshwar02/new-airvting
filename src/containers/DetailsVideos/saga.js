@@ -7,10 +7,10 @@ import { takeLatest, call, put } from 'redux-saga/effects';
 import { notifyError, notifySuccess } from '../App/action';
 
 import {
-  GET_VIDEO_DETAILS, ADD_COMMENT, GET_COMMENT, FOLLOW_ACTION
+  GET_VIDEO_DETAILS, ADD_COMMENT, GET_COMMENT, FOLLOW_ACTION, MY_GIFT, STORE_GIFT
 } from './constants';
 import {
-  updateVideoData, updateInProcess, updateCommentData, getComment, updateActionInProcess, updateFallowInProcess
+  updateVideoData, updateInProcess, updateCommentData, getComment, updateActionInProcess, updateFallowInProcess, updateMyGift, updateStoreGift
 } from './actions';
 import api from './api';
 
@@ -84,10 +84,40 @@ function* followUserSaga({ id }) {
   }
 }
 
+function* getMyGiftSaga() {
+  try {
+    const callGift = yield call(api.getMyGift);
+    if (callGift.success) {
+      yield put(updateMyGift(callGift.data));
+      return;
+    }
+    yield put(notifyError({ message: callGift.message }));
+    return;
+  } catch (e) {
+    yield put(notifyError(e));
+  }
+}
+
+function* getStoreGiftSaga() {
+  try {
+    const callGift = yield call(api.getStoreGift);
+    if (callGift.success) {
+      yield put(updateStoreGift(callGift.data));
+      return;
+    }
+    yield put(notifyError({ message: callGift.message }));
+    return;
+  } catch (e) {
+    yield put(notifyError(e));
+  }
+}
+
 
 export default function* detailsVideosSaga() {
   yield takeLatest(GET_VIDEO_DETAILS, getVideoDataSaga);
   yield takeLatest(ADD_COMMENT, addVideoCommentSaga);
   yield takeLatest(GET_COMMENT, getCommentSaga);
   yield takeLatest(FOLLOW_ACTION, followUserSaga);
+  yield takeLatest(MY_GIFT, getMyGiftSaga);
+  yield takeLatest(STORE_GIFT, getStoreGiftSaga);
 }

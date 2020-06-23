@@ -1,10 +1,12 @@
 /*
  *
- * Live actions
+ * Seting Action
  *
  */
 
-import { UPDATE_USER_DATA, UPDATE_PASSWORD, IS_PROCESS_ACTION, FORGATE_PASSWORD } from './constants';
+import {
+  UPDATE_USER_DATA, UPDATE_PASSWORD, IS_PROCESS_ACTION, FORGATE_PASSWORD, GET_GIFT, UPDATE_GIFT, VERIFY_EMAIL, UPDATE_VERIFY_MSG
+} from './constants';
 
 export function updateUser(userData, id) {
   return {
@@ -29,10 +31,37 @@ export function updatePassword(passData, id) {
   };
 }
 
-export function forgatePassword(passData, token) {
+export function forgatePassword(passData) {
   return {
     type: FORGATE_PASSWORD,
     passData,
+  };
+}
+
+export function verifyEmail(token) {
+  return {
+    type: VERIFY_EMAIL,
     token
   };
 }
+
+export function updateVerifyMsg(emailVerifyMsg) {
+  return {
+    type: UPDATE_VERIFY_MSG,
+    emailVerifyMsg,
+  };
+}
+
+export function updateGift(gift) {
+  return {
+    type: UPDATE_GIFT,
+    gift,
+  };
+}
+
+export function getGift() {
+  return {
+    type: GET_GIFT,
+  };
+}
+

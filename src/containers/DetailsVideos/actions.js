@@ -5,7 +5,7 @@
  */
 
 import {
-  ADD_COMMENT, GET_COMMENT, GET_VIDEO_DETAILS, UPDATE_VIDEO_DATA, Is_PROCESS_ACTION, UPDATE_COMMENT, FOLLOW_ACTION, ADD_COMMENT_ACTION_IN_PROCESS, FOLLOW_IN_PROCESS
+  ADD_COMMENT, GET_COMMENT, GET_VIDEO_DETAILS, UPDATE_VIDEO_DATA, Is_PROCESS_ACTION, UPDATE_COMMENT, FOLLOW_ACTION, ADD_COMMENT_ACTION_IN_PROCESS, FOLLOW_IN_PROCESS, MY_GIFT_UPDATE, STORE_GIFT_UPDATE, MY_GIFT, STORE_GIFT
 } from './constants';
 
 export function updateVideoData({ videoData, inProcess = false }) {
@@ -70,5 +70,31 @@ export function updateFallowInProcess(fallowInProcess) {
   return {
     type: FOLLOW_IN_PROCESS,
     fallowInProcess
+  };
+}
+
+export function updateStoreGift(storGift) {
+  return {
+    type: STORE_GIFT_UPDATE,
+    storGift
+  };
+}
+
+export function updateMyGift(myGift) {
+  return {
+    type: MY_GIFT_UPDATE,
+    myGift
+  };
+}
+
+export function storeGiftData() {
+  return {
+    type: STORE_GIFT,
+  };
+}
+
+export function myGiftData() {
+  return {
+    type: MY_GIFT,
   };
 }

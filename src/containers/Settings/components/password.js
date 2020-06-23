@@ -23,8 +23,8 @@ function Password({ updatePassword, inProcess, userData }) {
 
   const formTemplate = locals => (
     <>
-      <div className="uk-form-group">{locals.inputs.oldPass}</div>
-      <div className="uk-form-group">{locals.inputs.password}</div>
+      <div className="uk-form-group fieldWrap">{locals.inputs.oldPass}</div>
+      <div className="uk-form-group fieldWrap">{locals.inputs.password}</div>
     </>
   );
 

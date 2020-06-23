@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-no-duplicate-props */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/label-has-for */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/anchor-is-valid */
@@ -7,8 +9,11 @@
  *
  */
 
-import React, { memo, useEffect } from 'react';
+import React, {
+  memo, useEffect, useState
+} from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { compose, bindActionCreators } from 'redux';
@@ -22,12 +27,17 @@ import Comment from './components/addComment';
 import GetComment from './components/getComment';
 import LiveChat from './components/liveComment';
 import Loader from '../../components/Loader';
+import Mygift from './components/myGift';
+import Storegift from './components/storeGift';
 import './index.css';
 
 export function DetailsVideos({
   match, getVideoDetails, videoData, inProcess, followAction, addVideoComment, actionInProcess, fallowInProcess
 }) {
   const { id } = match.params;
+  const [isOpen, setOpen] = useState(false);
+  const [gift, setGift] = useState('storeGift');
+
   useEffect(() => {
     if (Utils.isUndefinedOrNullOrEmpty(id)) {
       Navigation.push('/sh/airvtingweb/');
@@ -120,21 +130,21 @@ export function DetailsVideos({
                   {!Utils.isUndefinedOrNullOrEmpty(mediaUrl) && <iframe title={title} width="100%" height="400" src={mediaUrl} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen /> }
 
                 </div>
-                <div className="chat-video-gift-box">
+                <div className={classNames('chat-video-gift-box', { isShow: isOpen })}>
                   <ul className="uk-tab gift-tab-box" data-uk-tab="{connect:'#my-id'}">
                     <li className="uk-active">
-                      <a href="">
+                      <span role="button" tabIndex={0} onClick={() => setGift('storeGift')}>
                         <i className="icon-feather-gift" />
                         {' '}
                         Gift Store
-                      </a>
+                      </span>
                     </li>
                     <li>
-                      <a href="/">
+                      <span role="button" role="button" tabIndex={0} onClick={() => setGift('myStore')}>
                         <i className="icon-feather-heart" />
                         {' '}
                         My Gift
-                      </a>
+                      </span>
                     </li>
                     <li className="tootal-coin">
                       <i className="icon-brand-bitcoin" />
@@ -143,7 +153,7 @@ export function DetailsVideos({
                     </li>
                   </ul>
                   <ul id="my-id" className="uk-switcher uk-margin ">
-                    <li className="gift-icon-all">
+                    {/* <li className="gift-icon-all">
                       <a href="/" id="autoplayer" data-uk-switcher-item="next" />
                       <div className="gifts-icon gilf-active-icon">
                         <img src="assets/images/video-thumbal/star.png" alt="" />
@@ -181,8 +191,8 @@ export function DetailsVideos({
                           21
                         </p>
                       </div>
-                    </li>
-                    <li>
+                    </li> */}
+                    {/* <li>
                       <div className="gifts-icon gilf-active-icon">
                         <img src="assets/images/video-thumbal/star.png" alt="" />
                         <p>star</p>
@@ -199,7 +209,10 @@ export function DetailsVideos({
                         <img src="assets/images/video-thumbal/headphone.png" alt="" />
                         <p>headphone</p>
                       </div>
-                    </li>
+                    </li> */}
+
+                    {gift === 'storeGift' && <Mygift />}
+                    {gift === 'myStore' && <Storegift />}
                     <li>Content 3</li>
                   </ul>
                 </div>
@@ -217,9 +230,9 @@ export function DetailsVideos({
                       <a href="store.php">
                         <li><img src="assets/images/video-thumbal/Shopping-icon.png" alt="" /></li>
                       </a>
-                      <a href="/">
+                      <span role="button" tabIndex={0} onClick={() => { setOpen(!isOpen); }}>
                         <li id="show"><img src="assets/images/video-thumbal/gift-icon.png" alt="" /></li>
-                      </a>
+                      </span>
                       <a href="my-token.php">
                         <li><img src="assets/images/video-thumbal/star-icon2.png" alt="" /></li>
                       </a>

@@ -14,3 +14,7 @@ export const UPDATE_COMMENT = 'app/DetailsVideos/UPDATE_COMMENT';
 export const FOLLOW_ACTION = 'app/DetailsVideos/FOLLOW_ACTION';
 export const ADD_COMMENT_ACTION_IN_PROCESS = 'app/DetailsVideos/ADD_COMMENT_ACTION_IN_PROCESS';
 export const FOLLOW_IN_PROCESS = 'app/DetailsVideos/FOLLOW_IN_PROCESS';
+export const STORE_GIFT = 'app/DetailsVideos/STORE_GIFT';
+export const STORE_GIFT_UPDATE = 'app/DetailsVideos/STORE_GIFT_UPDATE';
+export const MY_GIFT = 'app/DetailsVideos/MY_GIFT';
+export const MY_GIFT_UPDATE = 'app/DetailsVideos/MY_GIFT_UPDATE';
