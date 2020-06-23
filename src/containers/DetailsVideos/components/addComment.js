@@ -7,7 +7,15 @@ import t from 'tcomb-form';
 import airvForm from '../../../components/form';
 import Utils from '../../../utils/common';
 
-function Comment({ addVideoComment, actionInProcess, id }) {
+function Comment({
+  addVideoComment, actionInProcess, id, userData
+}) {
+  let imgUrl = 'assets/images/avatars/avatar-2.jpg';
+  const { userDetail } = userData;
+  if (!Utils.isUndefinedOrNullOrEmptyObject(userDetail) && !Utils.isUndefinedOrNullOrEmpty(userDetail.featuredImage)) {
+    imgUrl = userDetail.featuredImage;
+  }
+  console.log('userData == ', userData);
   const addCommentForm = useRef(null);
   const [addCommentData, setAddCommentData] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -65,7 +73,7 @@ function Comment({ addVideoComment, actionInProcess, id }) {
         <li>
           <div className="avatar">
             {/* {!Utils.isUndefinedOrNullOrEmpty(userDetail.)} */}
-            <img src="assets/images/avatars/avatar-2.jpg" alt="" />
+            <img src={imgUrl} alt="" />
           </div>
           <div className="comment-content">
             <div className="uk-grid-small uk-grid">
@@ -92,6 +100,7 @@ Comment.propTypes = {
   addVideoComment: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
   actionInProcess: PropTypes.bool.isRequired,
+  userData: PropTypes.object.isRequired,
 };
 
 

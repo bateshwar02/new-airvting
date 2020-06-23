@@ -42,7 +42,7 @@ function Mygift({ myGift, myGiftData, storeProccess }) {
     <li>
       {getContent()}
       {storeProccess && (
-      <div className="loaderWrapper">
+      <div className="loaderWrapper dataWrap">
         <div className="customLoader" />
       </div>
       )}

@@ -16,8 +16,10 @@ function* workerGetUsersSaga() {
 
 function* logoutSaga() {
   try {
-    yield call(api.logout);
-    window.location = '/sh/airvtingweb';
+    const apiCall = yield call(api.logout);
+    if (apiCall.success) {
+      window.location = '/sh/airvtingweb';
+    }
     return;
   } catch (e) {
     console.log(e);

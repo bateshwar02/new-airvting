@@ -48,7 +48,7 @@ function Mygift({ storGift, storeGiftData, storeProccess }) {
     <li>
       {getContent()}
       {storeProccess && (
-      <div className="loaderWrapper">
+      <div className="loaderWrapper dataWrap">
         <div className="customLoader" />
       </div>
       )}

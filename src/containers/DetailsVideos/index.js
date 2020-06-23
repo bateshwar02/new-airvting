@@ -32,7 +32,7 @@ import Storegift from './components/storeGift';
 import './index.css';
 
 export function DetailsVideos({
-  match, getVideoDetails, videoData, inProcess, followAction, addVideoComment, actionInProcess, fallowInProcess
+  match, getVideoDetails, videoData, inProcess, followAction, addVideoComment, actionInProcess, fallowInProcess, userData
 }) {
   const { id } = match.params;
   const [isOpen, setOpen] = useState(false);
@@ -236,7 +236,7 @@ export function DetailsVideos({
           </div>
           <hr />
           {!Utils.isUndefinedOrNullOrEmpty(_id) && <GetComment /> }
-          {!Utils.isUndefinedOrNullOrEmpty(_id) && <Comment actionInProcess={actionInProcess} id={_id} addVideoComment={addVideoComment} /> }
+          {!Utils.isUndefinedOrNullOrEmpty(_id) && <Comment actionInProcess={actionInProcess} id={_id} addVideoComment={addVideoComment} userData={userData} /> }
         </div>
       </div>
       <Footer />
@@ -266,15 +266,16 @@ DetailsVideos.propTypes = {
   addVideoComment: PropTypes.func.isRequired,
   actionInProcess: PropTypes.bool.isRequired,
   fallowInProcess: PropTypes.bool.isRequired,
+  userData: PropTypes.object.isRequired,
 };
 
 
 const mapStateToProps = ({
   detailsVideos: {
     videoData, inProcess, commentData, actionInProcess, fallowInProcess
-  }
+  }, userDetails: { userData }
 }) => ({
-  videoData, inProcess, commentData, actionInProcess, fallowInProcess
+  videoData, inProcess, commentData, actionInProcess, fallowInProcess, userData
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(Actions, dispatch);
