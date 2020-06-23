@@ -40,3 +40,5 @@ textarea{
 .input-group {padding: 0px !important;}
 .fieldWrap .input-group{min-width: 324px;}
 .delete-account-reason textarea{border: 1px solid #eceff5; width: 97% !important;}
+.uk-form-group.fieldWrap.imageWrape {display: flex; flex-direction: column};
+img .profileImg {height: 150px; width: 150px;}

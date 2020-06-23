@@ -4,7 +4,7 @@
  *
  */
 
-import React, { memo, useEffect } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose, bindActionCreators } from 'redux';
@@ -17,10 +17,14 @@ import './index.css';
 function About({
   match, verifyEmail, inProcess, emailVerifyMsg
 }) {
+  const [isApiCalled, setApiCalled] = useState(false);
   useEffect(() => {
-    const { token } = match.params;
-    const objectData = { token };
-    verifyEmail(objectData);
+    if (!isApiCalled) {
+      const { token } = match.params;
+      const objectData = { token };
+      verifyEmail(objectData);
+      setApiCalled(true);
+    }
   }, []);
 
   const getContent = () => (

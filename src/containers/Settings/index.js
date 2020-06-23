@@ -18,7 +18,7 @@ import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
 import Footer from '../../components/Footer';
 import General from './components/general';
-import Billing from './components/billing';
+// import Billing from './components/billing';
 import Password from './components/password';
 import Earning from './components/earning';
 import DeleteAccount from './components/delete-account';

@@ -87,8 +87,8 @@ export function App({ userData, getUserData }) {
         <Route exact path={Navigation.termsCondition} component={TermsCondition} />
         <Route exact path={Navigation.veryEmail} component={VerifyEmailTemp} />
         <Route exact path={Navigation.changePass} component={ChangePass} />
-        <Route path='/404' component={NotFoundPage} />
-        <Redirect from='*' to='/404' />
+        <Route path="/404" component={NotFoundPage} />
+        <Redirect from="*" to="/404" />
         {/* <Route component={NotFoundPage} /> */}
       </Switch>
     </>

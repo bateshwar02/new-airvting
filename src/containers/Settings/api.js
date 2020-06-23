@@ -5,7 +5,7 @@ import Utils from '../../utils/common';
 const Service = {
   updateUserData(userData, id) {
     const url = `api/v1/users/${id}`;
-    return Request.imageUpload(url, userData, 'multipart/form-data');
+    return Request.imgageUpload(url, userData);
   },
 
   updatePass(passData, id) {
@@ -19,7 +19,7 @@ const Service = {
   },
 
   verfyEmail(token) {
-    const url = '/api/v1/users/resendVerified';
+    const url = 'api/v1/users/verify_email_action';
     return Request.post(url, token);
   },
 

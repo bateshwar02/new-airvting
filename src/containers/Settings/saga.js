@@ -11,7 +11,8 @@ import Navigation from '../../utils/navigation';
 function* updateUserData({ userData, id }) {
   yield put(updateInProcess({ inProcess: true }));
   try {
-    const upData = yield call(api.updateUserData, userData, id);
+    const apiData = yield call(api.updateUserData, userData, id);
+    const upData = JSON.parse(apiData);
     if (upData.success) {
       yield put(notifySuccess('User data updated successfully.'));
       yield put(updateInProcess({ inProcess: false }));

@@ -13,10 +13,9 @@ import { connect } from 'react-redux';
 import { compose, bindActionCreators } from 'redux';
 import t from 'tcomb-form';
 import airvForm from '../../../components/form';
-
 import Utils from '../../../utils/common';
 import * as Actions from '../actions';
-// import Navigation from '../../../utils/navigation';
+import Loader from '../../../components/Loader';
 
 function General({ userData, updateUser, inProcess }) {
   const { userDetail } = userData;
@@ -34,6 +33,7 @@ function General({ userData, updateUser, inProcess }) {
   const [userFormData, setUserFormData] = useState(defaultFormValue);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+
   const onChange = (formValue, element) => {
     if (isSubmitted) {
       userFormRef.current.validate();
@@ -50,12 +50,12 @@ function General({ userData, updateUser, inProcess }) {
     firstName: airvForm.refinements.name,
     lastName: airvForm.refinements.name,
     email: airvForm.refinements.email,
-    description: t.String,
-    location: t.String,
-    birth: t.Number,
-    gender: t.Array,
-    coverImage: t.Object,
-    featuredImage: t.Object,
+    description: t.maybe(t.String),
+    location: t.maybe(t.String),
+    birth: t.maybe(t.Number),
+    gender: t.maybe(t.Array),
+    coverImage: t.maybe(t.Object),
+    featuredImage: t.maybe(t.Object),
   };
 
   const getLoginFormTemplate = locals => (
@@ -64,8 +64,14 @@ function General({ userData, updateUser, inProcess }) {
       <div className="uk-form-group fieldWrap">{locals.inputs.lastName}</div>
       <div className="uk-form-group fieldWrap">{locals.inputs.email}</div>
       <div className="uk-form-group fieldWrap">{locals.inputs.birth}</div>
-      <div className="uk-form-group fieldWrap">{locals.inputs.coverImage}</div>
-      <div className="uk-form-group fieldWrap">{locals.inputs.featuredImage}</div>
+      <div className="uk-form-group fieldWrap imageWrape">
+        {locals.inputs.coverImage}
+        {!Utils.isUndefinedOrNullOrEmptyObject(userDetail) && <img style={{ height: '150px', width: '150px' }} src={userDetail.coverImage} alt="cover" /> }
+      </div>
+      <div className="uk-form-group fieldWrap imageWrape">
+        {locals.inputs.featuredImage}
+        {!Utils.isUndefinedOrNullOrEmptyObject(userDetail) && <img style={{ height: '150px', width: '150px' }} src={userDetail.featuredImage} alt="feature" /> }
+      </div>
       <div className="uk-form-group fieldWrap">{locals.inputs.location}</div>
       <div className="uk-form-group fieldWrap">{locals.inputs.description}</div>
       <div className="uk-form-group fieldWrap">{locals.inputs.gender}</div>
@@ -195,7 +201,7 @@ function General({ userData, updateUser, inProcess }) {
     formData.append('coverImage', coverImage);
     formData.append('featuredImage', featuredImage);
     formData.append('location', location);
-    formData.append('birth', Utils.formatDate(birth, 'dd/mm/yyyy'));
+    formData.append('birth', Utils.formatDate(birth, 'dd-mm-yyyy'));
     formData.append('gender', gender[0]);
 
     if (!Utils.isUndefinedOrNullOrEmptyObject(userDetail)) {
@@ -225,6 +231,7 @@ function General({ userData, updateUser, inProcess }) {
           )}
         </button>
       </div>
+      <Loader inProcess={inProcess} />
     </>
   );
 }

@@ -1,4 +1,5 @@
 import cookie from 'cookies-js';
+import $ from 'jquery';
 import Utils from './common';
 
 
@@ -98,4 +99,29 @@ export default {
   upload(url, data, progressCallback, headers = {}) {
     return request(getBaseUrl() + url, { method: 'POST', headers: getDocHeaders(headers), body: data });
   },
+  imgageUpload(url, data) {
+    const headers = {};
+    if (!Utils.isUndefinedOrNullOrEmpty(cookie.get('token'))) {
+      headers.authorization = `Bearer ${cookie.get('token')}`;
+    }
+    return new Promise((resolve, reject) => {
+      $.ajax({
+        url: getBaseUrl() + url,
+        type: 'POST',
+        processData: false,
+        headers,
+        contentType: false,
+        mimeType: 'multipart/form-data',
+        data,
+        success: response => resolve(response),
+        error: (error) => {
+          if (Utils.isUndefinedOrNullOrEmpty(error.response)) {
+            reject(error);
+          } else {
+            reject(JSON.parse(error.response));
+          }
+        },
+      });
+    });
+  }
 };

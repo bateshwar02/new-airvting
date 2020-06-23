@@ -64,4 +64,3 @@ export function getGift() {
     type: GET_GIFT,
   };
 }
-
