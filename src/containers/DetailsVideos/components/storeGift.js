@@ -11,9 +11,9 @@ import { compose, bindActionCreators } from 'redux';
 import Utils from '../../../utils/common';
 import * as Actions from '../actions';
 
-function Mygift({ storGift, storeGiftData }) {
+function Mygift({ storGift, storeGiftData, storeProccess }) {
   useEffect(() => {
-    if (!Utils.isUndefinedOrNullOrEmptyObject(storGift)) {
+    if (Utils.isUndefinedOrNullOrEmptyObject(storGift)) {
       storeGiftData();
     }
   }, []);
@@ -24,6 +24,9 @@ function Mygift({ storGift, storeGiftData }) {
       return null;
     }
     const { giftDetail } = storGift;
+    if (Utils.isUndefinedOrNullOrEmptyList(giftDetail)) {
+      return (<div className="gifts-icon"> No Data </div>);
+    }
     return giftDetail.map((item, index) => {
       const keys = `index-key-${index}`;
 
@@ -44,6 +47,11 @@ function Mygift({ storGift, storeGiftData }) {
   return (
     <li>
       {getContent()}
+      {storeProccess && (
+      <div className="loaderWrapper">
+        <div className="customLoader" />
+      </div>
+      )}
     </li>
   );
 }
@@ -54,7 +62,7 @@ Mygift.propTypes = {
 };
 
 
-const mapStateToProps = ({ detailsVideos: { storGift } }) => ({ storGift });
+const mapStateToProps = ({ detailsVideos: { storGift, storeProccess } }) => ({ storGift, storeProccess });
 const mapDispatchToProps = dispatch => bindActionCreators(Actions, dispatch);
 
 const withConnect = connect(

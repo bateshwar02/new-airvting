@@ -11,9 +11,9 @@ import { compose, bindActionCreators } from 'redux';
 import Utils from '../../../utils/common';
 import * as Actions from '../actions';
 
-function Mygift({ myGift, myGiftData }) {
+function Mygift({ myGift, myGiftData, storeProccess }) {
   useEffect(() => {
-    if (!Utils.isUndefinedOrNullOrEmptyObject(myGift)) {
+    if (Utils.isUndefinedOrNullOrEmptyObject(myGift)) {
       myGiftData();
     }
   }, []);
@@ -24,9 +24,11 @@ function Mygift({ myGift, myGiftData }) {
       return null;
     }
     const { giftDetail } = myGift;
+    if (Utils.isUndefinedOrNullOrEmptyList(giftDetail)) {
+      return (<div className="gifts-icon"> No Data </div>);
+    }
     return giftDetail.map((item, index) => {
       const keys = `index-key-${index}`;
-
       return (
         <div className="gifts-icon" key={keys}>
           <img src={item.featuredImage} alt="" />
@@ -39,6 +41,11 @@ function Mygift({ myGift, myGiftData }) {
   return (
     <li>
       {getContent()}
+      {storeProccess && (
+      <div className="loaderWrapper">
+        <div className="customLoader" />
+      </div>
+      )}
     </li>
   );
 }
@@ -49,7 +56,7 @@ Mygift.propTypes = {
 };
 
 
-const mapStateToProps = ({ detailsVideos: { myGift } }) => ({ myGift });
+const mapStateToProps = ({ detailsVideos: { myGift, storeProccess } }) => ({ myGift, storeProccess });
 const mapDispatchToProps = dispatch => bindActionCreators(Actions, dispatch);
 
 const withConnect = connect(

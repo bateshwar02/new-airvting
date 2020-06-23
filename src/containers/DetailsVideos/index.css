@@ -50,7 +50,36 @@
     animation: spin 2s linear infinite;
     margin-left: 10px;
   }
-  
+
+  .chat-video-gift-box li {
+    display: flex !important;
+    margin-left: 0px;
+    flex-direction: row;
+    white-space: nowrap;
+    overflow-x: auto;
+}
+.gifts-icon {
+  float: left;
+  border: 1px solid rgba(220, 220, 220, 0.09);
+  border-radius: 4px;
+  width: 71px;
+  height: 75px;
+  text-align: center;
+  padding: 8px;
+  margin: 8px;
+  min-width: 70px;
+}
+.tootal-coin {
+  position: absolute;
+  right: 0;
+  top: 0px;
+}
+
+.loaderWrapper{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
   /* Safari */
   @-webkit-keyframes spin {
 	0% { -webkit-transform: rotate(0deg); }

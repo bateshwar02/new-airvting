@@ -146,74 +146,15 @@ export function DetailsVideos({
                         My Gift
                       </span>
                     </li>
-                    <li className="tootal-coin">
+                    {/* <li className="tootal-coin">
                       <i className="icon-brand-bitcoin" />
                       {' '}
                       3480
-                    </li>
+                    </li> */}
                   </ul>
                   <ul id="my-id" className="uk-switcher uk-margin ">
-                    {/* <li className="gift-icon-all">
-                      <a href="/" id="autoplayer" data-uk-switcher-item="next" />
-                      <div className="gifts-icon gilf-active-icon">
-                        <img src="assets/images/video-thumbal/star.png" alt="" />
-                        <p>star</p>
-                        <p>
-                          <i className="icon-brand-bitcoin" />
-                          {' '}
-                          1
-                        </p>
-                      </div>
-                      <div className="gifts-icon">
-                        <img src="assets/images/video-thumbal/ring.png" alt="" />
-                        <p>Ring</p>
-                        <p>
-                          <i className="icon-brand-bitcoin" />
-                          {' '}
-                          12
-                        </p>
-                      </div>
-                      <div className="gifts-icon">
-                        <img src="assets/images/video-thumbal/drink.png" alt="" />
-                        <p>Champagne</p>
-                        <p>
-                          <i className="icon-brand-bitcoin" />
-                          {' '}
-                          15
-                        </p>
-                      </div>
-                      <div className="gifts-icon">
-                        <img src="assets/images/video-thumbal/headphone.png" alt="" />
-                        <p>headphone</p>
-                        <p>
-                          <i className="icon-brand-bitcoin" />
-                          {' '}
-                          21
-                        </p>
-                      </div>
-                    </li> */}
-                    {/* <li>
-                      <div className="gifts-icon gilf-active-icon">
-                        <img src="assets/images/video-thumbal/star.png" alt="" />
-                        <p>star</p>
-                      </div>
-                      <div className="gifts-icon">
-                        <img src="assets/images/video-thumbal/ring.png" alt="" />
-                        <p>Ring</p>
-                      </div>
-                      <div className="gifts-icon">
-                        <img src="assets/images/video-thumbal/drink.png" alt="" />
-                        <p>Champagne</p>
-                      </div>
-                      <div className="gifts-icon">
-                        <img src="assets/images/video-thumbal/headphone.png" alt="" />
-                        <p>headphone</p>
-                      </div>
-                    </li> */}
-
-                    {gift === 'storeGift' && <Mygift />}
-                    {gift === 'myStore' && <Storegift />}
-                    <li>Content 3</li>
+                    {gift === 'myStore' && <Mygift />}
+                    {gift === 'storeGift' && <Storegift />}
                   </ul>
                 </div>
                 <div className="chat-vedio-icon-box">
