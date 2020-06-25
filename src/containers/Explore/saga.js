@@ -4,9 +4,11 @@ import { takeLatest, call, put } from 'redux-saga/effects';
 import Utils from '../../utils/common';
 import { notifyError, notifySuccess } from '../App/action';
 
-import { GET_EXPLORE_DATA, BOOKMARK_ACTION, GET_DATA_FILTER } from './constants';
 import {
-  updateData, updateInProcess, updateFilter, getExploreData
+  GET_EXPLORE_DATA, BOOKMARK_ACTION, GET_DATA_FILTER, GET_PEOPLE_DATA, FOLLOW_ACTION, GET_PRODUCT
+} from './constants';
+import {
+  updateData, updateInProcess, updateFilter, getExploreData, userFilterUpdate, updatePeopleData, updateFollowProcess, updateProduct
 } from './actions';
 import api from './api';
 import { addBookMark } from '../../lib/addBookMark';
@@ -55,8 +57,66 @@ function* getDataByFilterSaga({ filter }) {
   }
 }
 
+function* getPeopleDataSaga({ filter }) {
+  yield put(updateInProcess(true));
+  try {
+    const getPeople = yield call(api.getPeopleData, filter);
+    if (getPeople.success) {
+      if (!Utils.isUndefinedOrNullOrEmptyObject(getPeople.data)) {
+        yield put(updatePeopleData(getPeople.data));
+        yield put(userFilterUpdate(filter));
+        yield put(updateInProcess(false));
+        return;
+      }
+    }
+    yield put(updateInProcess(false));
+  } catch (e) {
+    yield put(updateInProcess(false));
+    yield put(notifyError(e));
+  }
+}
+
+function* getFollowActionSaga({ id }) {
+  yield put(updateFollowProcess(true));
+  try {
+    const follow = yield call(api.followUser, id);
+    if (follow.success) {
+      yield put(notifySuccess('Follow Action Success.'));
+      yield put(updateFollowProcess(false));
+      return;
+    }
+    yield put(notifyError({ message: follow.message }));
+    yield put(updateFollowProcess(false));
+    return;
+  } catch (e) {
+    yield put(updateFollowProcess(false));
+    yield put(notifyError(e));
+  }
+}
+
+function* getProductDataSaga() {
+  yield put(updateInProcess(true));
+  try {
+    const product = yield call(api.productList);
+    if (product.success) {
+      yield put(updateProduct(product.data));
+      yield put(updateInProcess(false));
+      return;
+    }
+    yield put(notifyError({ message: product.message }));
+    yield put(updateInProcess(false));
+    return;
+  } catch (e) {
+    yield put(updateInProcess(false));
+    yield put(notifyError(e));
+  }
+}
+
 export default function* exploreSaga() {
   yield takeLatest(GET_EXPLORE_DATA, getExploreDataSaga);
   yield takeLatest(BOOKMARK_ACTION, bookMarkActionSaga);
   yield takeLatest(GET_DATA_FILTER, getDataByFilterSaga);
+  yield takeLatest(GET_PEOPLE_DATA, getPeopleDataSaga);
+  yield takeLatest(FOLLOW_ACTION, getFollowActionSaga);
+  yield takeLatest(GET_PRODUCT, getProductDataSaga);
 }

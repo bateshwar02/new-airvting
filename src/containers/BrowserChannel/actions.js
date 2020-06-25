@@ -8,19 +8,17 @@ import {
   GET_USER_DATA_BY_ID, GET_POST_DATA_BY_ID, Is_PROCESS_ACTION, UPDATE_USER_POST_DATA, UPDATE_USER_DATA, BOOKMARK_ACTION
 } from './constants';
 
-export function updateUserData({ channelUserData, inProcess = false }) {
+export function updateUserData({ channelUserData }) {
   return {
     type: UPDATE_USER_DATA,
     channelUserData,
-    inProcess
   };
 }
 
-export function updatePostData({ postDataByUser, inProcess = false }) {
+export function updatePostData({ postDataByUser }) {
   return {
     type: UPDATE_USER_POST_DATA,
     postDataByUser,
-    inProcess
   };
 }
 

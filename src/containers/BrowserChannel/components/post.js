@@ -13,17 +13,18 @@ import { compose, bindActionCreators } from 'redux';
 import Utils from '../../../utils/common';
 import * as Actions from '../actions';
 import Navigation from '../../../utils/navigation';
+import Loader from '../../../components/Loader';
 
 export function Followers({
-  match, postDataByUser, getPostDataByUserId, bookMarkAction
+  match, postDataByUser, getPostDataByUserId, bookMarkAction, inProcess
 }) {
   const { id } = match.params;
 
   useEffect(() => {
-    if (Utils.isUndefinedOrNullOrEmptyObject(postDataByUser) && !Utils.isUndefinedOrNullOrEmpty(id)) {
+    if (!Utils.isUndefinedOrNullOrEmpty(id)) {
       getPostDataByUserId(id);
     }
-  }, []);
+  }, [id]);
 
   const videoPlay = (item) => {
     Navigation.push(`/sh/airvtingweb/video/${item._id}`);
@@ -102,6 +103,7 @@ export function Followers({
   return (
     <div className="section-small" id="user-video">
       {getVideoComp()}
+      <Loader inProcess={inProcess} />
     </div>
   );
 }
@@ -111,6 +113,7 @@ Followers.propTypes = {
   match: PropTypes.object.isRequired,
   getPostDataByUserId: PropTypes.func.isRequired,
   bookMarkAction: PropTypes.func.isRequired,
+  inProcess: PropTypes.bool.isRequired,
 };
 
 

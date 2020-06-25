@@ -13,14 +13,14 @@ import { compose, bindActionCreators } from 'redux';
 import Utils from '../../../utils/common';
 import * as Actions from '../actions';
 
-function TabMenu({ getDataByFilter, tabMenu, filter }) {
+function TabMenu({ tabMenu, tabValue, updateTabValue }) {
   const menuList = data => data.map((item, index) => {
     const idx = `content-${index}`;
     return (
       <span
-        className={classNames('actionButton', { active: filter === item.value })}
+        className={classNames('actionButton', { active: tabValue === item.value })}
         key={idx}
-        onClick={() => getDataByFilter(item.value)}
+        onClick={() => updateTabValue(item.value)}
         role="button"
         tabIndex={0}
       >
@@ -30,7 +30,7 @@ function TabMenu({ getDataByFilter, tabMenu, filter }) {
   });
 
   return (
-    <div className="buttonWrapper">
+    <div className="buttonWrapper menuWrap">
       <div className="listWrapper">{!Utils.isUndefinedOrNullOrEmptyList(tabMenu) && menuList(tabMenu)}</div>
     </div>
   );
@@ -38,12 +38,12 @@ function TabMenu({ getDataByFilter, tabMenu, filter }) {
 
 TabMenu.propTypes = {
   tabMenu: PropTypes.array.isRequired,
-  getDataByFilter: PropTypes.func.isRequired,
-  filter: PropTypes.string.isRequired,
+  tabValue: PropTypes.string.isRequired,
+  updateTabValue: PropTypes.func.isRequired,
 };
 
 
-const mapStateToProps = ({ explore: { tabMenu, filter } }) => ({ tabMenu, filter });
+const mapStateToProps = ({ explore: { tabMenu, tabValue } }) => ({ tabMenu, tabValue });
 const mapDispatchToProps = dispatch => bindActionCreators(Actions, dispatch);
 
 const withConnect = connect(

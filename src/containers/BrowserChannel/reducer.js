@@ -14,13 +14,11 @@ export default function setBrowserInfo(state = initialState, action) {
       return {
         ...state,
         channelUserData: action.channelUserData,
-        inProcess: action.inProcess,
       };
     case UPDATE_USER_POST_DATA:
       return {
         ...state,
         postDataByUser: action.postDataByUser,
-        inProcess: action.inProcess,
       };
     case Is_PROCESS_ACTION:
       return {

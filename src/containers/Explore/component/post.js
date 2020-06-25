@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /**
  *
- * About
+ * Post
  *
  */
 

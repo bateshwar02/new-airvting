@@ -28,7 +28,7 @@ function Transactions({ getTransictionsData, transictionsData }) {
         <td>
           <div className="my-gift-store-table-img"><img src={item.products[0].featuredImage} alt="" style={{ height: '55px', width: '70px' }} /></div>
         </td>
-        <td>{item.products[0].displayName}</td>
+        <td>{item.products[0].title}</td>
         <td>{`${item.currency} ${item.totalPrice}`}</td>
         <td>
           <span className="my-gift-store-table-icon">
@@ -38,7 +38,7 @@ function Transactions({ getTransictionsData, transictionsData }) {
         </td>
         <td>{Utils.formatDate(ticks)}</td>
         <td>{item.transaction}</td>
-        <td>Krishna</td>
+        <td>{item.products[0].displayName}</td>
         <td>{item.totalQuantity}</td>
       </tr>
     );

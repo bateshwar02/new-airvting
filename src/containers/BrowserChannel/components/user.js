@@ -11,18 +11,17 @@ import { compose, bindActionCreators } from 'redux';
 
 import Utils from '../../../utils/common';
 import * as Actions from '../actions';
-import Loader from '../../../components/Loader';
 import Post from './post';
 
 export function User({
-  match, inProcess, channelUserData, getUserDataById
+  match, channelUserData, getUserDataById
 }) {
   const { id } = match.params;
   useEffect(() => {
-    if (Utils.isUndefinedOrNullOrEmptyObject(channelUserData) && !Utils.isUndefinedOrNullOrEmpty(id)) {
+    if (!Utils.isUndefinedOrNullOrEmpty(id)) {
       getUserDataById(id);
     }
-  }, []);
+  }, [id]);
 
   const getChannelData = () => {
     if (Utils.isUndefinedOrNullOrEmptyObject(channelUserData)) {
@@ -144,7 +143,6 @@ export function User({
     <>
       {getChannelData()}
       {getStatusWrapper()}
-      <Loader inProcess={inProcess} />
     </>
   );
 }
@@ -153,7 +151,6 @@ User.propTypes = {
   channelUserData: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
   getUserDataById: PropTypes.func.isRequired,
-  inProcess: PropTypes.bool.isRequired,
 };
 
 

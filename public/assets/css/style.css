@@ -3684,7 +3684,7 @@ input:checked+.btn-switch-slider:before {
 
 [class~=my-4],
 .mt-4 {
-	margin-top: 1.5rem !important;
+	margin-top:.2rem !important;
 }
 
 [class~=button][class~=success][class~=active] {

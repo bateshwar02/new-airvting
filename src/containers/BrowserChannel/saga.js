@@ -33,6 +33,7 @@ function* getPostDataByUser({ id }) {
     if (postData.success) {
       if (!Utils.isUndefinedOrNullOrEmptyObject(postData.data)) {
         yield put(updatePostData({ postDataByUser: postData.data }));
+        yield put(updateInProcess(false));
         return;
       }
     }
