@@ -10,7 +10,6 @@ import likedVideoReducer from '../containers/LikeVideos/reducer';
 import featuredReducer from '../containers/Featured/reducer';
 import historyReducer from '../containers/History/reducer';
 import goLiveReducer from '../containers/Golive/reducer';
-import myChanelReducer from '../containers/MyChannel/reducer';
 import storeReducer from '../containers/Store/reducer';
 import videoReducer from '../containers/DetailsVideos/reducer';
 import exploreReducer from '../containers/Explore/reducer';
@@ -21,6 +20,7 @@ import cardReducer from '../containers/MyCards/reducer';
 import cartReducer from '../containers/MyCart/reducer';
 import history from '../utils/history';
 import messageReducer from '../containers/Message/reducer';
+import tokenReducer from '../containers/MyToken/reducer';
 
 export default combineReducers({
   router: connectRouter(history),
@@ -34,7 +34,6 @@ export default combineReducers({
   featured: featuredReducer,
   history: historyReducer,
   goLive: goLiveReducer,
-  myChanel: myChanelReducer,
   explore: exploreReducer,
   store: storeReducer,
   setting: settingReducer,
@@ -43,4 +42,5 @@ export default combineReducers({
   cards: cardReducer,
   carts: cartReducer,
   message: messageReducer,
+  token: tokenReducer,
 });

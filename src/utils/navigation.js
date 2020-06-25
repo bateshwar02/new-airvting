@@ -26,6 +26,7 @@ const Navigation = {
   card: '/cards',
   veryEmail: '/verify-email/:token',
   changePass: '/change-pass/:token',
+  token: '/token',
   push: (url) => {
     history.push(url);
   },

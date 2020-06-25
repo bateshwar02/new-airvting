@@ -24,3 +24,5 @@ export const GET_NOTIFICATION = 'app/App/GET_NOTIFICATION';
 export const UPDATE_NOTIFICATION = 'app/App/UPDATE_NOTIFICATION';
 export const GET_MESSAGE = 'app/App/GET_MESSAGE';
 export const UPDATE_MESSAGE = 'app/App/UPDATE_MESSAGE';
+export const UPDATE_IN_PROCCESS = 'app/App/UPDATE_IN_PROCCESS';
+export const VERIFY_EMAIL = 'app/App/VERIFY_EMAIL';

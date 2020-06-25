@@ -174,9 +174,9 @@ export function DetailsVideos({
                       <span role="button" tabIndex={0} onClick={() => { setOpen(!isOpen); }}>
                         <li id="show"><img src="assets/images/video-thumbal/gift-icon.png" alt="" /></li>
                       </span>
-                      <a href="my-token.php">
+                      <span onClick={() => Navigation.push(Navigation.token)} role="button" tabIndex={0}>
                         <li><img src="assets/images/video-thumbal/star-icon2.png" alt="" /></li>
-                      </a>
+                      </span>
                     </ul>
                   </div>
                 </div>

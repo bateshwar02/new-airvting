@@ -12,18 +12,21 @@ import { compose, bindActionCreators } from 'redux';
 import * as Actions from './actions';
 import Signin from './components/login';
 import Singnup from './components/sign-up';
+import ResetPassword from './components/forgetPass';
 import Loader from '../../components/Loader';
 import './index.css';
 
 export function Login({
-  signIn, signUp, action, updateActions, inProcess, socialLogin
+  signIn, signUp, action, updateActions, inProcess, socialLogin, sendEmailToResetPass
 }) {
   const getComponent = () => {
     switch (action) {
       case 1:
         return <Signin setAction={updateActions} signIn={signIn} socialLogin={socialLogin} />;
-      default:
+      case 2:
         return <Singnup setAction={updateActions} signUp={signUp} />;
+      default:
+        return <ResetPassword setAction={updateActions} sendEmailToResetPass={sendEmailToResetPass} />;
     }
   };
 
@@ -42,6 +45,7 @@ Login.propTypes = {
   action: PropTypes.number.isRequired,
   inProcess: PropTypes.bool.isRequired,
   socialLogin: PropTypes.func.isRequired,
+  sendEmailToResetPass: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ login: { action, inProcess }, userDetails: { userData } }) => ({ userData, action, inProcess });

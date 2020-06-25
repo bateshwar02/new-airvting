@@ -4,27 +4,24 @@ import PropTypes from 'prop-types';
 import t from 'tcomb-form';
 import airvForm from '../../../components/form';
 import Utils from '../../../utils/common';
-import Facebook from '../../../components/SocialLogin/facebook';
-import GoogleLogin from '../../../components/SocialLogin/google';
 
-function Login({ setAction, signIn, socialLogin }) {
-  const loginForm = useRef(null);
-  const [loginFormValue, setLoginForm] = useState({});
+function Login({ setAction, sendEmailToResetPass }) {
+  const passForm = useRef(null);
+  const [passFormValue, setPassForm] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const onChange = (formValue) => {
     if (isSubmitted) {
-      loginForm.current.validate();
+      passForm.current.validate();
     }
-    setLoginForm(formValue);
+    setPassForm(formValue);
   };
 
-  const formSchema = { email: airvForm.refinements.email, password: airvForm.refinements.pass };
+  const formSchema = { email: airvForm.refinements.email };
 
   const getLoginFormTemplate = locals => (
     <>
       <div className="formField">{locals.inputs.email}</div>
-      <div className="formField">{locals.inputs.password}</div>
     </>
   );
 
@@ -51,34 +48,17 @@ function Login({ setAction, signIn, socialLogin }) {
         },
         type: 'email',
       },
-      password: {
-        label: 'Password',
-        template: airvForm.templates.textbox,
-        attrs: {
-          placeholder: 'Enter Password',
-        },
-        config: {
-          addonBefore: <i className="icon-feather-lock" />,
-        },
-        error: (val) => {
-          if (Utils.isUndefinedOrNullOrEmpty(val)) {
-            return 'Password is required';
-          }
-          return 'Invalid Password (Password should be aplphanumeric.)';
-        },
-        type: 'password',
-      },
     },
   });
 
   const submit = () => {
     setIsSubmitted(true);
-    const { errors } = loginForm.current.validate();
+    const { errors } = passForm.current.validate();
     if (!Utils.isEmptyList(errors)) {
       return;
     }
-    const formData = Utils.deepCopy(loginFormValue);
-    signIn(formData);
+    const formData = Utils.deepCopy(passFormValue);
+    sendEmailToResetPass(formData);
   };
 
   return (
@@ -95,32 +75,26 @@ function Login({ setAction, signIn, socialLogin }) {
               <h2 className="mb-0"> Welcome back</h2>
               <p className="my-2">Login to manage your account.</p>
             </div>
-            <t.form.Form ref={loginForm} type={getFormSchema()} value={loginFormValue} options={getFormOptions()} onChange={onChange} />
+            <t.form.Form ref={passForm} type={getFormSchema()} value={passFormValue} options={getFormOptions()} onChange={onChange} />
             <div className="mt-4 uk-flex-middle -small uk-grid">
               <div className="uk-width-expand@s">
                 <p>
-                  {' '}
-                  Dont have account
-                  {' '}
-                  <span onClick={() => setAction({ action: 2 })} role="button" tabIndex={0} className="actionPointer">
-                    Sign up
+                  <span onClick={() => setAction({ action: 1 })} role="button" tabIndex={0} className="actionPointer">
+                    Sign In
                   </span>
-                </p>
-                <p>
-                  <span onClick={() => setAction({ action: 3 })} role="button" tabIndex={0} className="actionPointer">
-                    Forgot Password
+                  ,
+                  <span onClick={() => setAction({ action: 2 })} role="button" tabIndex={0} className="actionPointer">
+                    {' '}
+                    {' '}
+                    Sign Up
                   </span>
                 </p>
               </div>
               <div className="uk-width-auto@s">
                 <span className="button warning" onClick={submit} role="button" tabIndex={0}>
-                  Get Started
+                  Submit
                 </span>
               </div>
-            </div>
-            <div className="socialLogin">
-              <Facebook socialLogin={socialLogin} />
-              <GoogleLogin socialLogin={socialLogin} />
             </div>
           </div>
         </div>
@@ -131,8 +105,7 @@ function Login({ setAction, signIn, socialLogin }) {
 
 Login.propTypes = {
   setAction: PropTypes.func.isRequired,
-  signIn: PropTypes.func.isRequired,
-  socialLogin: PropTypes.func.isRequired,
+  sendEmailToResetPass: PropTypes.func.isRequired,
 };
 
 export default memo(Login);

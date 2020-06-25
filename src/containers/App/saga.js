@@ -1,10 +1,13 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 
 import {
-  GET_USERS_SAGA, LOGOUT, GET_NOTIFICATION, GET_MESSAGE
+  GET_USERS_SAGA, LOGOUT, GET_NOTIFICATION, GET_MESSAGE, VERIFY_EMAIL
 } from './constants';
-import { updateUserData, updateNotification, updateMessage } from './action';
+import {
+  updateUserData, updateNotification, updateMessage, updateInProcess, notifySuccess,
+} from './action';
 import Utils from '../../utils/common';
+import Navigation from '../../utils/navigation';
 import api from './api';
 
 function* workerGetUsersSaga() {
@@ -15,14 +18,17 @@ function* workerGetUsersSaga() {
 }
 
 function* logoutSaga() {
+  yield put(updateInProcess(true));
   try {
     const apiCall = yield call(api.logout);
     if (apiCall.success) {
-      window.location = '/sh/airvtingweb';
+      Navigation.forceReload('/sh/airvtingweb/');
     }
+    yield put(updateInProcess(false));
     return;
   } catch (e) {
     console.log(e);
+    yield put(updateInProcess(false));
   }
 }
 
@@ -145,9 +151,25 @@ function* getMessageSaga() {
   }
 }
 
+function* verifyEmailSaga() {
+  yield put(updateInProcess(true));
+  try {
+    const apiCall = yield call(api.verifyEmail);
+    if (apiCall.success) {
+      yield put(notifySuccess('Your email verification link has been send on regitered mail id.'));
+    }
+    yield put(updateInProcess(false));
+    return;
+  } catch (e) {
+    console.log(e);
+    yield put(updateInProcess(false));
+  }
+}
+
 export default function* watchGetUsersSaga() {
   yield takeLatest(GET_USERS_SAGA, workerGetUsersSaga);
   yield takeLatest(LOGOUT, logoutSaga);
   yield takeLatest(GET_NOTIFICATION, getNotificationSaga);
   yield takeLatest(GET_MESSAGE, getMessageSaga);
+  yield takeLatest(VERIFY_EMAIL, verifyEmailSaga);
 }

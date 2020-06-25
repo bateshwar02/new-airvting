@@ -14,7 +14,6 @@ import watchHistorySaga from '../containers/History/saga';
 import watchLikedVideoSaga from '../containers/LikeVideos/saga';
 import watchLiveSga from '../containers/Live/saga';
 import watchStoreSaga from '../containers/Store/saga';
-import watchMyChannelSaga from '../containers/MyChannel/saga';
 import watchVideoDetailsSaga from '../containers/DetailsVideos/saga';
 import watchSettingSaga from '../containers/Settings/saga';
 import watchBrowserChannelSaga from '../containers/BrowserChannel/saga';
@@ -22,24 +21,12 @@ import watchProductSaga from '../containers/Product/saga';
 import watchCardsSaga from '../containers/MyCards/saga';
 import watchCartsSaga from '../containers/MyCart/saga';
 import watchMessageSaga from '../containers/Message/saga';
+import watchToken from '../containers/MyToken/saga';
 
 
 // export default function* root() {
 //   yield all([
 //     fork(watchGetUsersSaga),
-//     fork(watchHomeSaga),
-//     fork(watchLoginSaga),
-//     fork(watchFollowersSaga),
-//     fork(watchFollowingSaga),
-//     fork(watchDetailsVideosSaga),
-//     fork(watchExploreSaga),
-//     fork(watchFeaturedSaga),
-//     fork(watchGoliveSaga),
-//     fork(watchHistorySaga),
-//     fork(watchLikedVideoSaga),
-//     fork(watchLiveSga),
-//     fork(watchStoreSaga),
-//     fork(watchMyChannelSaga),
 //   ]);
 // }
 
@@ -57,7 +44,6 @@ export default function* rootSaga() {
   yield spawn(watchHistorySaga);
   yield spawn(watchLikedVideoSaga);
   yield spawn(watchStoreSaga);
-  yield spawn(watchMyChannelSaga);
   yield spawn(watchVideoDetailsSaga);
   yield spawn(watchSettingSaga);
   yield spawn(watchBrowserChannelSaga);
@@ -65,4 +51,5 @@ export default function* rootSaga() {
   yield spawn(watchCardsSaga);
   yield spawn(watchCartsSaga);
   yield spawn(watchMessageSaga);
+  yield spawn(watchToken);
 }

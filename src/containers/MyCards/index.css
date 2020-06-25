@@ -22,3 +22,7 @@ span.add-card-btn.button.default {
     margin: 10px;
 }
 tr{background: #ffffff !important;}
+span.add-card-btn.button.defaul{
+    display: flex;
+    justify-content: center;
+}

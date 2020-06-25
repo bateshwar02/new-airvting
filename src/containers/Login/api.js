@@ -22,7 +22,12 @@ const Service = {
   },
 
   socialLogin(formData) {
-    const url = '/api/v1/socialSignIn';
+    const url = 'api/v1/socialSignIn';
+    return Request.post(url, formData);
+  },
+
+  emailToResetPass(formData) {
+    const url = 'api/v1/forgotPassword';
     return Request.post(url, formData);
   }
 

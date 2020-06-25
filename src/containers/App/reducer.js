@@ -9,11 +9,11 @@
 
 
 import {
-  UPDATE_USER_DATA, UPDATE_VIDEO_OBJ, IS_ADD_PRODUCT, UPDATE_NOTIFICATION, UPDATE_MESSAGE
+  UPDATE_USER_DATA, UPDATE_VIDEO_OBJ, IS_ADD_PRODUCT, UPDATE_NOTIFICATION, UPDATE_MESSAGE, UPDATE_IN_PROCCESS
 } from './constants';
 
 const initialState = {
-  userData: {}, mediaObj: {}, isAddProduct: false, notification: {}, message: {}
+  userData: {}, mediaObj: {}, isAddProduct: false, notification: {}, message: {}, inProcess: false,
 };
 
 export default function setBrowserInfo(state = initialState, action) {
@@ -42,6 +42,11 @@ export default function setBrowserInfo(state = initialState, action) {
       return {
         ...state,
         message: action.message
+      };
+    case UPDATE_IN_PROCCESS:
+      return {
+        ...state,
+        inProcess: action.inProcess
       };
     default:
       return state;

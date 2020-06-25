@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { memo, useEffect } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -10,22 +10,22 @@ import Navigation from '../../utils/navigation';
 import Search from '../search';
 import Notification from './components/notification';
 import MessageComp from './components/message';
+import Loader from '../Loader';
 import './header.css';
 
 function Header({
-  userData, logout, addProductAction, notification, getNotification, message, getMessage
+  userData, logout, addProductAction, notification, getNotification, message, getMessage, inProcess, verfyEmail
 }) {
-  let userProfileImg = 'assets/images/avatars/avatar-1.jpg';
+  const [userProfileImg, setUserProfileImage] = useState('assets/images/avatars/avatar-1.jpg');
   useEffect(() => {
     if (!Utils.isUndefinedOrNullOrEmptyObject(userData)) {
       const { userDetail } = userData;
       if (!Utils.isUndefinedOrNullOrEmptyObject(userDetail) && !Utils.isUndefinedOrNullOrEmpty(userDetail.coverImage)) {
-        userProfileImg = userDetail.featuredImage;
+        setUserProfileImage(userDetail.featuredImage);
       }
     }
   }, [userData]);
   const { userDetail } = userData;
-
   const nightMode = () => {
     const isNightMode = localStorage.getItem('gmtNightMode');
     document.documentElement.classList.toggle('night-mode');
@@ -61,10 +61,19 @@ function Header({
       <span>
         <div className="dropdown-user-details">
           <div className="dropdown-user-avatar">
-            {(!Utils.isUndefinedOrNullOrEmptyObject(userDetail) && !Utils.isUndefinedOrNullOrEmpty(userDetail.coverImage)) ? <img src={userDetail.coverImage} alt="" /> : <img src="assets/images/avatars/avatar-1.jpg" alt="" />}
+            {(!Utils.isUndefinedOrNullOrEmptyObject(userDetail) && !Utils.isUndefinedOrNullOrEmpty(userDetail.coverImage)) ? <img src={userProfileImg} alt="" /> : <img src="assets/images/avatars/avatar-1.jpg" alt="" />}
           </div>
           <div className="dropdown-user-name">
             {!Utils.isUndefinedOrNullOrEmptyObject(userDetail) && userDetail.displayName}
+            {userDetail.isVerified && (
+            <span className="verified">
+              Verified
+              {' '}
+              <i className="uil-check" />
+              {' '}
+            </span>
+            )}
+            {!userDetail.isVerified && <span onClick={verfyEmail} className="verify" role="button" tabIndex={0}>Verify</span>}
           </div>
         </div>
       </span>
@@ -286,6 +295,7 @@ function Header({
         {!Utils.isUndefinedOrNullOrEmptyObject(userData) && withLoginContent()}
         {Utils.isUndefinedOrNullOrEmptyObject(userData) && withoutLoginContent()}
       </header>
+      <Loader inProcess={inProcess} />
     </div>
   );
 }
@@ -298,9 +308,17 @@ Header.propTypes = {
   getNotification: PropTypes.func.isRequired,
   message: PropTypes.object.isRequired,
   getMessage: PropTypes.func.isRequired,
+  inProcess: PropTypes.bool.isRequired,
+  verfyEmail: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({ userDetails: { userData, notification, message } }) => ({ userData, notification, message });
+const mapStateToProps = ({
+  userDetails: {
+    userData, notification, message, inProcess
+  }
+}) => ({
+  userData, notification, message, inProcess
+});
 
 const mapDispatchToProps = dispatch => bindActionCreators(Actions, dispatch);
 

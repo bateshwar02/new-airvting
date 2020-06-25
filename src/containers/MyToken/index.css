@@ -1,0 +1,10 @@
+.giftWrapper {margin-bottom: 50px;}
+table.uk-table thead th {
+    background: #ffa365 !important;
+}
+.nodataFoundWraper {
+    display: flex;
+    min-height: 90px;
+    justify-content: center;
+    align-items: center;
+}

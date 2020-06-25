@@ -9,7 +9,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function Notification() {
-    return <ToastContainer />;
+  return <ToastContainer />;
 }
 
 export default memo(Notification);

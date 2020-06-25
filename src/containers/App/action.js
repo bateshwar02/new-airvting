@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
 import {
-  NOTIFICATION_SUCCESS, NOTIFICATION_ERROR, NOTIFICATION_WARN, IN_PROCESS_ACTION, UPDATE_USER_DATA, GET_USERS_SAGA, UPDATE_VIDEO_OBJ, LOGOUT, IS_ADD_PRODUCT, GET_NOTIFICATION, UPDATE_NOTIFICATION, UPDATE_MESSAGE, GET_MESSAGE
+  NOTIFICATION_SUCCESS, NOTIFICATION_ERROR, NOTIFICATION_WARN, UPDATE_USER_DATA, GET_USERS_SAGA, UPDATE_VIDEO_OBJ, LOGOUT, IS_ADD_PRODUCT, GET_NOTIFICATION, UPDATE_NOTIFICATION, UPDATE_MESSAGE, GET_MESSAGE, UPDATE_IN_PROCCESS, VERIFY_EMAIL
 } from './constants';
 
 
@@ -25,9 +25,9 @@ export function notifyWarn(msg = 'Warning') {
   };
 }
 
-export function updateInProcess({ inProcess }) {
+export function updateInProcess(inProcess) {
   return {
-    type: IN_PROCESS_ACTION,
+    type: UPDATE_IN_PROCCESS,
     inProcess,
   };
 }
@@ -88,5 +88,11 @@ export function updateMessage(message) {
   return {
     type: UPDATE_MESSAGE,
     message,
+  };
+}
+
+export function verfyEmail() {
+  return {
+    type: VERIFY_EMAIL
   };
 }
