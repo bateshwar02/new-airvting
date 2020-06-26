@@ -1,11 +1,13 @@
 /*
  *
- * Featured reducer
+ * Product reducer
  *
  */
-import { UPDATE_ACTION, IS_PROCESS_ACTION, UPDATE_PRODUCT_CATEGORY_OPTION } from './constants';
+import {
+  UPDATE_ACTION, IS_PROCESS_ACTION, UPDATE_PRODUCT_CATEGORY_OPTION, UPDATE_PRODUCT_DETAILS
+} from './constants';
 
-export const initialState = { categoryOption: [], inProcess: false };
+export const initialState = { categoryOption: [], inProcess: false, productDetails: {} };
 
 /* eslint-disable default-case, no-param-reassign */
 export default function setBrowserInfo(state = initialState, action) {
@@ -25,6 +27,11 @@ export default function setBrowserInfo(state = initialState, action) {
       return {
         ...state,
         categoryOption: action.categoryOption
+      };
+    case UPDATE_PRODUCT_DETAILS:
+      return {
+        ...state,
+        productDetails: action.productDetails
       };
     default:
       return state;

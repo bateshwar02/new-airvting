@@ -1,18 +1,17 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /**
  *
- * About
+ * Product
  *
  */
 
 import React, { memo, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
 import { connect } from 'react-redux';
 import { compose, bindActionCreators } from 'redux';
 import Utils from '../../../utils/common';
 import * as Actions from '../actions';
-// import Navigation from '../../../utils/navigation';
+import Navigation from '../../../utils/navigation';
 
 function Product({
   getProductData, productData
@@ -28,6 +27,7 @@ function Product({
       return null;
     }
 
+
     const { productDetail } = productData;
     if (Utils.isUndefinedOrNullOrEmptyObject(productDetail)) {
       return null;
@@ -38,8 +38,8 @@ function Product({
       const ticks = date.getTime();
 
       return (
-        <div key={keys} classNames="productElementWrap">
-          <a href="store-inner.php">
+        <div key={keys} className="productElementWrap" onClick={() => Navigation.push(`/sh/airvtingweb/product-details/${item._id}`)}>
+          <span>
             <div className="product-box productWrap">
               <img src={item.featuredImages[0].featuredImage} alt="" />
               <div className="product-text">
@@ -52,12 +52,15 @@ function Product({
                   {item.priceSale}
                 </p>
                 <p className="time-ago">
-                  <i className={classnames('fa fa-clock-o', { red: item.isLike })} aria-hidden="true" />
-                  <span>{Utils.formatDate(ticks)}</span>
+                  <i className="fa fa-clock-o" aria-hidden="true" />
+                  <span>
+                    {' '}
+                    {Utils.formatDate(ticks)}
+                  </span>
                 </p>
               </div>
             </div>
-          </a>
+          </span>
         </div>
       );
     });

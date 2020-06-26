@@ -22,7 +22,7 @@ function* bookMarkActionSaga({ id }) {
     return;
   } catch (e) {
     yield put(updateInProcess(false));
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 
@@ -39,7 +39,7 @@ function* getCategoryActionSaga() {
     return;
   } catch (e) {
     yield put(updateInProcess(false));
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 
@@ -57,15 +57,15 @@ function* getDataCategoryActionSaga({ id }) {
     return;
   } catch (e) {
     yield put(updateInProcess(false));
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 
 function* updateVideoObjSaga({ mediaObj }) {
   try {
-    updateMediaObj({ mediaObj });
+    yield put(updateMediaObj({ mediaObj }));
   } catch (e) {
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 

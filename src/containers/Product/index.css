@@ -15,3 +15,12 @@ input#productCategories-input-tfid-0-0 { width:2px !important}
 .modalInnerContent {
     min-height: 60vh !important;
 }
+
+.store-inner-addcart-box {
+    margin-top: 25px;
+    display: flex;
+}
+
+button.btn-addcart.button.default {
+    height: 32px;
+}

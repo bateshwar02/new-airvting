@@ -3,10 +3,12 @@
 // Individual exports for testing
 
 import { takeLatest, call, put } from 'redux-saga/effects';
-import { notifyError, notifySuccess, addProductAction } from '../App/action';
+import { notifySuccess, addProductAction } from '../App/action';
 
-import { ADD_PRODUCT_DATA, GET_PRODUCT_CATEGORY_OPTION, CLOSE_MODAL } from './constants';
-import { updateInProcess, updateProductCategoryOption } from './actions';
+import {
+  ADD_PRODUCT_DATA, GET_PRODUCT_CATEGORY_OPTION, CLOSE_MODAL, GET_PRODUCT_DETAILS, ADD_TO_CART
+} from './constants';
+import { updateInProcess, updateProductCategoryOption, updateProductDetails } from './actions';
 import api from './api';
 
 function* addProduct({ formData }) {
@@ -21,7 +23,7 @@ function* addProduct({ formData }) {
     return;
   } catch (e) {
     yield put(updateInProcess({ inProcess: false }));
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 
@@ -33,7 +35,22 @@ function* getProductCategoryOption() {
       yield put(updateProductCategoryOption(catArr));
     }
   } catch (e) {
-    yield put(notifyError(e));
+    console.log(e);
+  }
+}
+
+function* getProductDetails({ id }) {
+  yield put(updateInProcess({ inProcess: true }));
+  try {
+    const apiData = yield call(api.getProductDetails, id);
+    if (apiData.success) {
+      const { productDetail } = apiData.data;
+      yield put(updateProductDetails(productDetail));
+    }
+    yield put(updateInProcess({ inProcess: false }));
+  } catch (e) {
+    console.log(e);
+    yield put(updateInProcess({ inProcess: false }));
   }
 }
 
@@ -41,7 +58,21 @@ function* closeModal() {
   try {
     yield put(addProductAction(false));
   } catch (e) {
-    yield put(notifyError(e));
+    console.log(e);
+  }
+}
+
+function* addTocartSaga({ formData }) {
+  yield put(updateInProcess({ inProcess: true }));
+  try {
+    const apiData = yield call(api.addToCart, formData);
+    if (apiData.success) {
+      yield put(notifySuccess('Product added to cart successfully.'));
+    }
+    yield put(updateInProcess({ inProcess: false }));
+  } catch (e) {
+    console.log(e);
+    yield put(updateInProcess({ inProcess: false }));
   }
 }
 
@@ -49,4 +80,6 @@ export default function* productSaga() {
   yield takeLatest(ADD_PRODUCT_DATA, addProduct);
   yield takeLatest(GET_PRODUCT_CATEGORY_OPTION, getProductCategoryOption);
   yield takeLatest(CLOSE_MODAL, closeModal);
+  yield takeLatest(GET_PRODUCT_DETAILS, getProductDetails);
+  yield takeLatest(ADD_TO_CART, addTocartSaga);
 }

@@ -15,7 +15,7 @@ function Comment({
   if (!Utils.isUndefinedOrNullOrEmptyObject(userDetail) && !Utils.isUndefinedOrNullOrEmpty(userDetail.featuredImage)) {
     imgUrl = userDetail.featuredImage;
   }
-  console.log('userData == ', userData);
+  
   const addCommentForm = useRef(null);
   const [addCommentData, setAddCommentData] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);

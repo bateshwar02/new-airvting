@@ -1,4 +1,6 @@
+import cookie from 'cookies-js';
 import Request from '../../utils/request';
+import Utils from '../../utils/common';
 
 const Service = {
   getCategories() {
@@ -8,5 +10,20 @@ const Service = {
     const url = 'api/v1/products';
     return Request.imageUpload(url, formData, 'multipart/form-data');
   },
+
+  getProductDetails(id) {
+    const url = `api/v1/products/${id}`;
+    return Request.get(url);
+  },
+
+  addToCart(data) {
+    const userId = cookie.get('userId');
+    if (Utils.isUndefinedOrNullOrEmpty(userId)) {
+      return null;
+    }
+    const url = `api/v1/users/${userId}/cart `;
+    return Request.post(url, data);
+  }
+
 };
 export default Service;

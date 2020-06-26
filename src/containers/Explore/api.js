@@ -27,6 +27,10 @@ const Service = {
       return null;
     }
     return Request.get(`api/v1/users/${userId}/products?paginate=1&perPage=10&maxId=null`);
+  },
+
+  productListByCat(id) {
+    return Request.get(`api/v1/users/${id}/products?paginate=1&perPage=10&maxId=null`);
   }
 
 };

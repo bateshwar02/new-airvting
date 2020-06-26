@@ -34,6 +34,7 @@ import ChangePass from '../../components/common/changePass';
 import VerifyEmailTemp from '../../components/common/verifyEmailTemp';
 import NotFoundPage from '../NotFoundPage/index';
 import Token from '../MyToken';
+import ProductDetails from '../Product/component/product-details';
 
 export function App({ userData, getUserData }) {
   const [isLogin, setIsLogin] = useState(true);
@@ -81,6 +82,7 @@ export function App({ userData, getUserData }) {
         <PrivateRoute isLoggedIn={isLogin} exact path={Navigation.cart} defaultPath={Navigation.login} component={MyCart} />
         <PrivateRoute isLoggedIn={isLogin} exact path={Navigation.card} defaultPath={Navigation.login} component={MyCardsComp} />
         <PrivateRoute isLoggedIn={isLogin} exact path={Navigation.token} defaultPath={Navigation.login} component={Token} />
+        <PrivateRoute isLoggedIn={isLogin} exact path={Navigation.productDetails} defaultPath={Navigation.login} component={ProductDetails} />
         <Route exact path={Navigation.browserChannel} component={BrowserChannelComp} />
         <Route exact path={Navigation.videoDetails} component={DetailVideo} />
         <Route exact path={Navigation.login} component={LoginComp} />
