@@ -17,6 +17,7 @@ import Footer from '../../components/Footer';
 import DataNotFound from '../../components/NoDataFound';
 import Utils from '../../utils/common';
 import Loader from '../../components/Loader';
+import './index.css';
 
 export function Following({ followingData, getFollowingData, inProcess }) {
   useEffect(() => {
@@ -24,6 +25,7 @@ export function Following({ followingData, getFollowingData, inProcess }) {
       getFollowingData();
     }
   }, [followingData, getFollowingData]);
+
 
   const getFollowingWrapperList = () => {
     if (Utils.isUndefinedOrNullOrEmptyList(followingData)) {
@@ -34,24 +36,21 @@ export function Following({ followingData, getFollowingData, inProcess }) {
       return (
         <div key={keys}>
           <div className="channal-card animate-this">
-            <div className="channal-card-thumbnail uk-img" style={{ background: 'url(assets/images/channals/img-3.jpg)' }} />
+            <div className="channal-card-thumbnail uk-img" style={{ background: `url(${item.featuredImage})` }} />
             <div className="channal-card-body">
               <a href="browse-channals.php">
                 <div className="channal-card-creator">
-                  <img src="assets/images/avatars/avatar-5.jpg" alt="" />
+                  <img src={item.featuredImage} alt="" />
                 </div>
               </a>
               <h4>
-                {item.firstName}
-                {' '}
-                {item.lastName}
-                {' '}
+                {item.displayName}
               </h4>
-              <p>
+              {/* <p>
                 {' '}
                 <span>20K Followers . 26 Videos . 11k phtos . 200k Products</span>
                 {' '}
-              </p>
+              </p> */}
               <div className="text-center">
                 <div className="toggle1" aria-hidden="false">
                   <button className="button default custom-btn" type="button" uk-toggle="target: .toggle1">

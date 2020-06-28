@@ -8,7 +8,7 @@
     width: 100%;
 }
 
-.formWrapper{height: 450px; overflow-y: auto; overflow-x: hidden;}
+.addProductWrapper{height: 450px; overflow-y: auto; overflow-x: hidden;}
 .modalHeader {min-height: 40px !important;}
 /* input{width: 100% !important;} */
 input#productCategories-input-tfid-0-0 { width:2px !important}
@@ -24,3 +24,10 @@ input#productCategories-input-tfid-0-0 { width:2px !important}
 button.btn-addcart.button.default {
     height: 32px;
 }
+
+.formInputWrap { display: flex; flex-direction: row; justify-content: space-between;}
+.formInputWrap .form-group {
+    width: 48%;
+}
+
+.imageUploadWrap {display: flex; flex-direction: column;}

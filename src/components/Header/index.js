@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { memo, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose, bindActionCreators } from 'redux';
 import Utils from '../../utils/common';
@@ -38,21 +38,42 @@ function Header({
 
   const withoutLoginContent = () => (
     <div className="head_user">
-      <Link to={Navigation.home}>
+      <NavLink
+        to={Navigation.home}
+        activeStyle={{
+          fontWeight: 'bold',
+          color: 'red'
+        }}
+      >
         <span className="custom-link">  Home </span>
-      </Link>
-      <Link to={Navigation.explore}>
+      </NavLink>
+      <NavLink
+        to={Navigation.explore}
+        activeStyle={{
+          fontWeight: 'bold',
+          color: 'red'
+        }}
+      >
         <span className="custom-link"> Explore </span>
-      </Link>
-
-      <Link to={Navigation.store}>
+      </NavLink>
+      <NavLink
+        to={Navigation.store}
+        activeStyle={{
+          fontWeight: 'bold',
+          color: 'red'
+        }}
+      >
         <span className="custom-link"> Store </span>
-      </Link>
-
-      <Link to={Navigation.login}>
+      </NavLink>
+      <NavLink
+        to={Navigation.login}
+        activeStyle={{
+          fontWeight: 'bold',
+          color: 'red'
+        }}
+      >
         <span className="custom-link"> Login </span>
-      </Link>
-
+      </NavLink>
     </div>
   );
 
@@ -86,10 +107,16 @@ function Header({
           </Link>
         </li>
         <li>
+          <Link to="/token">
+            <img src="assets/images/wallet.png" className="walletIcon" alt="" />
+            My Wallet
+          </Link>
+        </li>
+        <li>
           <Link to="/cart">
             <i className="icon-material-outline-add-shopping-cart" />
             My Cart
-            <div className="my-cart-hadder-total">10</div>
+            {/* <div className="my-cart-hadder-total">10</div> */}
           </Link>
         </li>
         <li>

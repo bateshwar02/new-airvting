@@ -56,6 +56,7 @@ export function DetailsVideos({
   const date = new Date(createdAt);
   const ticks = date.getTime();
 
+  console.log('videoData === ', videoData);
   const ownerProfile = () => {
     if (Utils.isUndefinedOrNullOrEmptyObject(owner)) {
       return null;

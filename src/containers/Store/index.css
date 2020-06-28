@@ -1,0 +1,22 @@
+.prodWrap {margin: 10px 0px;}
+.contentWrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px 0px;
+}
+.tokenList{border: 1px solid #eceff5; min-height: 120px;
+    min-width: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;}
+
+    span.my-gift-store-icon-no{
+        width: 25px; height: 16px;
+    }
+
+   .butonWrap {right: -5px !important;
+    top: -5px !important;
+    font-size: 18px;} 
+    .main_content_inner { min-height: 40 vh;}

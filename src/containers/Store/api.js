@@ -3,13 +3,13 @@ import Request from '../../utils/request';
 import Utils from '../../utils/common';
 
 const Service = {
-  getCategories() {
-    return Request.get('api/v1/get_post_categories');
+  getAirToken() {
+    return Request.get('api/v1/airTokens?paginate=1&perPage=10');
   },
 
-  addProduct(formData) {
-    const url = 'api/v1/products';
-    return Request.imgageUpload(url, formData);
+  buyAirToken(formData) {
+    const url = 'api/v1/airTokens/buy';
+    return Request.post(url, formData);
   },
 
   getProductDetails(id) {

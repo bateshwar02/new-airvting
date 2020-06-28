@@ -184,3 +184,11 @@ ul[class~=dropdown-user-menu] li a{ padding-top: 0px !important; padding-bottom:
 	margin-top: 20px;
 	cursor: pointer;
 }
+img.walletIcon {
+    height: 16px;
+    margin-right: 10px;
+}
+
+.active {
+	color: #f76911
+}

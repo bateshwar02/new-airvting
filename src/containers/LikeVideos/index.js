@@ -21,7 +21,7 @@ import Footer from '../../components/Footer';
 import Loader from '../../components/Loader';
 
 export function LikeVideos({
-  likeVideosData, getLikedVideosData, bookMarkAction, inProcess
+  likeVideosData, getLikedVideosData, bookMarkAction, inProcess, userData
 }) {
   useEffect(() => {
     if (Utils.isUndefinedOrNullOrEmptyObject(likeVideosData)) {
@@ -105,38 +105,68 @@ export function LikeVideos({
   };
 
   const getUserProfile = () => {
-    if (Utils.isUndefinedOrNullOrEmptyObject(likeVideosData)) {
+    if (Utils.isUndefinedOrNullOrEmptyObject(userData)) {
       return null;
     }
-
+    const { userDetail } = userData;
+    if (Utils.isUndefinedOrNullOrEmptyObject(userDetail)) {
+      return null;
+    }
+    const date = new Date(userDetail.createdAt);
+    const ticks = date.getTime();
     return (
       <div className="uk-width-1-4@m uk-flex-last@m">
         <div className="uk-card-default rounded" uk-sticky="top:10; offset: 90; bottom: true; media: @m;">
           <div className="text-center p-3">
-            <img src="assets/images/avatars/home-profile.jpg" className="avatar-large circle m-auto my-3" alt="" />
-            <h4 className="mb-1"> Thomas Bruns </h4>
-            <p className="uk-text-small text-muted"> Since 2016</p>
+            <img src={userDetail.featuredImage} className="avatar-large circle m-auto my-3" alt="" />
+            <h4 className="mb-1">
+              {' '}
+              {userDetail.displayName}
+              {' '}
+            </h4>
+            <p className="uk-text-small text-muted">
+              {' '}
+              Since
+              {Utils.formatDate(ticks, 'yyyy')}
+            </p>
           </div>
           <hr className="my-0" />
           <ul className="uk-list uk-list-divider uk-margin-small-top pt-1 pb-2">
-            <i>
+            <li>
               <span className="ml-4">
                 <i className="uil-user mr-1" />
-                Subscriptions
+                Followers
                 {' '}
-                <span className="pr-4 uk-float-right"> 122</span>
+                <span className="pr-4 uk-float-right">
+                  {' '}
+                  {userDetail.followers}
+                </span>
                 {' '}
-              </span>
-            </i>
-            <li>
-              <span href="#" className="ml-4">
-                <i className="uil-cloud-upload mr-1" />
-                Uploads
-                {' '}
-                <span className="pr-4 uk-float-right"> 12</span>
               </span>
             </li>
             <li>
+              <span className="ml-4">
+                <i className="uil-user mr-1" />
+                Followins
+                {' '}
+                <span className="pr-4 uk-float-right">
+                  {' '}
+                  {userDetail.following}
+                </span>
+              </span>
+            </li>
+            <li>
+              <span href="#" className="ml-4">
+                <i className="uil-cloud-upload mr-1" />
+                Posts
+                {' '}
+                <span className="pr-4 uk-float-right">
+                  {' '}
+                  {userDetail.posts}
+                </span>
+              </span>
+            </li>
+            {/* <li>
               <span className="ml-4">
                 <i className="uil-thumbs-up mr-1" />
                 Likes
@@ -151,7 +181,7 @@ export function LikeVideos({
                 {' '}
                 <span className="pr-4 uk-float-right"> 2</span>
               </span>
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>
@@ -207,10 +237,11 @@ LikeVideos.propTypes = {
   getLikedVideosData: PropTypes.func.isRequired,
   bookMarkAction: PropTypes.func.isRequired,
   inProcess: PropTypes.bool.isRequired,
+  userData: PropTypes.object.isRequired,
 };
 
 
-const mapStateToProps = ({ likedVideos: { likeVideosData, inProcess } }) => ({ likeVideosData, inProcess });
+const mapStateToProps = ({ likedVideos: { likeVideosData, inProcess }, userDetails: { userData } }) => ({ likeVideosData, inProcess, userData });
 const mapDispatchToProps = dispatch => bindActionCreators(Actions, dispatch);
 
 const withConnect = connect(

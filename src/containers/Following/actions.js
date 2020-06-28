@@ -20,7 +20,7 @@ export function updateFollowingData({ followingData, inProcess = false }) {
   };
 }
 
-export function updateInProcess({ inProcess }) {
+export function updateInProcess(inProcess) {
   return {
     type: Is_PROCESS_ACTION,
     inProcess,

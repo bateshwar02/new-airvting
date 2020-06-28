@@ -1,0 +1,7 @@
+.form-group .multi-preview {
+	display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.form-group .multi-preview img{ height: 100px; width: 100px; margin-right: 5px;}
+.file-upload-input { border: 1px solid #eceff5; }

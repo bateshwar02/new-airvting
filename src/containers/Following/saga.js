@@ -11,7 +11,7 @@ import { updateFollowingData } from './actions';
 import api from './api';
 
 function* getFollowing() {
-  yield put(updateInProcess({ inProcess: true }));
+  yield put(updateInProcess(true));
   try {
     const followingData = yield call(api.followingData);
     if (followingData.success) {
@@ -34,10 +34,10 @@ function* getFollowing() {
 
       yield put(updateFollowingData({ followingData: arrData }));
     }
-    yield put(updateInProcess({ inProcess: false }));
+    yield put(updateInProcess(false));
     return;
   } catch (e) {
-    yield put(updateInProcess({ inProcess: false }));
+    yield put(updateInProcess(false));
     yield put(notifyError(e));
   }
 }

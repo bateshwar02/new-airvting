@@ -16,6 +16,7 @@ import Utils from '../../utils/common';
 import * as Actions from './actions';
 import airvForm from '../../components/form';
 import Modal from '../../components/Modal';
+import ImageUpload from '../../components/imageUpload';
 import './index.css';
 
 export function Product({
@@ -24,7 +25,9 @@ export function Product({
   const addProdRef = useRef(null);
 
   const [prodFormData, setProductFormData] = useState({});
+  const [imageUpload, setImageUpload] = useState([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isImageUpload, setISImageUpload] = useState(false);
 
   useEffect(() => {
     if (Utils.isUndefinedOrNullOrEmptyList(categoryOption)) {
@@ -36,7 +39,6 @@ export function Product({
     if (isSubmitted) {
       addProdRef.current.validate();
     }
-
     setProductFormData(formValue);
   };
 
@@ -49,37 +51,47 @@ export function Product({
     discount: t.String,
     expiredAt: t.Number,
     startedAt: t.Number,
-    featuredImages0: t.Object,
+    // featuredImages0: t.Object,
+  };
+
+  const getImageData = (file) => {
+    if (!Utils.isUndefinedOrNullOrEmptyList(imageUpload)) {
+      setISImageUpload(false);
+      return;
+    }
+    setImageUpload(file);
   };
 
   const getLoginFormTemplate = locals => (
     <>
-      <div className="uk-form-group">
+      <div className="formInputWrap">
         {locals.inputs.productCategories}
         {' '}
         {locals.inputs.title}
       </div>
-      <div className="uk-form-group">
+      <div className="formInputWrap">
         {locals.inputs.condition}
-        {locals.inputs.featuredImages0}
+        {/* {locals.inputs.featuredImages0} */}
       </div>
-      <div className="uk-form-group">
+      <div className="formInputWrap">
         {locals.inputs.price}
         {' '}
         {locals.inputs.discount}
       </div>
-      <div className="uk-form-group">
+      <div className="formInputWrap">
         {locals.inputs.expiredAt}
         {' '}
         {locals.inputs.startedAt}
       </div>
-      <div className="uk-form-group">{locals.inputs.description}</div>
+      <div className="formInputWrap">{locals.inputs.description}</div>
+      <div className="formInputWrap imageUploadWrap">
+        <ImageUpload isMulti getImageData={getImageData} />
+        {isImageUpload && <span className="error"> Please Upload Images. </span>}
+      </div>
     </>
   );
 
-
   const getFormSchema = () => t.struct(formSchema);
-
 
   const getFormOptions = () => ({
     template: getLoginFormTemplate,
@@ -138,12 +150,12 @@ export function Product({
         type: 'textarea'
       },
 
-      featuredImages0: {
-        label: 'Featured Image',
-        template: airvForm.templates.textbox,
-        error: 'Featured Image is required',
-        type: 'file'
-      },
+      // featuredImages0: {
+      //   label: 'Featured Image',
+      //   template: airvForm.templates.textbox,
+      //   error: 'Featured Image is required',
+      //   type: 'file'
+      // },
       expiredAt: {
         template: airvForm.templates.date,
         label: 'Expired At',
@@ -175,8 +187,14 @@ export function Product({
     if (!Utils.isEmptyList(errors)) {
       return;
     }
+    if (Utils.isUndefinedOrNullOrEmptyList(imageUpload)) {
+      setISImageUpload(true);
+      return;
+    }
+
+    console.log('imageUpload === ', imageUpload);
     const {
-      productCategories, title, condition, description, price, discount, featuredImages0, expiredAt, startedAt
+      productCategories, title, condition, description, price, discount, expiredAt, startedAt
     } = prodFormData;
 
     const formData = new FormData();
@@ -186,13 +204,12 @@ export function Product({
     formData.append('condition', condition);
     formData.append('description', description);
     formData.append('price', price);
-    formData.append('featuredImages0', featuredImages0);
+    formData.append('featuredImages', imageUpload);
     formData.append('discount', discount);
-    formData.append('expiredAt', Utils.formatDate(expiredAt, 'dd/mm/yyyy'));
-    formData.append('startedAt', Utils.formatDate(startedAt, 'dd/mm/yyyy'));
+    formData.append('expiredAt', Utils.formatDate(expiredAt, 'dd-mm-yyyy'));
+    formData.append('startedAt', Utils.formatDate(startedAt, 'dd-mm-yyyy'));
     addProduct(formData);
   };
-
 
   const getContent = () => (
     <div className="addProductWrapper">
