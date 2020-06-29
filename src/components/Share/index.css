@@ -1,0 +1,27 @@
+
+.modalInnerContent.shearModal { position: fixed; height: 10%; min-height: 20vh !important; bottom: 2px;}
+.modalInnerContent.shearModal.modalHeader{  border-bottom: 0px; min-height: 20px; padding: 0px 10px;} 
+.modalInnerContent.shearModal.modalHeader button.btn.close {  background: #fff; }
+
+    .modalContent { border-bottom: 0px; min-height: 25px; padding: 10px 16px;}
+    .modalContent.shareWrapper { display: flex; justify-content: space-between;} 
+    .modalContent.shareWrapper.container {outline: none;}
+    .modalContent.shareWrapper.container.icon img{height: 48px; width: 48px;}
+    .modalContent.shareWrapper.container.name{font-size: 12px;
+            color: #16325C;
+            margin: 5px 0px;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-content: center;
+            align-items: center;}
+    .modalFooter {  display: none; }
+    .shareWrapper {
+        display: flex;
+        flex-direction: row;
+         margin: 20px 0px;
+    }
+    .container {
+        display: flex;
+        flex-direction: column;
+    }

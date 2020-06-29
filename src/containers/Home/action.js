@@ -1,5 +1,5 @@
 import {
-  USER_DATA, DATA_BY_CATEGORY, BOOKMARK_ACTION, GET_CATEGORY, Is_PROCESS_ACTION, UPDATE_CATEGORY_DATA, UPDATE_DATA_BY_CATEGORY, UPDATE_VIDEO
+  USER_DATA, DATA_BY_CATEGORY, BOOKMARK_ACTION, GET_CATEGORY, Is_PROCESS_ACTION, UPDATE_CATEGORY_DATA, UPDATE_DATA_BY_CATEGORY, UPDATE_VIDEO, IS_SHARE, SHARE_URL
 } from './constatnt';
 
 export function updateUserData({ userData }) {
@@ -55,5 +55,19 @@ export function updateVideosObj(data) {
   return {
     type: UPDATE_VIDEO,
     mediaObj: data,
+  };
+}
+
+export function updateShare(isShare) {
+  return {
+    type: IS_SHARE,
+    isShare
+  };
+}
+
+export function updateShareUrl(url) {
+  return {
+    type: SHARE_URL,
+    url
   };
 }

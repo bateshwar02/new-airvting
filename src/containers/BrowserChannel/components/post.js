@@ -5,7 +5,7 @@
  *
  */
 
-import React, { memo, useEffect } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose, bindActionCreators } from 'redux';
@@ -14,11 +14,14 @@ import Utils from '../../../utils/common';
 import * as Actions from '../actions';
 import Navigation from '../../../utils/navigation';
 import Loader from '../../../components/Loader';
+import Share from '../../../components/Share';
 
 export function Followers({
   match, postDataByUser, getPostDataByUserId, bookMarkAction, inProcess
 }) {
   const { id } = match.params;
+  const [isShare, setShare] = useState(false);
+  const [url, setUrl] = useState('');
 
   useEffect(() => {
     if (!Utils.isUndefinedOrNullOrEmpty(id)) {
@@ -30,11 +33,17 @@ export function Followers({
     Navigation.push(`/sh/airvtingweb/video/${item._id}`);
   };
 
+
+  const shareAction = (postId) => {
+    const shareUrl = `https://vridhisoftech.co.in/sh/airvtingweb/video/${postId}`;
+    setUrl(shareUrl);
+    setShare(true);
+  };
+
   const getVideoComp = () => {
     if (Utils.isUndefinedOrNullOrEmptyObject(postDataByUser)) {
       return null;
     }
-
     const { postDetail } = postDataByUser;
     return postDetail.map((item, index) => {
       const keys = `key-${index}`;
@@ -63,7 +72,7 @@ export function Followers({
                     </span>
                   </li>
                   <li>
-                    <span>
+                    <span onClick={() => shareAction(item._id)}>
                       {' '}
                       <i className="uil-share-alt" />
                       {' '}
@@ -104,6 +113,7 @@ export function Followers({
     <div className="section-small" id="user-video">
       {getVideoComp()}
       <Loader inProcess={inProcess} />
+      {isShare && <Share onClose={setShare} url={url} />}
     </div>
   );
 }

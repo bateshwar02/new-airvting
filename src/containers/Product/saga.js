@@ -14,9 +14,10 @@ import api from './api';
 function* addProduct({ formData }) {
   yield put(updateInProcess({ inProcess: true }));
   try {
-    const addProd = yield call(api.addProduct, formData);
+    const addProdApi = yield call(api.addProduct, formData);
+    const addProd = JSON.parse(addProdApi);
     if (addProd.success) {
-      yield put(notifySuccess('Product added successfully.'));
+      yield put(notifySuccess(addProd.message));
       yield put(addProductAction(false));
     }
     yield put(updateInProcess({ inProcess: false }));

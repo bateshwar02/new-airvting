@@ -27,7 +27,6 @@ function Product({
       return null;
     }
 
-
     const { productDetail } = productData;
     if (Utils.isUndefinedOrNullOrEmptyObject(productDetail)) {
       return null;
@@ -41,7 +40,7 @@ function Product({
         <div key={keys} className="productElementWrap" onClick={() => Navigation.push(`/sh/airvtingweb/product-details/${item._id}`)}>
           <span>
             <div className="product-box productWrap">
-              <img src={item.featuredImages[0].featuredImage} alt="" />
+              <img src={!Utils.isUndefinedOrNullOrEmptyList(item.featuredImages) && item.featuredImages[0].featuredImage} alt="" />
               <div className="product-text">
                 <h3 className="product-title">{item.title}</h3>
                 <span className="like-icon">

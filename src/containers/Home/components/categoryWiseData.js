@@ -9,7 +9,9 @@ import Navigation from '../../../utils/navigation';
 import ApiService from '../api';
 import * as Actions from '../action';
 
-function Category({ id, addBookMark }) {
+function Category({
+  id, addBookMark, updateShareUrl, updateShare
+}) {
   const [childData, setChildData] = useState([]);
   const [isProcess, setIsProcess] = useState(false);
 
@@ -29,6 +31,12 @@ function Category({ id, addBookMark }) {
 
   const videoPlay = (item) => {
     Navigation.push(`/sh/airvtingweb/video/${item._id}`);
+  };
+
+  const shareAction = (postId) => {
+    const shareUrl = `https://vridhisoftech.co.in/sh/airvtingweb/video/${postId}`;
+    updateShareUrl(shareUrl);
+    updateShare(true);
   };
 
   const categoryChildData = () => {
@@ -67,9 +75,7 @@ function Category({ id, addBookMark }) {
                     <span
                       role="button"
                       tabIndex={0}
-                      onClick={() => {
-                        alert('Under Process');
-                      }}
+                      onClick={() => shareAction(item._id)}
                     >
                       {' '}
                       <i className="uil-share-alt" />
@@ -119,6 +125,8 @@ function Category({ id, addBookMark }) {
 Category.propTypes = {
   addBookMark: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
+  updateShareUrl: PropTypes.func.isRequired,
+  updateShare: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ home: { categoryData } }) => ({ categoryData });

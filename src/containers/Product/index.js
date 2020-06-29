@@ -51,7 +51,6 @@ export function Product({
     discount: t.String,
     expiredAt: t.Number,
     startedAt: t.Number,
-    // featuredImages0: t.Object,
   };
 
   const getImageData = (file) => {
@@ -79,9 +78,9 @@ export function Product({
         {locals.inputs.discount}
       </div>
       <div className="formInputWrap">
-        {locals.inputs.expiredAt}
-        {' '}
         {locals.inputs.startedAt}
+        {' '}
+        {locals.inputs.expiredAt}
       </div>
       <div className="formInputWrap">{locals.inputs.description}</div>
       <div className="formInputWrap imageUploadWrap">
@@ -149,13 +148,6 @@ export function Product({
         error: 'Description is required',
         type: 'textarea'
       },
-
-      // featuredImages0: {
-      //   label: 'Featured Image',
-      //   template: airvForm.templates.textbox,
-      //   error: 'Featured Image is required',
-      //   type: 'file'
-      // },
       expiredAt: {
         template: airvForm.templates.date,
         label: 'Expired At',
@@ -187,12 +179,11 @@ export function Product({
     if (!Utils.isEmptyList(errors)) {
       return;
     }
-    if (Utils.isUndefinedOrNullOrEmptyList(imageUpload)) {
+    if (Utils.isUndefinedOrNullOrEmptyObject(imageUpload)) {
       setISImageUpload(true);
       return;
     }
-
-    console.log('imageUpload === ', imageUpload);
+    const imgageArr = [...imageUpload];
     const {
       productCategories, title, condition, description, price, discount, expiredAt, startedAt
     } = prodFormData;
@@ -204,10 +195,13 @@ export function Product({
     formData.append('condition', condition);
     formData.append('description', description);
     formData.append('price', price);
-    formData.append('featuredImages', imageUpload);
     formData.append('discount', discount);
-    formData.append('expiredAt', Utils.formatDate(expiredAt, 'dd-mm-yyyy'));
-    formData.append('startedAt', Utils.formatDate(startedAt, 'dd-mm-yyyy'));
+    formData.append('expiredAt', Utils.formatDate(expiredAt, 'yyyy-mm-dd'));
+    formData.append('startedAt', Utils.formatDate(startedAt, 'yyyy-mm-dd'));
+
+    imgageArr.forEach((item, index) => {
+      formData.append(`featuredImages${index}`, item);
+    });
     addProduct(formData);
   };
 

@@ -5,17 +5,21 @@
  *
  */
 
-import React, { memo, useEffect } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose, bindActionCreators } from 'redux';
 import Utils from '../../../utils/common';
 import * as Actions from '../actions';
 import Navigation from '../../../utils/navigation';
+import Share from '../../../components/Share';
 
 function TabContent({
   getExploreData, exploreData, filter, addBookMark
 }) {
+  const [isShare, setShare] = useState(false);
+  const [url, setUrl] = useState('');
+
   useEffect(() => {
     if (Utils.isUndefinedOrNullOrEmptyObject(exploreData)) {
       getExploreData(filter);
@@ -26,11 +30,17 @@ function TabContent({
     Navigation.push(`/sh/airvtingweb/video/${item._id}`);
   };
 
+  const shareAction = (postId) => {
+    const shareUrl = `https://vridhisoftech.co.in/sh/airvtingweb/video/${postId}`;
+    setUrl(shareUrl);
+    setShare(true);
+  };
+
+
   const getContent = () => {
     if (Utils.isUndefinedOrNullOrEmptyObject(exploreData)) {
       return null;
     }
-
     const { postDetail } = exploreData;
     if (Utils.isUndefinedOrNullOrEmptyObject(postDetail)) {
       return null;
@@ -63,7 +73,7 @@ function TabContent({
                     </span>
                   </li>
                   <li>
-                    <span className="actionSpan">
+                    <span className="actionSpan" onClick={() => shareAction(item._id)}>
                       {' '}
                       <i className="uil-share-alt" />
                       {' '}
@@ -101,6 +111,7 @@ function TabContent({
   return (
     <ul className="uk-slider-items uk-child-width-1-4@m uk-child-width-1-3@s uk-grid videoWrapper">
       {getContent()}
+      {isShare && <Share onClose={setShare} url={url} />}
     </ul>
   );
 }

@@ -72,7 +72,7 @@ function ProductDetails({
         <div className="right-side-col uk-width-1-2@m">
           <div className="store-inner-text-box">
             <h3 className="product-title">{productDetails.title}</h3>
-            <span>{productDetails.productCategories[0].title}</span>
+            <span>{!Utils.isUndefinedOrNullOrEmptyList(productDetails.productCategories) && productDetails.productCategories[0].title}</span>
             <div className="store-inner-price">
               <span className="discount-price">
                 <i className="icon-line-awesome-tag" />

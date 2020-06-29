@@ -14,7 +14,6 @@ export default function setBrowserInfo(state = initialState, action) {
       return {
         ...state,
         featuredData: action.featuredData,
-        inProcess: action.inProcess,
       };
     case Is_PROCESS_ACTION:
       return {

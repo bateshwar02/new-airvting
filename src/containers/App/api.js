@@ -23,7 +23,7 @@ const Service = {
     if (Utils.isUndefinedOrNullOrEmpty(token) || Utils.isUndefinedOrNullOrEmpty(userId)) {
       return null;
     }
-    return Request.get(`api/v1/users/${userId}/notifications?paginate=1&perPage=10&isMessage=false`);
+    return Request.get(`api/v1/users/${userId}/notifications?paginate=1&perPage=5&isMessage=false`);
   },
 
   getMessageData() {
@@ -32,7 +32,7 @@ const Service = {
     if (Utils.isUndefinedOrNullOrEmpty(token) || Utils.isUndefinedOrNullOrEmpty(userId)) {
       return null;
     }
-    return Request.get(`api/v1/users/${userId}/notifications?paginate=1&perPage=5&isMessage=true`);
+    return Request.get(`api/v1/users/${userId}/notifications?paginate=0&perPage=4&isMessage=true`);
   },
 
   verifyEmail() {

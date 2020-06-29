@@ -1,9 +1,9 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/label-has-for */
-/* eslint-disable react/no-access-state-in-setstate */
+/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Utils from '../../utils/common';
 import './index.css';
 
 export default class ImageUpload extends Component {
@@ -13,22 +13,21 @@ export default class ImageUpload extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      file: []
-    };
     this.uploadMultipleFiles = this.uploadMultipleFiles.bind(this);
   }
 
   uploadMultipleFiles(e) {
     this.fileObj.push(e.target.files);
-    const data = this.state.file;
-    data.push(e.target.files[0]);
-
+    if (Utils.isUndefinedOrNullOrEmptyList(this.fileObj)) {
+      return;
+    }
+    if (this.fileObj[0].length > 10) {
+      return;
+    }
+    this.props.getImageData(this.fileObj[0]);
     for (let i = 0; i < this.fileObj[0].length; i++) {
       this.fileArray.push(URL.createObjectURL(this.fileObj[0][i]));
     }
-    this.setState({ file: data });
-    this.props.getImageData(this.state.file);
   }
 
   render() {
@@ -56,6 +55,3 @@ ImageUpload.propTypes = {
   isMulti: PropTypes.bool.isRequired,
   getImageData: PropTypes.func.isRequired,
 };
-
-
-// module.exports = ImageUpload;

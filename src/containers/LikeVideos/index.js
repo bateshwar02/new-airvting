@@ -6,7 +6,7 @@
  *
  */
 
-import React, { memo, useEffect } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
@@ -19,10 +19,13 @@ import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
 import Footer from '../../components/Footer';
 import Loader from '../../components/Loader';
+import Share from '../../components/Share';
 
 export function LikeVideos({
   likeVideosData, getLikedVideosData, bookMarkAction, inProcess, userData
 }) {
+  const [isShare, setShare] = useState(false);
+  const [url, setUrl] = useState('');
   useEffect(() => {
     if (Utils.isUndefinedOrNullOrEmptyObject(likeVideosData)) {
       getLikedVideosData();
@@ -32,6 +35,13 @@ export function LikeVideos({
   const videoPlay = (item) => {
     Navigation.push(`/sh/airvtingweb/video/${item._id}`);
   };
+
+  const shareAction = (postId) => {
+    const shareUrl = `https://vridhisoftech.co.in/sh/airvtingweb/video/${postId}`;
+    setUrl(shareUrl);
+    setShare(true);
+  };
+
 
   const getDataWrapper = () => {
     if (Utils.isUndefinedOrNullOrEmptyObject(likeVideosData)) {
@@ -89,7 +99,7 @@ export function LikeVideos({
                   </span>
                 </li>
                 <li>
-                  <span>
+                  <span onClick={() => shareAction(item._id)}>
                     {' '}
                     <i className="uil-share-alt" />
                     {' '}
@@ -228,6 +238,7 @@ export function LikeVideos({
       <Header />
       {getContent()}
       <Loader inProcess={inProcess} />
+      {isShare && <Share onClose={setShare} url={url} />}
     </div>
   );
 }

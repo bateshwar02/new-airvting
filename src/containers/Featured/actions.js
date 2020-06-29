@@ -6,11 +6,10 @@
 
 import { UPDATE_ACTION, GET_FEATURED_DATA, Is_PROCESS_ACTION } from './constants';
 
-export function updateData({ featuredData, inProcess = false }) {
+export function updateData({ featuredData }) {
   return {
     type: UPDATE_ACTION,
     featuredData,
-    inProcess
   };
 }
 

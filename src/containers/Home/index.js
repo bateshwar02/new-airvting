@@ -12,9 +12,12 @@ import Sidebar from '../../components/Sidebar';
 import Footer from '../../components/Footer/index';
 import Loader from '../../components/Loader';
 import Category from './components/category';
+import Share from '../../components/Share';
 
 
-function HomePage({ inProcess }) {
+function HomePage({
+  inProcess, updateShare, url, isShare
+}) {
   const getHomeContent = () => (
     <div className="main_content">
       <div className="main_content_inner">
@@ -418,16 +421,26 @@ function HomePage({ inProcess }) {
       <Sidebar />
       {getHomeContent()}
       <Loader inProcess={inProcess} />
+      {isShare && <Share onClose={updateShare} url={url} />}
     </div>
   );
 }
 
 HomePage.propTypes = {
   inProcess: PropTypes.bool.isRequired,
+  updateShare: PropTypes.func.isRequired,
+  url: PropTypes.string.isRequired,
+  isShare: PropTypes.bool.isRequired,
 };
 
 
-const mapStateToProps = ({ home: { categoryData, inProcess }, userDetails: { userData } }) => ({ userData, categoryData, inProcess });
+const mapStateToProps = ({
+  home: {
+    categoryData, inProcess, isShare, url
+  }, userDetails: { userData }
+}) => ({
+  userData, categoryData, inProcess, isShare, url
+});
 
 const mapDispatchToProps = dispatch => bindActionCreators(Actions, dispatch);
 

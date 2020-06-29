@@ -7,3 +7,5 @@ export const Is_PROCESS_ACTION = 'app/Home/Is_PROCESS_ACTION';
 export const UPDATE_CATEGORY_DATA = 'app/Home/UPDATE_CATEGORY_DATA';
 export const UPDATE_DATA_BY_CATEGORY = 'app/Home/UPDATE_DATA_BY_CATEGORY';
 export const UPDATE_VIDEO = 'app/Home/UPDATE_VIDEO';
+export const IS_SHARE = 'app/Home/IS_SHARE';
+export const SHARE_URL = 'app/Home/SHARE_URL';
