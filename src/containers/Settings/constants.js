@@ -14,3 +14,4 @@ export const UPDATE_GIFT = 'app/Setting/UPDATE_GIFT';
 export const GET_GIFT = 'app/Setting/GET_GIFT';
 export const VERIFY_EMAIL = 'app/Setting/VERIFY_EMAIL';
 export const UPDATE_VERIFY_MSG = 'app/Setting/UPDATE_VERIFY_MSG';
+export const DEACTIVE_ACCOUNT = 'app/Setting/DEACTIVE_ACCOUNT';

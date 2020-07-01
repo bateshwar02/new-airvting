@@ -1,11 +1,57 @@
-import React, { memo } from 'react';
-// import PropTypes from 'prop-types';
+import React, { memo, useRef, useState } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose, bindActionCreators } from 'redux';
-// import Utils from '../../../utils/common';
+import t from 'tcomb-form';
+import Utils from '../../../utils/common';
+import airvForm from '../../../components/form';
 import * as Actions from '../actions';
 
-function Delete() {
+function Delete({ deactivateAccount }) {
+  const accRef = useRef(null);
+  const [accFormData, setAccFormData] = useState({});
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const onChange = (formValue) => {
+    if (isSubmitted) {
+      accRef.current.validate();
+    }
+    setAccFormData(formValue);
+  };
+
+  const formSchema = { reason: t.String };
+
+  const formTemplate = locals => (
+    <>
+      <div className="uk-form-group fieldWrap">{locals.inputs.reason}</div>
+    </>
+  );
+
+  const getFormSchema = () => t.struct(formSchema);
+  const getFormOptions = () => ({
+    template: formTemplate,
+    fields: {
+      reason: {
+        label: 'Enter your Reason',
+        template: airvForm.templates.textbox,
+        attrs: {
+          placeholder: 'Others...',
+        },
+        error: 'Field is required',
+        type: 'textarea',
+      },
+    }
+  });
+
+  const submit = () => {
+    setIsSubmitted(true);
+    const { errors } = accRef.current.validate();
+    if (!Utils.isEmptyList(errors)) {
+      return;
+    }
+    deactivateAccount(accFormData);
+  };
+
   return (
     <>
       <div className="p-3">
@@ -16,18 +62,14 @@ function Delete() {
         <h5>Are you sure you want to delete Your account?</h5>
         <p>Please Let Us know the reason why you are leaving.</p>
       </div>
-      <form className="uk-child-width-1@s uk-grid-small p-4 uk-grid">
-        <div className="delete-account-reason">
-          <h5 className="uk-text-bold mb-2"> Enter your Reason </h5>
-          <textarea placeholder="Others..." cols="5" />
-        </div>
-      </form>
-
+      <div className="uk-child-width-1@s uk-grid-small p-4 uk-grid">
+        <t.form.Form ref={accRef} type={getFormSchema()} value={accFormData} options={getFormOptions()} onChange={onChange} />
+      </div>
       <div className="uk-flex uk-flex-right p-4">
         <button type="button" className="button soft-warning mr-2">
           Cancle
         </button>
-        <button type="button" className="button warning">
+        <button type="button" className="button warning" onClick={submit}>
           Delete Account
         </button>
       </div>
@@ -35,7 +77,9 @@ function Delete() {
   );
 }
 
-Delete.propTypes = { };
+Delete.propTypes = {
+  deactivateAccount: PropTypes.func.isRequired
+};
 
 
 const mapStateToProps = ({ userDetails: { userData } }) => ({ userData });

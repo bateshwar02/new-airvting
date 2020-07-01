@@ -42,3 +42,7 @@ textarea{
 .delete-account-reason textarea{border: 1px solid #eceff5; width: 97% !important;}
 .uk-form-group.fieldWrap.imageWrape {display: flex; flex-direction: column};
 img .profileImg {height: 150px; width: 150px;}
+
+.form-group.form-group-depth-1.form-group-reason {
+    width: 100%;
+}

@@ -7,7 +7,7 @@ import airvForm from '../../../components/form';
 import Utils from '../../../utils/common';
 import * as Actions from '../actions';
 
-function Password({ updatePassword, inProcess, userData }) {
+function Password({ updatePassword, inProcess }) {
   const passRef = useRef(null);
   const [passFormData, setPassFormData] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -19,11 +19,11 @@ function Password({ updatePassword, inProcess, userData }) {
     setPassFormData(formValue);
   };
 
-  const formSchema = { oldPass: airvForm.refinements.pass, password: airvForm.refinements.pass };
+  const formSchema = { old_password: airvForm.refinements.pass, password: airvForm.refinements.pass };
 
   const formTemplate = locals => (
     <>
-      <div className="uk-form-group fieldWrap">{locals.inputs.oldPass}</div>
+      <div className="uk-form-group fieldWrap">{locals.inputs.old_password}</div>
       <div className="uk-form-group fieldWrap">{locals.inputs.password}</div>
     </>
   );
@@ -32,7 +32,7 @@ function Password({ updatePassword, inProcess, userData }) {
   const getFormOptions = () => ({
     template: formTemplate,
     fields: {
-      oldPass: {
+      old_password: {
         label: 'Old Password',
         template: airvForm.templates.textbox,
         attrs: {
@@ -75,11 +75,7 @@ function Password({ updatePassword, inProcess, userData }) {
     if (!Utils.isEmptyList(errors)) {
       return;
     }
-    if (Utils.isUndefinedOrNullOrEmptyObject(userData)) {
-      return;
-    }
-    const { userDetail: { _id } } = userData;
-    updatePassword(passFormData, _id);
+    updatePassword(passFormData);
   };
 
   return (
@@ -109,7 +105,6 @@ function Password({ updatePassword, inProcess, userData }) {
 }
 
 Password.propTypes = {
-  userData: PropTypes.object.isRequired,
   updatePassword: PropTypes.func.isRequired,
   inProcess: PropTypes.bool.isRequired,
 };

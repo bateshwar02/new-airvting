@@ -22,9 +22,6 @@ function Notification({ notification, getNotification }) {
       const date2 = new Date();
       const diff = Math.abs(date1.getTime() - date2.getTime());
       const hours = new Date(diff).getHours();
-      // if (Number(index) < 10) {
-      //   return null;
-      // }
       return (
         <li key={keys} className="notifications-not-read">
           <span className="notificationWrapper">

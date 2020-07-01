@@ -8,11 +8,6 @@ const Service = {
     return Request.imgageUpload(url, userData);
   },
 
-  updatePass(passData, id) {
-    const url = `api/v1/users/changePass/${id}`;
-    return Request.post(url, passData);
-  },
-
   resetPass(passData) {
     const url = 'api/v1/reset_password';
     return Request.post(url, passData);
@@ -30,6 +25,17 @@ const Service = {
     }
     const url = `api/v1/users/${id}/gifts?paginate=1&perPage=10`;
     return Request.get(url);
+  },
+
+  changePassword(data) {
+    const url = 'api/v1/change_password';
+    return Request.post(url, data);
+  },
+
+  deActivateAccount() {
+    const url = 'api/v1/users/deActive';
+    return Request.post(url, {});
   }
+
 };
 export default Service;

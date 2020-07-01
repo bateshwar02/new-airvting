@@ -5,7 +5,7 @@
  */
 
 import {
-  UPDATE_USER_DATA, UPDATE_PASSWORD, IS_PROCESS_ACTION, FORGATE_PASSWORD, GET_GIFT, UPDATE_GIFT, VERIFY_EMAIL, UPDATE_VERIFY_MSG
+  UPDATE_USER_DATA, UPDATE_PASSWORD, IS_PROCESS_ACTION, FORGATE_PASSWORD, GET_GIFT, UPDATE_GIFT, VERIFY_EMAIL, UPDATE_VERIFY_MSG, DEACTIVE_ACCOUNT
 } from './constants';
 
 export function updateUser(userData, id) {
@@ -23,11 +23,10 @@ export function updateInProcess({ inProcess }) {
   };
 }
 
-export function updatePassword(passData, id) {
+export function updatePassword(passData) {
   return {
     type: UPDATE_PASSWORD,
     passData,
-    id
   };
 }
 
@@ -62,5 +61,11 @@ export function updateGift(gift) {
 export function getGift() {
   return {
     type: GET_GIFT,
+  };
+}
+
+export function deactivateAccount() {
+  return {
+    type: DEACTIVE_ACCOUNT
   };
 }

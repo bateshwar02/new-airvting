@@ -143,7 +143,7 @@ function General({ userData, updateUser, inProcess }) {
       description: {
         label: 'Description',
         template: airvForm.templates.textbox,
-        error: () => 'Description is required',
+        error: 'Description is required',
         type: 'textarea'
       },
       coverImage: {
