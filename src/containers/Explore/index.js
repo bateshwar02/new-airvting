@@ -19,7 +19,8 @@ import Post from './component/post';
 import TabMenu from './component/tabMenu';
 import SubTabMenu from './component/sub-menu';
 import People from './component/people';
-import Product from './component/product';
+// import Product from './component/product';
+import ProductList from './component/productByCategory';
 import './index.css';
 
 export function Explore({
@@ -39,7 +40,7 @@ export function Explore({
       case 'products':
         return (
           <>
-            <Product />
+            <ProductList />
           </>
         );
 

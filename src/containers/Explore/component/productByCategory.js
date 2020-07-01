@@ -1,19 +1,35 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { compose, bindActionCreators } from 'redux';
+
+import * as Actions from '../actions';
 import Utils from '../../../utils/common';
-import ChildDataWrapper from './productList';
+import ChildDataWrapper from './productListData';
+import Loader from '../../../components/Loader';
 // import Navigation from '../../../utils/navigation';
 
-function ProductByCategory({ categoryData }) {
-  const getChildDataWrapper = id => <ChildDataWrapper id={id} />;
+function ProductByCategory({ categoryData, getCategory, productLikedAction }) {
+  const [inProcess, setInProcess] = useState(true);
+  useEffect(() => {
+    if (Utils.isUndefinedOrNullOrEmptyList(categoryData)) {
+      getCategory();
+    }
+    if (!Utils.isUndefinedOrNullOrEmptyList(categoryData)) {
+      setInProcess(false);
+    }
+  }, [categoryData]);
+
+
+  const getChildDataWrapper = id => <ChildDataWrapper id={id} productLikedAction={productLikedAction} />;
 
   const childComponent = () => {
     if (Utils.isUndefinedOrNullOrEmptyList(categoryData)) {
       return null;
     }
-    console.log('categoryData === ', categoryData);
+
     return categoryData.map((item, index) => {
-      const keys = `${index}-${item._id}`;
+      const keys = `${index}-${item.title}`;
       return (
         <>
           <div className="video-grid-slider mt-4" uk-slider="finite: true" key={keys}>
@@ -44,17 +60,30 @@ function ProductByCategory({ categoryData }) {
 
   return (
     <div className="sections-small">
-      <div className="uk-child-width-1-4@m uk-child-width-1-3@s uk-grid">
-        {childComponent()}
-      </div>
+      {childComponent()}
+      <Loader inProcess={inProcess} />
     </div>
-
-
   );
 }
 
 ProductByCategory.propTypes = {
   categoryData: PropTypes.array.isRequired,
+  getCategory: PropTypes.func.isRequired,
+  productLikedAction: PropTypes.func.isRequired,
 };
 
-export default memo(ProductByCategory);
+const mapStateToProps = ({
+  home: { categoryData }
+}) => ({ categoryData });
+
+const mapDispatchToProps = dispatch => bindActionCreators(Actions, dispatch);
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
+
+export default compose(
+  withConnect,
+  memo,
+)(ProductByCategory);

@@ -3,9 +3,10 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import Utils from '../../utils/common';
 import { notifyError, notifySuccess } from '../App/action';
+import { getCategoryData } from '../Home/action';
 
 import {
-  GET_EXPLORE_DATA, BOOKMARK_ACTION, GET_DATA_FILTER, GET_PEOPLE_DATA, FOLLOW_ACTION, GET_PRODUCT
+  GET_EXPLORE_DATA, BOOKMARK_ACTION, GET_DATA_FILTER, GET_PEOPLE_DATA, FOLLOW_ACTION, GET_PRODUCT, GET_CATEGORY, LIKED_ACTION
 } from './constants';
 import {
   updateData, updateInProcess, updateFilter, getExploreData, userFilterUpdate, updatePeopleData, updateFollowProcess, updateProduct
@@ -112,6 +113,28 @@ function* getProductDataSaga() {
   }
 }
 
+function* getCategorySaga() {
+  try {
+    yield put(getCategoryData(true));
+  } catch (e) {
+    yield put(notifyError(e));
+  }
+}
+
+function* likedActionSaga({ id }) {
+  yield put(updateInProcess(true));
+  try {
+    const likedAcc = yield call(api.productLikedAction, id);
+    if (likedAcc.success) {
+      yield put(notifySuccess('Product Liked'));
+    }
+    yield put(updateInProcess(false));
+  } catch (e) {
+    yield put(updateInProcess(false));
+    console.log(e);
+  }
+}
+
 export default function* exploreSaga() {
   yield takeLatest(GET_EXPLORE_DATA, getExploreDataSaga);
   yield takeLatest(BOOKMARK_ACTION, bookMarkActionSaga);
@@ -119,4 +142,6 @@ export default function* exploreSaga() {
   yield takeLatest(GET_PEOPLE_DATA, getPeopleDataSaga);
   yield takeLatest(FOLLOW_ACTION, getFollowActionSaga);
   yield takeLatest(GET_PRODUCT, getProductDataSaga);
+  yield takeLatest(GET_CATEGORY, getCategorySaga);
+  yield takeLatest(LIKED_ACTION, likedActionSaga);
 }

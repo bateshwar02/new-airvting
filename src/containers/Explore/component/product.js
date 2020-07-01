@@ -14,7 +14,7 @@ import * as Actions from '../actions';
 import Navigation from '../../../utils/navigation';
 
 function Product({
-  getProductData, productData
+  getProductData, productData, productLikedAction
 }) {
   useEffect(() => {
     if (Utils.isUndefinedOrNullOrEmptyObject(productData)) {
@@ -43,12 +43,12 @@ function Product({
               <img src={!Utils.isUndefinedOrNullOrEmptyList(item.featuredImages) && item.featuredImages[0].featuredImage} alt="" />
               <div className="product-text">
                 <h3 className="product-title">{item.title}</h3>
-                <span className="like-icon">
+                <span className="like-icon" onClick={() => productLikedAction(item._id)}>
                   <i className="fa fa-heart" aria-hidden="true" />
                 </span>
                 <p className="product-price">
                   $
-                  {item.priceSale}
+                  {Utils.getRoundOfValue(item.priceSale, 2)}
                 </p>
                 <p className="time-ago">
                   <i className="fa fa-clock-o" aria-hidden="true" />
@@ -77,6 +77,7 @@ function Product({
 Product.propTypes = {
   productData: PropTypes.object.isRequired,
   getProductData: PropTypes.func.isRequired,
+  productLikedAction: PropTypes.func.isRequired,
 };
 
 

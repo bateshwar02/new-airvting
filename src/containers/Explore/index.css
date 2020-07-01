@@ -65,3 +65,10 @@
     margin: 10px 0px; cursor: pointer;
 }
 .productWrap img{width: 220px; height:240px;}
+h3.product-title {
+    width: 100%;
+    max-width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

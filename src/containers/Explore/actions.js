@@ -5,7 +5,7 @@
  */
 
 import {
-  GET_EXPLORE_DATA, UPDATE_DATA, IN_PROCESS_ACTION, BOOKMARK_ACTION, UPDATE_FILTER, GET_DATA_FILTER, UPDATE_TAB, GET_PEOPLE_DATA, UPDATE_PEOPLE_DATA, UPDATE_PEOPLE_FILTER, UPDATE_FOLLOW_ACTION, FOLLOW_ACTION, GET_PRODUCT, UPDATE_PRODUCT
+  GET_EXPLORE_DATA, UPDATE_DATA, IN_PROCESS_ACTION, BOOKMARK_ACTION, UPDATE_FILTER, GET_DATA_FILTER, UPDATE_TAB, GET_PEOPLE_DATA, UPDATE_PEOPLE_DATA, UPDATE_PEOPLE_FILTER, UPDATE_FOLLOW_ACTION, FOLLOW_ACTION, GET_PRODUCT, UPDATE_PRODUCT, GET_CATEGORY, LIKED_ACTION
 } from './constants';
 
 export function updateData({ exploreData, inProcess = false }) {
@@ -103,5 +103,18 @@ export function updateProduct(productData) {
   return {
     type: UPDATE_PRODUCT,
     productData
+  };
+}
+
+export function getCategory() {
+  return {
+    type: GET_CATEGORY
+  };
+}
+
+export function productLikedAction(id) {
+  return {
+    type: LIKED_ACTION,
+    id
   };
 }

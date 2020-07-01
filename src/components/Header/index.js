@@ -163,10 +163,15 @@ function Header({
       <Link to={Navigation.explore}>
         <span className="custom-link"> Explore </span>
       </Link>
-
-      {/* <Link to={Navigation.store}>
+      <NavLink
+        to={Navigation.store}
+        activeStyle={{
+          fontWeight: 'bold',
+          color: 'red'
+        }}
+      >
         <span className="custom-link"> Store </span>
-      </Link> */}
+      </NavLink>
 
       <span className="header-menu" onClick={() => { addProductAction(true); }}> Add Product </span>
       <MessageComp message={message} getMessage={getMessage} />

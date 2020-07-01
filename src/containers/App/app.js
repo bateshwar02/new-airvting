@@ -35,6 +35,7 @@ import VerifyEmailTemp from '../../components/common/verifyEmailTemp';
 import NotFoundPage from '../NotFoundPage/index';
 import Token from '../MyToken';
 import ProductDetails from '../Product/component/product-details';
+import ContactUs from '../ContactUs';
 
 export function App({ userData, getUserData }) {
   const [isLogin, setIsLogin] = useState(true);
@@ -91,6 +92,7 @@ export function App({ userData, getUserData }) {
         <Route exact path={Navigation.termsCondition} component={TermsCondition} />
         <Route exact path={Navigation.veryEmail} component={VerifyEmailTemp} />
         <Route exact path={Navigation.changePass} component={ChangePass} />
+        <Route exact path={Navigation.contact} component={ContactUs} />
         <Route path="/404" component={NotFoundPage} />
         <Redirect from="*" to="/404" />
         {/* <Route component={NotFoundPage} /> */}

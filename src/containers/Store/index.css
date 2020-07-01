@@ -20,3 +20,5 @@
     top: -5px !important;
     font-size: 18px;} 
     .main_content_inner { min-height: 40 vh;}
+
+    .video-grid-slider.mt-4.uk-slider.uk-slider-container{ margin-top: 45px !important;}

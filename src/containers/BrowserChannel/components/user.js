@@ -12,6 +12,7 @@ import { compose, bindActionCreators } from 'redux';
 import Utils from '../../../utils/common';
 import * as Actions from '../actions';
 import Post from './post';
+import Product from '../../Explore/component/product';
 
 export function User({
   match, channelUserData, getUserDataById
@@ -135,6 +136,17 @@ export function User({
           </div>
         </div>
         <Post match={match} />
+        <div id="user-product">
+          <div className="sections-small">
+            <h3> All Products </h3>
+            <div
+              className="uk-child-width-1-4@m uk-child-width-1-3@s uk-grid"
+              uk-grid
+              uk-scrollspy="target: > div; cls: uk-animation-slide-bottom-small; delay: 100"
+            />
+            <Product />
+          </div>
+        </div>
       </div>
     );
   };

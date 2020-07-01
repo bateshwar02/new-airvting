@@ -154,6 +154,11 @@ function Sidebar() {
                   {' '}
                   Terms - Conditions
                 </Link>
+                <Link to={Navigation.contact}>
+                  <i className="icon-material-outline-check" />
+                  {' '}
+                  Contact Us
+                </Link>
               </li>
             </ul>
           </div>

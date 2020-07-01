@@ -7,20 +7,20 @@
 
 import React, { memo, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
+// import classnames from 'classnames';
 import Utils from '../../../utils/common';
 import ApiService from '../api';
-// import Navigation from '../../../utils/navigation';
+import Navigation from '../../../utils/navigation';
 
-function Product({ id }) {
+function Product({ id, productLikedAction }) {
   const [childData, setChildData] = useState([]);
   const [isProcess, setIsProcess] = useState(false);
 
   useEffect(() => {
     if (Utils.isUndefinedOrNullOrEmptyList(childData)) {
-      ApiService.getDataByCategory(id).then((response) => {
+      ApiService.getProductCategoryData(id).then((response) => {
         if (response.success) {
-          setChildData(response.data.postDetail);
+          setChildData(response.data.productDetail);
           setIsProcess(true);
         }
       }).catch((error) => {
@@ -39,47 +39,49 @@ function Product({ id }) {
     }
 
     return childData.map((item, index) => {
-      const keys = `${index}-keys`;
+      const keys = `${index}-${item.productCategories[0].categoryId}`;
       const date = new Date(item.createdAt);
       const ticks = date.getTime();
 
       return (
-        <div key={keys} classNames="productElementWrap">
-          <a href="store-inner.php">
+        <div key={keys} className="productElementWrap" onClick={() => Navigation.push(`/sh/airvtingweb/product-details/${item._id}`)}>
+          <span>
             <div className="product-box productWrap">
-              <img src={item.featuredImages[0].featuredImage} alt="" />
+              <img src={!Utils.isUndefinedOrNullOrEmptyList(item.featuredImages) ? item.featuredImages[0].featuredImage : 'assets/images/default.jpg'} alt="" />
               <div className="product-text">
                 <h3 className="product-title">{item.title}</h3>
-                <span className="like-icon">
+                <span className="like-icon" onClick={() => productLikedAction(item._id)}>
                   <i className="fa fa-heart" aria-hidden="true" />
                 </span>
                 <p className="product-price">
                   $
-                  {item.priceSale}
+                  {Utils.getRoundOfValue(item.priceSale, 2)}
                 </p>
                 <p className="time-ago">
-                  <i className={classnames('fa fa-clock-o', { red: item.isLike })} aria-hidden="true" />
-                  <span>{Utils.formatDate(ticks)}</span>
+                  <i className="fa fa-clock-o" aria-hidden="true" />
+                  <span>
+                    {' '}
+                    {Utils.formatDate(ticks)}
+                  </span>
                 </p>
               </div>
             </div>
-          </a>
+          </span>
         </div>
       );
     });
   };
 
   return (
-    <div className="sections-small">
-      <div className="uk-child-width-1-4@m uk-child-width-1-3@s uk-grid">
-        {getContent()}
-      </div>
-    </div>
+    <>
+      {getContent()}
+    </>
   );
 }
 
 Product.propTypes = {
   id: PropTypes.string.isRequired,
+  productLikedAction: PropTypes.func.isRequired,
 };
 
 export default memo(Product);

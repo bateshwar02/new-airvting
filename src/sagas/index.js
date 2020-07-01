@@ -22,6 +22,7 @@ import watchCardsSaga from '../containers/MyCards/saga';
 import watchCartsSaga from '../containers/MyCart/saga';
 import watchMessageSaga from '../containers/Message/saga';
 import watchToken from '../containers/MyToken/saga';
+import watchContactSaga from '../containers/ContactUs/saga';
 
 
 // export default function* root() {
@@ -52,4 +53,5 @@ export default function* rootSaga() {
   yield spawn(watchCartsSaga);
   yield spawn(watchMessageSaga);
   yield spawn(watchToken);
+  yield spawn(watchContactSaga);
 }

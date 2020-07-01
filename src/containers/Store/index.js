@@ -13,11 +13,12 @@ import { compose, bindActionCreators } from 'redux';
 import * as Actions from './actions';
 import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
-import ProductList from './components/product-list';
+// import ProductList from './components/product-list';
 import AirToken from './components/ait-token-list';
 import Lodaer from '../../components/Loader';
 import TabMenu from './components/tabMenu';
 import Footer from '../../components/Footer';
+import Product from '../Explore/component/productByCategory';
 import './index.css';
 
 export function Store({ inProcess, tabValue }) {
@@ -25,7 +26,7 @@ export function Store({ inProcess, tabValue }) {
     <div className="main_content">
       <div className="main_content_inner">
         <TabMenu />
-        {tabValue === 'product' && <ProductList />}
+        {tabValue === 'product' && <Product />}
         {tabValue === 'airToken' && <AirToken />}
       </div>
       <Footer />

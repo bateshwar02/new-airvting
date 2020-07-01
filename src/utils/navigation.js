@@ -28,6 +28,7 @@ const Navigation = {
   changePass: '/change-pass/:token',
   token: '/token',
   productDetails: '/product-details/:id',
+  contact: '/contact',
   push: (url) => {
     history.push(url);
   },

@@ -21,6 +21,7 @@ import cartReducer from '../containers/MyCart/reducer';
 import history from '../utils/history';
 import messageReducer from '../containers/Message/reducer';
 import tokenReducer from '../containers/MyToken/reducer';
+import contactUsReducer from '../containers/ContactUs/reducer';
 
 export default combineReducers({
   router: connectRouter(history),
@@ -43,4 +44,5 @@ export default combineReducers({
   carts: cartReducer,
   message: messageReducer,
   token: tokenReducer,
+  contact: contactUsReducer,
 });

@@ -31,7 +31,18 @@ const Service = {
 
   productListByCat(id) {
     return Request.get(`api/v1/users/${id}/products?paginate=1&perPage=10&maxId=null`);
+  },
+
+  getProductCategoryData(id) {
+    const url = `api/v1/categories/${id}/products`;
+    return Request.get(url);
+  },
+
+  productLikedAction(id) {
+    const url = `api/v1/products/${id}/like`;
+    return Request.get(url);
   }
+
 
 };
 export default Service;

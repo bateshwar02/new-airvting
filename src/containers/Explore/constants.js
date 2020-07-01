@@ -21,3 +21,5 @@ export const UPDATE_FOLLOW_ACTION = 'app/Explore/UPDATE_FOLLOW_ACTION';
 export const FOLLOW_ACTION = 'app/Explore/FOLLOW_ACTION';
 export const GET_PRODUCT = 'app/Explore/GET_PRODUCT';
 export const UPDATE_PRODUCT = 'app/Explore/UPDATE_PRODUCT';
+export const GET_CATEGORY = 'app/Explore/GET_CATEGORY';
+export const LIKED_ACTION = 'app/Explore/LIKED_ACTION';

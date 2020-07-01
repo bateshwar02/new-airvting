@@ -23,7 +23,6 @@ function TokenList({ aitTokenList, getAirToken, buyAirToken }) {
     const dataObj = {
       Purchase: { receipt: 'transactionId.Web.Test' }, airTokenId: data._id, currency: 'INR', price: data.price, quantityToBuy: data.quantity, title: data.title
     };
-    console.log('dataObj ====', dataObj);
     buyAirToken(dataObj);
   };
 
