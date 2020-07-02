@@ -9,3 +9,5 @@ export const UPDATE_DATA_BY_CATEGORY = 'app/Home/UPDATE_DATA_BY_CATEGORY';
 export const UPDATE_VIDEO = 'app/Home/UPDATE_VIDEO';
 export const IS_SHARE = 'app/Home/IS_SHARE';
 export const SHARE_URL = 'app/Home/SHARE_URL';
+export const GET_SEARCH_DATA = 'app/Home/GET_SEARCH_DATA';
+export const UPDATE_SEARCH_DATA = 'app/Home/UPDATE_SEARCH_DATA';

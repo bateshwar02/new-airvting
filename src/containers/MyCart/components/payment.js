@@ -79,7 +79,7 @@ function Payment({ cartData, productList, count }) {
                 <td>
                   <span>
                     $
-                    {subTotal}
+                    {Utils.getRoundOfValue(subTotal, 2)}
                   </span>
                 </td>
               </tr>
@@ -102,7 +102,7 @@ function Payment({ cartData, productList, count }) {
                 <td>
                   <span>
                     $
-                    {Number(subTotal) - Number(token)}
+                    {Utils.getRoundOfValue((Number(subTotal) - Number(token)), 2)}
                   </span>
                 </td>
               </tr>

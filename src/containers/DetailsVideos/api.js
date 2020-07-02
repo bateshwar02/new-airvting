@@ -45,6 +45,11 @@ const Service = {
     }
     const url = `api/v1/users/${id}/gifts?paginate=1&perPage=10`;
     return Request.get(url);
+  },
+
+  likePostAction(post_id) {
+    const url = `api/v1/posts/${post_id}/like`;
+    return Request.get(url);
   }
 
 };

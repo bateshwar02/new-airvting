@@ -124,6 +124,17 @@ function Sidebar() {
               </li>
               <li
                 className={classNames({
+                  active: getRouterValue(Navigation.aboutUs) === getLocationParams(),
+                })}
+              >
+                <Link to={Navigation.contact}>
+                  <i className="icon-material-outline-check" />
+                  {' '}
+                  Contact Us
+                </Link>
+              </li>
+              <li
+                className={classNames({
                   active: getRouterValue(Navigation.setting) === getLocationParams(),
                 })}
               >
@@ -153,11 +164,6 @@ function Sidebar() {
                   <i className="icon-material-outline-check" />
                   {' '}
                   Terms - Conditions
-                </Link>
-                <Link to={Navigation.contact}>
-                  <i className="icon-material-outline-check" />
-                  {' '}
-                  Contact Us
                 </Link>
               </li>
             </ul>

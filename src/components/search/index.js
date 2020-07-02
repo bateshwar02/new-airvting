@@ -1,29 +1,53 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, {
-  memo, useRef, useEffect, useState
+  memo, useState, useEffect
 } from 'react';
-// import PropTypes from 'prop-types';
+import classnames from 'classnames';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { compose, bindActionCreators } from 'redux';
 import t from 'tcomb-form';
+import * as Actions from '../../containers/Home/action';
+import Utils from '../../utils/common';
 import airvForm from '../form';
 import './index.css';
 
-function Search() {
-  const searchRef = useRef(null);
+function Search({ updateSearch, getSearchData }) {
   const [searchData, setSearchData] = useState({});
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
-
-  }, []);
+    if (!Utils.isUndefinedOrNullOrEmptyObject(searchData)) {
+      setShow(true);
+    } else {
+      setShow(false);
+    }
+  }, [searchData]);
 
   const onChange = (formValue) => {
     setSearchData(formValue);
+    if (formValue.search.length > 2) {
+      updateSearch(true);
+      getSearchData(formValue.search.length);
+    }
   };
 
   const formSchema = { search: t.String };
+
+  const clearData = () => {
+    setSearchData({});
+    updateSearch(false);
+  };
 
   const getLoginFormTemplate = locals => (
     <>
       <div className="head_search_cont">
         {locals.inputs.search}
+        <span className={classnames('crossSearch', { show })} onClick={clearData} role="button" tabIndex={0}>
+          {' '}
+          <img src="assets/icons/cros.png" alt="" />
+          {' '}
+        </span>
       </div>
     </>
   );
@@ -49,7 +73,7 @@ function Search() {
 
   return (
     <div className="head_search">
-      <t.form.Form ref={searchRef} type={getFormSchema()} value={searchData} options={getFormOptions()} onChange={onChange} />
+      <t.form.Form type={getFormSchema()} value={searchData} options={getFormOptions()} onChange={onChange} />
       <div uk-dropdown="pos:top;mode:click;animation:uk-animation-slide-bottom-small" className="dropdown-search">
         <ul className="dropdown-search-list">
           <li className="list-title"> Recent Searches </li>
@@ -82,10 +106,27 @@ function Search() {
   );
 }
 
-Search.propTypes = { };
-
-Search.defaultProps = {
-  inProcess: false,
+Search.propTypes = {
+  updateSearch: PropTypes.func.isRequired,
+  getSearchData: PropTypes.func.isRequired,
 };
 
-export default memo(Search);
+const mapStateToProps = ({
+  userDetails: {
+    userData, notification, message, inProcess
+  }
+}) => ({
+  userData, notification, message, inProcess
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators(Actions, dispatch);
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
+
+export default compose(
+  withConnect,
+  memo,
+)(Search);

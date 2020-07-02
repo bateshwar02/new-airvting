@@ -32,7 +32,7 @@ import Storegift from './components/storeGift';
 import './index.css';
 
 export function DetailsVideos({
-  match, getVideoDetails, videoData, inProcess, followAction, addVideoComment, actionInProcess, fallowInProcess, userData
+  match, getVideoDetails, videoData, inProcess, followAction, addVideoComment, actionInProcess, fallowInProcess, userData, likeAction
 }) {
   const { id } = match.params;
   const [isOpen, setOpen] = useState(false);
@@ -168,9 +168,9 @@ export function DetailsVideos({
                   </div>
                   <div className="w50 text-right">
                     <ul className="gift-section">
-                      <a href="store.php">
+                      <span onClick={() => Navigation.push(Navigation.store)} role="button" tabIndex={0}>
                         <li><img src="assets/images/video-thumbal/Shopping-icon.png" alt="" /></li>
-                      </a>
+                      </span>
                       <span role="button" tabIndex={0} onClick={() => { setOpen(!isOpen); }}>
                         <li id="show"><img src="assets/images/video-thumbal/gift-icon.png" alt="" /></li>
                       </span>
@@ -198,7 +198,7 @@ export function DetailsVideos({
                 <span>60,723,169 views </span>
               </div> */}
               <div className="video-likes">
-                <div className="like-btn" uk-tooltip="I like it">
+                <div className="like-btn" uk-tooltip="I like it" onClick={() => likeAction(_id)}>
                   <i className="uil-thumbs-up" />
                   <span className="likes">{totalLikes}</span>
                 </div>
@@ -267,6 +267,7 @@ DetailsVideos.propTypes = {
   actionInProcess: PropTypes.bool.isRequired,
   fallowInProcess: PropTypes.bool.isRequired,
   userData: PropTypes.object.isRequired,
+  likeAction: PropTypes.func.isRequired,
 };
 
 

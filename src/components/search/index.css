@@ -9,5 +9,14 @@
 	background-color: #08090f !important; top: 8px; left: 4px;}
 	
 	.form-group-search label.control-label span{ display: none; }	
-	.head_search_cont {border: 0px solid #fff;}
+	.head_search_cont {border: 0px solid #fff; display: flex; flex-direction: row;}
 	.form-group-search .input-group{ border-radius: 40px !important;}
+	.crossSearch img {
+		height: 18px;
+		position: absolute;
+		top: 14px;
+		right: 12px;
+		display: none;
+	}
+
+	span.crossSearch.show { display: block; }

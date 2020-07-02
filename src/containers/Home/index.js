@@ -13,10 +13,11 @@ import Footer from '../../components/Footer/index';
 import Loader from '../../components/Loader';
 import Category from './components/category';
 import Share from '../../components/Share';
+import Post from './components/postData';
 
 
 function HomePage({
-  inProcess, updateShare, url, isShare
+  inProcess, updateShare, url, isShare, isSearch
 }) {
   const getHomeContent = () => (
     <div className="main_content">
@@ -195,7 +196,9 @@ function HomePage({
           {/* <a className="uk-position-center-left-out uk-position-small uk-hidden-hover slidenav-prev" href="void(0)" uk-slideshow-item="previous"></a>
                     <a className="uk-position-center-right-out uk-position-small uk-hidden-hover slidenav-next" href="void(0)" uk-slideshow-item="next"></a> */}
         </div>
-        <Category />
+        { !isSearch && <Category />}
+        { isSearch && <Post />}
+
 
         {/* <div className="section-small">
           <div uk-slider="finite: true">
@@ -431,15 +434,16 @@ HomePage.propTypes = {
   updateShare: PropTypes.func.isRequired,
   url: PropTypes.string.isRequired,
   isShare: PropTypes.bool.isRequired,
+  isSearch: PropTypes.bool.isRequired,
 };
 
 
 const mapStateToProps = ({
   home: {
     categoryData, inProcess, isShare, url
-  }, userDetails: { userData }
+  }, userDetails: { userData, isSearch }
 }) => ({
-  userData, categoryData, inProcess, isShare, url
+  userData, categoryData, inProcess, isShare, url, isSearch
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(Actions, dispatch);

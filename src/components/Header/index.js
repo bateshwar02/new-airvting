@@ -14,7 +14,7 @@ import Loader from '../Loader';
 import './header.css';
 
 function Header({
-  userData, logout, addProductAction, notification, getNotification, message, getMessage, inProcess, verfyEmail
+  userData, logout, addProductAction, notification, getNotification, message, getMessage, inProcess, verfyEmail, updateSearch
 }) {
   const [userProfileImg, setUserProfileImage] = useState('assets/images/avatars/avatar-1.jpg');
   useEffect(() => {
@@ -323,7 +323,7 @@ function Header({
             <img src="assets/images/logo-light.png" className="logo-inverse" alt="" />
           </span>
         </div>
-        <Search />
+        <Search updateSearch={updateSearch} />
         {!Utils.isUndefinedOrNullOrEmptyObject(userData) && withLoginContent()}
         {Utils.isUndefinedOrNullOrEmptyObject(userData) && withoutLoginContent()}
       </header>
@@ -342,6 +342,7 @@ Header.propTypes = {
   getMessage: PropTypes.func.isRequired,
   inProcess: PropTypes.bool.isRequired,
   verfyEmail: PropTypes.func.isRequired,
+  updateSearch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({

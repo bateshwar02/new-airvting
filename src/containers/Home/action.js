@@ -1,5 +1,5 @@
 import {
-  USER_DATA, DATA_BY_CATEGORY, BOOKMARK_ACTION, GET_CATEGORY, Is_PROCESS_ACTION, UPDATE_CATEGORY_DATA, UPDATE_DATA_BY_CATEGORY, UPDATE_VIDEO, IS_SHARE, SHARE_URL
+  USER_DATA, DATA_BY_CATEGORY, BOOKMARK_ACTION, GET_CATEGORY, Is_PROCESS_ACTION, UPDATE_CATEGORY_DATA, UPDATE_DATA_BY_CATEGORY, UPDATE_VIDEO, IS_SHARE, SHARE_URL, GET_SEARCH_DATA, UPDATE_SEARCH_DATA
 } from './constatnt';
 
 export function updateUserData({ userData }) {
@@ -69,5 +69,19 @@ export function updateShareUrl(url) {
   return {
     type: SHARE_URL,
     url
+  };
+}
+
+export function getSearchData(keyword) {
+  return {
+    type: GET_SEARCH_DATA,
+    keyword
+  };
+}
+
+export function updateSearchData(searchData) {
+  return {
+    type: UPDATE_SEARCH_DATA,
+    searchData
   };
 }

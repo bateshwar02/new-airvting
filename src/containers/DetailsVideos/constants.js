@@ -19,3 +19,4 @@ export const STORE_GIFT_UPDATE = 'app/DetailsVideos/STORE_GIFT_UPDATE';
 export const MY_GIFT = 'app/DetailsVideos/MY_GIFT';
 export const MY_GIFT_UPDATE = 'app/DetailsVideos/MY_GIFT_UPDATE';
 export const UPDATE_STORE_PROCCESS = 'app/DetailsVideos/UPDATE_STORE_PROCCESS';
+export const LIKE_ACTION_POST = 'app/DetailsVideos/LIKE_ACTION_POST';

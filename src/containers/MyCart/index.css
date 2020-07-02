@@ -4,3 +4,6 @@
 .mycart-table-img img { width: 100px; height: 100px; }
 .main_content_inner { min-height: 55vh; }
 
+.uk-grid.dataWrap {
+    position: static;
+}

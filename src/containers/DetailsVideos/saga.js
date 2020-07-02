@@ -7,7 +7,7 @@ import { takeLatest, call, put } from 'redux-saga/effects';
 import { notifyError, notifySuccess } from '../App/action';
 
 import {
-  GET_VIDEO_DETAILS, ADD_COMMENT, GET_COMMENT, FOLLOW_ACTION, MY_GIFT, STORE_GIFT
+  GET_VIDEO_DETAILS, ADD_COMMENT, GET_COMMENT, FOLLOW_ACTION, MY_GIFT, STORE_GIFT, LIKE_ACTION_POST
 } from './constants';
 import {
   updateVideoData, updateInProcess, updateCommentData, getComment, updateActionInProcess, updateFallowInProcess, updateMyGift, updateStoreGift, updateStoreProcess
@@ -130,6 +130,24 @@ function* getStoreGiftSaga() {
   }
 }
 
+function* likeActionSaga({ post_id }) {
+  yield put(updateStoreProcess(true));
+  try {
+    const callGift = yield call(api.likePostAction, post_id);
+    if (callGift.success) {
+      yield put(notifySuccess('Liked Post'));
+      yield put(updateStoreProcess(false));
+      return;
+    }
+    yield put(notifyError({ message: callGift.message }));
+    yield put(updateStoreProcess(false));
+    return;
+  } catch (e) {
+    yield put(notifyError(e));
+    yield put(updateStoreProcess(false));
+  }
+}
+
 
 export default function* detailsVideosSaga() {
   yield takeLatest(GET_VIDEO_DETAILS, getVideoDataSaga);
@@ -138,4 +156,5 @@ export default function* detailsVideosSaga() {
   yield takeLatest(FOLLOW_ACTION, followUserSaga);
   yield takeLatest(MY_GIFT, getMyGiftSaga);
   yield takeLatest(STORE_GIFT, getStoreGiftSaga);
+  yield takeLatest(LIKE_ACTION_POST, likeActionSaga);
 }

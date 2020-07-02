@@ -26,3 +26,4 @@ export const GET_MESSAGE = 'app/App/GET_MESSAGE';
 export const UPDATE_MESSAGE = 'app/App/UPDATE_MESSAGE';
 export const UPDATE_IN_PROCCESS = 'app/App/UPDATE_IN_PROCCESS';
 export const VERIFY_EMAIL = 'app/App/VERIFY_EMAIL';
+export const UPDATE_SEARCH = 'app/App/UPDATE_SEARCH';

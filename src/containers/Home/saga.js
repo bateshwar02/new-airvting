@@ -3,9 +3,9 @@ import { notifySuccess, notifyError, updateMediaObj } from '../App/action';
 import { addBookMark } from '../../lib/addBookMark';
 
 import {
-  BOOKMARK_ACTION, GET_CATEGORY, GET_DATA_BY_CATEGORY, UPDATE_VIDEO
+  BOOKMARK_ACTION, GET_CATEGORY, GET_DATA_BY_CATEGORY, UPDATE_VIDEO, GET_SEARCH_DATA
 } from './constatnt';
-import { updateInProcess, updateCategoryData } from './action';
+import { updateInProcess, updateCategoryData, updateSearchData } from './action';
 import api from './api';
 
 function* bookMarkActionSaga({ id }) {
@@ -69,9 +69,28 @@ function* updateVideoObjSaga({ mediaObj }) {
   }
 }
 
+function* getSearchDataSaga({ keyword }) {
+  yield put(updateInProcess(true));
+  try {
+    const searchAct = yield call(api.getSearchData, keyword);
+    if (searchAct.success) {
+      yield put(updateSearchData(searchAct.data));
+      yield put(updateInProcess(false));
+      return;
+    }
+    yield put(notifyError({ message: searchAct.message }));
+    yield put(updateInProcess(false));
+    return;
+  } catch (e) {
+    yield put(updateInProcess(false));
+    console.log(e);
+  }
+}
+
 export default function* loginSaga() {
   yield takeLatest(BOOKMARK_ACTION, bookMarkActionSaga);
   yield takeLatest(GET_CATEGORY, getCategoryActionSaga);
   yield takeLatest(GET_DATA_BY_CATEGORY, getDataCategoryActionSaga);
   yield takeLatest(UPDATE_VIDEO, updateVideoObjSaga);
+  yield takeLatest(GET_SEARCH_DATA, getSearchDataSaga);
 }

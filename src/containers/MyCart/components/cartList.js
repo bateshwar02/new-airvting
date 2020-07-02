@@ -29,7 +29,7 @@ function CartList({
   }, []);
 
   const checkboxCheck = (event) => {
-    const arrData = [];
+    const arrData = Utils.deepCopy(productList);
     if (!Utils.isUndefinedOrNullOrEmptyList(event.target.value) && event.target.checked) {
       arrData.push(event.target.value);
     }

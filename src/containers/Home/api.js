@@ -11,5 +11,10 @@ const Service = {
     return Request.get(url);
   },
 
+  getSearchData(keyword) {
+    const url = `api/v1/search?type=post&keyword=${keyword}&paginate=1&perPage=20&maxId=0`;
+    return Request.get(url);
+  },
+
 };
 export default Service;
