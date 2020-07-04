@@ -115,7 +115,7 @@ function HomePage({
               </div>
             </li>
             <li> */}
-              {/* <div className="slide-box">
+            {/* <div className="slide-box">
                 <div className="live-vid-slide">
                   <iframe
                     width="100%"

@@ -22,6 +22,7 @@ import history from '../utils/history';
 import messageReducer from '../containers/Message/reducer';
 import tokenReducer from '../containers/MyToken/reducer';
 import contactUsReducer from '../containers/ContactUs/reducer';
+import liveReducer from '../containers/Live/reducer';
 
 export default combineReducers({
   router: connectRouter(history),
@@ -45,4 +46,5 @@ export default combineReducers({
   message: messageReducer,
   token: tokenReducer,
   contact: contactUsReducer,
+  live: liveReducer
 });

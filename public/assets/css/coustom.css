@@ -3,6 +3,10 @@
     margin: 0;
     font-family: 'Alata', sans-serif;
 }
+.has-error .input-group, .has-error .checkboxLabel span:before, .has-error .radioLabel span:before, .has-error [class*='-Control'] {
+    border-color: #fa3365 !important;
+}
+
 [class~=button][class~=default] {
     background: #f07015;
 }
