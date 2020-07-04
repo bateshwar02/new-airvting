@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 import {
   BrowserRouter as Router
 } from 'react-router-dom';
-// import { ConnectedRouter } from 'connected-react-router';
 import Apps from './containers/App/app';
 import { unregister } from './registerServiceWorker';
 import store from './store';

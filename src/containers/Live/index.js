@@ -20,261 +20,152 @@ import Footer from '../../components/Footer';
 
 export function Live() {
   useEffect(() => {
-    // const peerConnections = {};
-    // const config = {
-    //     iceServers: [
-    //         {
-    //             urls: ['stun:stun.l.google.com:19302'],
-    //         },
-    //     ],
-    // };
-    // const socket = io(window.location.origin);
-    // const video = document.querySelector('video');
-    // const constraints = { video: true, audio: true };
-    // navigator.mediaDevices
-    //     .getUserMedia(constraints)
-    //     .then(stream => {
-    //         video.srcObject = stream;
-    //         socket.emit('broadcaster');
+    if(window) {
+      console.log('window ==== ', window);
+        var publisher = new window.red5prosdk.RTCPublisher();
+        // Initialize
+        publisher.init({
+            protocol: 'ws',
+            port:5080,
+            host: '18.140.72.26',
+            app: 'live',
+            streamName: 'mystream',
+            rtcConfiguration: {
+              iceServers: [{urls: 'stun:stun2.l.google.com:19302'}],
+              iceCandidatePoolSize: 2,
+              bundlePolicy: 'max-bundle'
+            }, // See https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/RTCPeerConnection#RTCConfiguration_dictionary
+            streamMode: 'live',
+            mediaElementId: 'red5pro-publisher',
+            bandwidth: {
+              audio: 56,
+              video: 512
+            },
+            mediaConstraints: {
+              audio: true,
+              video:{
+                width: {
+                  max: 1920,
+                  ideal: 1280,
+                  min: 640
+                },
+                width: {
+                  max: 1080,
+                  ideal: 720,
+                  min: 360
+                },
+                frameRate: {
+                  min: 8,
+                  max: 24
+                }
+              }
+            }
+          })
+          .then(function() {
+            // Invoke the publish action.
+            return publisher.publish();
+          })
+          .catch(function(error) {
+            // A fault occurred while trying to initialize and publish the stream.
+            console.error(error);
+          });
+          
+    }
+
+
+
+    // (function(red5prosdk) {
+    //   'use strict';
+
+    //   var rtcPublisher = new red5prosdk.RTCPublisher();
+    //   var rtcSubscriber = new red5prosdk.RTCSubscriber();
+    //   var config = {
+    //     protocol: 'ws',
+    //     host: '18.140.72.26',
+    //     port: 5080,
+    //     app: 'live',
+    //     streamName: 'mystream1zssdusgf98436568436',
+    //     rtcConfiguration: {
+    //       iceServers: [{urls: 'stun:stun2.l.google.com:19302'}],
+    //       iceCandidatePoolSize: 2,
+    //       bundlePolicy: 'max-bundle'
+    //     } // See https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/RTCPeerConnection#RTCConfiguration_dictionary
+    //   };
+
+    //   function subscribe () {
+    //     rtcSubscriber.init(config)
+    //       .then(function () {
+    //         return rtcSubscriber.subscribe();
+    //       })
+    //       .then(function () {
+    //         console.log('Playing!');
+    //       })
+    //       .catch(function (err) {
+    //         console.log('Could not play: ' + err);
+    //       });
+    //   }
+
+    //   rtcPublisher.init(config)
+    //     .then(function () {
+    //       // On broadcast started, subscribe.
+    //       rtcPublisher.on(red5prosdk.PublisherEventTypes.PUBLISH_START, subscribe);
+    //       return rtcPublisher.publish();
     //     })
-    //     .catch(error => {
-    //         console.log('Device undefined ', error);
+    //     .then(function () {
+    //       console.log('Publishing!');
+    //     })
+    //     .catch(function (err) {
+    //       console.error('Could not publish: ' + err);
     //     });
-    // socket.on('watcher', id => {
-    //     const peerConnection = new RTCPeerConnection(config);
-    //     peerConnections[id] = peerConnection;
-    //     const stream = video.srcObject;
-    //     stream.getTracks().forEach(track => peerConnection.addTrack(track, stream));
-    //     peerConnection.onicecandidate = event => {
-    //         if (event.candidate) {
-    //             socket.emit('candidate', id, event.candidate);
-    //         }
-    //     };
-    //     peerConnection
-    //         .createOffer()
-    //         .then(sdp => peerConnection.setLocalDescription(sdp))
-    //         .then(() => {
-    //             socket.emit('offer', id, peerConnection.localDescription);
-    //         });
-    // });
-    // socket.on('answer', (id, description) => {
-    //     peerConnections[id].setRemoteDescription(description);
-    // });
-    // socket.on('candidate', (id, candidate) => {
-    //     peerConnections[id].addIceCandidate(new RTCIceCandidate(candidate));
-    // });
-    // socket.on('disconnectPeer', id => {
-    //     peerConnections[id].close();
-    //     delete peerConnections[id];
-    // });
-  });
 
-  const getContent = () => (
+    // }(window.red5prosdk));
+  
+}, []);
+
+const getContent = () => (
     <div className="main_content content-expand">
-      <div className="main_content_inner">
-        <div className="go-live-bxo">
-          <div className="uk-grid">
-            <div className="uk-width-1-2@m">
-              <div className="golive-video-img" style={{ position: 'relative' }}>
-                <video className="golive-video-img-w" playsInline autoPlay muted />
-                {/* <img src="assets/images/video-thumbal/golive.jpg" className="golive-video-img-w" alt="" /> */}
-                <div className="chat-video-gift-box golive-gift-popup-box ">
-                  <ul className="uk-tab gift-tab-box" data-uk-tab="{connect:'#my-id'}">
-                    <li className="uk-active">
-                      <a href="/store">
-                        <i className="icon-feather-gift" />
-                        {' '}
-                        Gift Store
-                      </a>
-                    </li>
-                    <li>
-                      <a href="/store">
-                        <i className="icon-feather-heart" />
-                        {' '}
-                        My Gift
-                      </a>
-                    </li>
-                    <li className="tootal-coin">
-                      <i className="icon-brand-bitcoin" />
-                      {' '}
-                      3480
-                    </li>
-                  </ul>
-                  <ul id="my-id" className="uk-switcher uk-margin ">
-                    <li className="gift-icon-all">
-                      {/* <a href="/store" id="autoplayer"></a> */}
-                      <div className="gifts-icon gilf-active-icon">
-                        <img src="assets/images/video-thumbal/star.png" alt="" />
-                        <p>star</p>
-                        <p>
-                          <i className="icon-brand-bitcoin" />
-                          {' '}
-                          1
-                        </p>
-                      </div>
-                      <div className="gifts-icon">
-                        <img src="assets/images/video-thumbal/ring.png" alt="" />
-                        <p>Ring</p>
-                        <p>
-                          <i className="icon-brand-bitcoin" />
-                          {' '}
-                          12
-                        </p>
-                      </div>
-                      <div className="gifts-icon">
-                        <img src="assets/images/video-thumbal/drink.png" alt="" />
-                        <p>Champagne</p>
-                        <p>
-                          <i className="icon-brand-bitcoin" />
-                          {' '}
-                          15
-                        </p>
-                      </div>
-                      <div className="gifts-icon">
-                        <img src="assets/images/video-thumbal/headphone.png" alt="" />
-                        <p>headphone</p>
-                        <p>
-                          <i className="icon-brand-bitcoin" />
-                          {' '}
-                          21
-                        </p>
-                      </div>
-                    </li>
-                    <li>
-                      <div className="gifts-icon gilf-active-icon">
-                        <img src="assets/images/video-thumbal/star.png" alt="" />
-                        <p>star</p>
-                      </div>
-                      <div className="gifts-icon">
-                        <img src="assets/images/video-thumbal/ring.png" alt="" />
-                        <p>Ring</p>
-                      </div>
-                      <div className="gifts-icon">
-                        <img src="assets/images/video-thumbal/drink.png" alt="" />
-                        <p>Champagne</p>
-                      </div>
-                      <div className="gifts-icon">
-                        <img src="assets/images/video-thumbal/headphone.png" alt="" />
-                        <p>headphone</p>
-                      </div>
-                    </li>
-                    <li>Content 3</li>
-                  </ul>
-                </div>
-                <div className="chat-vedio-icon-box golive-gift-box">
-                  <div className="w50">
-                    <p>
-                      <i className="icon-feather-eye" />
-                      {' '}
-                      2.3k views
-                    </p>
-                    <div className="w50 text-right">
-                      <ul className="gift-section">
-                        <a href="store.php">
-                          <li>
-                            <img src="assets/images/video-thumbal/Shopping-icon.png" alt="" />
-                          </li>
-                        </a>
-                        <a href="/thumb">
-                          <li id="show">
-                            <img src="assets/images/video-thumbal/gift-icon.png" alt="" />
-                          </li>
-                        </a>
-                        <a href="my-token.php">
-                          <li>
-                            <img src="assets/images/video-thumbal/star-icon2.png" alt="" />
-                          </li>
-                        </a>
-                      </ul>
+        <div className="main_content_inner">
+            <div className="go-live-bxo">
+                <div className="uk-grid">
+                    <div className="videoPublishWrapper">
+                        <div className="golive-video-img" style={{ position: 'relative' }}>
+                            <video id="red5pro-publisher" autoPlay muted></video>
+                           </div>
                     </div>
-                  </div>
                 </div>
-              </div>
             </div>
-            <div className=" uk-width-1-2@m">
-              <div className="golive-option-box">
-                <form className="uk-form">
-                  <div className="golive-say-somthing">
-                    <img src="assets/images/avatars/avatar-3.jpg" alt="" />
-                    <input type="text" name="say-somthing" placeholder="say somthing" alt="" />
-                  </div>
-                  <select className="uk-select">
-                    <option>Tag</option>
-                    <option>option 2</option>
-                    <option>option 3</option>
-                  </select>
-                  <select className="uk-select">
-                    <option>Store</option>
-                    <option>option 2</option>
-                    <option>option 3</option>
-                  </select>
-                  <select className="uk-select">
-                    <option>Category</option>
-                    <option>option 2</option>
-                    <option>option 3</option>
-                  </select>
-                  <div className="golive-input">
-                    <label htmlFor="time" className="frm-golive-label">
-                      Discount Timer
-                    </label>
-                    <input type="time" name="discount-timer" />
-                  </div>
-                  <div className="golive-input">
-                    <label htmlFor="discount" className="frm-golive-label">
-                      Discount Amount
-                    </label>
-                    <input type="text" name="discount-Amount" />
-                  </div>
-                  <div className="golive-input">
-                    <label htmlFor="stock" className="frm-golive-label">
-                      Stock Availability
-                    </label>
-                    <input type="text" name="Stock-availability" />
-                  </div>
-                </form>
-                <div className="golive-btn">
-                  <div className="uk-flex uk-flex-center mb-3">
-                    <a href="video.php" className="button default ">
-                      <i className="icon-feather-video mr-2" />
-                      {' '}
-                      Go live
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
-      <Footer />
+        <Footer />
     </div>
-  );
 
-  return (
+);
+
+return (
     <div>
-      <Helmet>
-        <title>Live</title>
-        <meta name="description" content="Description of Live" />
-      </Helmet>
-      <Sidebar />
-      <Header />
-      {getContent()}
+        <Helmet>
+            <title>Live</title>
+            <meta name="description" content="Description of Live" />
+        </Helmet>
+        <Sidebar />
+        <Header isLogin />
+        {getContent()}
     </div>
-  );
+);
 }
 
 Live.propTypes = {};
 
 
-const mapStateToProps = ({ live }) => ({ live });
+const mapStateToProps = ({ live }) => ({live });
+
 const mapDispatchToProps = dispatch => bindActionCreators(Actions, dispatch);
 
 const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
+mapStateToProps,
+mapDispatchToProps,
 );
 
 export default compose(
-  withConnect,
-  memo,
+withConnect,
+memo,
 )(Live);

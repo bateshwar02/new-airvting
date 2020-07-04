@@ -14,6 +14,7 @@ import Loader from '../../components/Loader';
 import Category from './components/category';
 import Share from '../../components/Share';
 import Post from './components/postData';
+import Video from './components/liveVideo';
 
 
 function HomePage({
@@ -29,6 +30,9 @@ function HomePage({
         >
           <ul className="uk-slideshow-items rounded">
             <li>
+              <Video />
+            </li>
+            {/* <li>
               <div className="slide-box">
                 <div className="live-vid-slide">
                   <iframe
@@ -110,8 +114,8 @@ function HomePage({
                 </div>
               </div>
             </li>
-            <li>
-              <div className="slide-box">
+            <li> */}
+              {/* <div className="slide-box">
                 <div className="live-vid-slide">
                   <iframe
                     width="100%"
@@ -191,7 +195,7 @@ function HomePage({
                   </div>
                 </div>
               </div>
-            </li>
+            </li> */}
           </ul>
           {/* <a className="uk-position-center-left-out uk-position-small uk-hidden-hover slidenav-prev" href="void(0)" uk-slideshow-item="previous"></a>
                     <a className="uk-position-center-right-out uk-position-small uk-hidden-hover slidenav-next" href="void(0)" uk-slideshow-item="next"></a> */}
