@@ -28,13 +28,11 @@ function About({
   }, []);
 
   const getContent = () => (
-    <div className="main_content">
       <div className="main_content_inner emailVerifyWrapper">
         <span>
           {emailVerifyMsg}.
         </span>
       </div>
-    </div>
   );
 
   return (
