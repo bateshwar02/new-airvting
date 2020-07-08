@@ -31,8 +31,7 @@ function About({
     <div className="main_content">
       <div className="main_content_inner emailVerifyWrapper">
         <span>
-          {emailVerifyMsg}
-          .
+          {emailVerifyMsg}.
         </span>
       </div>
     </div>

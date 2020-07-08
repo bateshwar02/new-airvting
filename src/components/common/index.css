@@ -25,10 +25,17 @@ span.input-group-addon {
 
 .date-input-group span.inputIcon{padding: 0px 5px 5px 0px;}
 .main_content_inner.emailVerifyWrapper {
-    min-height: 48vh;
+    min-height: 52vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .main_content_inner.emailVerifyWrapper span {
     margin: 20px 0px;
     color: #ff6200;
+    background: #f5e7df;
+    padding: 18px;
+    min-width: 400px;
+    min-height: 44px;
 }
 

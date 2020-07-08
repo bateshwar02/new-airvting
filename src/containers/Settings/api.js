@@ -14,7 +14,7 @@ const Service = {
   },
 
   verfyEmail(token) {
-    const url = 'api/v1/users/verify_email_action';
+    const url = 'api/v1/verify_email_action';
     return Request.post(url, token);
   },
 

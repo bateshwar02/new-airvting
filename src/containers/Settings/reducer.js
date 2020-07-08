@@ -6,7 +6,7 @@
 
 import { IS_PROCESS_ACTION, UPDATE_GIFT, UPDATE_VERIFY_MSG } from './constants';
 
-export const initialState = { inProcess: false, gift: {}, emailVerifyMsg: 'Your email has been verified successfully.' };
+export const initialState = { inProcess: false, gift: {}, emailVerifyMsg: '' };
 /* eslint-disable default-case, no-param-reassign */
 export default function setBrowserInfo(state = initialState, action) {
   switch (action.type) {

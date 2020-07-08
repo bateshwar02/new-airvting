@@ -70,6 +70,7 @@ function* verifyEmailSaga({ token }) {
     const verifyEmail = yield call(api.verfyEmail, token);
     if (verifyEmail.success) {
       yield put(updateInProcess({ inProcess: false }));
+      yield put(updateVerifyMsg('Your email has been verified successfully.'));
       return;
     }
     yield put(updateVerifyMsg(verifyEmail.message));
