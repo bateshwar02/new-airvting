@@ -20,7 +20,7 @@ import Modal from '../../components/Modal';
 
 
 export function AddPost({
-  inProcess, addPost, catOption, getCategoryOp, isAddPost
+  inProcess, addPost, catOption, getCategoryOp, isAddPost, updatePostData
 }) {
   const addPostRef = useRef(null);
 
@@ -41,10 +41,11 @@ export function AddPost({
   };
 
   const formSchema = {
-    categories: t.Object,
+    postCategories: t.Object,
     title: t.String,
     type: t.String,
-    tagUsers: t.Array
+    tagUsers: t.Array,
+    discount: t.String,
   };
 
   const getUserData = (input, callback) => {
@@ -75,11 +76,12 @@ export function AddPost({
         {locals.inputs.title}
       </div>
       <div className="formWrap">
-        {locals.inputs.categories}
+        {locals.inputs.postCategories}
       </div>
       <div className="formWrap">
         {locals.inputs.tagUsers}
       </div>
+      <div className="formWrap">{locals.inputs.discount}</div>
     </>
   );
 
@@ -102,7 +104,7 @@ export function AddPost({
         },
         error: 'Title is required',
       },
-      categories: {
+      postCategories: {
         label: 'Categories',
         template: airvForm.templates.select,
         attrs: {
@@ -134,6 +136,16 @@ export function AddPost({
         factory: t.form.Select,
       },
 
+      discount: {
+        label: 'Discount',
+        template: airvForm.templates.textbox,
+        error: 'Discount is required',
+        type: 'text',
+        attrs: {
+          placeholder: 'Discount in %',
+        },
+      },
+
       //   featuredImage: {
       //     label: 'Type',
       //     template: airvForm.templates.textbox,
@@ -156,7 +168,22 @@ export function AddPost({
     if (!Utils.isEmptyList(errors)) {
       return;
     }
-    addPost(postFormData);
+    const formData = Utils.deepCopy(postFormData);
+    const userData = []
+    if(!Utils.isUndefinedOrNullOrEmptyList(formData.tagUsers)){
+      formData.tagUsers.forEach( item => {
+        userData.push({userId: item.value, username: item.label});
+      });
+    }
+    formData.postCategories= [{categoryId: formData.postCategories.value, title: formData.postCategories.label}]
+    formData.tagUsers = userData;
+    formData.product = [{
+      discount: formData.discount,
+      featuredImage: '',
+    }];
+    delete(formData.discount);
+    // updatePostData(formData);
+    addPost(formData);
   };
 
   const getContent = () => (
@@ -197,6 +224,7 @@ AddPost.propTypes = {
   catOption: PropTypes.array.isRequired,
   getCategoryOp: PropTypes.func.isRequired,
   isAddPost: PropTypes.bool.isRequired,
+  updatePostData: PropTypes.func.isRequired,
 };
 
 

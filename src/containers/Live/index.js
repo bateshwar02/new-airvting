@@ -7,11 +7,11 @@
  */
 
 import React, { memo, useEffect } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { compose, bindActionCreators } from 'redux';
-
+import Utils from '../../utils/common';
 
 import * as Actions from './actions';
 import Header from '../../components/Header';
@@ -20,8 +20,12 @@ import Footer from '../../components/Footer';
 import AddPosts from './addPost';
 import './index.css';
 
-export function Live() {
+export function Live({postData, userData}) {
   useEffect(() => {
+   
+    if(Utils.isUndefinedOrNullOrEmptyObject(postData)){
+       return;
+    }
     if (window) {
       console.log('window ==== ', window);
       const publisher = new window.red5prosdk.RTCPublisher();
@@ -29,15 +33,15 @@ export function Live() {
       publisher.init({
         protocol: 'ws',
         port: 5080,
-        host: '18.140.72.26',
+        host: '52.77.219.22',
         app: 'live',
-        streamName: 'mystream',
+        streamName: `${userData.userDetail._id}-${postData.title}`,
         rtcConfiguration: {
           iceServers: [{ urls: 'stun:stun2.l.google.com:19302' }],
           iceCandidatePoolSize: 2,
           bundlePolicy: 'max-bundle'
         }, // See https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/RTCPeerConnection#RTCConfiguration_dictionary
-        streamMode: 'live',
+        streamMode: 'append',
         mediaElementId: 'red5pro-publisher',
         bandwidth: {
           audio: 56,
@@ -72,8 +76,37 @@ export function Live() {
           // A fault occurred while trying to initialize and publish the stream.
           console.error(error);
         });
+
+        setTimeout(()=>{captureImage()}, 4000);
+
     }
-  }, []);
+  }, [postData]);
+
+  const clearCanvas = (targetElement, canvasElement) => {
+    var context = canvasElement.getContext('2d');
+    context.fillStyle = '#a1a1a1';
+    context.fillRect(0, 0, targetElement.offsetWidth, targetElement.offsetHeight);
+  }
+  
+  const drawOnCanvas = (targetElement, canvasElement) => {
+    var context = canvasElement.getContext('2d');
+    canvasElement.width = targetElement.offsetWidth;
+    canvasElement.height = targetElement.offsetHeight;
+    context.drawImage(targetElement, 0, 0, targetElement.offsetWidth, targetElement.offsetHeight);
+    console.log('context=====', context);
+    }
+  
+  const captureImage = ()=> {
+    console.log('context=====1');
+    if(document){
+      console.log('context=====2');
+      const videoElement = document.getElementById('red5pro-publisher');
+      const canvasElement = document.getElementById('capture-canvas');
+      clearCanvas(videoElement, canvasElement);
+      drawOnCanvas(videoElement, canvasElement);
+    }
+  }  
+  
 
   const getContent = () => (
     <div className="main_content content-expand">
@@ -87,6 +120,7 @@ export function Live() {
             </div>
           </div>
         </div>
+        <canvas id="capture-canvas"></canvas>
       </div>
       <Footer />
     </div>
@@ -106,10 +140,13 @@ export function Live() {
   );
 }
 
-Live.propTypes = {};
+Live.propTypes = {
+  postData: PropTypes.object.isRequired,
+  userData: PropTypes.object.isRequired,
+};
 
 
-const mapStateToProps = ({ live }) => ({ live });
+const mapStateToProps = ({ live: {postData} , userDetails: { userData } }) => ({ postData, userData });
 
 const mapDispatchToProps = dispatch => bindActionCreators(Actions, dispatch);
 

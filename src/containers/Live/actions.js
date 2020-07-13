@@ -5,7 +5,7 @@
  */
 
 import {
-  UPDATE_IN_PROCESS, GET_CATEGORY, ADD_POST, UPDATE_POST_ACTION, UPDATE_CATEGORY_OPTION
+  UPDATE_IN_PROCESS, GET_CATEGORY, ADD_POST, UPDATE_POST_ACTION, UPDATE_CATEGORY_OPTION, UPDATE_POST_DATA
 } from './constants';
 
 export function updateInProcess(inProcess) {
@@ -40,4 +40,11 @@ export function updateCatOption(catOption) {
     type: UPDATE_CATEGORY_OPTION,
     catOption
   };
+}
+
+export function updatePostData(postData){
+  return {
+    type: UPDATE_POST_DATA,
+    postData
+  }
 }

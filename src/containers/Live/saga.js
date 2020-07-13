@@ -1,6 +1,6 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { GET_CATEGORY, ADD_POST } from './constants';
-import { updateInProcess, updateCatOption, updatePostAction } from './actions';
+import { updateInProcess, updateCatOption, updatePostAction, updatePostData } from './actions';
 
 import api from './api';
 
@@ -17,19 +17,22 @@ function* getConversationDeatils() {
 }
 
 function* addPostSaga({ formData }) {
-  yield put(updateInProcess(true));
-  try {
-    const addConv = yield call(api.addPost, formData);
-    if (addConv.success) {
-      yield put(updatePostAction(false));
-      yield put(updateInProcess(false));
-    }
-    yield put(updateInProcess(false));
-    return;
-  } catch (e) {
-    yield put(updateInProcess(false));
-    console.log(e);
-  }
+  yield put(updatePostData(formData));
+  yield put(updatePostAction(false));
+
+  // yield put(updateInProcess(true));
+  // try {
+  //   const addConv = yield call(api.addPost, formData);
+  //   if (addConv.success) {
+  //     yield put(updatePostAction(false));
+  //     yield put(updateInProcess(false));
+  //   }
+  //   yield put(updateInProcess(false));
+  //   return;
+  // } catch (e) {
+  //   yield put(updateInProcess(false));
+  //   console.log(e);
+  // }
 }
 
 

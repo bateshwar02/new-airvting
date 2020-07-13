@@ -14,7 +14,7 @@ import Loader from '../../components/Loader';
 import Category from './components/category';
 import Share from '../../components/Share';
 import Post from './components/postData';
-import Video from './components/liveVideo';
+// import Video from './components/liveVideo';
 
 
 function HomePage({

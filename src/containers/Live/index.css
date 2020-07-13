@@ -27,3 +27,14 @@ button.btn-addcart.button.default {
     color: #FA3365;}
 
  .has-error.input-group{border-color: #fa3365;}   
+ .input-group { border: 1px solid #A8B7C7 !important;}
+ #capture-canvas {
+    position: absolute;
+    top: 160px;
+    left: 10px;
+    width: 180px;
+    display: none ;
+  }
+  video#red5pro-publisher {
+    height: 360px;
+}
