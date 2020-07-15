@@ -48,52 +48,49 @@ function Video({ stream }) {
   //   }
   // }, []);
 
-  useEffect(() => {
-    (function (red5prosdk) {
-      // Create a new instance of the WebRTC subcriber.
-      const subscriber = new red5prosdk.RTCSubscriber();
-
-      // Initialize
-      subscriber.init({
+  useEffect(()=> {
+    if(window){
+        var subscriber = new window.red5prosdk.RTCSubscriber();
+        // Initialize
+        subscriber.init({
         protocol: 'ws',
-        port: 5080,
+        port: 8081,
         host: 'localhost',
         app: 'live',
-        streamName: 'test-stream',
+        streamName: 'mystream',
         rtcConfiguration: {
-          iceServers: [{ urls: 'stun:stun2.l.google.com:19302' }],
-          iceCandidatePoolSize: 2,
-          bundlePolicy: 'max-bundle'
+            iceServers: [{urls: 'stun:stun2.l.google.com:19302'}],
+            iceCandidatePoolSize: 2,
+            bundlePolicy: 'max-bundle'
         }, // See https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/RTCPeerConnection#RTCConfiguration_dictionary
         mediaElementId: 'red5pro-subscriber',
-        subscriptionId: 'test-stream' + Math.floor(Math.random() * 0x10000).toString(16),
+        subscriptionId: 'mystream' + Math.floor(Math.random() * 0x10000).toString(16),
         videoEncoding: 'NONE',
         audioEncoding: 'NONE'
-      })
-        .then(subscriber => subscriber.subscribe())
-        .then((subscriber) => {
+        })
+        .then(function(subscriber) {
+            console.log('subscriber ===', subscriber);
+        // `subcriber` is the WebRTC Subscriber instance.
+        return subscriber.subscribe();
+        })
+        .then(function(subscriber) {
         // subscription is complete.
         // playback should begin immediately due to
         //   declaration of `autoplay` on the `video` element.
         })
-        .catch((error) => {
+        .catch(function(error) {
         // A fault occurred while trying to initialize and playback the stream.
-          console.error(error);
+        console.error(error)
         });
-    }(window.red5prosdk));
-  }, []);
+    }
+}, [])
 
   return (
     <div className="videoPublishWrapper">
       <div className="golive-video-img" style={{ position: 'relative' }}>
         {/* <video id="red5pro-subscriber" width="640" height="400" poster="assets/images/default.jpg" controls> </video> */}
 
-        <video
-          id="red5pro-subscriber"
-          className="red5pro-media red5pro-media-background"
-          autoPlay
-          controls
-        />
+        <video id="red5pro-subscriber" controls> </video>
       </div>
     </div>
   );
