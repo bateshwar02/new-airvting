@@ -5,6 +5,7 @@
  */
 
 import React, { memo, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose, bindActionCreators } from 'redux';
@@ -55,9 +56,9 @@ export function User({
             <div className="right-side">
               <div className="btn-subscribe">
                 <div className="btn-mobile btn-dekstop">
-                  <a href="message.php">
+                  <Link to="/message">
                     <button type="button" className="button default circle px-5 btn-subs channal-btn">Message</button>
-                  </a>
+                  </Link>
                 </div>
                 <div className="follow-follwing-channal-btn btn-mobile btn-dekstop">
                   {' '}
@@ -72,7 +73,6 @@ export function User({
                       <button className="button default circle px-5 btn-subs channal-btn " type="button" uk-toggle="target: .toggle3">Follow</button>
                     </div>
                     )}
-
                   </div>
                 </div>
               </div>
@@ -141,7 +141,6 @@ export function User({
             <h3> All Products </h3>
             <div
               className="uk-child-width-1-4@m uk-child-width-1-3@s uk-grid"
-              uk-grid
               uk-scrollspy="target: > div; cls: uk-animation-slide-bottom-small; delay: 100"
             />
             <Product />

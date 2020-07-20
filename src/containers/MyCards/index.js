@@ -27,7 +27,7 @@ export function MyCards({ isCardAdd, isAddCard }) {
         <div className="headerWrapper">
           <span className="headerText">
             {' '}
-            <h2> MY CARD </h2>
+            <h2> My Card </h2>
             {' '}
           </span>
           <span className="ButtonWrapper" onClick={() => isAddCard(true)} role="button" tabIndex={0}>

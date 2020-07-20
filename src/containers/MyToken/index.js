@@ -27,7 +27,7 @@ export function MyToken({ inProcess }) {
         <div className="my-gift-store-main-box">
           <h4 className="my-gift-store-main-hadding">
             {' '}
-            MY TOKEN
+            My Token
             <span>
               <i className="icon-brand-bitcoin" />
               2812

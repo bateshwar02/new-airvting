@@ -6,6 +6,7 @@
  */
 
 import React, { memo, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose, bindActionCreators } from 'redux';
@@ -45,11 +46,11 @@ function People({
           <div className="channal-card animate-this elementWrap">
             <div className="channal-card-thumbnail" style={{ background: `url(${featureImg})` }} />
             <div className="channal-card-body ">
-              <a href="browse-channals.php">
-                <div className="channal-card-creator">
-                  <img src={featureImg} alt="" />
+              <Link to={`/browser-channel/${item._id}`}>
+                <div className="channal-card-creator" style={{ height: '42px', width: '42px' }}>
+                  <img src={featureImg} alt="" style={{ height: '42px', width: '42px' }} />
                 </div>
-              </a>
+              </Link>
               <h4>
                 {item.displayName}
                 {' '}

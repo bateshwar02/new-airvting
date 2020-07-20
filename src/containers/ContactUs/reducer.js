@@ -1,7 +1,7 @@
 /* eslint-disable consistent-return */
-import { UPDATE_IN_PROCESS } from './constants';
+import { UPDATE_IN_PROCESS, SUBMIT_ACTION } from './constants';
 
-export const initialState = { inProcess: false };
+export const initialState = { inProcess: false, isSubmittedForm: false };
 
 /* eslint-disable default-case, no-param-reassign */
 export default function setBrowserInfo(state = initialState, action) {
@@ -11,6 +11,12 @@ export default function setBrowserInfo(state = initialState, action) {
         ...state,
         inProcess: action.inProcess,
       };
+    case SUBMIT_ACTION:
+      return {
+        ...state,
+        isSubmittedForm: action.isSubmittedForm,
+      };
+
     default:
       return state;
   }

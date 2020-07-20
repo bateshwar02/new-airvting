@@ -22,7 +22,7 @@ export function MyCarts() {
     <div className="main_content">
       <div className="main_content_inner">
         <div className="m-cart-box">
-          <h2> MY CART </h2>
+          <h2> My Cart </h2>
           <div className="uk-grid dataWrap">
             <div className="uk-width-1-1">
               <div className="my-cart-box">

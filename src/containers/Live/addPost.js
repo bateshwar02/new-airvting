@@ -44,7 +44,7 @@ export function AddPost({
     postCategories: t.Object,
     title: t.String,
     type: t.String,
-    tagUsers: t.Array,
+    tagUsers: t.maybe(t.Array),
     discount: t.String,
   };
 
@@ -132,7 +132,6 @@ export function AddPost({
           },
         },
         options: [],
-        error: 'To field is required',
         factory: t.form.Select,
       },
 
@@ -169,19 +168,19 @@ export function AddPost({
       return;
     }
     const formData = Utils.deepCopy(postFormData);
-    const userData = []
-    if(!Utils.isUndefinedOrNullOrEmptyList(formData.tagUsers)){
-      formData.tagUsers.forEach( item => {
-        userData.push({userId: item.value, username: item.label});
+    const userData = [];
+    if (!Utils.isUndefinedOrNullOrEmptyList(formData.tagUsers)) {
+      formData.tagUsers.forEach((item) => {
+        userData.push({ userId: item.value, username: item.label });
       });
     }
-    formData.postCategories= [{categoryId: formData.postCategories.value, title: formData.postCategories.label}]
+    formData.postCategories = [{ categoryId: formData.postCategories.value, title: formData.postCategories.label }];
     formData.tagUsers = userData;
     formData.product = [{
       discount: formData.discount,
       featuredImage: '',
     }];
-    delete(formData.discount);
+    delete (formData.discount);
     // updatePostData(formData);
     addPost(formData);
   };

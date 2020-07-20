@@ -718,6 +718,26 @@ export default class Utils {
     return num;
   }
 
+  static convertCurrency(n) {
+    if (this.isUndefinedOrNullOrEmpty(n)) {
+      return null;
+    }
+    const num = Number(n);
+    if (Number.isNaN(num)) {
+      return '-';
+    }
+    if (num >= 1e7) {
+      return `${(num / 1e7)} Cr`;
+    }
+    if (num >= 1e5) {
+      return `${(num / 1e5)} L`;
+    }
+    if (num >= 1e3) {
+      return `${(num / 1e3)} K`;
+    }
+    return num;
+  }
+
   static replaceString(val, str, newStr) {
     if (this.isUndefinedOrNullOrEmpty(val) || this.isUndefinedOrNull(str) || Number(val) === 0) {
       return val;

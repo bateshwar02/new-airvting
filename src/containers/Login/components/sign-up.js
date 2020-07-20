@@ -202,7 +202,7 @@ function Signup({ setAction, signUp }) {
             </div>
             <t.form.Form ref={signUpForm} type={getFormSchema()} value={signUpFormValue} options={getFormOptions()} onChange={onChange} />
             <div className="mt-4 uk-flex-middle uk-grid-small  uk-grid">
-              <div className="uk-width-expand@s">
+              <div className="uk-width-expand@s logingPageTag">
                 <p>
                   {' '}
                   Do you have account
@@ -214,7 +214,7 @@ function Signup({ setAction, signUp }) {
               </div>
               <div className="uk-width-auto@s">
                 <span className="button warning" onClick={submit} role="button" tabIndex={0}>
-                  Get Started
+                  Register
                 </span>
               </div>
             </div>

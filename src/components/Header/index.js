@@ -173,7 +173,7 @@ function Header({
         <span className="custom-link"> Store </span>
       </NavLink>
 
-      <span className="header-menu" onClick={() => { addProductAction(true); }}> Add Product </span>
+      <span className="header-menu custom-link" onClick={() => { addProductAction(true); }}> Add Product </span>
       <MessageComp message={message} getMessage={getMessage} />
       <Notification notification={notification} getNotification={getNotification} />
       <span role="button" tabIndex={0} onClick={() => false} className="opts_account">
@@ -189,7 +189,7 @@ function Header({
         <div className="with-50">
           <div className="social-icon">
             <ul>
-              <li>
+              {/* <li>
                 <a href="void(0)">
                   <i className="icon-brand-facebook" />
                 </a>
@@ -208,22 +208,23 @@ function Header({
                 <a href="void(0)">
                   <i className="icon-brand-twitter" />
                 </a>
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>
 
-        <div className="with-50 text-right">
+        {/* <div className="with-50 text-right"> */}
+        <div className="text-right">
           <div className="top-bar-link">
             <ul>
               <li>
-                <a href={Navigation.goLive}>
+                <Link to={Navigation.live}>
                   <i className="icon-feather-wifi" />
                   Go Live
-                </a>
+                </Link>
               </li>
             </ul>
-            <ul aria-expanded="false">
+            {/* <ul aria-expanded="false">
               <li>
                 <a href="void(0)" className="btn-upload uk-visible@s" aria-expanded="true">
                   {' '}
@@ -231,8 +232,9 @@ function Header({
                   Upload
                 </a>
               </li>
-            </ul>
-            <div
+            </ul> */}
+
+            {/* <div
               uk-dropdown="pos: top-right;mode:click ; animation: uk-animation-slide-bottom-small"
               className="dropdown-notifications uk-dropdown uk-dropdown-top-right"
               style={{ left: '718px', top: '-383px' }}
@@ -304,7 +306,9 @@ function Header({
               </div>
               <hr className="m-0" />
               <div className="text-center uk-text-small py-2 uk-text-muted"> Your Video size Must be Maxmium 999MB</div>
-            </div>
+            </div> */}
+
+
           </div>
         </div>
       </div>
