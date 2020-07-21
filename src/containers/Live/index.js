@@ -49,7 +49,6 @@ export function Live({ postData, userData }) {
   };
 
   useEffect(() => {
-<<<<<<< HEAD
     if(window) {
         var publisher = new window.red5prosdk.RTCPublisher();
         // Initialize
@@ -99,53 +98,7 @@ export function Live({ postData, userData }) {
     }
   
 }, []);
-  
-=======
-    if (window) {
-      const publisher = new window.red5prosdk.RTCPublisher();
-      // Initialize
-      publisher.init({
-        protocol: 'ws',
-        port: 5080,
-        host: 'localhost',
-        app: 'live',
-        streamName: 'bnm-mystream',
-        rtcConfiguration: {
-          iceServers: [{ urls: 'stun:stun2.l.google.com:19302' }],
-          iceCandidatePoolSize: 2,
-          bundlePolicy: 'max-bundle'
-        }, // See https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/RTCPeerConnection#RTCConfiguration_dictionary
-        streamMode: 'live',
-        mediaElementId: 'red5pro-publisher',
-        bandwidth: {
-          audio: 56,
-          video: 512
-        },
-        mediaConstraints: {
-          audio: true,
-          video: {
-            // width: {
-            //   exact: 640
-            // },
-            height: {
-              //   exact: 480
-              exact: 560
-            },
-            frameRate: {
-              min: 8,
-              max: 24
-            }
-          }
-        }
-      })
-        .then(() => publisher.publish())
-        .catch((error) => {
-          // A fault occurred while trying to initialize and publish the stream.
-          console.error(error);
-        });
-    }
-  }, []);
->>>>>>> 199d6bcf7c0d75636ae736166648482d5c97af26
+
   const getContent = () => (
     <div className="main_content content-expand">
       <div className="main_content_inner">
