@@ -28,3 +28,5 @@
 .add-message-modal .add-message-form{
   margin: 20px 0px;
 }
+
+.night-mode .message-text-message{ color: #c7c7c7 !important; }

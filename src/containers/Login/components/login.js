@@ -81,6 +81,14 @@ function Login({ setAction, signIn, socialLogin }) {
     signIn(formData);
   };
 
+  const onEnterPress = (e) => {
+    console.log('e =====', e);
+    if (e.keyCode == 13 && e.shiftKey == false) {
+      e.preventDefault();
+      submit();
+    }
+  };
+
   return (
     <div className="uk-height-viewport uk-flex uk-flex-middle loginWrapper">
       <div className="uk-width-2-3@m uk-width-1-2@s m-auto rounded">
@@ -95,12 +103,12 @@ function Login({ setAction, signIn, socialLogin }) {
               <h2 className="mb-0"> Welcome back</h2>
               <p className="my-2">Login to manage your account.</p>
             </div>
-            <t.form.Form ref={loginForm} type={getFormSchema()} value={loginFormValue} options={getFormOptions()} onChange={onChange} />
+            <t.form.Form ref={loginForm} type={getFormSchema()} value={loginFormValue} options={getFormOptions()} onChange={onChange} onKeyDown={onEnterPress} />
             <div className="mt-4 uk-flex-middle -small uk-grid">
-              <div className="uk-width-expand@s">
+              <div className="uk-width-expand@s ">
                 <p>
                   {' '}
-                  Dont have account
+                  Don&apos;t have account
                   {' '}
                   <span onClick={() => setAction({ action: 2 })} role="button" tabIndex={0} className="actionPointer">
                     Sign up
@@ -113,8 +121,8 @@ function Login({ setAction, signIn, socialLogin }) {
                 </p>
               </div>
               <div className="uk-width-auto@s">
-                <span className="button warning" onClick={submit} role="button" tabIndex={0}>
-                  Get Started
+                <span type="submit" className="button warning" onClick={submit} role="button" tabIndex={0}>
+                  Login
                 </span>
               </div>
             </div>

@@ -74,11 +74,17 @@ function ProductDetails({
             <h3 className="product-title">{productDetails.title}</h3>
             <span>{!Utils.isUndefinedOrNullOrEmptyList(productDetails.productCategories) && productDetails.productCategories[0].title}</span>
             <div className="store-inner-price">
-              <span className="discount-price">
-                <i className="icon-line-awesome-tag" />
-                $
-                {productDetails.price}
-              </span>
+              {
+                (!Utils.isUndefinedOrNullOrEmpty(productDetails.price) && productDetails.discount != 0) && (
+                <span className="discount-price">
+                  <i className="icon-line-awesome-tag" />
+                  $
+                  {productDetails.price}
+                </span>
+                )
+
+              }
+
               <span className="sale-price">
                 $
                 {productDetails.priceSale}

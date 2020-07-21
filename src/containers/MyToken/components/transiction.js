@@ -80,7 +80,7 @@ function Transactions({ getTransictionsData, transictionsData }) {
   return (
     <div className="uk-width-1-1">
       <div className="my-gift-store-wallet-box">
-        <h2>WALLET</h2>
+        <h2>Wallet</h2>
 
         {childComponent()}
 

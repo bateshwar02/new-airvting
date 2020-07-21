@@ -26,7 +26,7 @@ function Message({ message, getMessage }) {
         <li key={keys}>
           <span className="notificationWrapper">
             <span className="notification-avatar">
-              <img src={item.notifier.featuredImage} alt="" />
+              <img src={item.notifier.featuredImage} alt="" style={{ height: '42px', width: '42px' }} />
             </span>
             <div className="notification-text notification-msg-text">
               <strong>{item.notifier.displayName}</strong>
@@ -74,7 +74,7 @@ function Message({ message, getMessage }) {
           <Link to="/message">
             <span>
               {' '}
-              sell all
+              Show All
               {' '}
               <i className="icon-line-awesome-long-arrow-right" />
               {' '}

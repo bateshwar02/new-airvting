@@ -72,3 +72,5 @@ h3.product-title {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.channal-card-creator{height: 42px; width: 42px;}

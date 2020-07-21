@@ -24,7 +24,7 @@ export function Message({ isAddMessage, addMessageAction }) {
     <div className="main_content">
       <div className="main_content_inner ">
         <div className="message-page-content-box">
-          <h2> MESSAGE </h2>
+          <h2> Message </h2>
           <div className="add-new-message-box">
             <button className="button default add-new-message-btn" type="button" onClick={() => addMessageAction(true)}>New Message</button>
           </div>

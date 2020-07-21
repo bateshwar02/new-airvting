@@ -124,7 +124,7 @@ function Sidebar() {
               </li>
               <li
                 className={classNames({
-                  active: getRouterValue(Navigation.aboutUs) === getLocationParams(),
+                  active: getRouterValue(Navigation.contact) === getLocationParams(),
                 })}
               >
                 <Link to={Navigation.contact}>

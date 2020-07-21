@@ -10,25 +10,80 @@ import PropTypes from 'prop-types';
 // import styled from 'styled-components';
 
 function Video({ stream }) {
+<<<<<<< HEAD
   useEffect(()=> {
     if(window){
         var subscriber = new window.red5prosdk.RTCSubscriber();
         // Initialize
         subscriber.init({
+=======
+  // useEffect(() => {
+  //   if (window) {
+  //     const subscriber = new window.red5prosdk.RTCSubscriber();
+  //     // Initialize
+  //     subscriber.init({
+  //       protocol: 'ws',
+  //       port: 5080,
+  //       host: '52.77.219.22',
+  //       app: 'live',
+  //       streamName: stream,
+  //       rtcConfiguration: {
+  //         iceServers: [{ urls: 'stun:stun2.l.google.com:19302' }],
+  //         iceCandidatePoolSize: 2,
+  //         bundlePolicy: 'max-bundle'
+  //       },
+  //       mediaElementId: 'red5pro-subscriber',
+  //       subscriptionId: stream,
+  //       videoEncoding: 'NONE',
+  //       audioEncoding: 'NONE'
+  //     })
+  //       .then((subscribers) => {
+  //         console.log('subscriber ===', subscribers);
+  //         // `subcriber` is the WebRTC Subscriber instance.
+  //         return subscriber.subscribe();
+  //       })
+  //       .then((subs) => {
+  //         console.log(subs);
+  //         // subscription is complete.
+  //         // playback should begin immediately due to
+  //         //   declaration of `autoplay` on the `video` element.
+  //       })
+  //       .catch((error) => {
+  //         // A fault occurred while trying to initialize and playback the stream.
+  //         console.error(error);
+  //       });
+  //   }
+  // }, []);
+
+  useEffect(() => {
+    if (window) {
+      const subscriber = new window.red5prosdk.RTCSubscriber();
+      // Initialize
+      subscriber.init({
+>>>>>>> 199d6bcf7c0d75636ae736166648482d5c97af26
         protocol: 'ws',
         port: 5080,
         host: 'localhost',
         app: 'live',
+<<<<<<< HEAD
         streamName: 'bnm-test',
         rtcConfiguration: {
             iceServers: [{urls: 'stun:stun2.l.google.com:19302'}],
             iceCandidatePoolSize: 2,
             bundlePolicy: 'max-bundle'
+=======
+        streamName: 'bnm-mystream',
+        rtcConfiguration: {
+          iceServers: [{ urls: 'stun:stun2.l.google.com:19302' }],
+          iceCandidatePoolSize: 2,
+          bundlePolicy: 'max-bundle'
+>>>>>>> 199d6bcf7c0d75636ae736166648482d5c97af26
         }, // See https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/RTCPeerConnection#RTCConfiguration_dictionary
         mediaElementId: 'red5pro-subscriber',
         subscriptionId: 'mystream' + Math.floor(Math.random() * 0x10000).toString(16),
         videoEncoding: 'NONE',
         audioEncoding: 'NONE'
+<<<<<<< HEAD
         })
         .then(function(subscriber) {
             console.log('subscriber ===', subscriber);
@@ -46,6 +101,25 @@ function Video({ stream }) {
         });
     }
 }, []);
+=======
+      })
+        .then((subscriber) => {
+          console.log('subscriber ===', subscriber);
+          // `subcriber` is the WebRTC Subscriber instance.
+          return subscriber.subscribe();
+        })
+        .then((subscriber) => {
+          // subscription is complete.
+          // playback should begin immediately due to
+          //   declaration of `autoplay` on the `video` element.
+        })
+        .catch((error) => {
+          // A fault occurred while trying to initialize and playback the stream.
+          console.error(error);
+        });
+    }
+  }, []);
+>>>>>>> 199d6bcf7c0d75636ae736166648482d5c97af26
 
   return (
     <div className="videoPublishWrapper">
