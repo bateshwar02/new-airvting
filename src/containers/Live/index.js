@@ -49,55 +49,50 @@ export function Live({ postData, userData }) {
   };
 
   useEffect(() => {
-    if(window) {
-        var publisher = new window.red5prosdk.RTCPublisher();
-        // Initialize
-        publisher.init({
-            protocol: 'ws',
-            port:5080,
-            host: 'localhost',
-            app: 'live',
-            streamName: 'bnm-test',
-            rtcConfiguration: {
-              iceServers: [{urls: 'stun:stun2.l.google.com:19302'}],
-              iceCandidatePoolSize: 2,
-              bundlePolicy: 'max-bundle'
-            }, // See https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/RTCPeerConnection#RTCConfiguration_dictionary
-            streamMode: 'record',
-            mediaElementId: 'red5pro-publisher',
-            bandwidth: {
-              audio: 56,
-              video: 512
+    if (window) {
+      const publisher = new window.red5prosdk.RTCPublisher();
+      // Initialize
+      publisher.init({
+        protocol: 'ws',
+        port: 5080,
+        host: '52.77.219.22',
+        app: 'live',
+        streamName: 'bnm-streaming1',
+        rtcConfiguration: {
+          iceServers: [{ urls: 'stun:stun2.l.google.com:19302' }],
+          iceCandidatePoolSize: 2,
+          bundlePolicy: 'max-bundle'
+        }, // See https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/RTCPeerConnection#RTCConfiguration_dictionary
+        streamMode: 'live',
+        mediaElementId: 'red5pro-publisher',
+        bandwidth: {
+          audio: 56,
+          video: 512
+        },
+        mediaConstraints: {
+          audio: true,
+          video: {
+            // width: {
+            //   exact: 640
+            // },
+            height: {
+              //   exact: 480
+              exact: 560
             },
-            mediaConstraints: {
-              audio: true,
-              video: {
-                // width: {
-                //   exact: 640
-                // },
-                height: {
-                //   exact: 480
-                exact: 560
-                },
-                frameRate: {
-                  min: 8,
-                  max: 24
-                }
-              }
+            frameRate: {
+              min: 8,
+              max: 24
             }
-          })
-          .then(function() {
-            // Invoke the publish action.
-            return publisher.publish();
-          })
-          .catch(function(error) {
-            // A fault occurred while trying to initialize and publish the stream.
-            console.error(error);
-          });
-          
+          }
+        }
+      })
+        .then(() => publisher.publish())
+        .catch((error) => {
+          // A fault occurred while trying to initialize and publish the stream.
+          console.error(error);
+        });
     }
-  
-}, []);
+  }, []);
 
   const getContent = () => (
     <div className="main_content content-expand">
@@ -106,7 +101,6 @@ export function Live({ postData, userData }) {
           <div className="uk-grid">
             <div className="videoPublishWrapper">
               <div className="golive-video-img" style={{ position: 'relative' }}>
-                {/* <video id="red5pro-publisher" autoPlay muted /> */}
                 <video id="red5pro-publisher" autoPlay muted />
               </div>
             </div>
@@ -129,6 +123,7 @@ export function Live({ postData, userData }) {
       <Header />
       {getContent()}
       {/* <AddPosts /> */}
+      {console.log('live')}
     </div>
   );
 }

@@ -9,7 +9,7 @@ import GoogleLogin from '../../../components/SocialLogin/google';
 
 function Login({ setAction, signIn, socialLogin }) {
   const loginForm = useRef(null);
-  const [loginFormValue, setLoginForm] = useState({});
+  const [loginFormValue, setLoginForm] = useState({ email: '', password: '' });
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const onChange = (formValue) => {
@@ -82,7 +82,6 @@ function Login({ setAction, signIn, socialLogin }) {
   };
 
   const onEnterPress = (e) => {
-    console.log('e =====', e);
     if (e.keyCode == 13 && e.shiftKey == false) {
       e.preventDefault();
       submit();
@@ -103,7 +102,9 @@ function Login({ setAction, signIn, socialLogin }) {
               <h2 className="mb-0"> Welcome back</h2>
               <p className="my-2">Login to manage your account.</p>
             </div>
-            <t.form.Form ref={loginForm} type={getFormSchema()} value={loginFormValue} options={getFormOptions()} onChange={onChange} onKeyDown={onEnterPress} />
+            <form onSubmit={submit}>
+              <t.form.Form ref={loginForm} type={getFormSchema()} value={loginFormValue} options={getFormOptions()} onChange={onChange} onKeyDown={onEnterPress} />
+            </form>
             <div className="mt-4 uk-flex-middle -small uk-grid">
               <div className="uk-width-expand@s ">
                 <p>

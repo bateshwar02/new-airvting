@@ -40,18 +40,18 @@ import ContactUs from '../ContactUs';
 export function App({ userData, getUserData }) {
   const [isLogin, setIsLogin] = useState(true);
 
-  useEffect(() => {
-    const token = cookie.get('token');
-    const userId = cookie.get('userId');
-    if (Utils.isUndefinedOrNullOrEmpty(token) || Utils.isUndefinedOrNullOrEmpty(userId)) {
-      setIsLogin(false);
-      return;
-    }
+  // useEffect(() => {
+  //   const token = cookie.get('token');
+  //   const userId = cookie.get('userId');
+  //   if (Utils.isUndefinedOrNullOrEmpty(token) || Utils.isUndefinedOrNullOrEmpty(userId)) {
+  //     setIsLogin(false);
+  //     return;
+  //   }
 
-    if (Utils.isUndefinedOrNullOrEmptyObject(userData) && !Utils.isUndefinedOrNullOrEmpty(token) && !Utils.isUndefinedOrNullOrEmpty(userId)) {
-      getUserData();
-    }
-  }, []);
+  //   if (Utils.isUndefinedOrNullOrEmptyObject(userData) && !Utils.isUndefinedOrNullOrEmpty(token) && !Utils.isUndefinedOrNullOrEmpty(userId)) {
+  //     getUserData();
+  //   }
+  // }, []);
 
   const PrivateRoute = ({
     component: Component, isLoggedIn, defaultPath, ...rest

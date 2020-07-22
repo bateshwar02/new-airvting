@@ -39,7 +39,7 @@ function HomePage({
             <li>
               <Video stream="" />
             </li>
-            {/* <li>
+            <li>
               <div className="slide-box">
                 <div className="live-vid-slide">
                   <iframe
@@ -203,7 +203,7 @@ function HomePage({
                 </div>
               </div>
             </li>
-          */}
+
           </ul>
           {/* <a className="uk-position-center-left-out uk-position-small uk-hidden-hover slidenav-prev" href="void(0)" uk-slideshow-item="previous"></a>
                     <a className="uk-position-center-right-out uk-position-small uk-hidden-hover slidenav-next" href="void(0)" uk-slideshow-item="next"></a> */}
