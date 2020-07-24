@@ -1,3 +1,13 @@
+
+.videoWrapper {
+    display: flex;
+    flex-direction: row;
+}
+.video-post {
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;
+}
 .radioButtonWrapper{
     line-height: .458333333in;
     text-align: left;

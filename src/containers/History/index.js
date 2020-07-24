@@ -48,18 +48,19 @@ export function History({
       return (
         <div className="video-post video-post-list" key={keys}>
           <div className="video-post-thumbnail">
-            <span className="play-btn-trigger" role="button" tabIndex={-1} onClick={() => videoPlay(item)} />
+            <span className="play-btn-trigger" role="button" tabIndex={0} onClick={() => videoPlay(item)} />
             <span className="video-post-time">{Utils.formatDateAndTime(ticks, 'h:MM TT')}</span>
             <img src={item.featuredImage} alt="" />
           </div>
           <div className="video-post-content">
-            <button
-              className="p-3 circle bg-secondary uk-align-right ml-2 uk-close"
-              uk-tooltip="title: Clear Video ; pos: left"
-              type="button"
-            />
-            <h3>{item.title}</h3>
+            <h3>
+              {item.title}
+              {' '}
+            </h3>
             <span className="video-post-user">{item.owner.displayName}</span>
+            <span className="video-post-views">
+              {!Utils.isUndefinedOrNullOrEmpty(item.viewers) && item.viewers !== 0 && `${item.viewers} views`}
+            </span>
             <span className="video-post-date">
               {' '}
               {Utils.formatDate(ticks)}
@@ -67,7 +68,7 @@ export function History({
             </span>
             <p>
               {' '}
-              {item.owner.description}
+              {item.description}
             </p>
           </div>
         </div>
@@ -81,58 +82,7 @@ export function History({
         <h2 className="mt-lg-2 mb-sm-0"> Watched history </h2>
         <div className="section-small">
           <div className="uk-grid">
-            <div className="uk-width-1-4@m uk-flex-last@m">
-              <nav
-                className="responsive-tab style-3 setting-menu uk-sticky"
-                uk-sticky="top:30 ; offset:100; media:@m ;bottom:true; animation: uk-animation-slide-top"
-              >
-                <h4 className="mb-0 p-3 uk-visible@m"> History type</h4>
-                <hr className="m-0" />
-                <ul className="uk-form-controls">
-                  <li>
-                    <span className="radioButtonWrapper">
-                      <label>
-                        <input className="uk-radio" type="radio" name="radio1" />
-                        <span className="checkmark ml-2"> Watch History </span>
-                      </label>
-                    </span>
-                  </li>
-                  <li>
-                    <span className="radioButtonWrapper">
-                      <label>
-                        <input className="uk-radio" type="radio" name="radio1" />
-                        <span className="checkmark ml-2"> Search History </span>
-                      </label>
-                    </span>
-                  </li>
-                  <li>
-                    <span className="radioButtonWrapper">
-                      <label>
-                        <input className="uk-radio" type="radio" name="radio1" />
-                        <span className="checkmark ml-2"> Comments </span>
-                      </label>
-                    </span>
-                  </li>
-                  <li>
-                    <span className="radioButtonWrapper">
-                      <label>
-                        <input className="uk-radio" type="radio" name="radio1" />
-                        <span className="checkmark ml-2"> Community </span>
-                      </label>
-                    </span>
-                  </li>
-                  <li>
-                    <span className="radioButtonWrapper">
-                      <label>
-                        <input className="uk-radio" type="radio" name="radio1" />
-                        <span className="checkmark ml-2"> Browse all History </span>
-                      </label>
-                    </span>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-            <div className="uk-width-3-4@m">{getVideoWrapper()}</div>
+            <div className="videoWrapper">{getVideoWrapper()}</div>
           </div>
         </div>
       </div>

@@ -11,3 +11,5 @@ export const IS_SHARE = 'app/Home/IS_SHARE';
 export const SHARE_URL = 'app/Home/SHARE_URL';
 export const GET_SEARCH_DATA = 'app/Home/GET_SEARCH_DATA';
 export const UPDATE_SEARCH_DATA = 'app/Home/UPDATE_SEARCH_DATA';
+export const UPDATE_CURRENT_POST = 'app/Home/UPDATE_CURRENT_POST';
+export const GET_CURRENT_POST = 'app/Home/GET_CURRENT_POST';

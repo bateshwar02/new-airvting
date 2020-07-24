@@ -1,0 +1,5 @@
+.currentVideo {
+    height: 380px !important;
+    width: 100%;
+    border-radius: 8px;
+}

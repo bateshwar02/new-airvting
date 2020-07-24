@@ -3,9 +3,11 @@ import { notifySuccess, notifyError, updateMediaObj } from '../App/action';
 import { addBookMark } from '../../lib/addBookMark';
 
 import {
-  BOOKMARK_ACTION, GET_CATEGORY, GET_DATA_BY_CATEGORY, UPDATE_VIDEO, GET_SEARCH_DATA
+  BOOKMARK_ACTION, GET_CATEGORY, GET_DATA_BY_CATEGORY, UPDATE_VIDEO, GET_SEARCH_DATA, GET_CURRENT_POST
 } from './constatnt';
-import { updateInProcess, updateCategoryData, updateSearchData } from './action';
+import {
+  updateInProcess, updateCategoryData, updateSearchData, updateCurrentPost
+} from './action';
 import api from './api';
 
 function* bookMarkActionSaga({ id }) {
@@ -87,10 +89,23 @@ function* getSearchDataSaga({ keyword }) {
   }
 }
 
+function* getCurrentPostData() {
+  try {
+    const currentData = yield call(api.getCurrentData);
+    console.log('currentData ===== ', currentData);
+    if (currentData.success) {
+      yield put(updateCurrentPost(currentData.data));
+    }
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 export default function* loginSaga() {
   yield takeLatest(BOOKMARK_ACTION, bookMarkActionSaga);
   yield takeLatest(GET_CATEGORY, getCategoryActionSaga);
   yield takeLatest(GET_DATA_BY_CATEGORY, getDataCategoryActionSaga);
   yield takeLatest(UPDATE_VIDEO, updateVideoObjSaga);
   yield takeLatest(GET_SEARCH_DATA, getSearchDataSaga);
+  yield takeLatest(GET_CURRENT_POST, getCurrentPostData);
 }

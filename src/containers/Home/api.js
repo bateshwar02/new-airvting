@@ -16,5 +16,10 @@ const Service = {
     return Request.get(url);
   },
 
+  getCurrentData() {
+    const url = 'api/v1/posts?filter=new&paginate=1&perPage=5&maxId=null&typePost=video,stream&isShowAdver=false';
+    return Request.get(url);
+  }
+
 };
 export default Service;

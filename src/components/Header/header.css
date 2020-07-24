@@ -192,3 +192,8 @@ img.walletIcon {
 .active {
 	color: #f76911
 }
+
+.activeMenu{
+	font-weight: bold;
+	color: #ba4b00
+}

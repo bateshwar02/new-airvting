@@ -27,10 +27,12 @@ header .btn-upgrade:hover, header .btn-upload:hover {
 header [class~=btn-upload] {
     background-color: #f07015;
 }
-.live-vid-slide {
+/* .live-vid-slide {
     width: 70%;
     float: left;
-}
+} */
+
+.live-vid-slide { width: 100%; }
 .live-chat-slide {
     width: 30%;
     float: right;
@@ -195,7 +197,7 @@ padding-left: 4px;
     position: absolute;
     bottom: 0;
     background: #000;
-    width: 68%;
+    width: 98%;
     padding: 5px 10px;
     z-index: 99;
 }
@@ -1248,6 +1250,7 @@ table.uk-table thead {
     width: 100%;
     float: left;
 }
+
 .chat-video-gift-box {
     position: absolute;
     bottom: 0;

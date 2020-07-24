@@ -1,3 +1,7 @@
 .componentWrapper {
     margin-bottom: 20px;
 }
+
+.catagroy-card{
+    cursor: pointer;
+}

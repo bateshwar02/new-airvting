@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { memo, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link, NavLink } from 'react-router-dom';
+import classnames from 'classnames';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose, bindActionCreators } from 'redux';
 import Utils from '../../utils/common';
@@ -36,46 +37,31 @@ function Header({
     localStorage.setItem('gmtNightMode', true);
   };
 
-  const withoutLoginContent = () => (
-    <div className="head_user">
-      <NavLink
-        to={Navigation.home}
-        activeStyle={{
-          fontWeight: 'bold',
-          color: 'red'
-        }}
-      >
-        <span className="custom-link">  Home </span>
-      </NavLink>
-      <NavLink
-        to={Navigation.explore}
-        activeStyle={{
-          fontWeight: 'bold',
-          color: 'red'
-        }}
-      >
-        <span className="custom-link"> Explore </span>
-      </NavLink>
-      <NavLink
-        to={Navigation.store}
-        activeStyle={{
-          fontWeight: 'bold',
-          color: 'red'
-        }}
-      >
-        <span className="custom-link"> Store </span>
-      </NavLink>
-      <NavLink
-        to={Navigation.login}
-        activeStyle={{
-          fontWeight: 'bold',
-          color: 'red'
-        }}
-      >
-        <span className="custom-link"> Login </span>
-      </NavLink>
-    </div>
-  );
+  const withoutLoginContent = () => {
+    const path = window.location.pathname;
+    const pathArray = [];
+    if (!Utils.isUndefinedOrNullOrEmpty(path)) {
+      pathArray.push(...path.split('/'));
+    }
+
+    const activeMenuValue = pathArray[pathArray.length - 1];
+    return (
+      <div className="head_user">
+        <Link to={Navigation.home}>
+          <span className={classnames('custom-link', { activeMenu: activeMenuValue === '' || activeMenuValue === 'undefined' })}>  Home </span>
+        </Link>
+        <Link to={Navigation.explore}>
+          <span className={classnames('custom-link', { activeMenu: activeMenuValue === 'explore' })}> Explore </span>
+        </Link>
+        <Link to={Navigation.store}>
+          <span className={classnames('custom-link', { activeMenu: activeMenuValue === 'store' })}> Store </span>
+        </Link>
+        <Link to={Navigation.login}>
+          <span className={classnames('custom-link', { activeMenu: activeMenuValue === 'login' })}> Login </span>
+        </Link>
+      </div>
+    );
+  };
 
   const userProfile = () => (
     <div uk-dropdown="pos: top-right;mode:click ; animation: uk-animation-slide-bottom-small" className="dropdown-notifications small">
@@ -155,33 +141,35 @@ function Header({
   );
 
 
-  const withLoginContent = () => (
-    <div className="head_user">
-      <Link to={Navigation.home}>
-        <span className="custom-link">  Home </span>
-      </Link>
-      <Link to={Navigation.explore}>
-        <span className="custom-link"> Explore </span>
-      </Link>
-      <NavLink
-        to={Navigation.store}
-        activeStyle={{
-          fontWeight: 'bold',
-          color: 'red'
-        }}
-      >
-        <span className="custom-link"> Store </span>
-      </NavLink>
+  const withLoginContent = () => {
+    const path = window.location.pathname;
+    const pathArray = [];
+    if (!Utils.isUndefinedOrNullOrEmpty(path)) {
+      pathArray.push(...path.split('/'));
+    }
 
-      <span className="header-menu custom-link" onClick={() => { addProductAction(true); }}> Add Product </span>
-      <MessageComp message={message} getMessage={getMessage} />
-      <Notification notification={notification} getNotification={getNotification} />
-      <span role="button" tabIndex={0} onClick={() => false} className="opts_account">
-        <img src={userProfileImg} alt="" />
-      </span>
-      {userProfile()}
-    </div>
-  );
+    const activeMenuValue = pathArray[pathArray.length - 1];
+    return (
+      <div className="head_user">
+        <Link to={Navigation.home}>
+          <span className={classnames('custom-link', { activeMenu: activeMenuValue === '' || activeMenuValue === 'undefined' })}>  Home </span>
+        </Link>
+        <Link to={Navigation.explore}>
+          <span className={classnames('custom-link', { activeMenu: activeMenuValue === 'explore' })}> Explore </span>
+        </Link>
+        <Link to={Navigation.store}>
+          <span className={classnames('custom-link', { activeMenu: activeMenuValue === 'store' })}> Store </span>
+        </Link>
+        <span className="header-menu custom-link" onClick={() => { addProductAction(true); }}> Add Product </span>
+        <MessageComp message={message} getMessage={getMessage} />
+        <Notification notification={notification} getNotification={getNotification} />
+        <span role="button" tabIndex={0} onClick={() => false} className="opts_account">
+          <img src={userProfileImg} alt="" />
+        </span>
+        {userProfile()}
+      </div>
+    );
+  };
 
   return (
     <div id="main_header">

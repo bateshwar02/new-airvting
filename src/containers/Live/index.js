@@ -53,7 +53,7 @@ export function Live({ postData, userData }) {
       const publisher = new window.red5prosdk.RTCPublisher();
       // Initialize
       publisher.init({
-        protocol: 'ws',
+        protocol: 'wss',
         port: 5080,
         host: '52.77.219.22',
         app: 'live',
@@ -122,7 +122,7 @@ export function Live({ postData, userData }) {
       <Sidebar />
       <Header />
       {getContent()}
-      {/* <AddPosts /> */}
+      <AddPosts />
       {console.log('live')}
     </div>
   );

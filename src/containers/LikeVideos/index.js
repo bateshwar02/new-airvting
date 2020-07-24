@@ -56,7 +56,7 @@ export function LikeVideos({
         <div className="video-post video-post-list" key={keys}>
           <div className="video-post-thumbnail">
             <span className="play-btn-trigger" role="button" tabIndex={0} onClick={() => videoPlay(item)} />
-            <span className="video-post-time">23:00</span>
+            <span className="video-post-time">{Utils.formatDateAndTime(ticks, 'h:MM TT')}</span>
             <img src={item.featuredImage} alt="" />
           </div>
           <div className="video-post-content">
@@ -82,14 +82,14 @@ export function LikeVideos({
             </span>
             <div className="dropdown-option-nav" uk-dropdown="pos: bottom-right ;mode : hover">
               <ul>
-                <li>
+                {/* <li>
                   <span>
                     {' '}
                     <i className="uil-history" />
                     {' '}
                     Watch Later
                   </span>
-                </li>
+                </li> */}
                 <li>
                   <span onClick={() => bookMarkAction({ id: item._id })} role="button" tabIndex={0}>
                     {' '}

@@ -19,7 +19,7 @@ export function getFeaturedData() {
   };
 }
 
-export function updateInProcess({ inProcess }) {
+export function updateInProcess(inProcess) {
   return {
     type: Is_PROCESS_ACTION,
     inProcess,

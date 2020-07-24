@@ -15,7 +15,7 @@ function Video({ stream }) {
       const subscriber = new window.red5prosdk.RTCSubscriber();
       // Initialize
       subscriber.init({
-        protocol: 'ws',
+        protocol: 'wss',
         port: 5080,
         host: '52.77.219.22',
         app: 'live',

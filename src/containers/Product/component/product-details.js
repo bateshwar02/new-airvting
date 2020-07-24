@@ -75,7 +75,7 @@ function ProductDetails({
             <span>{!Utils.isUndefinedOrNullOrEmptyList(productDetails.productCategories) && productDetails.productCategories[0].title}</span>
             <div className="store-inner-price">
               {
-                (!Utils.isUndefinedOrNullOrEmpty(productDetails.price) && productDetails.discount != 0) && (
+                (!Utils.isUndefinedOrNullOrEmpty(productDetails.price) && productDetails.discount !== 0) && (
                 <span className="discount-price">
                   <i className="icon-line-awesome-tag" />
                   $
@@ -110,12 +110,6 @@ function ProductDetails({
             </div>
             <div className="store-inner-addcart-box">
               <span className="inc-dec-box">
-                {/* <form id="myform" method="POST" action="#">
-                  <input type="button" value="-" className="qtyminus decriment-btn" field="quantity" />
-                  <input type="text" name="quantity" value="0" className="qty inc-dec-number" />
-                  <input type="button" value="+" className="qtyplus incriment-btm" field="quantity" />
-                </form> */}
-
                 <div className="mycart-table-inc-dec-btn">
                   <span type="button" className="qtyminus decriment-btn" onClick={decreament}>-</span>
                   <span className="count">

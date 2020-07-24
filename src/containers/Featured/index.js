@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /**
  *
  * Featured
@@ -16,6 +17,7 @@ import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
 import Footer from '../../components/Footer';
 import Loader from '../../components/Loader';
+import Navigation from '../../utils/navigation';
 import './index.css';
 
 export function Featured({ featuredData, getFeaturedData, inProcess }) {
@@ -24,6 +26,10 @@ export function Featured({ featuredData, getFeaturedData, inProcess }) {
       getFeaturedData();
     }
   }, [featuredData, getFeaturedData]);
+
+  const videoPlay = (item) => {
+    Navigation.push(`/sh/airvtingweb/video/${item._id}`);
+  };
 
   const getDataWrapper = () => {
     if (Utils.isUndefinedOrNullOrEmptyObject(featuredData)) {
@@ -34,7 +40,7 @@ export function Featured({ featuredData, getFeaturedData, inProcess }) {
       const keys = `${index}-keys`;
       return (
         <div className="componentWrapper" key={keys}>
-          <a href="category-inner.php">
+          <span className="play-btn-trigger" role="button" tabIndex={0} onClick={() => videoPlay(item)}>
             <div className="catagroy-card" style={{ background: `url(${item.featuredImage})` }}>
               <div className="catagroy-card-content">
                 <h4>
@@ -44,7 +50,7 @@ export function Featured({ featuredData, getFeaturedData, inProcess }) {
                 </h4>
               </div>
             </div>
-          </a>
+          </span>
         </div>
       );
     });
@@ -56,12 +62,9 @@ export function Featured({ featuredData, getFeaturedData, inProcess }) {
         <nav className="responsive-tab">
           <ul>
             <li className="uk-active">
-              <span href="#">
-                {' '}
+              <span>
                 <i className="uil-video" />
-                {' '}
                 Featured
-                {' '}
               </span>
             </li>
           </ul>
