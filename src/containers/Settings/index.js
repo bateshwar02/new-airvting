@@ -79,7 +79,7 @@ function Setting() {
             </nav>
           </div>
 
-          <div className="uk-width-2-3@m mt-sm-3 pl-sm-0">
+          <div className="uk-width-3-4@m mt-sm-3 pl-sm-0">
             <div className="uk-width-expand@m">
               <ul id="component-tab-left" className="uk-switcher">
                 <li>

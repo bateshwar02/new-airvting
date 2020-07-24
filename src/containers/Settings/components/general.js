@@ -64,11 +64,11 @@ function General({ userData, updateUser, inProcess }) {
       <div className="uk-form-group fieldWrap">{locals.inputs.lastName}</div>
       <div className="uk-form-group fieldWrap">{locals.inputs.email}</div>
       <div className="uk-form-group fieldWrap">{locals.inputs.birth}</div>
-      <div className="uk-form-group fieldWrap imageWrape">
+      <div className="uk-form-group fieldWrap">
         {locals.inputs.coverImage}
         {!Utils.isUndefinedOrNullOrEmptyObject(userDetail) && <img style={{ height: '150px', width: '150px' }} src={userDetail.coverImage} alt="cover" /> }
       </div>
-      <div className="uk-form-group fieldWrap imageWrape">
+      <div className="uk-form-group fieldWrap">
         {locals.inputs.featuredImage}
         {!Utils.isUndefinedOrNullOrEmptyObject(userDetail) && <img style={{ height: '150px', width: '150px' }} src={userDetail.featuredImage} alt="feature" /> }
       </div>
