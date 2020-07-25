@@ -15,8 +15,10 @@ function Video({ stream }) {
       const subscriber = new window.red5prosdk.RTCSubscriber();
       // Initialize
       subscriber.init({
+        // protocol: 'wss',
+        // port: 5080,
         protocol: 'wss',
-        port: 5080,
+        port: 443,
         host: '52.77.219.22',
         app: 'live',
         streamName: 'bnm-streaming1',

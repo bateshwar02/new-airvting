@@ -4,9 +4,7 @@
  *
  */
 
-import React, {
-  memo, useRef, useState, useEffect
-} from 'react';
+import React, { memo, Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose, bindActionCreators } from 'redux';
@@ -17,38 +15,39 @@ import * as Actions from './actions';
 import airvForm from '../../components/form';
 import Services from '../Message/api';
 import Modal from '../../components/Modal';
+import Navigation from '../../utils/navigation';
 
+class AddPost extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      postFormData: {
+        title: '', postCategories: {}, discount: '', tagUsers: []
+      },
+      isSubmitted: false,
+    };
+  }
 
-export function AddPost({
-  inProcess, addPost, catOption, getCategoryOp, isAddPost, updatePostData
-}) {
-  const addPostRef = useRef(null);
-
-  const [postFormData, setProductFormData] = useState({});
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  useEffect(() => {
+  componentDidMount() {
+    const { catOption, getCategoryOp } = this.props;
     if (Utils.isUndefinedOrNullOrEmptyList(catOption)) {
       getCategoryOp();
     }
-  }, []);
+  }
 
-  const onChange = (formValue) => {
-    if (isSubmitted) {
-      addPostRef.current.validate();
-    }
-    setProductFormData(formValue);
+  onChange = (formValue) => {
+    const { isSubmitted } = this.state;
+
+    this.setState({
+      postFormData: formValue,
+    }, () => {
+      if (isSubmitted) {
+        this.postForm.getValue();
+      }
+    });
   };
 
-  const formSchema = {
-    postCategories: t.Object,
-    title: t.String,
-    type: t.String,
-    tagUsers: t.maybe(t.Array),
-    discount: t.String,
-  };
-
-  const getUserData = (input, callback) => {
+  getUserData = (input, callback) => {
     if (Utils.isUndefinedOrNullOrEmpty(input)) {
       callback(null, []);
       return;
@@ -67,107 +66,102 @@ export function AddPost({
       });
   };
 
-  const getLoginFormTemplate = locals => (
+  getLoginFormTemplate = locals => (
     <>
-      <div className="formWrap">
-        {locals.inputs.type}
-      </div>
       <div className="formWrap">
         {locals.inputs.title}
       </div>
       <div className="formWrap">
         {locals.inputs.postCategories}
       </div>
+      <div className="formWrap">{locals.inputs.discount}</div>
       <div className="formWrap">
         {locals.inputs.tagUsers}
       </div>
-      <div className="formWrap">{locals.inputs.discount}</div>
     </>
   );
 
-  const getFormSchema = () => t.struct(formSchema);
+  getFormSchema = () => {
+    const formSchema = {
+      postCategories: t.Object,
+      title: t.String,
+      tagUsers: t.maybe(t.Array),
+      discount: t.String,
+    };
 
-  const getFormOptions = () => ({
-    template: getLoginFormTemplate,
-    fields: {
-      type: {
-        label: 'Type',
-        template: airvForm.templates.textbox,
-        error: 'Type is required',
-        type: 'text'
-      },
-      title: {
-        label: 'Title',
-        template: airvForm.templates.textbox,
-        attrs: {
-          placeholder: 'Title',
-        },
-        error: 'Title is required',
-      },
-      postCategories: {
-        label: 'Categories',
-        template: airvForm.templates.select,
-        attrs: {
-          placeholder: 'Select Category Name',
-          simpleValue: true,
-          clearable: true,
-        },
-        options: catOption,
-        error: 'Product Categories is required',
-        factory: t.form.Select,
-      },
+    return t.struct(formSchema);
+  }
 
-      tagUsers: {
-        template: airvForm.templates.select,
-        label: 'Tag Users',
-        attrs: {
-          placeholder: 'Search user',
-          simpleValue: true,
-          clearable: true,
-          multiSelect: true,
-          loadOptions: (input, callback) => {
-            if (input.length > 2) {
-              getUserData(input, callback);
-            }
+  getFormOptions = () => {
+    const { catOption } = this.props;
+    return ({
+      template: this.getLoginFormTemplate,
+      fields: {
+        title: {
+          label: 'Title',
+          template: airvForm.templates.textbox,
+          attrs: {
+            placeholder: 'Title',
+          },
+          error: 'Title is required',
+        },
+        postCategories: {
+          label: 'Categories',
+          template: airvForm.templates.select,
+          attrs: {
+            placeholder: 'Select Category Name',
+            simpleValue: true,
+            clearable: true,
+          },
+          options: catOption,
+          error: 'Product Categories is required',
+          factory: t.form.Select,
+        },
+
+        tagUsers: {
+          template: airvForm.templates.select,
+          label: 'Tag Users',
+          attrs: {
+            placeholder: 'Search user',
+            simpleValue: true,
+            clearable: true,
+            multiSelect: true,
+            loadOptions: (input, callback) => {
+              if (input.length > 2) {
+                this.getUserData(input, callback);
+              }
+            },
+          },
+          options: [],
+          factory: t.form.Select,
+        },
+
+        discount: {
+          label: 'Discount',
+          template: airvForm.templates.textbox,
+          error: 'Discount is required',
+          type: 'text',
+          attrs: {
+            validateRegex: /^[0-9]{1,2}[:.,-]?$/,
+            placeholder: 'Discount in %',
           },
         },
-        options: [],
-        factory: t.form.Select,
       },
+    });
+  }
 
-      discount: {
-        label: 'Discount',
-        template: airvForm.templates.textbox,
-        error: 'Discount is required',
-        type: 'text',
-        attrs: {
-          placeholder: 'Discount in %',
-        },
-      },
+  submit = () => {
+    const { addPost } = this.props;
+    const { postFormData } = this.state;
 
-      //   featuredImage: {
-      //     label: 'Type',
-      //     template: airvForm.templates.textbox,
-      //     error: 'Type is required',
-      //     type: 'text'
-      //   },
-      //   mediaUrl: {
-      //     label: 'Type',
-      //     template: airvForm.templates.textbox,
-      //     error: 'Type is required',
-      //     type: 'text'
-      //   },
-
-    },
-  });
-
-  const submit = () => {
-    setIsSubmitted(true);
-    const { errors } = addPostRef.current.validate();
-    if (!Utils.isEmptyList(errors)) {
+    const errors = this.postForm.getValue();
+    this.setState({ isSubmitted: true });
+    if (Utils.isUndefinedOrNullOrEmptyObject(errors)) {
       return;
     }
+
     const formData = Utils.deepCopy(postFormData);
+    formData.type = 'stream';
     const userData = [];
     if (!Utils.isUndefinedOrNullOrEmptyList(formData.tagUsers)) {
       formData.tagUsers.forEach((item) => {
@@ -177,44 +171,57 @@ export function AddPost({
     formData.postCategories = [{ categoryId: formData.postCategories.value, title: formData.postCategories.label }];
     formData.tagUsers = userData;
     formData.product = [{
-      discount: formData.discount,
+      discount: `${formData.discount} %`,
       featuredImage: '',
     }];
     delete (formData.discount);
-    // updatePostData(formData);
+    console.log('formData ==== ', formData);
     addPost(formData);
   };
 
-  const getContent = () => (
-    <div className="addPostWrapper">
-      <div className="formWrapper">
-        <t.form.Form ref={addPostRef} type={getFormSchema()} value={postFormData} options={getFormOptions()} onChange={onChange} />
+  getContent = () => {
+    const { postFormData } = this.state;
+    const { inProcess } = this.props;
+    return (
+      <div className="addPostWrapper">
+        <div className="formWrapper">
+          <t.form.Form
+            ref={(el) => { this.postForm = el; }}
+            type={this.getFormSchema()}
+            options={this.getFormOptions()}
+            value={postFormData}
+            onChange={this.onChange}
+          />
+        </div>
+        <div className="uk-flex uk-flex-right p-4">
+          <button type="button" className="button warning" onClick={this.submit}>
+            Add Post
+            {inProcess && (
+              <div className="loaderWrapper">
+                <div className="customLoader" />
+              </div>
+            )}
+          </button>
+        </div>
       </div>
-      <div className="uk-flex uk-flex-right p-4">
-        <button type="button" className="button warning" onClick={submit}>
-          Add Post
-          {inProcess && (
-            <div className="loaderWrapper">
-              <div className="customLoader" />
-            </div>
-          )}
-        </button>
-      </div>
-    </div>
-  );
+    );
+  }
 
-  return (
-    <>
-      {isAddPost && (
-      <Modal
-        onCancel={() => {}}
-        modalContent={getContent()}
-        modalHeader={<h2 className="uk-modal-title">Add Post</h2>}
-        hasFooter={false}
-      />
-      )}
-    </>
-  );
+  render() {
+    const { isAddPost } = this.props;
+    return (
+      <>
+        {isAddPost && (
+        <Modal
+          onCancel={() => { Navigation.push('/sh/airvtingweb'); }}
+          modalContent={this.getContent()}
+          modalHeader={<h2 className="uk-modal-title">Add Post</h2>}
+          hasFooter={false}
+        />
+        )}
+      </>
+    );
+  }
 }
 
 AddPost.propTypes = {
@@ -223,7 +230,6 @@ AddPost.propTypes = {
   catOption: PropTypes.array.isRequired,
   getCategoryOp: PropTypes.func.isRequired,
   isAddPost: PropTypes.bool.isRequired,
-  updatePostData: PropTypes.func.isRequired,
 };
 
 

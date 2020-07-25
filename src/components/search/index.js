@@ -75,7 +75,7 @@ function Search({ updateSearch, getSearchData }) {
     <div className="head_search">
       <t.form.Form type={getFormSchema()} value={searchData} options={getFormOptions()} onChange={onChange} />
       <div uk-dropdown="pos:top;mode:click;animation:uk-animation-slide-bottom-small" className="dropdown-search">
-        <ul className="dropdown-search-list">
+        {/* <ul className="dropdown-search-list">
           <li className="list-title"> Recent Searches </li>
           <li>
             {' '}
@@ -100,7 +100,7 @@ function Search({ updateSearch, getSearchData }) {
               <a href="your-history.php"> Searches History </a>
             </li>
           </div>
-        </ul>
+        </ul> */}
       </div>
     </div>
   );

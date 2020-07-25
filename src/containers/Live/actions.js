@@ -42,9 +42,9 @@ export function updateCatOption(catOption) {
   };
 }
 
-export function updatePostData(postData){
+export function updatePostData(postData) {
   return {
     type: UPDATE_POST_DATA,
     postData
-  }
+  };
 }

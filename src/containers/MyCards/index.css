@@ -9,7 +9,7 @@ span.add-card-btn.button.default {
 }
 .childData{min-height: 38vh}
 .ButtonWrapper {cursor: pointer;}
-.modal .modalInnerContent {max-height:70%; margin-top: 40px; min-height: 75vh;}
+.modal .modalInnerContent {max-height:70%; margin-top: 40px; min-height: 71vh;}
 .alert {margin: 10px; color:#ff6200;}
 .cardWrapper {margin: 20px 0px 40px 0px;}
 .actionWrapper{display: flex;

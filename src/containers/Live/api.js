@@ -7,7 +7,7 @@ const Service = {
 
   addPost(formData) {
     const url = 'api/v1/posts';
-    return Request.imgageUpload(url, formData);
+    return Request.post(url, formData);
   },
 
 };

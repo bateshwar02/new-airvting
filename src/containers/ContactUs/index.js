@@ -98,7 +98,7 @@ function ContactUs({ contactUs, userData, inProcess }) {
 
 
   const cancelAction = () => {
-    Navigation.push('sh/airvtingweb');
+    Navigation.push('/sh/airvtingweb/');
   };
 
   const submit = () => {

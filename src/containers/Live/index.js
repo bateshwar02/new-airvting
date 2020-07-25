@@ -49,12 +49,15 @@ export function Live({ postData, userData }) {
   };
 
   useEffect(() => {
+    if (Utils.isUndefinedOrNullOrEmptyObject(postData)) {
+      return;
+    }
     if (window) {
       const publisher = new window.red5prosdk.RTCPublisher();
       // Initialize
       publisher.init({
         protocol: 'wss',
-        port: 5080,
+        port: 443,
         host: '52.77.219.22',
         app: 'live',
         streamName: 'bnm-streaming1',
@@ -123,7 +126,6 @@ export function Live({ postData, userData }) {
       <Header />
       {getContent()}
       <AddPosts />
-      {console.log('live')}
     </div>
   );
 }

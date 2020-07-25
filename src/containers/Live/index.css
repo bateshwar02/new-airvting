@@ -8,7 +8,7 @@
     width: 100%;
 }
 
-.addPostWrapper{margin-top: 30px; overflow-y: auto; overflow-x: hidden;}
+.addPostWrapper{margin-top: 18px; overflow-y: auto; overflow-x: hidden;}
 .modalHeader {min-height: 40px !important;}
 /* input{width: 100% !important;} */
 input#productCategories-input-tfid-0-0 { width:2px !important}
