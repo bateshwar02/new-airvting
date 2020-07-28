@@ -21,7 +21,7 @@ function Footer() {
             </p>
           </div>
         </div>
-        <div className="uk-width-auto@s">
+        {/* <div className="uk-width-auto@s">
           <nav className="footer-nav-icon">
             <ul>
               <li>
@@ -46,7 +46,7 @@ function Footer() {
               </li>
             </ul>
           </nav>
-        </div>
+        </div> */}
       </div>
     </div>
   );

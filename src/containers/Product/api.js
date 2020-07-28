@@ -22,7 +22,7 @@ const Service = {
     if (Utils.isUndefinedOrNullOrEmpty(userId)) {
       return null;
     }
-    const url = `api/v1/users/${userId}/cart `;
+    const url = `api/v1/users/${userId}/cart`;
     return Request.post(url, data);
   }
 

@@ -7,3 +7,72 @@
 .uk-grid.dataWrap {
     position: static;
 }
+
+.addressWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    margin: 20px 0px;
+}
+
+.headerWrap{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+ .addAddressButton {
+    background: #f07015;
+    border: 1px solid #f07015;
+    color: #fff;
+    padding: 5px;
+    border-radius: 4px;
+ }
+
+ .addAddressWrapper{
+     overflow-y: auto;
+ }
+
+ .form-group-is_default .control-label span{display: none;}
+
+ .addressElements {
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-between; */
+    border: 1px solid #efefef;
+    padding: 4px 6px;
+    border-radius: 4px;
+    min-height: 60px;
+    margin: 10px 0px;
+ }
+ .addressWrap {
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    max-width: 600px;
+}
+
+.actionWrap{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: auto;
+}
+.iconWrap{
+    margin: 10px 0px;
+    cursor: pointer;
+}
+.mycart-ceakbox {
+    padding: 8px;
+}
+
+.modalInnerContent.small {
+    max-width: 400px;
+    min-height: 300px !important;
+}
+
+.buttonWrapCont {
+  margin: 20px 0px;
+}
+
+.mycart-total-token{color: #6d6d6d !important}

@@ -75,6 +75,7 @@ function Password({ updatePassword, inProcess }) {
     if (!Utils.isEmptyList(errors)) {
       return;
     }
+    passFormData.confirm_password = passFormData.password;
     updatePassword(passFormData);
   };
 

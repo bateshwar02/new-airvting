@@ -23,8 +23,12 @@ const Service = {
   },
 
   deleteCart(id) {
-    const url = `api/v1/paymentMethods/${id}`;
-    return Request.get(url);
+    const userId = cookie.get('userId');
+    if (Utils.isUndefinedOrNullOrEmpty(userId)) {
+      return false;
+    }
+    const url = `api/v1/users/${userId}/cart/products/delete`;
+    return Request.post(url, { user_id: userId, _id: id });
   },
 
   getCartDetailsCall(id) {
@@ -40,6 +44,30 @@ const Service = {
     const url = 'api/v1/airTokens?paginate=1&perPage=10';
     return Request.get(url);
   },
+
+  getAddress() {
+    return Request.get('api/v1/address');
+  },
+
+  addAddress(formData) {
+    return Request.post('api/v1/address', formData);
+  },
+
+  deleteAddress(id) {
+    return Request.delete(`api/v1/address/${id}`, {});
+  },
+
+  editAddress(formData, id) {
+    return Request.put(`api/v1/address/${id}`, formData);
+  },
+
+  checkOut(prodData) {
+    const userId = cookie.get('userId');
+    if (Utils.isUndefinedOrNullOrEmpty(userId)) {
+      return false;
+    }
+    return Request.post(`api/v1/users/${userId}/checkout`, prodData);
+  }
 
 };
 export default Service;

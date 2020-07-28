@@ -39,7 +39,6 @@ import ContactUs from '../ContactUs';
 
 export function App({ userData, getUserData }) {
   const [isLogin, setIsLogin] = useState(true);
-
   useEffect(() => {
     const token = cookie.get('token');
     const userId = cookie.get('userId');
