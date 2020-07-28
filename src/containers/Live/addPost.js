@@ -1,9 +1,12 @@
+/* eslint-disable no-unused-expressions */
+/* eslint-disable no-sequences */
+/* eslint-disable react/no-unused-state */
 /**
  *
  * Featured
  *
  */
-
+import cookie from 'cookies-js';
 import React, { memo, Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -21,17 +24,23 @@ class AddPost extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      postFormData: {
-        title: '', postCategories: {}, discount: '', tagUsers: []
-      },
+      postFormData: {},
       isSubmitted: false,
     };
   }
 
+
   componentDidMount() {
-    const { catOption, getCategoryOp } = this.props;
+    const {
+      catOption, getCategoryOp, porductData, getProductList
+    } = this.props;
+
     if (Utils.isUndefinedOrNullOrEmptyList(catOption)) {
       getCategoryOp();
+    }
+    if (Utils.isUndefinedOrNullOrEmptyList(porductData)) {
+      const userId = cookie.get('userId');
+      getProductList(userId);
     }
   }
 
@@ -46,6 +55,12 @@ class AddPost extends Component {
       }
     });
   };
+
+  setProductOption = (data) => {
+    const porductOption = data.map(item => ({ value: item._id, label: item.title }));
+    this.setState({ porductOption });
+  }
+
 
   getUserData = (input, callback) => {
     if (Utils.isUndefinedOrNullOrEmpty(input)) {
@@ -66,6 +81,7 @@ class AddPost extends Component {
       });
   };
 
+
   getLoginFormTemplate = locals => (
     <>
       <div className="formWrap">
@@ -74,26 +90,43 @@ class AddPost extends Component {
       <div className="formWrap">
         {locals.inputs.postCategories}
       </div>
-      <div className="formWrap">{locals.inputs.discount}</div>
+      <div className="formWrap">
+        {locals.inputs.product}
+      </div>
       <div className="formWrap">
         {locals.inputs.tagUsers}
       </div>
+      <div className="formWrap">{locals.inputs.quantity}</div>
+      <div className="formWrap">{locals.inputs.discount}</div>
+      <div className="formWrap">{locals.inputs.timer}</div>
     </>
   );
 
   getFormSchema = () => {
+    const { postFormData } = this.state;
     const formSchema = {
       postCategories: t.Object,
       title: t.String,
       tagUsers: t.maybe(t.Array),
-      discount: t.String,
+      product: t.maybe(t.Object),
     };
+
+    if (!Utils.isUndefinedOrNullOrEmptyList(postFormData.product)) {
+      formSchema.quantity = t.String;
+      formSchema.discount = t.String;
+      formSchema.timer = t.String;
+    }
 
     return t.struct(formSchema);
   }
 
   getFormOptions = () => {
-    const { catOption } = this.props;
+    const { catOption, porductData } = this.props;
+    let productOpt = [];
+    if (!Utils.isUndefinedOrNullOrEmptyList(porductData)) {
+      productOpt = porductData.map(item => ({ value: item._id, label: item.title }));
+    }
+
     return ({
       template: this.getLoginFormTemplate,
       fields: {
@@ -118,6 +151,18 @@ class AddPost extends Component {
           factory: t.form.Select,
         },
 
+        product: {
+          template: airvForm.templates.select,
+          label: 'Add Product',
+          attrs: {
+            placeholder: 'Select Product',
+            simpleValue: true,
+            clearable: true,
+          },
+          options: productOpt,
+          factory: t.form.Select,
+        },
+
         tagUsers: {
           template: airvForm.templates.select,
           label: 'Tag Users',
@@ -135,7 +180,6 @@ class AddPost extends Component {
           options: [],
           factory: t.form.Select,
         },
-
         discount: {
           label: 'Discount',
           template: airvForm.templates.textbox,
@@ -146,14 +190,34 @@ class AddPost extends Component {
             placeholder: 'Discount in %',
           },
         },
+
+        quantity: {
+          label: 'Stock Availability',
+          template: airvForm.templates.textbox,
+          error: 'Discount is required',
+          type: 'text',
+          attrs: {
+            validateRegex: /^[0-9]{1,5}[:.,-]?$/,
+            placeholder: 'Quantity',
+          },
+        },
+        timer: {
+          label: 'Discount Timer',
+          template: airvForm.templates.textbox,
+          error: 'Discount is required',
+          type: 'text',
+          attrs: {
+            validateRegex: /^[0-9]{1,5}[:.,-]?$/,
+            placeholder: 'Enter time in minutes',
+          },
+        },
       },
     });
   }
 
   submit = () => {
-    const { addPost } = this.props;
+    const { addPost, porductData } = this.props;
     const { postFormData } = this.state;
-
     const errors = this.postForm.getValue();
     this.setState({ isSubmitted: true });
     if (Utils.isUndefinedOrNullOrEmptyObject(errors)) {
@@ -162,20 +226,32 @@ class AddPost extends Component {
 
     const formData = Utils.deepCopy(postFormData);
     formData.type = 'stream';
-    const userData = [];
+    const tagUserData = [];
     if (!Utils.isUndefinedOrNullOrEmptyList(formData.tagUsers)) {
       formData.tagUsers.forEach((item) => {
-        userData.push({ userId: item.value, username: item.label });
+        tagUserData.push({ userId: item.value, username: item.label });
       });
     }
     formData.postCategories = [{ categoryId: formData.postCategories.value, title: formData.postCategories.label }];
-    formData.tagUsers = userData;
-    formData.product = [{
-      discount: `${formData.discount} %`,
-      featuredImage: '',
-    }];
-    delete (formData.discount);
-    console.log('formData ==== ', formData);
+    formData.tagUsers = tagUserData;
+
+    if (!Utils.isUndefinedOrNullOrEmptyObject(postFormData.product)) {
+      const dataObj = { };
+      const productArr = porductData.filter(item => (item._id === postFormData.product.value));
+      dataObj.productId = productArr[0]._id,
+      dataObj.title = productArr[0].title,
+      dataObj.quantity = Number(formData.quantity),
+      dataObj.discount = formData.discount,
+      dataObj.featuredImage = productArr[0].featuredImages[0].featuredImage,
+      dataObj.timer = Number(formData.timer),
+      dataObj.price = Number(productArr[0].price),
+      dataObj.airToken = productArr[0].airToken,
+      delete (formData.discount);
+      delete (formData.quantity);
+      delete (formData.timer);
+      formData.product = [dataObj];
+    }
+
     addPost(formData);
   };
 
@@ -230,10 +306,18 @@ AddPost.propTypes = {
   catOption: PropTypes.array.isRequired,
   getCategoryOp: PropTypes.func.isRequired,
   isAddPost: PropTypes.bool.isRequired,
+  porductData: PropTypes.array.isRequired,
+  getProductList: PropTypes.func.isRequired
 };
 
 
-const mapStateToProps = ({ live: { inProcess, catOption, isAddPost } }) => ({ inProcess, catOption, isAddPost });
+const mapStateToProps = ({
+  live: {
+    inProcess, catOption, isAddPost, porductData
+  }, userDetails: { userData }
+}) => ({
+  inProcess, catOption, isAddPost, porductData, userData
+});
 
 const mapDispatchToProps = dispatch => bindActionCreators(Actions, dispatch);
 

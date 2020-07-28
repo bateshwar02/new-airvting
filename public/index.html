@@ -79,6 +79,7 @@
     if (event.type === pubTypes.PUBLISH_METADATA) {
       return;
     }
+   
     switch (event.type) {
       case 'ERROR':
         inFailedState = true;
@@ -129,10 +130,11 @@
         status = 'Unpublished.';
         break;
     }
+    console.log('status ====', status);
     if (status && status.length > 0) {
       const arr = ['STATUS', status];
       console.log('arr === ', arr);
-      statusField.innerText = arr.join();
+      statusField.innerText = '';
       // statusField.innerText = ['STATUS', status].join(': ');
     }
   }

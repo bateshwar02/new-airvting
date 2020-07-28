@@ -5,11 +5,11 @@
  */
 
 import {
-  UPDATE_IN_PROCESS, UPDATE_CATEGORY_OPTION, UPDATE_POST_ACTION, UPDATE_POST_DATA
+  UPDATE_IN_PROCESS, UPDATE_CATEGORY_OPTION, UPDATE_POST_ACTION, UPDATE_POST_DATA, UPDATE_PRODUCT_OPTION
 } from './constants';
 
 export const initialState = {
-  inProcess: false, catOption: [], isAddPost: true, postData: {}
+  inProcess: false, catOption: [], isAddPost: true, postData: {}, porductData: []
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -35,6 +35,11 @@ export default function setBrowserInfo(state = initialState, action) {
       return {
         ...state,
         postData: action.postData
+      };
+    case UPDATE_PRODUCT_OPTION:
+      return {
+        ...state,
+        porductData: action.porductData
       };
 
     default:

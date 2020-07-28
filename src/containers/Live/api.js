@@ -9,6 +9,10 @@ const Service = {
     const url = 'api/v1/posts';
     return Request.post(url, formData);
   },
+  getPostDataByUser(id) {
+    const url = `api/v1/users/${id}/products?paginate=1&perPage=100&maxId=null`;
+    return Request.get(url);
+  },
 
 };
 export default Service;

@@ -1,7 +1,7 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
-import { GET_CATEGORY, ADD_POST } from './constants';
+import { GET_CATEGORY, ADD_POST, GET_PRODUCT_LIST } from './constants';
 import {
-  updateInProcess, updateCatOption, updatePostAction, updatePostData
+  updateInProcess, updateCatOption, updatePostAction, updatePostData, updateProduct
 } from './actions';
 import Utils from '../../utils/common';
 import api from './api';
@@ -23,12 +23,10 @@ function* addPostSaga({ formData }) {
   try {
     const addConv = yield call(api.addPost, formData);
     if (addConv.success) {
-      console.log('add post ==== ', addConv);
       const { data: { postDetail } } = addConv;
       if (!Utils.isUndefinedOrNullOrEmptyObject(postDetail)) {
         yield put(updatePostData(postDetail));
       }
-      yield put(updatePostAction(false));
     }
     yield put(updateInProcess(false));
     return;
@@ -38,8 +36,24 @@ function* addPostSaga({ formData }) {
   }
 }
 
+function* getProductSaga({ id }) {
+  try {
+    const postData = yield call(api.getPostDataByUser, id);
+    if (postData.success) {
+      if (!Utils.isUndefinedOrNullOrEmptyObject(postData.data)) {
+        const { data: { productDetail } } = postData;
+        console.log('productDetail === ', productDetail);
+        yield put(updateProduct(productDetail));
+      }
+    }
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 
 export default function* liveSaga() {
   yield takeLatest(GET_CATEGORY, getConversationDeatils);
   yield takeLatest(ADD_POST, addPostSaga);
+  yield takeLatest(GET_PRODUCT_LIST, getProductSaga);
 }
