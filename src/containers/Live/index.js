@@ -21,7 +21,6 @@ import AddPosts from './addPost';
 import './index.css';
 
 export function Live({ postData, userData }) {
-  console.log('postData ===== ', postData);
   const [image, setImage] = useState('');
   const clearCanvas = (targetElement, canvasElement) => {
     const context = canvasElement.getContext('2d');

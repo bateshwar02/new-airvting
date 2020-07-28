@@ -6,6 +6,7 @@
 
 import React, { memo, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { compose, bindActionCreators } from 'redux';
@@ -37,27 +38,14 @@ export function Followers({ followersData, getFollowersData, inProcess }) {
           <div className="channal-card animate-this">
             <div className="channal-card-thumbnail" style={{ background: `url(${item.featuredImage})` }} />
             <div className="channal-card-body">
-              <a href="browse-channals.php">
+              <Link to={`/browser-channel/${item._id}`}>
                 <div className="channal-card-creator">
                   <img src={item.featuredImage} alt="" />
                 </div>
-              </a>
-              <h4>
-                {item.displayName}
-                {' '}
-              </h4>
-              <p>
-                {' '}
-                <span>20K Followers . 26 Videos . 11k phtos . 200k Products</span>
-                {' '}
-              </p>
-              <div className="text-center">
-                <span>
-                  <button type="button" className="button default  custom-btn">
-                    Remove
-                  </button>
-                </span>
-              </div>
+                <h4>
+                  {item.displayName}
+                </h4>
+              </Link>
             </div>
           </div>
         </div>

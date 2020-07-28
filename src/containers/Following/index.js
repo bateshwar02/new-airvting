@@ -6,6 +6,7 @@
 
 import React, { memo, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { compose, bindActionCreators } from 'redux';
@@ -19,7 +20,9 @@ import Utils from '../../utils/common';
 import Loader from '../../components/Loader';
 import './index.css';
 
-export function Following({ followingData, getFollowingData, inProcess }) {
+export function Following({
+  followingData, getFollowingData, inProcess, followAction
+}) {
   useEffect(() => {
     if (Utils.isUndefinedOrNullOrEmptyList(followingData)) {
       getFollowingData();
@@ -38,23 +41,18 @@ export function Following({ followingData, getFollowingData, inProcess }) {
           <div className="channal-card animate-this">
             <div className="channal-card-thumbnail uk-img" style={{ background: `url(${item.featuredImage})` }} />
             <div className="channal-card-body">
-              <a href="browse-channals.php">
+              <Link to={`/browser-channel/${item._id}`}>
                 <div className="channal-card-creator">
                   <img src={item.featuredImage} alt="" />
                 </div>
-              </a>
-              <h4>
-                {item.displayName}
-              </h4>
-              {/* <p>
-                {' '}
-                <span>20K Followers . 26 Videos . 11k phtos . 200k Products</span>
-                {' '}
-              </p> */}
+                <h4>
+                  {item.displayName}
+                </h4>
+              </Link>
               <div className="text-center">
                 <div className="toggle1" aria-hidden="false">
-                  <button className="button default custom-btn" type="button" uk-toggle="target: .toggle1">
-                    Follwing
+                  <button className="button default custom-btn" type="button" uk-toggle="target: .toggle1" onClick={() => followAction(item._id)}>
+                    Remove
                   </button>
                 </div>
               </div>
@@ -98,6 +96,7 @@ Following.propTypes = {
   followingData: PropTypes.array.isRequired,
   getFollowingData: PropTypes.func.isRequired,
   inProcess: PropTypes.bool.isRequired,
+  followAction: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ following: { followingData, inProcess } }) => ({ followingData, inProcess });

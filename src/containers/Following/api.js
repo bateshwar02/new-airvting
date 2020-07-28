@@ -8,5 +8,10 @@ const Service = {
     const url = `api/v1/users/relationships?paginate=1&perPage=20&userId=${cookie.get('userId')}&type=fallowing`;
     return Request.get(url);
   },
+
+  followUser(id) {
+    const url = `api/v1/users/${id}/fallow `;
+    return Request.get(url);
+  },
 };
 export default Service;

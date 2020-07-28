@@ -2,3 +2,16 @@
     height: 220px;
     margin-bottom: 20px;
 }
+
+.text-center {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+button.button.default.custom-btn {
+    min-width: 80px;
+    text-align: center;
+    display: inline-block;
+}

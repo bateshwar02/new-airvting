@@ -4,7 +4,9 @@
  *
  */
 
-import { FOLLOWING_ACTION, UPDATE_ACTION, Is_PROCESS_ACTION } from './constants';
+import {
+  FOLLOWING_ACTION, UPDATE_ACTION, Is_PROCESS_ACTION, FOLLOW_ACTION
+} from './constants';
 
 export function getFollowingData() {
   return {
@@ -24,5 +26,12 @@ export function updateInProcess(inProcess) {
   return {
     type: Is_PROCESS_ACTION,
     inProcess,
+  };
+}
+
+export function followAction(id) {
+  return {
+    type: FOLLOW_ACTION,
+    id
   };
 }
