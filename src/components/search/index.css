@@ -26,9 +26,12 @@
 		left: 10px;
 		z-index: 12;
 	}
-	span.after.showCross {
+	span.after {
 		position: absolute;
-		right: 5px;
+		right: 10px;
+		display: none;
+		height: 18px;
 	}
-
-	span.after.showCross { height: 18px;}
+	span.after.showCross {
+		display: block;
+	}

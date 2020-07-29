@@ -22,21 +22,18 @@ function Search({ updateSearch, searchValue }) {
   useEffect(() => {
     if (!Utils.isUndefinedOrNullOrEmpty(searchValue)) {
       setSearchData({ search: searchValue });
+      setShow(true);
     }
   }, [searchValue]);
 
-  useEffect(() => {
-    if (!Utils.isUndefinedOrNullOrEmptyObject(searchData)) {
-      setShow(true);
-    } else {
-      setShow(false);
-    }
-  }, [searchData]);
 
   const onChange = (formValue) => {
     setSearchData(formValue);
+    if (formValue.search.length > 0) {
+      setShow(true);
+    }
     if (formValue.search.length === 0) {
-      Navigation.push('/sh/airvtingweb');
+      setShow(false);
     }
   };
 
