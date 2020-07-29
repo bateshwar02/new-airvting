@@ -55,7 +55,7 @@ function Product({ id, productLikedAction }) {
                 </span>
                 <p className="product-price">
                   $
-                  {Utils.getRoundOfValue(item.priceSale, 2)}
+                  {Utils.convertCurrency(Utils.getRoundOfValue(item.priceSale, 2))}
                 </p>
                 <p className="time-ago">
                   <i className="fa fa-clock-o" aria-hidden="true" />

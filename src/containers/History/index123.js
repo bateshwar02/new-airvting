@@ -7,33 +7,41 @@
  *
  */
 
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
+import { compose, bindActionCreators } from 'redux';
+
 
 import Utils from '../../utils/common';
+import * as Actions from './actions';
 import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
 import Footer from '../../components/Footer';
+import Loader from '../../components/Loader';
 import Navigation from '../../utils/navigation';
 import './index.css';
 
-export function History() {
+export function History({
+  historyData, getHistoryData, inProcess
+}) {
+  useEffect(() => {
+    if (Utils.isUndefinedOrNullOrEmptyObject(historyData)) {
+      getHistoryData();
+    }
+  }, [getHistoryData, historyData]);
+
   const videoPlay = (item) => {
     Navigation.push(`/sh/airvtingweb/video/${item._id}`);
   };
 
   const getVideoWrapper = () => {
-    let parseData = [];
-    const historyData1 = localStorage.getItem('historyData');
-    if (!Utils.isUndefinedOrNullOrEmpty(historyData1)) {
-      parseData = JSON.parse(historyData1);
-    }
-
-    if (Utils.isUndefinedOrNullOrEmptyList(parseData)) {
+    if (Utils.isUndefinedOrNullOrEmptyObject(historyData)) {
       return null;
     }
-
-    return parseData.map((item, index) => {
+    const { postDetail } = historyData;
+    return postDetail.map((item, index) => {
       const keys = `key-${index}`;
       const date = new Date(item.createdAt);
       const ticks = date.getTime();
@@ -91,8 +99,27 @@ export function History() {
       <Sidebar />
       <Header />
       {getComponent()}
+      <Loader inProcess={inProcess} />
     </div>
   );
 }
 
-export default memo(History);
+History.propTypes = {
+  historyData: PropTypes.object.isRequired,
+  getHistoryData: PropTypes.func.isRequired,
+  inProcess: PropTypes.bool.isRequired,
+};
+
+const mapStateToProps = ({ history: { historyData, inProcess } }) => ({ historyData, inProcess });
+
+const mapDispatchToProps = dispatch => bindActionCreators(Actions, dispatch);
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
+
+export default compose(
+  withConnect,
+  memo,
+)(History);

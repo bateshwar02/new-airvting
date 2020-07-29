@@ -93,3 +93,13 @@
   }
 
   .chat-video-gift-box {height: 190px;}
+  span.noVideoAlert {
+    margin: auto;
+    color: #6d6d6d;
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    font-size: 18px;
+}
+
+video{top: 20px !important}

@@ -6,8 +6,12 @@ import { takeLatest, call, put } from 'redux-saga/effects';
 import Utils from '../../utils/common';
 import { notifyError, notifySuccess } from '../App/action';
 
-import { GET_USER_DATA_BY_ID, GET_POST_DATA_BY_ID, BOOKMARK_ACTION } from './constants';
-import { updatePostData, updateInProcess, updateUserData } from './actions';
+import {
+  GET_USER_DATA_BY_ID, GET_POST_DATA_BY_ID, BOOKMARK_ACTION, FOLLOW_ACTION
+} from './constants';
+import {
+  updatePostData, updateInProcess, updateUserData, getUserDataById
+} from './actions';
 import { addBookMark } from '../../lib/addBookMark';
 import api from './api';
 
@@ -61,8 +65,28 @@ function* bookMarkActionSaga({ id }) {
   }
 }
 
+function* followUserSaga({ id }) {
+  yield put(updateInProcess(true));
+  try {
+    const follow = yield call(api.followUser, id);
+    if (follow.success) {
+      yield put(notifySuccess('Follow Action Success.'));
+      yield put(getUserDataById(id));
+      yield put(updateInProcess(false));
+      return;
+    }
+    yield put(notifyError({ message: follow.message }));
+    yield put(updateInProcess(false));
+    return;
+  } catch (e) {
+    yield put(updateInProcess(false));
+    yield put(notifyError(e));
+  }
+}
+
 export default function* followersSaga() {
   yield takeLatest(GET_USER_DATA_BY_ID, getChannelUser);
   yield takeLatest(GET_POST_DATA_BY_ID, getPostDataByUser);
   yield takeLatest(BOOKMARK_ACTION, bookMarkActionSaga);
+  yield takeLatest(FOLLOW_ACTION, followUserSaga);
 }

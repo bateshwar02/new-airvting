@@ -85,6 +85,17 @@ function Sidebar() {
               </li>
               <li
                 className={classNames({
+                  active: getRouterValue(Navigation.bookmark) === getLocationParams(),
+                })}
+              >
+                <Link to={Navigation.bookmark}>
+                  <i className="uil-bookmark" />
+                  {' '}
+                  Bookmark
+                </Link>
+              </li>
+              <li
+                className={classNames({
                   active: getRouterValue(Navigation.featured) === getLocationParams(),
                 })}
               >

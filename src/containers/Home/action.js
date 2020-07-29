@@ -1,5 +1,5 @@
 import {
-  USER_DATA, DATA_BY_CATEGORY, BOOKMARK_ACTION, GET_CATEGORY, Is_PROCESS_ACTION, UPDATE_CATEGORY_DATA, UPDATE_DATA_BY_CATEGORY, UPDATE_VIDEO, IS_SHARE, SHARE_URL, GET_SEARCH_DATA, UPDATE_SEARCH_DATA, UPDATE_CURRENT_POST, GET_CURRENT_POST
+  USER_DATA, DATA_BY_CATEGORY, BOOKMARK_ACTION, GET_CATEGORY, Is_PROCESS_ACTION, UPDATE_CATEGORY_DATA, UPDATE_DATA_BY_CATEGORY, UPDATE_VIDEO, IS_SHARE, SHARE_URL, GET_SEARCH_DATA, UPDATE_SEARCH_DATA, UPDATE_CURRENT_POST, GET_CURRENT_POST, UPDATE_SEARCH, UPDATE_SEARCH_VALUE
 } from './constatnt';
 
 export function updateUserData({ userData }) {
@@ -86,15 +86,31 @@ export function updateCurrentPost(currentPost) {
   };
 }
 
-export function updateSearchData(searchData) {
+export function updateSearchData(searchData, isSearch = false, searchValue = '') {
   return {
     type: UPDATE_SEARCH_DATA,
-    searchData
+    searchData,
+    searchValue,
+    isSearch
   };
 }
 
 export function getCurrentPost() {
   return {
     type: GET_CURRENT_POST
+  };
+}
+
+export function updateSearch(isSearch) {
+  return {
+    type: UPDATE_SEARCH,
+    isSearch
+  };
+}
+
+export function updateSearchValue(searchValue) {
+  return {
+    type: UPDATE_SEARCH_VALUE,
+    searchValue
   };
 }

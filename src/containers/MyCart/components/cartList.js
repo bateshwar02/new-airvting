@@ -82,7 +82,7 @@ function CartList({
                   <h4>{item.displayName}</h4>
                   <p>
                     $
-                    {item.priceSale}
+                    {Utils.convertCurrency(Utils.getRoundOfValue(item.priceSale, 2))}
                   </p>
                   <p><button type="button" className="btn-mycart-remove button default" onClick={() => { removeCart(item._id); }}>Remove</button></p>
                 </div>
@@ -100,7 +100,8 @@ function CartList({
                 <div className="mycart-table-total-price">
                   <p>
                     $
-                    {Number(!Utils.isUndefinedOrNullOrEmpty(count[`${item._id}-count`]) ? count[`${item._id}-count`] : 1) * Number(item.priceSale) }
+                    {Utils.convertCurrency(Utils.getRoundOfValue(Number(!Utils.isUndefinedOrNullOrEmpty(count[`${item._id}-count`]) ? count[`${item._id}-count`] : 1) * Number(item.priceSale), 2)) }
+                    {/* {Number(!Utils.isUndefinedOrNullOrEmpty(count[`${item._id}-count`]) ? count[`${item._id}-count`] : 1) * Number(item.priceSale) } */}
                   </p>
                 </div>
               </td>

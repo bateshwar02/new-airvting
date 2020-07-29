@@ -13,3 +13,5 @@ export const GET_SEARCH_DATA = 'app/Home/GET_SEARCH_DATA';
 export const UPDATE_SEARCH_DATA = 'app/Home/UPDATE_SEARCH_DATA';
 export const UPDATE_CURRENT_POST = 'app/Home/UPDATE_CURRENT_POST';
 export const GET_CURRENT_POST = 'app/Home/GET_CURRENT_POST';
+export const UPDATE_SEARCH = 'app/Home/UPDATE_SEARCH';
+export const UPDATE_SEARCH_VALUE = 'app/Home/UPDATE_SEARCH_VALUE';

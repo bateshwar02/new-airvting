@@ -5,7 +5,7 @@
  */
 
 import {
-  UPDATE_DATA, UPDATE_IN_PROCESS, GET_CONVERSATION_DATA, ADD_CONVERSATION, ADD_CONVERSATION_REPLLY, UPDATE_CONVERSATION, GET_CONVERSATION_BY_ID, IS_ADD_MESSAGE, ADD_MESSAGE_ACTION, UPDATE_NOTIFICATIONS, GET_NOTIFICATION
+  UPDATE_DATA, UPDATE_IN_PROCESS, GET_CONVERSATION_DATA, ADD_CONVERSATION, ADD_CONVERSATION_REPLLY, UPDATE_CONVERSATION, GET_CONVERSATION_BY_ID, IS_ADD_MESSAGE, ADD_MESSAGE_ACTION
 } from './constants';
 
 export function updateData(messageData) {
@@ -68,18 +68,5 @@ export function messageAction(actionInProcess) {
   return {
     type: ADD_MESSAGE_ACTION,
     actionInProcess
-  };
-}
-
-export function updateNotifications(notificationData) {
-  return {
-    type: UPDATE_NOTIFICATIONS,
-    notificationData
-  };
-}
-
-export function getNotification() {
-  return {
-    type: GET_NOTIFICATION
   };
 }

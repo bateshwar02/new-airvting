@@ -3,10 +3,10 @@ import Utils from '../../utils/common';
 import { notifyError, notifySuccess } from '../App/action';
 
 import {
-  GET_CONVERSATION_DATA, ADD_CONVERSATION, GET_CONVERSATION_BY_ID, ADD_CONVERSATION_REPLLY, GET_NOTIFICATION
+  GET_CONVERSATION_DATA, ADD_CONVERSATION, GET_CONVERSATION_BY_ID, ADD_CONVERSATION_REPLLY
 } from './constants';
 import {
-  updateData, updateInProcess, updateConversationById, getConversationById, getConversation, addMessageAction, messageAction, updateNotifications
+  updateData, updateInProcess, updateConversationById, getConversationById, getConversation, addMessageAction, messageAction
 } from './actions';
 import api from './api';
 
@@ -76,25 +76,10 @@ function* addConversation({ formData }) {
   }
 }
 
-function* getNotifications() {
-  yield put(messageAction(true));
-  try {
-    const apiCall = yield call(api.getNotifications);
-    if (apiCall.success) {
-      yield put(updateNotifications(apiCall.data));
-    }
-    yield put(updateInProcess(false));
-  } catch (e) {
-    yield put(updateInProcess(false));
-    yield put(notifyError(e));
-  }
-}
 
-
-export default function* followingSaga() {
+export default function* notificationSaga() {
   yield takeLatest(GET_CONVERSATION_DATA, getConversationDeatils);
   yield takeLatest(GET_CONVERSATION_BY_ID, getConversationDeatilsById);
   yield takeLatest(ADD_CONVERSATION_REPLLY, addReply);
   yield takeLatest(ADD_CONVERSATION, addConversation);
-  yield takeLatest(GET_NOTIFICATION, getNotifications);
 }

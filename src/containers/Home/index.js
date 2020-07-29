@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-undef */
 /* eslint-disable no-underscore-dangle */
-import React, { memo } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -15,11 +15,24 @@ import Category from './components/category';
 import Share from '../../components/Share';
 import Post from './components/postData';
 import CurrentPost from './components/currentPost';
+import Utils from '../../utils/common';
 import './index.css';
 
 function HomePage({
-  inProcess, updateShare, url, isShare, isSearch
+  inProcess, updateShare, url, isShare, isSearch, getSearchData, updateSearch, searchValue
 }) {
+  useEffect(() => {
+    if (window) {
+      const { search } = window.location;
+      if (!Utils.isUndefinedOrNullOrEmpty(search)) {
+        const data = search.split('=');
+        getSearchData(data[1]);
+        return;
+      }
+      updateSearch(false);
+    }
+  }, []);
+
   const getHomeContent = () => (
     <div className="main_content">
       <div className="main_content_inner">
@@ -32,8 +45,8 @@ function HomePage({
             <CurrentPost />
           </ul>
         </div>
-        { !isSearch && <Category />}
-        { isSearch && <Post />}
+        { (!isSearch && Utils.isUndefinedOrNullOrEmpty(searchValue)) && <Category />}
+        { (isSearch && !Utils.isUndefinedOrNullOrEmpty(searchValue)) && <Post />}
         <Footer />
       </div>
     </div>
@@ -60,15 +73,18 @@ HomePage.propTypes = {
   url: PropTypes.string.isRequired,
   isShare: PropTypes.bool.isRequired,
   isSearch: PropTypes.bool.isRequired,
+  getSearchData: PropTypes.func.isRequired,
+  updateSearch: PropTypes.func.isRequired,
+  searchValue: PropTypes.string.isRequired,
 };
 
 
 const mapStateToProps = ({
   home: {
-    categoryData, inProcess, isShare, url
-  }, userDetails: { userData, isSearch }, live: { postData },
+    categoryData, inProcess, isShare, url, isSearch, searchValue
+  }, userDetails: { userData }, live: { postData },
 }) => ({
-  userData, categoryData, inProcess, isShare, url, isSearch, postData
+  userData, categoryData, inProcess, isShare, url, isSearch, postData, searchValue
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(Actions, dispatch);

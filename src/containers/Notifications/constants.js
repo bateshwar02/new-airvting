@@ -13,5 +13,3 @@ export const UPDATE_CONVERSATION = 'app/MyChannel/UPDATE_CONVERSATION';
 export const ADD_CONVERSATION_REPLLY = 'app/MyChannel/ADD_CONVERSATION_REPLLY';
 export const IS_ADD_MESSAGE = 'app/MyChannel/IS_ADD_MESSAGE';
 export const ADD_MESSAGE_ACTION = 'app/MyChannel/ADD_MESSAGE_ACTION';
-export const GET_NOTIFICATION = 'app/MyChannel/GET_NOTIFICATION';
-export const UPDATE_NOTIFICATIONS = 'app/MyChannel/UPDATE_NOTIFICATIONS';

@@ -9,7 +9,7 @@ import Navigation from '../../../utils/navigation';
 import * as Actions from '../action';
 
 function PostData({
-  id, addBookMark, updateShareUrl, updateShare, searchData
+  addBookMark, updateShareUrl, updateShare, searchData
 }) {
   const videoPlay = (item) => {
     Navigation.push(`/sh/airvtingweb/video/${item._id}`);
@@ -28,7 +28,7 @@ function PostData({
     }
 
     return postDetail.map((item, index) => {
-      const keys = `keys-${index}-${id}-${item.title}`;
+      const keys = `keys-${index}-${item.title}`;
       const date = new Date(item.createdAt);
       const ticks = date.getTime();
       return (
@@ -104,7 +104,6 @@ function PostData({
 
 PostData.propTypes = {
   addBookMark: PropTypes.func.isRequired,
-  id: PropTypes.string.isRequired,
   updateShareUrl: PropTypes.func.isRequired,
   updateShare: PropTypes.func.isRequired,
   searchData: PropTypes.object.isRequired,

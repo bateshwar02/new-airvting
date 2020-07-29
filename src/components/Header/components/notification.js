@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { memo, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Utils from '../../../utils/common';
 
@@ -63,14 +64,28 @@ function Notification({ notification, getNotification }) {
       <div uk-dropdown="pos: top-right;mode:click ; animation: uk-animation-slide-bottom-small" className="dropdown-notifications">
         <div className="dropdown-notifications-headline">
           <h4>Notifications </h4>
-          <span>
-            <i className="icon-feather-settings" uk-tooltip="title: Notifications settings ; pos: left" />
-          </span>
+          <Link to="/notifications">
+            <span>
+              <i className="icon-feather-settings" uk-tooltip="title: Show All Notifications  ; pos: left" />
+            </span>
+          </Link>
+
         </div>
         <div className="dropdown-notifications-content" data-simplebar>
           <ul>
             {getNotificationWrap()}
           </ul>
+        </div>
+        <div className="dropdown-notifications-footer">
+          <Link to="/notifications">
+            <span>
+              {' '}
+              Show All
+              {' '}
+              <i className="icon-line-awesome-long-arrow-right" />
+              {' '}
+            </span>
+          </Link>
         </div>
       </div>
     </>

@@ -10,11 +10,20 @@ import t from 'tcomb-form';
 import * as Actions from '../../containers/Home/action';
 import Utils from '../../utils/common';
 import airvForm from '../form';
+import Navigation from '../../utils/navigation';
 import './index.css';
 
-function Search({ updateSearch, getSearchData }) {
-  const [searchData, setSearchData] = useState({});
+function Search({ updateSearch, searchValue }) {
+  const objData = { search: searchValue };
+
+  const [searchData, setSearchData] = useState(objData);
   const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    if (!Utils.isUndefinedOrNullOrEmpty(searchValue)) {
+      setSearchData({ search: searchValue });
+    }
+  }, [searchValue]);
 
   useEffect(() => {
     if (!Utils.isUndefinedOrNullOrEmptyObject(searchData)) {
@@ -26,26 +35,38 @@ function Search({ updateSearch, getSearchData }) {
 
   const onChange = (formValue) => {
     setSearchData(formValue);
-    if (formValue.search.length > 2) {
-      updateSearch(true);
-      getSearchData(formValue.search.length);
+    if (formValue.search.length === 0) {
+      Navigation.push('/sh/airvtingweb');
     }
   };
 
   const formSchema = { search: t.String };
 
+  const searchFunction = () => {
+    if (searchData.search.length > 2) {
+      Navigation.push(`/sh/airvtingweb?search=${searchData.search}`);
+    }
+    if (searchData.search.length === 0) {
+      Navigation.push('/sh/airvtingweb');
+    }
+  };
+
   const clearData = () => {
     setSearchData({});
     updateSearch(false);
+    Navigation.push('/sh/airvtingweb');
   };
 
   const getLoginFormTemplate = locals => (
     <>
       <div className="head_search_cont">
+        <span className="before" onClick={searchFunction} role="button" tabIndex={-1}>
+          <i className="s_icon uil-search-alt" />
+        </span>
         {locals.inputs.search}
-        <span className={classnames('crossSearch', { show })} onClick={clearData} role="button" tabIndex={0}>
+        <span className={classnames('after', { showCross: show })} onClick={clearData} role="button" tabIndex={0}>
           {' '}
-          <img src="assets/icons/cros.png" alt="" />
+          <img src="assets/icons/cros.png" alt="" style={{ height: '18px' }} />
           {' '}
         </span>
       </div>
@@ -63,9 +84,9 @@ function Search({ updateSearch, getSearchData }) {
           placeholder: 'Search for Videos, Games, Movies and more..',
           autoComplete: 'off'
         },
-        config: {
-          addonBefore: <i className="s_icon uil-search-alt" />,
-        },
+        // config: {
+        //   addonBefore: <i className="s_icon uil-search-alt" />,
+        // },
         type: 'text',
       },
     },
@@ -74,50 +95,17 @@ function Search({ updateSearch, getSearchData }) {
   return (
     <div className="head_search">
       <t.form.Form type={getFormSchema()} value={searchData} options={getFormOptions()} onChange={onChange} />
-      <div uk-dropdown="pos:top;mode:click;animation:uk-animation-slide-bottom-small" className="dropdown-search">
-        {/* <ul className="dropdown-search-list">
-          <li className="list-title"> Recent Searches </li>
-          <li>
-            {' '}
-            <a href="video.php"> Adobe XD Design Free Tutorial .. </a>
-            {' '}
-          </li>
-          <li>
-            {' '}
-            <a href="video.php"> How to create a basic Sticky HTML element .. </a>
-          </li>
-          <li>
-            {' '}
-            <a href="video.php"> Learn How to Prototype Faster with Mockplus! in 2020</a>
-          </li>
-          <li>
-            {' '}
-            <a href="video.php"> Adobe XD Design Tutorial Company Website Landing Page .. </a>
-          </li>
-          <div className="menu-divider">
-            <li className="list-footer">
-              {' '}
-              <a href="your-history.php"> Searches History </a>
-            </li>
-          </div>
-        </ul> */}
-      </div>
+      <div uk-dropdown="pos:top;mode:click;animation:uk-animation-slide-bottom-small" className="dropdown-search" />
     </div>
   );
 }
 
 Search.propTypes = {
   updateSearch: PropTypes.func.isRequired,
-  getSearchData: PropTypes.func.isRequired,
+  searchValue: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = ({
-  userDetails: {
-    userData, notification, message, inProcess
-  }
-}) => ({
-  userData, notification, message, inProcess
-});
+const mapStateToProps = ({ home: { searchValue } }) => ({ searchValue });
 
 const mapDispatchToProps = dispatch => bindActionCreators(Actions, dispatch);
 

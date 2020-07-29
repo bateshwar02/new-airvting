@@ -12,6 +12,7 @@
 import React, {
   memo, useEffect, useState
 } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
@@ -46,8 +47,22 @@ export function DetailsVideos({
     if (!Utils.isUndefinedOrNullOrEmpty(id) && Utils.isUndefinedOrNullOrEmptyObject(videoData)) {
       getVideoDetails(id);
     }
-  }, []);
-
+    if (!Utils.isUndefinedOrNullOrEmptyObject(videoData)) {
+      let videoDataArr = [];
+      const historyData = localStorage.getItem('historyData');
+      if (!Utils.isUndefinedOrNullOrEmpty(historyData)) {
+        const parseData = JSON.parse(historyData);
+        let filterd = [];
+        if (!Utils.isUndefinedOrNullOrEmptyList(parseData)) {
+          filterd = parseData.filter(val => val._id !== videoData._id);
+        }
+        videoDataArr = [videoData, ...filterd];
+      } else {
+        videoDataArr = [videoData];
+      }
+      localStorage.setItem('historyData', JSON.stringify(videoDataArr));
+    }
+  }, [videoData]);
 
   const {
     _id, mediaUrl, owner, title, viewers, createdAt, totalLikes, isLive
@@ -63,9 +78,9 @@ export function DetailsVideos({
     return (
       <div className="uk-flex uk-flex-between uk-flex-middle uk-grid">
         <div className="user-details-card uk-width-expand">
-          <a href="single-channal.php" className="uk-flex">
+          <Link to={`/browser-channel/${owner._id}`} className="uk-flex">
             <div className="user-details-card-avatar">
-              {!Utils.isUndefinedOrNullOrEmpty(owner.featuredImage) && <img src={owner.featuredImage} alt="" /> }
+              {!Utils.isUndefinedOrNullOrEmpty(owner.featuredImage) && <img src={owner.featuredImage} alt="" style={{ width: '48px', height: '48px' }} /> }
             </div>
             <div className="user-details-card-name">
               {!Utils.isUndefinedOrNullOrEmpty(owner.displayName) && owner.displayName }
@@ -75,7 +90,7 @@ export function DetailsVideos({
                 {' '}
               </span>
             </div>
-          </a>
+          </Link>
         </div>
         <div className="uk-width-auto uk-flex">
           <div className="btn-subscribe">
@@ -114,6 +129,9 @@ export function DetailsVideos({
     );
   };
 
+  const noVideoFound = () => (
+    <span className="noVideoAlert"> Sorry There is no video for this post. </span>
+  );
 
   const getComponent = () => (
     <div className="main_content">
@@ -128,7 +146,7 @@ export function DetailsVideos({
               <div className="slide-box">
                 <div className="live-vid-slide">
                   {!Utils.isUndefinedOrNullOrEmpty(mediaUrl) && <iframe title={title} width="100%" height="400" src={mediaUrl} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen /> }
-
+                  {(Utils.isUndefinedOrNullOrEmpty(mediaUrl) && !Utils.isUndefinedOrNullOrEmptyObject(videoData)) && noVideoFound()}
                 </div>
                 <div className={classNames('chat-video-gift-box', { isShow: isOpen })}>
                   <ul className="uk-tab gift-tab-box" data-uk-tab="{connect:'#my-id'}">

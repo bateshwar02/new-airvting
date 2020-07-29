@@ -6,7 +6,8 @@ import {
   BOOKMARK_ACTION, GET_CATEGORY, GET_DATA_BY_CATEGORY, UPDATE_VIDEO, GET_SEARCH_DATA, GET_CURRENT_POST
 } from './constatnt';
 import {
-  updateInProcess, updateCategoryData, updateSearchData, updateCurrentPost
+  updateInProcess, updateCategoryData, updateSearchData, updateCurrentPost,
+  // updateSearch
 } from './action';
 import api from './api';
 
@@ -76,7 +77,7 @@ function* getSearchDataSaga({ keyword }) {
   try {
     const searchAct = yield call(api.getSearchData, keyword);
     if (searchAct.success) {
-      yield put(updateSearchData(searchAct.data));
+      yield put(updateSearchData(searchAct.data, true, keyword));
       yield put(updateInProcess(false));
       return;
     }
@@ -92,7 +93,6 @@ function* getSearchDataSaga({ keyword }) {
 function* getCurrentPostData() {
   try {
     const currentData = yield call(api.getCurrentData);
-    console.log('currentData ===== ', currentData);
     if (currentData.success) {
       yield put(updateCurrentPost(currentData.data));
     }

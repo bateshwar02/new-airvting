@@ -5,7 +5,7 @@
  */
 
 import {
-  GET_USER_DATA_BY_ID, GET_POST_DATA_BY_ID, Is_PROCESS_ACTION, UPDATE_USER_POST_DATA, UPDATE_USER_DATA, BOOKMARK_ACTION
+  GET_USER_DATA_BY_ID, GET_POST_DATA_BY_ID, Is_PROCESS_ACTION, UPDATE_USER_POST_DATA, UPDATE_USER_DATA, BOOKMARK_ACTION, FOLLOW_ACTION
 } from './constants';
 
 export function updateUserData({ channelUserData }) {
@@ -47,5 +47,12 @@ export function bookMarkAction({ id }) {
   return {
     type: BOOKMARK_ACTION,
     id,
+  };
+}
+
+export function followAction(id) {
+  return {
+    type: FOLLOW_ACTION,
+    id
   };
 }

@@ -9,5 +9,9 @@ const Service = {
     const url = `api/v1/users/${id}/posts?paginate=1&perPage=100&typePost=video,image&typePost=&bookmarks=0`;
     return Request.get(url);
   },
+  followUser(id) {
+    const url = `api/v1/users/${id}/fallow `;
+    return Request.get(url);
+  },
 };
 export default Service;

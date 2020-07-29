@@ -29,6 +29,8 @@ const Navigation = {
   token: '/token',
   productDetails: '/product-details/:id',
   contact: '/contact',
+  bookmark: '/bookmark',
+  notifications: '/notifications',
   push: (url) => {
     history.push(url);
   },

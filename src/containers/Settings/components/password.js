@@ -90,7 +90,7 @@ function Password({ updatePassword, inProcess }) {
       </div>
       <div className="uk-flex uk-flex-right p-4">
         <button type="button" className="button soft-warning mr-2">
-          Cancle
+          Cancel
         </button>
         <button type="button" className="button warning" onClick={submit}>
           Save Changes

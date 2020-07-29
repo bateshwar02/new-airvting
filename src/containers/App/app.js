@@ -36,6 +36,8 @@ import NotFoundPage from '../NotFoundPage/index';
 import Token from '../MyToken';
 import ProductDetails from '../Product/component/product-details';
 import ContactUs from '../ContactUs';
+import BookmarkComp from '../History/bookmark';
+import NotificationComp from '../Message/notification';
 
 export function App({ userData, getUserData }) {
   const [isLogin, setIsLogin] = useState(true);
@@ -83,6 +85,8 @@ export function App({ userData, getUserData }) {
         <PrivateRoute isLoggedIn={isLogin} exact path={Navigation.card} defaultPath={Navigation.login} component={MyCardsComp} />
         <PrivateRoute isLoggedIn={isLogin} exact path={Navigation.token} defaultPath={Navigation.login} component={Token} />
         <PrivateRoute isLoggedIn={isLogin} exact path={Navigation.productDetails} defaultPath={Navigation.login} component={ProductDetails} />
+        <PrivateRoute isLoggedIn={isLogin} exact path={Navigation.bookmark} defaultPath={Navigation.login} component={BookmarkComp} />
+        <PrivateRoute isLoggedIn={isLogin} exact path={Navigation.notifications} defaultPath={Navigation.login} component={NotificationComp} />
         <Route exact path={Navigation.browserChannel} component={BrowserChannelComp} />
         <Route exact path={Navigation.videoDetails} component={DetailVideo} />
         <Route exact path={Navigation.login} component={LoginComp} />

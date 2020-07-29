@@ -23,7 +23,7 @@ const Service = {
     if (Utils.isUndefinedOrNullOrEmpty(token) || Utils.isUndefinedOrNullOrEmpty(userId)) {
       return null;
     }
-    return Request.get(`api/v1/users/${userId}/notifications?paginate=1&perPage=5&isMessage=false`);
+    return Request.get(`api/v1/users/${userId}/notifications?paginate=1&perPage=4&isMessage=false`);
   },
 
   getMessageData() {

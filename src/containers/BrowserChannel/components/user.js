@@ -16,7 +16,7 @@ import Post from './post';
 import Product from '../../Explore/component/product';
 
 export function User({
-  match, channelUserData, getUserDataById
+  match, channelUserData, getUserDataById, followAction, inProcess
 }) {
   const { id } = match.params;
   useEffect(() => {
@@ -41,7 +41,7 @@ export function User({
             <div className="left-side">
               <div className="channal-image ">
                 <span>
-                  <img src={userDetail.featuredImage} alt="" />
+                  <img src={userDetail.featuredImage} alt="" style={{ width: '48px', height: '48px' }} />
                 </span>
               </div>
               <div className="channal-details-info">
@@ -63,16 +63,16 @@ export function User({
                 <div className="follow-follwing-channal-btn btn-mobile btn-dekstop">
                   {' '}
                   <div>
-                    {userDetail.isFollow && (
                     <div className="toggle3" aria-hidden="false">
-                      <button className="button default circle px-5 btn-subs channal-btn " type="button" uk-toggle="target: .toggle3">Follwing</button>
+                      <button className="button default circle px-5 btn-subs channal-btn " type="button" onClick={() => followAction(userDetail._id)}>
+                        {userDetail.isFollow ? 'Unfollow' : 'Follow' }
+                        {inProcess && (
+                        <div className="loaderWrapper">
+                          <div className="customLoader" />
+                        </div>
+                        )}
+                      </button>
                     </div>
-                    )}
-                    {!userDetail.isFollow && (
-                    <div className="toggle3" aria-hidden="true" hidden="">
-                      <button className="button default circle px-5 btn-subs channal-btn " type="button" uk-toggle="target: .toggle3">Follow</button>
-                    </div>
-                    )}
                   </div>
                 </div>
               </div>
@@ -162,11 +162,12 @@ User.propTypes = {
   channelUserData: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
   getUserDataById: PropTypes.func.isRequired,
+  followAction: PropTypes.func.isRequired,
+  inProcess: PropTypes.bool.isRequired,
 };
 
 
 const mapStateToProps = ({ browserChannel: { channelUserData, inProcess } }) => ({ channelUserData, inProcess });
-
 const mapDispatchToProps = dispatch => bindActionCreators(Actions, dispatch);
 
 const withConnect = connect(

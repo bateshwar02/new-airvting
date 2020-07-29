@@ -79,7 +79,7 @@ function ProductDetails({
                 <span className="discount-price">
                   <i className="icon-line-awesome-tag" />
                   $
-                  {productDetails.price}
+                  {Utils.convertCurrency(Utils.getRoundOfValue(productDetails.price, 2))}
                 </span>
                 )
 

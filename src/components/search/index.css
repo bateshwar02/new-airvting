@@ -19,4 +19,16 @@
 		display: none;
 	}
 
-	span.crossSearch.show { display: block; }
+	span.crossSearch.showCross { display: block; }
+	span.before {
+		position: absolute;
+		top: 5px;
+		left: 10px;
+		z-index: 12;
+	}
+	span.after.showCross {
+		position: absolute;
+		right: 5px;
+	}
+
+	span.after.showCross { height: 18px;}

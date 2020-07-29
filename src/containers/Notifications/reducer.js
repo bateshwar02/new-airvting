@@ -5,11 +5,11 @@
  */
 
 import {
-  UPDATE_DATA, UPDATE_IN_PROCESS, UPDATE_CONVERSATION, IS_ADD_MESSAGE, ADD_MESSAGE_ACTION, UPDATE_NOTIFICATIONS
+  UPDATE_DATA, UPDATE_IN_PROCESS, UPDATE_CONVERSATION, IS_ADD_MESSAGE, ADD_MESSAGE_ACTION
 } from './constants';
 
 export const initialState = {
-  messageData: {}, inProcess: true, conversionDataById: {}, isAddMessage: false, actionInProcess: false, notificationData: {}
+  messageData: {}, inProcess: true, conversionDataById: {}, isAddMessage: false, actionInProcess: false
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -39,11 +39,6 @@ export default function setBrowserInfo(state = initialState, action) {
       return {
         ...state,
         actionInProcess: action.actionInProcess
-      };
-    case UPDATE_NOTIFICATIONS:
-      return {
-        ...state,
-        notificationData: action.notificationData
       };
     default:
       return state;

@@ -8,12 +8,12 @@
  */
 
 import {
-  USER_DATA, Is_PROCESS_ACTION, UPDATE_CATEGORY_DATA, IS_SHARE, SHARE_URL, UPDATE_SEARCH_DATA, UPDATE_CURRENT_POST
+  USER_DATA, Is_PROCESS_ACTION, UPDATE_CATEGORY_DATA, IS_SHARE, SHARE_URL, UPDATE_SEARCH_DATA, UPDATE_CURRENT_POST, UPDATE_SEARCH, UPDATE_SEARCH_VALUE
 } from './constatnt';
 
 // The initial state of the App
 export const initialState = {
-  categoryData: [], inProcess: false, isShare: false, url: '', searchData: {}, currentPost: {}
+  categoryData: [], inProcess: false, isShare: false, url: '', searchData: {}, currentPost: {}, isSearch: false, searchValue: '',
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -53,7 +53,19 @@ export default function setBrowserInfo(state = initialState, action) {
     case UPDATE_SEARCH_DATA:
       return {
         ...state,
-        searchData: action.searchData
+        searchData: action.searchData,
+        searchValue: action.searchValue,
+        isSearch: action.isSearch
+      };
+    case UPDATE_SEARCH:
+      return {
+        ...state,
+        isSearch: action.isSearch
+      };
+    case UPDATE_SEARCH_VALUE:
+      return {
+        ...state,
+        searchValue: action.searchValue
       };
     default:
       return state;
