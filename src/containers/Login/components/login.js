@@ -88,6 +88,12 @@ function Login({ setAction, signIn, socialLogin }) {
     }
   };
 
+  document.onkeydown = function () {
+    if (window.event.keyCode == '13') {
+      submit();
+    }
+  };
+
   return (
     <div className="uk-height-viewport uk-flex uk-flex-middle loginWrapper">
       <div className="uk-width-2-3@m uk-width-1-2@s m-auto rounded">

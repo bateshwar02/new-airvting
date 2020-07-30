@@ -87,13 +87,13 @@ function Payment({
 
   const checkOutData = () => {
     const objectData = {};
-    const { PaymentMethodIdDefault } = userData;
+    // const { PaymentMethodIdDefault } = userData;
     let totalQuant = 0;
     const quantArr = checkoutProd.map(item => item.quantity);
     if (!Utils.isUndefinedOrNullOrEmptyList(quantArr)) {
       totalQuant = quantArr.reduce((a, b) => a + b, 0);
     }
-    objectData.paymentMethodId = PaymentMethodIdDefault;
+    // objectData.paymentMethodId = PaymentMethodIdDefault;
     objectData.products = checkoutProd;
     objectData.totalPrice = (Number(subTotal) - Number(token));
     objectData.totalQuantity = totalQuant;

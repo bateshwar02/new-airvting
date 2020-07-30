@@ -57,6 +57,7 @@ export default function setBrowserInfo(state = initialState, action) {
         ...state,
         storeProccess: action.storeProccess
       };
+
     default:
       return state;
   }

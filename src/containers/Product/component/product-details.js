@@ -75,7 +75,7 @@ function ProductDetails({
             <span>{!Utils.isUndefinedOrNullOrEmptyList(productDetails.productCategories) && productDetails.productCategories[0].title}</span>
             <div className="store-inner-price">
               {
-                (!Utils.isUndefinedOrNullOrEmpty(productDetails.price) && productDetails.discount !== 0) && (
+                (!Utils.isUndefinedOrNullOrEmpty(productDetails.price) && Number(productDetails.discount) > 0) && (
                 <span className="discount-price">
                   <i className="icon-line-awesome-tag" />
                   $
@@ -87,7 +87,7 @@ function ProductDetails({
 
               <span className="sale-price">
                 $
-                {productDetails.priceSale}
+                {Utils.convertCurrency(Utils.getRoundOfValue(productDetails.priceSale, 2))}
               </span>
             </div>
             {/* <div className="store-inner-stars">

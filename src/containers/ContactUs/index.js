@@ -29,6 +29,7 @@ function ContactUs({ contactUs, userData, inProcess }) {
       const { userDetail } = userData;
       customData.name = userDetail.displayName;
       customData.email = userDetail.email;
+      customData.message = '';
       setContactUsForm(customData);
     }
   }, [userData]);
@@ -108,6 +109,15 @@ function ContactUs({ contactUs, userData, inProcess }) {
       return;
     }
     contactUs(contactUsForm);
+    const formData = Utils.deepCopy(contactUsForm);
+    formData.message = '';
+    setContactUsForm(formData);
+  };
+
+  document.onkeydown = function () {
+    if (window.event.keyCode == '13') {
+      submit();
+    }
   };
 
   const getContent = () => (

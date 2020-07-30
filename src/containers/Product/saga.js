@@ -9,6 +9,7 @@ import {
   ADD_PRODUCT_DATA, GET_PRODUCT_CATEGORY_OPTION, CLOSE_MODAL, GET_PRODUCT_DETAILS, ADD_TO_CART
 } from './constants';
 import { updateInProcess, updateProductCategoryOption, updateProductDetails } from './actions';
+import { getCart } from '../MyCart/actions';
 import api from './api';
 
 function* addProduct({ formData }) {
@@ -69,6 +70,7 @@ function* addTocartSaga({ formData }) {
     const apiData = yield call(api.addToCart, formData);
     if (apiData.success) {
       yield put(notifySuccess('Product added to cart successfully.'));
+      yield put(getCart());
     }
     yield put(updateInProcess({ inProcess: false }));
   } catch (e) {

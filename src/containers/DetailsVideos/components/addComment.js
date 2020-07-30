@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, {
-  useRef, useState, useEffect
+  useRef, useState
 } from 'react';
 import PropTypes from 'prop-types';
 import t from 'tcomb-form';
@@ -17,15 +17,8 @@ function Comment({
   }
 
   const addCommentForm = useRef(null);
-  const [addCommentData, setAddCommentData] = useState({ comment: '' });
+  const [addCommentData, setAddCommentData] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
-
-  useEffect(() => {
-    if (isSubmitted) {
-      setAddCommentData({ comment: '' });
-      setIsSubmitted(false);
-    }
-  }, [isSubmitted]);
 
   const onChange = (formValue) => {
     if (isSubmitted) {
@@ -69,6 +62,13 @@ function Comment({
     }
     const otpFormData = Utils.deepCopy(addCommentData);
     addVideoComment(otpFormData, id);
+    setAddCommentData({});
+  };
+
+  document.onkeydown = function () {
+    if (window.event.keyCode == '13') {
+      submit();
+    }
   };
 
   return (
@@ -85,8 +85,8 @@ function Comment({
               <t.form.Form ref={addCommentForm} type={getFormSchema()} value={addCommentData} options={getFormOptions()} onChange={onChange} onSubmit={submit} />
             </div>
             <div className="uk-grid-margin">
-              <span type="submit" className="button warning submitButton" role="button" tabIndex={0} onClick={submit}>
-                submit
+              <span type="button" className="button warning submitButton" role="button" tabIndex={0} onClick={submit}>
+                Submit
                 { actionInProcess && (
                 <div className="loaderWrapper">
                   <div className="customLoader" />
