@@ -10,18 +10,18 @@ import {
   GET_VIDEO_DETAILS, ADD_COMMENT, GET_COMMENT, FOLLOW_ACTION, MY_GIFT, STORE_GIFT, LIKE_ACTION_POST
 } from './constants';
 import {
-  updateVideoData, updateInProcess, updateCommentData, getComment, updateActionInProcess, updateFallowInProcess, updateMyGift, updateStoreGift, updateStoreProcess
+  updateVideoData, updateInProcess, updateCommentData, getComment, updateActionInProcess, updateFallowInProcess, updateMyGift, updateStoreGift, updateStoreProcess, getVideoDetails
 } from './actions';
 import api from './api';
 
 function* getVideoDataSaga({ id }) {
   try {
-    const getVideoDetails = yield call(api.getVideoDetails, id);
-    if (getVideoDetails.success) {
-      yield put(updateVideoData({ videoData: getVideoDetails.data.postDetail, inProcess: false }));
+    const getVideoDetailsCall = yield call(api.getVideoDetails, id);
+    if (getVideoDetailsCall.success) {
+      yield put(updateVideoData({ videoData: getVideoDetailsCall.data.postDetail, inProcess: false }));
       return;
     }
-    yield put(notifyError({ message: getVideoDetails.message }));
+    yield put(notifyError({ message: getVideoDetailsCall.message }));
     yield put(updateInProcess(false));
     return;
   } catch (e) {
@@ -136,6 +136,7 @@ function* likeActionSaga({ post_id }) {
     const callGift = yield call(api.likePostAction, post_id);
     if (callGift.success) {
       yield put(notifySuccess('Liked Post'));
+      yield put(getVideoDetails(post_id));
       yield put(updateStoreProcess(false));
       return;
     }

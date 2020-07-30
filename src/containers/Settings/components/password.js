@@ -89,9 +89,9 @@ function Password({ updatePassword, inProcess }) {
         <t.form.Form ref={passRef} type={getFormSchema()} value={passFormData} options={getFormOptions()} onChange={onChange} />
       </div>
       <div className="uk-flex uk-flex-right p-4">
-        <button type="button" className="button soft-warning mr-2">
+        {/* <button type="button" className="button soft-warning mr-2">
           Cancel
-        </button>
+        </button> */}
         <button type="button" className="button warning" onClick={submit}>
           Save Changes
           {inProcess && (

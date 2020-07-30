@@ -21,12 +21,24 @@ export function conversationList({ getNotification, notificationData, inProcess 
   }, [notificationData]);
 
   const notificationList = () => {
-    const { items } = notificationData;
-    if (Utils.isUndefinedOrNullOrEmptyList(items)) {
+    if (Utils.isUndefinedOrNullOrEmptyObject(notificationData)) {
       return null;
     }
+    const { items } = notificationData;
+
+    if (Utils.isUndefinedOrNullOrEmptyList(items)) {
+      return (
+        <li>
+          <span className="notificationWrapper">
+            <div className="notification-text notification-msg-text">
+              <p>No Notification</p>
+            </div>
+          </span>
+        </li>
+      );
+    }
+
     return items.map((item, index) => {
-      console.log('item =====', item);
       const keys = `key-${index}`;
       const date1 = new Date(item.createdAt);
       const date2 = new Date();

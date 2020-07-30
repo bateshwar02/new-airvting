@@ -21,6 +21,7 @@ import Footer from '../../components/Footer';
 import Loader from '../../components/Loader';
 import Share from '../../components/Share';
 
+
 export function LikeVideos({
   likeVideosData, getLikedVideosData, bookMarkAction, inProcess, userData
 }) {
@@ -143,7 +144,7 @@ export function LikeVideos({
           <hr className="my-0" />
           <ul className="uk-list uk-list-divider uk-margin-small-top pt-1 pb-2">
             <li>
-              <span className="ml-4">
+              <span className="ml-4" onClick={() => Navigation.push('/sh/airvtingweb/followers')} tabIndex={0} role="button">
                 <i className="uil-user mr-1" />
                 Followers
                 {' '}
@@ -155,7 +156,7 @@ export function LikeVideos({
               </span>
             </li>
             <li>
-              <span className="ml-4">
+              <span className="ml-4" onClick={() => Navigation.push('/sh/airvtingweb/following')} tabIndex={0} role="button">
                 <i className="uil-user mr-1" />
                 Followins
                 {' '}
@@ -166,7 +167,7 @@ export function LikeVideos({
               </span>
             </li>
             <li>
-              <span href="#" className="ml-4">
+              <span className="ml-4" onClick={() => Navigation.push(`/sh/airvtingweb/browser-channel/${userDetail._id}`)} tabIndex={0} role="button">
                 <i className="uil-cloud-upload mr-1" />
                 Posts
                 {' '}
@@ -209,14 +210,14 @@ export function LikeVideos({
                 <h3> Your Liked Videos</h3>
               </div>
               <div className="section-header-right">
-                <div className="display-as">
+                {/* <div className="display-as">
                   <span uk-tooltip="title: Veiw as list; pos: top-right">
                     <i className="icon-feather-grid" />
                   </span>
                   <a href="your-watch-later.php" className="active" uk-tooltip="title: Veiw as Grid; pos: top-right">
                     <i className="icon-feather-list" />
                   </a>
-                </div>
+                </div> */}
               </div>
             </div>
             {getDataWrapper()}

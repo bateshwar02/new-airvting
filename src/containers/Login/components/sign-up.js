@@ -103,6 +103,9 @@ function Signup({ setAction, signUp }) {
         label: 'User Name',
         template: airvForm.templates.textbox,
         error: () => 'User Name is required',
+        attrs: {
+          placeholder: 'Enter Username',
+        },
         config: {
           addonBefore: <i className="icon-feather-user" />,
         },
@@ -121,6 +124,7 @@ function Signup({ setAction, signUp }) {
         },
         attrs: {
           validateRegex: /^(\d{1}){0,10}$/,
+          placeholder: 'Enter Phone Number',
         },
         type: 'text',
       },

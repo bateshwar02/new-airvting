@@ -26,7 +26,7 @@ import Utils from '../../utils/common';
 import Navigation from '../../utils/navigation';
 import Comment from './components/addComment';
 import GetComment from './components/getComment';
-import LiveChat from './components/liveComment';
+// import LiveChat from './components/liveComment';
 import Loader from '../../components/Loader';
 import Mygift from './components/myGift';
 import Storegift from './components/storeGift';
@@ -65,7 +65,7 @@ export function DetailsVideos({
   }, [videoData]);
 
   const {
-    _id, mediaUrl, owner, title, viewers, createdAt, totalLikes, isLive
+    _id, mediaUrl, owner, title, viewers, createdAt, totalLikes
   } = videoData;
 
   const date = new Date(createdAt);
@@ -198,7 +198,7 @@ export function DetailsVideos({
                     </ul>
                   </div>
                 </div>
-                {isLive && <LiveChat />}
+                {/* {isLive && <LiveChat />} */}
               </div>
             </li>
           </ul>
@@ -243,12 +243,12 @@ export function DetailsVideos({
               </div>
               <div className="abt-rw tgs">
                 <h4>Tags : </h4>
-                <ul>
+                {/* <ul>
                   <li><a href="/" title="">#Education</a></li>
                   <li><a href="/" title="">#Programming </a></li>
                   <li><a href="/" title="">#Design</a></li>
                   <li><a href="/" title="">#Courses</a></li>
-                </ul>
+                </ul> */}
               </div>
             </div>
           </div>

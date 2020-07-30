@@ -31,10 +31,22 @@ export function conversationList({ getConversation, messageData, inProcess }) {
   }, [messageData]);
 
   const messageList = () => {
-    const { conversationsDetail } = messageData;
-    if (Utils.isUndefinedOrNullOrEmptyObject(conversationsDetail)) {
+    if (Utils.isUndefinedOrNullOrEmptyObject(messageData)) {
       return null;
     }
+    const { conversationsDetail } = messageData;
+    if (Utils.isUndefinedOrNullOrEmptyList(conversationsDetail)) {
+      return (
+        <li>
+          <span className="notificationWrapper">
+            <div className="notification-text notification-msg-text">
+              <p>No message</p>
+            </div>
+          </span>
+        </li>
+      );
+    }
+
     return conversationsDetail.map((item, index) => {
       const date = new Date(item.updatedAt);
       const ticks = date.getTime();

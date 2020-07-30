@@ -12,10 +12,22 @@ function Message({ message, getMessage }) {
   }, []);
 
   const getMessageWrap = () => {
-    const { items } = message;
-    if (Utils.isUndefinedOrNullOrEmptyList(items)) {
+    if (Utils.isUndefinedOrNullOrEmptyObject(message)) {
       return null;
     }
+    const { items } = message;
+    if (Utils.isUndefinedOrNullOrEmptyList(items)) {
+      return (
+        <li>
+          <span className="notificationWrapper">
+            <div className="notification-text notification-msg-text">
+              <p>No message</p>
+            </div>
+          </span>
+        </li>
+      );
+    }
+
     return items.map((item, index) => {
       const keys = `key-${index}`;
       const date1 = new Date(item.createdAt);
@@ -70,17 +82,23 @@ function Message({ message, getMessage }) {
             {getMessageWrap()}
           </ul>
         </div>
+
+
         <div className="dropdown-notifications-footer">
-          <Link to="/message">
-            <span>
-              {' '}
-              Show All
-              {' '}
-              <i className="icon-line-awesome-long-arrow-right" />
-              {' '}
-            </span>
-          </Link>
+          { (!Utils.isUndefinedOrNullOrEmptyList(message.item) && message.item.length > 4) && (
+            <Link to="/message">
+              <span>
+                {' '}
+                Show All
+                {' '}
+                <i className="icon-line-awesome-long-arrow-right" />
+                {' '}
+              </span>
+            </Link>
+          )}
+
         </div>
+
       </div>
     </>
   );

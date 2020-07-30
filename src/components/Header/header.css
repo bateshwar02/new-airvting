@@ -195,5 +195,16 @@ img.walletIcon {
 
 .activeMenu{
 	font-weight: bold;
-	color: #ba4b00
+	color: #ba4b00 !important ;
 }
+
+.night-mode span.custom-link.activeMenu{
+	font-weight: bold;
+	color: #ba4b00 !important ;
+}
+
+.night-mode span.actionButton{
+   color: #c7c7c7;
+}
+
+.night-mode span.profileMenu{color: #c7c7c7 !important}

@@ -22,10 +22,11 @@ function* signUpSaga({ formData }) {
         yield put(updateUserData({ userData: signUp.data }));
         yield put(updateProcessAction(false));
       }
+      yield put(updateActions({ action: 1 }));
       return;
     }
     yield put(notifyError({ message: signUp.message }));
-    yield put(updateActions({ action: 1 }));
+    yield put(updateActions({ action: 2 }));
     yield put(updateProcessAction(false));
   } catch (e) {
     yield put(updateProcessAction(false));
@@ -83,6 +84,7 @@ function* sedEmailToResetPass({ formData }) {
       if (!Utils.isUndefinedOrNullOrEmptyObject(signInCall.data)) {
         yield put(notifySuccess('Reset password link has been send on your email id.'));
         yield put(updateProcessAction(false));
+        yield put(updateActions({ action: 1 }));
         return;
       }
     }

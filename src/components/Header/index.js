@@ -15,9 +15,10 @@ import Loader from '../Loader';
 import './header.css';
 
 function Header({
-  userData, logout, addProductAction, notification, getNotification, message, getMessage, inProcess, verfyEmail, updateSearch
+  userData, logout, addProductAction, notification, getNotification, message, getMessage, inProcess, verfyEmail, updateSearch, cartData, getCartData
 }) {
   const [userProfileImg, setUserProfileImage] = useState('assets/images/avatars/avatar-1.jpg');
+  const [cartCount, setCartCount] = useState(0);
   useEffect(() => {
     if (!Utils.isUndefinedOrNullOrEmptyObject(userData)) {
       const { userDetail } = userData;
@@ -26,6 +27,16 @@ function Header({
       }
     }
   }, [userData]);
+
+  useEffect(() => {
+    if (Utils.isUndefinedOrNullOrEmptyObject(cartData)) {
+      getCartData();
+    }
+    if (!Utils.isUndefinedOrNullOrEmptyObject(cartData)) {
+      setCartCount(cartData.productDetail.length);
+    }
+  }, [cartData]);
+
   const { userDetail } = userData;
   const nightMode = () => {
     const isNightMode = localStorage.getItem('gmtNightMode');
@@ -94,7 +105,7 @@ function Header({
         </li>
         <li>
           <Link to="/token">
-            <img src="assets/images/wallet.png" className="walletIcon" alt="" />
+            <i className="uil-wallet" />
             My Wallet
           </Link>
         </li>
@@ -102,15 +113,15 @@ function Header({
           <Link to="/cart">
             <i className="icon-material-outline-add-shopping-cart" />
             My Cart
-            {/* <div className="my-cart-hadder-total">10</div> */}
+            <div className="my-cart-hadder-total">{cartCount}</div>
           </Link>
         </li>
-        <li>
+        {/* <li>
           <Link to="/cards">
             <i className="icon-material-outline-credit-card" />
             My Cards
           </Link>
-        </li>
+        </li> */}
 
         <li>
           <Link to="/message">
@@ -212,91 +223,6 @@ function Header({
                 </Link>
               </li>
             </ul>
-            {/* <ul aria-expanded="false">
-              <li>
-                <a href="void(0)" className="btn-upload uk-visible@s" aria-expanded="true">
-                  {' '}
-                  <i className="uil-cloud-upload" />
-                  Upload
-                </a>
-              </li>
-            </ul> */}
-
-            {/* <div
-              uk-dropdown="pos: top-right;mode:click ; animation: uk-animation-slide-bottom-small"
-              className="dropdown-notifications uk-dropdown uk-dropdown-top-right"
-              style={{ left: '718px', top: '-383px' }}
-            >
-              <div className="dropdown-notifications-headline">
-                <h4 className="text-left">Upload Video/Photo</h4>
-              </div>
-              <div className="dropdown-notifications-content uk-flex uk-flex-middle uk-flex-center text-center">
-                <div className="uk-flex uk-flex-column choose-upload  text-center">
-                  <img src="assets/images/upload.png" width="70" className="m-auto" alt="" />
-                  <p className="my-3">
-                    {' '}
-                    Do you have a video wants to share us
-                    {' '}
-                    <br />
-                    {' '}
-                    please upload her ..
-                  </p>
-                  <div uk-form-custom="" className="uk-form-custom">
-                    <input type="file" />
-                    <a href="void(0)" className="button soft-warning small">
-                      {' '}
-                      Choose file
-                    </a>
-                  </div>
-
-                  <a
-                    href="void(0)"
-                    className="uk-text-muted mt-3 uk-link"
-                    uk-toggle="target: .choose-upload ;  animation: uk-animation-slide-right-small, uk-animation-slide-left-medium; queued: true"
-                  >
-                    Or Import Video
-                    {' '}
-                  </a>
-                </div>
-
-                <div className="uk-flex uk-flex-column choose-upload" hidden="">
-                  <i className="uil-import icon-large text-muted" />
-                  <p className="my-3">
-                    {' '}
-                    Import videos from YouTube
-                    {' '}
-                    <br />
-                    {' '}
-                    Copy / Paste your video link here
-                    {' '}
-                  </p>
-                  <form className="uk-grid-small uk-grid">
-                    <div className="uk-width-expand">
-                      <input type="text" className="uk-input uk-form-small" placeholder="Paste link" />
-                    </div>
-                    <div className="uk-width-auto">
-                      <button type="submit" className="button soft-warning">
-                        {' '}
-                        Import
-                        {' '}
-                      </button>
-                    </div>
-                  </form>
-                  <a
-                    href="void(0)"
-                    className="uk-text-muted mt-3 uk-link"
-                    uk-toggle="target: .choose-upload ; animation: uk-animation-slide-left-small, uk-animation-slide-right-medium; queued: true"
-                  >
-                    Or Upload Video
-                    {' '}
-                  </a>
-                </div>
-              </div>
-              <hr className="m-0" />
-              <div className="text-center uk-text-small py-2 uk-text-muted"> Your Video size Must be Maxmium 999MB</div>
-            </div> */}
-
-
           </div>
         </div>
       </div>
@@ -335,14 +261,17 @@ Header.propTypes = {
   inProcess: PropTypes.bool.isRequired,
   verfyEmail: PropTypes.func.isRequired,
   updateSearch: PropTypes.func.isRequired,
+  cartData: PropTypes.object.isRequired,
+  getCartData: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({
   userDetails: {
     userData, notification, message, inProcess
-  }
+  },
+  carts: { cartData }
 }) => ({
-  userData, notification, message, inProcess
+  userData, notification, message, inProcess, cartData
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(Actions, dispatch);

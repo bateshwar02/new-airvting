@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, {
-  memo, useRef, useState
+  useRef, useState, useEffect
 } from 'react';
 import PropTypes from 'prop-types';
 import t from 'tcomb-form';
@@ -15,11 +15,17 @@ function Comment({
   if (!Utils.isUndefinedOrNullOrEmptyObject(userDetail) && !Utils.isUndefinedOrNullOrEmpty(userDetail.featuredImage)) {
     imgUrl = userDetail.featuredImage;
   }
-  
+
   const addCommentForm = useRef(null);
-  const [addCommentData, setAddCommentData] = useState({});
+  const [addCommentData, setAddCommentData] = useState({ comment: '' });
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  useEffect(() => {
+    if (isSubmitted) {
+      setAddCommentData({ comment: '' });
+      setIsSubmitted(false);
+    }
+  }, [isSubmitted]);
 
   const onChange = (formValue) => {
     if (isSubmitted) {
@@ -63,7 +69,6 @@ function Comment({
     }
     const otpFormData = Utils.deepCopy(addCommentData);
     addVideoComment(otpFormData, id);
-    setAddCommentData({});
   };
 
   return (
@@ -77,10 +82,10 @@ function Comment({
           </div>
           <div className="comment-content">
             <div className="uk-grid-small uk-grid">
-              <t.form.Form ref={addCommentForm} type={getFormSchema()} value={addCommentData} options={getFormOptions()} onChange={onChange} />
+              <t.form.Form ref={addCommentForm} type={getFormSchema()} value={addCommentData} options={getFormOptions()} onChange={onChange} onSubmit={submit} />
             </div>
             <div className="uk-grid-margin">
-              <span className="button warning submitButton" role="button" tabIndex={0} onClick={submit}>
+              <span type="submit" className="button warning submitButton" role="button" tabIndex={0} onClick={submit}>
                 submit
                 { actionInProcess && (
                 <div className="loaderWrapper">
@@ -104,4 +109,4 @@ Comment.propTypes = {
 };
 
 
-export default memo(Comment);
+export default Comment;

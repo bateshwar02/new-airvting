@@ -102,9 +102,7 @@ function Login({ setAction, signIn, socialLogin }) {
               <h2 className="mb-0"> Welcome back</h2>
               <p className="my-2">Login to manage your account.</p>
             </div>
-            <form onSubmit={submit}>
-              <t.form.Form ref={loginForm} type={getFormSchema()} value={loginFormValue} options={getFormOptions()} onChange={onChange} onKeyDown={onEnterPress} />
-            </form>
+            <t.form.Form ref={loginForm} type={getFormSchema()} value={loginFormValue} options={getFormOptions()} onChange={onChange} onKeyDown={onEnterPress} onSubmit={submit} />
             <div className="mt-4 uk-flex-middle -small uk-grid">
               <div className="uk-width-expand@s ">
                 <p>

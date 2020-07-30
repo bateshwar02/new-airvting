@@ -58,7 +58,7 @@ function Sidebar() {
                 <Link to={Navigation.followers}>
                   <i className="uil-users-alt" />
                   {' '}
-                  follower
+                  Followers
                 </Link>
               </li>
               <li
@@ -69,7 +69,7 @@ function Sidebar() {
                 <Link to={Navigation.following}>
                   <i className="uil-users-alt" />
                   {' '}
-                  following
+                  Following
                 </Link>
               </li>
               <li

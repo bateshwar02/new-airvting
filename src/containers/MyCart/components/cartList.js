@@ -6,7 +6,7 @@
  */
 
 import React, {
-  memo, useEffect, useState, useRef
+  memo, useEffect, useState
 } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -18,7 +18,6 @@ import Loader from '../../../components/Loader';
 function CartList({
   getCart, cartData, inProcess, removeCart, updateProdItem
 }) {
-  const checkBoxRef = useRef(null);
   const [productList, setProductList] = useState([]);
   const [count, setCount] = useState({});
 
@@ -60,56 +59,11 @@ function CartList({
   };
 
   const getCardsList = () => {
-    if (!Utils.isUndefinedOrNullOrEmptyObject(cartData)) {
-      const { productDetail } = cartData;
-      const countObj = Utils.deepCopy(count);
-      if (!Utils.isUndefinedOrNullOrEmptyList(productDetail)) {
-        return productDetail.map((item, index) => {
-          const keys = `keys-index-${index}`;
-          countObj[`${item._id}-count`] = 1;
-          return (
-            <tr key={keys}>
-              <td>
-                <div className="mycart-ceakbox">
-                  <input type="checkbox" name="cheakbox-mycart" value={`${item._id}|${item.priceSale}`} onChange={checkboxCheck} checked={productList.includes(`${item._id}|${item.priceSale}`)} />
-                </div>
-              </td>
-              <td>
-                <div className="mycart-table-img"><img src={item.featuredImages[0].featuredImage} alt="" /></div>
-              </td>
-              <td>
-                <div className="mycart-table-remove">
-                  <h4>{item.displayName}</h4>
-                  <p>
-                    $
-                    {Utils.convertCurrency(Utils.getRoundOfValue(item.priceSale, 2))}
-                  </p>
-                  <p><button type="button" className="btn-mycart-remove button default" onClick={() => { removeCart(item._id); }}>Remove</button></p>
-                </div>
-              </td>
-              <td>
-                <div className="mycart-table-inc-dec-btn">
-                  <span type="button" className="qtyminus decriment-btn" onClick={() => decreament(`${item._id}-count`)}>-</span>
-                  <span className="count">
-                    {!Utils.isUndefinedOrNullOrEmpty(count[`${item._id}-count`]) ? count[`${item._id}-count`] : 1 }
-                  </span>
-                  <span type="button" className="qtyplus incriment-btm" onClick={() => increament(`${item._id}-count`)}>+</span>
-                </div>
-              </td>
-              <td>
-                <div className="mycart-table-total-price">
-                  <p>
-                    $
-                    {Utils.convertCurrency(Utils.getRoundOfValue(Number(!Utils.isUndefinedOrNullOrEmpty(count[`${item._id}-count`]) ? count[`${item._id}-count`] : 1) * Number(item.priceSale), 2)) }
-                    {/* {Number(!Utils.isUndefinedOrNullOrEmpty(count[`${item._id}-count`]) ? count[`${item._id}-count`] : 1) * Number(item.priceSale) } */}
-                  </p>
-                </div>
-              </td>
-            </tr>
-          );
-        });
-      }
-      setCount(countObj);
+    if (Utils.isUndefinedOrNullOrEmptyObject(cartData)) {
+      return false;
+    }
+    const { productDetail } = cartData;
+    if (Utils.isUndefinedOrNullOrEmptyList(productDetail)) {
       return (
         <tr>
           <td className="my-card-table-img-td">
@@ -118,7 +72,53 @@ function CartList({
         </tr>
       );
     }
-    return null;
+
+    const countObj = Utils.deepCopy(count);
+    return productDetail.map((item, index) => {
+      const keys = `keys-index-${index}`;
+      countObj[`${item._id}-count`] = 1;
+      return (
+        <tr key={keys}>
+          <td>
+            <div className="mycart-ceakbox">
+              <input type="checkbox" name="cheakbox-mycart" value={`${item._id}|${item.priceSale}`} onChange={checkboxCheck} checked={productList.includes(`${item._id}|${item.priceSale}`)} />
+            </div>
+          </td>
+          <td>
+            <div className="mycart-table-img"><img src={item.featuredImages[0].featuredImage} alt="" /></div>
+          </td>
+          <td>
+            <div className="mycart-table-remove">
+              <h4>{item.displayName}</h4>
+              <p>
+                $
+                {Utils.convertCurrency(Utils.getRoundOfValue(item.priceSale, 2))}
+              </p>
+              <p><button type="button" className="btn-mycart-remove button default" onClick={() => { removeCart(item._id); }}>Remove</button></p>
+            </div>
+          </td>
+          <td>
+            <div className="mycart-table-inc-dec-btn">
+              <span type="button" className="qtyminus decriment-btn" onClick={() => decreament(`${item._id}-count`)}>-</span>
+              <span className="count">
+                {!Utils.isUndefinedOrNullOrEmpty(count[`${item._id}-count`]) ? count[`${item._id}-count`] : 1 }
+              </span>
+              <span type="button" className="qtyplus incriment-btm" onClick={() => increament(`${item._id}-count`)}>+</span>
+            </div>
+          </td>
+          <td>
+            <div className="mycart-table-total-price">
+              <p>
+                $
+                {Utils.convertCurrency(Utils.getRoundOfValue(Number(!Utils.isUndefinedOrNullOrEmpty(count[`${item._id}-count`]) ? count[`${item._id}-count`] : 1) * Number(item.priceSale), 2)) }
+                {/* {Number(!Utils.isUndefinedOrNullOrEmpty(count[`${item._id}-count`]) ? count[`${item._id}-count`] : 1) * Number(item.priceSale) } */}
+              </p>
+            </div>
+          </td>
+        </tr>
+      );
+    });
+    // setCount(countObj);
   };
 
   const prosideOrder = (step) => {
@@ -153,7 +153,7 @@ function CartList({
 
   const getContent = () => (
     <table className="uk-table uk-table-responsive uk-table-divider uk-table-middle mycart-table">
-      <tbody ref={checkBoxRef}>
+      <tbody>
         {getCardsList()}
       </tbody>
     </table>

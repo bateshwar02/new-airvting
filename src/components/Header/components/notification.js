@@ -13,9 +13,21 @@ function Notification({ notification, getNotification }) {
   }, []);
 
   const getNotificationWrap = () => {
-    const { items } = notification;
-    if (Utils.isUndefinedOrNullOrEmptyList(items)) {
+    if (Utils.isUndefinedOrNullOrEmptyObject(notification)) {
       return null;
+    }
+    const { items } = notification;
+
+    if (Utils.isUndefinedOrNullOrEmptyList(items)) {
+      return (
+        <li>
+          <span className="notificationWrapper">
+            <div className="notification-text notification-msg-text">
+              <p>No Notification</p>
+            </div>
+          </span>
+        </li>
+      );
     }
     return items.map((item, index) => {
       const keys = `key-${index}`;
@@ -32,7 +44,7 @@ function Notification({ notification, getNotification }) {
             <span className="notification-text">
               <strong>{item.notifier.displayName}</strong>
               {item.notifyMessage}
-              <span className="text-primary"> Learn Prototype Faster</span>
+              {/* <span className="text-primary"> Learn Prototype Faster</span> */}
               <br />
               {' '}
               <span className="time-ago">
@@ -76,17 +88,19 @@ function Notification({ notification, getNotification }) {
             {getNotificationWrap()}
           </ul>
         </div>
-        <div className="dropdown-notifications-footer">
-          <Link to="/notifications">
-            <span>
-              {' '}
-              Show All
-              {' '}
-              <i className="icon-line-awesome-long-arrow-right" />
-              {' '}
-            </span>
-          </Link>
-        </div>
+
+        { (!Utils.isUndefinedOrNullOrEmptyList(notification.item) && notification.item.length > 4) && (
+        <Link to="/notifications">
+          <span>
+            {' '}
+            Show All
+            {' '}
+            <i className="icon-line-awesome-long-arrow-right" />
+            {' '}
+          </span>
+        </Link>
+        ) }
+
       </div>
     </>
   );

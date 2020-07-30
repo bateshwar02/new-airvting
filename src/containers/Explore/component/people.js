@@ -5,18 +5,21 @@
  *
  */
 
-import React, { memo, useEffect } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose, bindActionCreators } from 'redux';
 import Utils from '../../../utils/common';
 import * as Actions from '../actions';
+import Loader from '../../../components/Loader';
 // import Navigation from '../../../utils/navigation';
 
 function People({
   getPeopleData, peopleData, peopleFilter, followAction, fallowInProcess
 }) {
+  const [followArr, setFollowArr] = useState([]);
+
   useEffect(() => {
     if (Utils.isUndefinedOrNullOrEmptyObject(peopleData)) {
       getPeopleData(peopleFilter);
@@ -40,6 +43,18 @@ function People({
       if (!Utils.isUndefinedOrNullOrEmpty(item.featuredImage)) {
         featureImg = item.featuredImage;
       }
+
+      const follow = (id) => {
+        const arrData = Utils.deepCopy(followArr);
+        if (!arrData.includes(id)) {
+          arrData.push(id);
+        } else {
+          arrData.splice(arrData.indexOf(5), 1);
+        }
+
+        setFollowArr(arrData);
+        followAction(id);
+      };
 
       return (
         <div key={keys}>
@@ -66,13 +81,11 @@ function People({
                     Remove
                   </button> */}
 
-                  <button onClick={() => followAction(item._id)} className="button default circle px-5 btn-subs channal-btn followButton " type="button">
-                    Follow
-                    {fallowInProcess && (
-                    <div className="loaderWrapper">
-                      <div className="customLoader" />
-                    </div>
-                    )}
+                  <button onClick={() => follow(item._id)} className="button default circle px-5 btn-subs channal-btn followButton " type="button">
+
+                    {
+                      followArr.includes(item._id) ? 'Remove' : 'Follow'
+                    }
                   </button>
                 </span>
               </div>
@@ -90,6 +103,7 @@ function People({
           {getContent()}
         </div>
       </div>
+      <Loader inProcess={fallowInProcess} />
     </div>
   );
 }

@@ -121,6 +121,7 @@ a#night-mode i {
     padding-right: 5px;
 }
 
+night-mode span.actionButton {color: #545454}
 
 .custom-link {
     color: black;
