@@ -18,7 +18,7 @@ function ProductDetails({
   getProductDetails, inProcess, productDetails, match, addToCart
 }) {
   const [productImg, setProdImg] = useState('');
-  const [count, setCount] = useState(1);
+  // const [count, setCount] = useState(1);
 
   useEffect(() => {
     if (Utils.isUndefinedOrNullOrEmptyObject(productDetails)) {
@@ -42,15 +42,15 @@ function ProductDetails({
     addToCart(objData);
   };
 
-  const decreament = () => {
-    if (count > 1) {
-      setCount(Number(count) - 1);
-    }
-  };
+  // const decreament = () => {
+  //   if (count > 1) {
+  //     setCount(Number(count) - 1);
+  //   }
+  // };
 
-  const increament = () => {
-    setCount(Number(!Utils.isUndefinedOrNullOrEmpty(count) ? count : 1) + 1);
-  };
+  // const increament = () => {
+  //   setCount(Number(!Utils.isUndefinedOrNullOrEmpty(count) ? count : 1) + 1);
+  // };
 
   const getDetails = () => {
     if (Utils.isUndefinedOrNullOrEmptyObject(productDetails)) {
@@ -109,7 +109,7 @@ function ProductDetails({
               </p>
             </div>
             <div className="store-inner-addcart-box">
-              <span className="inc-dec-box">
+              {/* <span className="inc-dec-box">
                 <div className="mycart-table-inc-dec-btn">
                   <span type="button" className="qtyminus decriment-btn" onClick={decreament}>-</span>
                   <span className="count">
@@ -117,7 +117,7 @@ function ProductDetails({
                   </span>
                   <span type="button" className="qtyplus incriment-btm" onClick={increament}>+</span>
                 </div>
-              </span>
+              </span> */}
               <span className="addToCart" onClick={() => { addToCartProduct(productDetails._id); }}>
                 <button className="btn-addcart button default " type="button">
                   <i className="icon-line-awesome-cart-plus" />

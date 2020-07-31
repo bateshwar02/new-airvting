@@ -43,3 +43,16 @@ span.message-text {
 span.time-ago {
   color: #6787c1;
 }
+
+.buttonWrapper.menuWrap.actionWrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-left: 20px;
+  width: 100%;
+  color: #6d6d6d;
+}
+.marginLeft{margin-left: -18px;}
+.message-mobile-box {
+  width: 100%;
+}

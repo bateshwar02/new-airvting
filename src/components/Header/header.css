@@ -208,3 +208,25 @@ img.walletIcon {
 }
 
 .night-mode span.profileMenu{color: #c7c7c7 !important}
+
+span.alertIcon {
+    height: 16px !important;
+    width: 18px !important;
+	font-size: 9px !important;
+	padding-top: 1px !important;
+}
+
+span.message {
+    font-size: 12px;
+}
+
+.time-ago {
+    width: 40%;
+    float: right;
+    display: contents;
+    font-size: 9px !important;
+    color: #007791 !important;
+    display: flex;
+	justify-self: end;
+	align-self: flex-end;
+}

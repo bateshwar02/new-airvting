@@ -1,16 +1,20 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { memo, useEffect } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Utils from '../../../utils/common';
 
 
 function Notification({ notification, getNotification }) {
+  const [count, setCount] = useState(0);
   useEffect(() => {
     if (Utils.isUndefinedOrNullOrEmptyObject(notification)) {
       getNotification();
     }
-  }, []);
+    if (!Utils.isUndefinedOrNullOrEmptyObject(notification)) {
+      setCount(notification.items.length);
+    }
+  }, [notification]);
 
   const getNotificationWrap = () => {
     if (Utils.isUndefinedOrNullOrEmptyObject(notification)) {
@@ -32,9 +36,9 @@ function Notification({ notification, getNotification }) {
     return items.map((item, index) => {
       const keys = `key-${index}`;
       const date1 = new Date(item.createdAt);
-      const date2 = new Date();
-      const diff = Math.abs(date1.getTime() - date2.getTime());
-      const hours = new Date(diff).getHours();
+      // const date2 = new Date();
+      // const diff = Math.abs(date1.getTime() - date2.getTime());
+      // const hours = new Date(diff).getHours();
       return (
         <li key={keys} className="notifications-not-read">
           <span className="notificationWrapper">
@@ -43,15 +47,21 @@ function Notification({ notification, getNotification }) {
             </span>
             <span className="notification-text">
               <strong>{item.notifier.displayName}</strong>
-              {item.notifyMessage}
+              <br />
+              <span className="message">
+                {item.notifyMessage}
+              </span>
+
               {/* <span className="text-primary"> Learn Prototype Faster</span> */}
               <br />
               {' '}
               <span className="time-ago">
-                {hours}
+                {/* {hours}
                 {' '}
                 hours ago
-                {' '}
+                {' '} */}
+
+                {Utils.formatDateAndTime(date1.getTime())}
               </span>
             </span>
           </span>
@@ -64,7 +74,7 @@ function Notification({ notification, getNotification }) {
     if (Utils.isUndefinedOrNullOrEmpty(notification.totalCount)) {
       return null;
     }
-    return (<span>{notification.totalCount}</span>);
+    return (<span className="alertIcon">{notification.totalCount}</span>);
   };
 
   return (
@@ -88,19 +98,19 @@ function Notification({ notification, getNotification }) {
             {getNotificationWrap()}
           </ul>
         </div>
-
-        { (!Utils.isUndefinedOrNullOrEmptyList(notification.item) && notification.item.length > 4) && (
-        <Link to="/notifications">
-          <span>
-            {' '}
-            Show All
-            {' '}
-            <i className="icon-line-awesome-long-arrow-right" />
-            {' '}
-          </span>
-        </Link>
-        ) }
-
+        <div className="dropdown-notifications-footer">
+          { count > 3 && (
+          <Link to="/notifications">
+            <span>
+              {' '}
+              Show All
+              {' '}
+              <i className="icon-line-awesome-long-arrow-right" />
+              {' '}
+            </span>
+          </Link>
+          ) }
+        </div>
       </div>
     </>
   );

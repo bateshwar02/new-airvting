@@ -76,10 +76,10 @@ function* addConversation({ formData }) {
   }
 }
 
-function* getNotifications() {
+function* getNotifications({ status }) {
   yield put(messageAction(true));
   try {
-    const apiCall = yield call(api.getNotifications);
+    const apiCall = yield call(api.getNotifications, status);
     if (apiCall.success) {
       yield put(updateNotifications(apiCall.data));
     }

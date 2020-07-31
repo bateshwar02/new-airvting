@@ -81,15 +81,8 @@ function Login({ setAction, signIn, socialLogin }) {
     signIn(formData);
   };
 
-  const onEnterPress = (e) => {
-    if (e.keyCode === 13 && e.shiftKey === false) {
-      e.preventDefault();
-      submit();
-    }
-  };
-
   document.onkeydown = function () {
-    if (window.event.keyCode == '13') {
+    if (window.event.keyCode === 13) {
       submit();
     }
   };
@@ -108,7 +101,7 @@ function Login({ setAction, signIn, socialLogin }) {
               <h2 className="mb-0"> Welcome back</h2>
               <p className="my-2">Login to manage your account.</p>
             </div>
-            <t.form.Form ref={loginForm} type={getFormSchema()} value={loginFormValue} options={getFormOptions()} onChange={onChange} onKeyDown={onEnterPress} onSubmit={submit} />
+            <t.form.Form ref={loginForm} type={getFormSchema()} value={loginFormValue} options={getFormOptions()} onChange={onChange} onSubmit={submit} />
             <div className="mt-4 uk-flex-middle -small uk-grid">
               <div className="uk-width-expand@s ">
                 <p>

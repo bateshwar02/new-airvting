@@ -115,7 +115,7 @@ function ContactUs({ contactUs, userData, inProcess }) {
   };
 
   document.onkeydown = function () {
-    if (window.event.keyCode == '13') {
+    if (window.event.keyCode === 13) {
       submit();
     }
   };

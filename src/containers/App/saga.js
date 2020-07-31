@@ -38,10 +38,7 @@ function* getNotificationSaga() {
     const notifCall = yield call(api.updateNotification);
     if (notifCall.success) {
       if (!Utils.isUndefinedOrNullOrEmptyObject(notifCall.data)) {
-        if (!Utils.isUndefinedOrNullOrEmptyList(notifCall.data)) {
-          yield put(updateNotification(notifCall.data));
-        }
-        return;
+        yield put(updateNotification(notifCall.data));
       }
     }
   } catch (e) {
@@ -54,10 +51,7 @@ function* getMessageSaga() {
     const msgCall = yield call(api.getMessageData);
     if (msgCall.success) {
       if (!Utils.isUndefinedOrNullOrEmptyObject(msgCall.data)) {
-        if (!Utils.isUndefinedOrNullOrEmptyList(msgCall.data)) {
-          yield put(updateMessage(msgCall.data));
-        }
-        return;
+        yield put(updateMessage(msgCall.data));
       }
     }
   } catch (e) {

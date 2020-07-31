@@ -5,18 +5,27 @@
  *
  */
 
-import React, { memo, useEffect } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { compose, bindActionCreators } from 'redux';
 import * as Actions from '../actions';
 import Utils from '../../../utils/common';
 import Loader from '../../../components/Loader';
 
-export function conversationList({ getNotification, notificationData, inProcess }) {
+export function conversationList({
+  getNotification, notificationData, inProcess, match
+}) {
+  const [tabMenu] = useState([{ name: 'Inbox', value: true }, { name: 'Activity', value: false }]);
+  const [defaultValue, setDefault] = useState(false);
+
   useEffect(() => {
+    const { params } = match;
     if (Utils.isUndefinedOrNullOrEmptyObject(notificationData)) {
-      getNotification();
+      const status = Utils.isUndefinedOrNull(params.status) ? params.status : false;
+      getNotification(status);
+      setDefault(status);
     }
   }, [notificationData]);
 
@@ -25,13 +34,12 @@ export function conversationList({ getNotification, notificationData, inProcess 
       return null;
     }
     const { items } = notificationData;
-
     if (Utils.isUndefinedOrNullOrEmptyList(items)) {
       return (
         <li>
           <span className="notificationWrapper">
             <div className="notification-text notification-msg-text">
-              <p>No Notification</p>
+              <p>No Data Found</p>
             </div>
           </span>
         </li>
@@ -41,9 +49,10 @@ export function conversationList({ getNotification, notificationData, inProcess 
     return items.map((item, index) => {
       const keys = `key-${index}`;
       const date1 = new Date(item.createdAt);
-      const date2 = new Date();
-      const diff = Math.abs(date1.getTime() - date2.getTime());
-      const hours = new Date(diff).getHours();
+      // console.log('date1 ==== ', date1.getTime());
+      // const date2 = new Date();
+      // const diff = Math.abs(date1.getTime() - date2.getTime());
+      // const hours = new Date(diff).getHours();
       return (
         <li key={keys} className="notifications-not-read">
           <span className="notificationWrapper">
@@ -65,9 +74,10 @@ export function conversationList({ getNotification, notificationData, inProcess 
             <div className="timer">
               <span className="notification-text">
                 <span className="time-ago">
-                  {hours}
+                  {/* {hours} */}
+                  {Utils.formatDateAndTime(date1.getTime())}
                   {' '}
-                  hours ago
+                  {/* hours ago */}
                   {' '}
                 </span>
               </span>
@@ -78,8 +88,36 @@ export function conversationList({ getNotification, notificationData, inProcess 
     });
   };
 
+  const getTabAction = (status) => {
+    setDefault(status);
+    getNotification(status);
+  };
+
+
+  const menuList = data => data.map((item, index) => {
+    const idx = `content-${index}`;
+    return (
+      <span
+        className={classNames('actionButton', { active: defaultValue === item.value })}
+        key={idx}
+        onClick={() => getTabAction(item.value)}
+        role="button"
+        tabIndex={0}
+      >
+        {item.name}
+      </span>
+    );
+  });
+
+  const menuTab = () => (
+    <div className="buttonWrapper menuWrap actionWrap">
+      <div className="listWrapper marginLeft">{menuList(tabMenu)}</div>
+    </div>
+  );
+
   return (
     <div className="uk-grid">
+      {menuTab()}
       <div className="message-mobile-box">
         <div className="all-message-box">
           <ul>
@@ -96,6 +134,7 @@ conversationList.propTypes = {
   notificationData: PropTypes.object.isRequired,
   getNotification: PropTypes.func.isRequired,
   inProcess: PropTypes.bool.isRequired,
+  match: PropTypes.object.isRequired,
 };
 
 

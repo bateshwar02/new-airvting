@@ -30,7 +30,7 @@ const Navigation = {
   productDetails: '/product-details/:id',
   contact: '/contact',
   bookmark: '/bookmark',
-  notifications: '/notifications',
+  notifications: '/notifications/:status?',
   push: (url) => {
     history.push(url);
   },

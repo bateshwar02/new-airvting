@@ -76,6 +76,8 @@ h3.product-title {
 .channal-card-creator{height: 42px; width: 42px;}
 
 button.button.default.circle.px-5.btn-subs.channal-btn.followButton {
-    display: inline-block;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 

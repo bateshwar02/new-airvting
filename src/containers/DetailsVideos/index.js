@@ -38,6 +38,7 @@ export function DetailsVideos({
   const { id } = match.params;
   const [isOpen, setOpen] = useState(false);
   const [gift, setGift] = useState('storeGift');
+  const [isFollow, setFollow] = useState(false);
 
   useEffect(() => {
     if (Utils.isUndefinedOrNullOrEmpty(id)) {
@@ -96,9 +97,9 @@ export function DetailsVideos({
           <div className="btn-subscribe">
             <div className="follow-follwing-channal-btn">
               <div>
-                {owner.isFollow && (
+                {(owner.isFollow || isFollow) && (
                 <div className="toggle3">
-                  <button onClick={() => followAction(owner.userId)} className="button default circle px-5 btn-subs channal-btn followButton " type="button">
+                  <button onClick={() => { followAction(owner.userId); setFollow(false); }} className="button default circle px-5 btn-subs channal-btn followButton " type="button">
                     Following
                     {fallowInProcess && (
                     <div className="loaderWrapper">
@@ -109,9 +110,9 @@ export function DetailsVideos({
                 </div>
                 )}
 
-                { !owner.isFollow && (
+                { (!owner.isFollow || !isFollow) && (
                 <div className="toggle3">
-                  <button onClick={() => followAction(owner.userId)} className="button default circle px-5 btn-subs channal-btn followButton " type="button">
+                  <button onClick={() => { followAction(owner.userId); setFollow(true); }} className="button default circle px-5 btn-subs channal-btn followButton " type="button">
                     Follow
                     {fallowInProcess && (
                     <div className="loaderWrapper">
@@ -186,13 +187,13 @@ export function DetailsVideos({
                   </div>
                   <div className="w50 text-right">
                     <ul className="gift-section">
-                      <span onClick={() => Navigation.push(Navigation.store)} role="button" tabIndex={0}>
+                      <span onClick={() => Navigation.push('/sh/airvtingweb/store')} role="button" tabIndex={0}>
                         <li><img src="assets/images/video-thumbal/Shopping-icon.png" alt="" /></li>
                       </span>
                       <span role="button" tabIndex={0} onClick={() => { setOpen(!isOpen); }}>
                         <li id="show"><img src="assets/images/video-thumbal/gift-icon.png" alt="" /></li>
                       </span>
-                      <span onClick={() => Navigation.push(Navigation.token)} role="button" tabIndex={0}>
+                      <span onClick={() => Navigation.push('/sh/airvtingweb/token')} role="button" tabIndex={0}>
                         <li><img src="assets/images/video-thumbal/star-icon2.png" alt="" /></li>
                       </span>
                     </ul>

@@ -89,17 +89,7 @@ function* getMyGiftSaga() {
   try {
     const callGift = yield call(api.getMyGift);
     if (callGift.success) {
-      // yield put(updateMyGift(callGift.data));
-      const data = {
-        giftDetail: [{
-          airToken: 1, createdAt: '2020-05-23T05:27:17.000000Z', isActive: true, quantity: 2, featuredImage: 'https://vridhisoftech.co.in/sh/airvtingApis/public/uploads/gifts/airVting_Icon_Set-01.png', giftId: '5b8f57e3-9ce8-11ea-93ad-fa163eeeaebe', title: 'HANDSHAKE', updatedAt: '2020-05-23T05:31:57.000000Z'
-        }, {
-          airToken: 1, createdAt: '2020-05-23T05:27:17.000000Z', isActive: true, quantity: 1, featuredImage: 'https://vridhisoftech.co.in/sh/airvtingApis/public/uploads/gifts/airVting_Icon_Set-02.png', giftId: '5b8f9095-9ce8-11ea-93ad-fa163eeeaebe', title: 'STAR', updatedAt: '2020-05-23T05:32:01.000000Z'
-        }],
-        totalGift: 3,
-        totalPages: 2
-      };
-      yield put(updateMyGift(data));
+      yield put(updateMyGift(callGift.data));
       yield put(updateStoreProcess(false));
       return;
     }
@@ -135,6 +125,7 @@ function* likeActionSaga({ post_id }) {
   try {
     const callGift = yield call(api.likePostAction, post_id);
     if (callGift.success) {
+      console.log('like === ', callGift);
       yield put(notifySuccess('Liked Post'));
       yield put(getVideoDetails(post_id));
       yield put(updateStoreProcess(false));

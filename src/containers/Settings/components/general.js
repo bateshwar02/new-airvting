@@ -219,9 +219,6 @@ function General({ userData, updateUser, inProcess }) {
         <t.form.Form ref={userFormRef} type={getFormSchema()} value={userFormData} options={getFormOptions()} onChange={onChange} />
       </div>
       <div className="uk-flex uk-flex-right p-4">
-        <button type="button" className="button soft-warning mr-2">
-          Cancle
-        </button>
         <button type="button" className="button warning" onClick={submit}>
           Save Changes
           {inProcess && (

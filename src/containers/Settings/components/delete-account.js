@@ -66,9 +66,6 @@ function Delete({ deactivateAccount }) {
         <t.form.Form ref={accRef} type={getFormSchema()} value={accFormData} options={getFormOptions()} onChange={onChange} />
       </div>
       <div className="uk-flex uk-flex-right p-4">
-        <button type="button" className="button soft-warning mr-2">
-          Cancle
-        </button>
         <button type="button" className="button warning" onClick={submit}>
           Delete Account
         </button>

@@ -135,7 +135,7 @@ function Payment({
           </div>
           <div>
             <label htmlFor="token">
-              <input id="token" type="checkbox" name="mycart-tokan-cheakbox" value={userDetail.airToken} onChange={checkboxCheck} checked={token == userDetail.airToken} />
+              <input id="token" type="checkbox" name="mycart-tokan-cheakbox" value={userDetail.airToken} onChange={checkboxCheck} checked={token === userDetail.airToken} />
               Do you want to use your token?
             </label>
           </div>

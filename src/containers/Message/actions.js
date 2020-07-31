@@ -78,8 +78,9 @@ export function updateNotifications(notificationData) {
   };
 }
 
-export function getNotification() {
+export function getNotification(status) {
   return {
-    type: GET_NOTIFICATION
+    type: GET_NOTIFICATION,
+    status
   };
 }
