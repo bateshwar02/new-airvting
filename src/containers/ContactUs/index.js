@@ -98,9 +98,9 @@ function ContactUs({ contactUs, userData, inProcess }) {
   });
 
 
-  const cancelAction = () => {
-    Navigation.push('/sh/airvtingweb/');
-  };
+  // const cancelAction = () => {
+  //   Navigation.push('/sh/airvtingweb/');
+  // };
 
   const submit = () => {
     setIsSubmitted(true);
@@ -133,9 +133,9 @@ function ContactUs({ contactUs, userData, inProcess }) {
             <t.form.Form ref={contactForm} type={getFormSchema()} value={contactUsForm} options={getFormOptions()} onChange={onChange} />
           </div>
           <div className="uk-flex uk-flex-right p-4">
-            <button type="button" className="button soft-warning mr-2" onClick={cancelAction}>
+            {/* <button type="button" className="button soft-warning mr-2" onClick={cancelAction}>
               Cancle
-            </button>
+            </button> */}
             <button type="button" className="button warning" onClick={submit}>
               Submit
             </button>

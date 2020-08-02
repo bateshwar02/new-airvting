@@ -121,7 +121,6 @@ export function Live({ postData, userData }) {
 
   useEffect(() => {
     if (window) {
-      console.log('sdsd');
       const publisher = new window.red5prosdk.RTCPublisher();
       // Initialize
       publisher.init({

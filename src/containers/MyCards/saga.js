@@ -44,7 +44,6 @@ function* getCardSaga() {
     yield put(notifyError({ message: apiData.message }));
   } catch (e) {
     yield put(updateProcessAction(false));
-    console.log('sign in error ====', e);
     yield put(notifyError(e));
   }
 }
@@ -64,7 +63,6 @@ function* deleteCardSaga({ id }) {
     yield put(notifyError({ message: apiData.message }));
   } catch (e) {
     yield put(updateProcessAction(false));
-    console.log('sign in error ====', e);
     yield put(notifyError(e));
   }
 }
@@ -85,7 +83,6 @@ function* getCardDetailsSaga({ id }) {
     yield put(notifyError({ message: apiData.message }));
   } catch (e) {
     yield put(updateProcessAction(false));
-    console.log('sign in error ====', e);
     yield put(notifyError(e));
   }
 }

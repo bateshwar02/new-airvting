@@ -38,5 +38,17 @@ const Service = {
     return Request.get(`api/v1/users/${userId}/notifications?paginate=1&perPage=200&isMessage=${status}`);
   },
 
+  deleteNotification(para) {
+    const userId = cookie.get('userId');
+    if (Utils.isUndefinedOrNullOrEmpty(userId)) {
+      return null;
+    }
+    return Request.delete(`api/v1/users/${userId}/notifications`, para);
+  },
+
+  readNotification(notifications_id) {
+    return Request.get(`api/v1/notifications/${notifications_id}/read`);
+  }
+
 };
 export default Service;

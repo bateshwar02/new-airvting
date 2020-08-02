@@ -66,7 +66,7 @@ export function DetailsVideos({
   }, [videoData]);
 
   const {
-    _id, mediaUrl, owner, title, viewers, createdAt, totalLikes
+    _id, mediaUrl, owner, title, viewers, createdAt, totalLikes, isLike
   } = videoData;
 
   const date = new Date(createdAt);
@@ -99,8 +99,8 @@ export function DetailsVideos({
               <div>
                 {(owner.isFollow || isFollow) && (
                 <div className="toggle3">
-                  <button onClick={() => { followAction(owner.userId); setFollow(false); }} className="button default circle px-5 btn-subs channal-btn followButton " type="button">
-                    Following
+                  <button onClick={() => { followAction(owner.userId, isFollow); setFollow(false); }} className="button default circle px-5 btn-subs channal-btn followButton " type="button">
+                    Unfollow
                     {fallowInProcess && (
                     <div className="loaderWrapper">
                       <div className="customLoader" />
@@ -112,7 +112,7 @@ export function DetailsVideos({
 
                 { (!owner.isFollow || !isFollow) && (
                 <div className="toggle3">
-                  <button onClick={() => { followAction(owner.userId); setFollow(true); }} className="button default circle px-5 btn-subs channal-btn followButton " type="button">
+                  <button onClick={() => { followAction(owner.userId, isFollow); setFollow(true); }} className="button default circle px-5 btn-subs channal-btn followButton " type="button">
                     Follow
                     {fallowInProcess && (
                     <div className="loaderWrapper">
@@ -217,8 +217,8 @@ export function DetailsVideos({
                 <span>60,723,169 views </span>
               </div> */}
               <div className="video-likes">
-                <div className="like-btn" uk-tooltip="I like it" onClick={() => likeAction(_id)}>
-                  <i className="uil-thumbs-up" />
+                <div className="like-btn" uk-tooltip={`I ${isLike ? 'unlike' : 'like'} it`} onClick={() => { likeAction(_id, isLike); }}>
+                  {isLike ? <i className="uil-thumbs-down" /> : <i className="uil-thumbs-up" /> }
                   <span className="likes">{totalLikes}</span>
                 </div>
                 <div className="video-info-element">

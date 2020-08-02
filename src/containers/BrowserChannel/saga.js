@@ -65,12 +65,16 @@ function* bookMarkActionSaga({ id }) {
   }
 }
 
-function* followUserSaga({ id }) {
+function* followUserSaga({ id, isFollow }) {
   yield put(updateInProcess(true));
   try {
     const follow = yield call(api.followUser, id);
     if (follow.success) {
-      yield put(notifySuccess('Follow Action Success.'));
+      if (isFollow) {
+        yield put(notifySuccess('Unfollow Action Successfully done.'));
+      } else {
+        yield put(notifySuccess('Follow Action Successfully done.'));
+      }
       yield put(getUserDataById(id));
       yield put(updateInProcess(false));
       return;

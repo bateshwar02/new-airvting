@@ -46,7 +46,6 @@ export function Followers({
     }
     const { postDetail } = postDataByUser;
     return postDetail.map((item, index) => {
-      console.log('url === ', item);
       const keys = `key-${index}`;
       const date = new Date(item.createdAt);
       const ticks = date.getTime();

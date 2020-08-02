@@ -86,7 +86,7 @@ function Notification({ notification, getNotification }) {
       <div uk-dropdown="pos: top-right;mode:click ; animation: uk-animation-slide-bottom-small" className="dropdown-notifications">
         <div className="dropdown-notifications-headline">
           <h4>Notifications </h4>
-          <Link to="/notifications">
+          <Link to="/notifications/false">
             <span>
               <i className="icon-feather-settings" uk-tooltip="title: Show All Notifications  ; pos: left" />
             </span>
@@ -100,7 +100,7 @@ function Notification({ notification, getNotification }) {
         </div>
         <div className="dropdown-notifications-footer">
           { count > 3 && (
-          <Link to="/notifications">
+          <Link to="/notifications/false">
             <span>
               {' '}
               Show All

@@ -1,10 +1,14 @@
+/* eslint-disable no-unused-expressions */
+/* eslint-disable react/jsx-no-duplicate-props */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
+import cookie from 'cookies-js';
 import React, { memo, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose, bindActionCreators } from 'redux';
+import { GoogleLogout } from 'react-google-login';
 import Utils from '../../utils/common';
 import * as Actions from '../../containers/App/action';
 import Navigation from '../../utils/navigation';
@@ -19,6 +23,8 @@ function Header({
 }) {
   const [userProfileImg, setUserProfileImage] = useState('assets/images/avatars/avatar-1.jpg');
   const [cartCount, setCartCount] = useState(0);
+  const gaLogin = cookie.get('gaLogin');
+
   useEffect(() => {
     if (!Utils.isUndefinedOrNullOrEmptyObject(userData)) {
       const { userDetail } = userData;
@@ -38,6 +44,11 @@ function Header({
   }, [cartData]);
 
   const { userDetail } = userData;
+  const GoogleLogoutAcction = () => {
+    cookie.expire(gaLogin);
+    logout();
+  };
+
   const nightMode = () => {
     const isNightMode = localStorage.getItem('gmtNightMode');
     document.documentElement.classList.toggle('night-mode');
@@ -141,10 +152,15 @@ function Header({
           </span>
         </li>
         <li>
-          <span className="profileMenu" role="button" onClick={logout} tabIndex={-1}>
+          <span className="profileMenu" role="button" role="button" tabIndex={0} onClick={() => { Utils.isUndefinedOrNull(gaLogin) && logout(); }}>
             <i className="icon-feather-log-out" />
-            {' '}
-            Sign-out
+            {(!Utils.isUndefinedOrNull(gaLogin) && gaLogin) ? (
+              <GoogleLogout
+                clientId="422703669313-7aqglrljcqpa6il48km7bpfiq55cggnr.apps.googleusercontent.com"
+                buttonText=" Sign-out"
+                onLogoutSuccess={GoogleLogoutAcction}
+              />
+            ) : 'Sign-out'}
           </span>
         </li>
       </ul>

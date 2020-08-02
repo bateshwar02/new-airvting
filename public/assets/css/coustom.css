@@ -757,7 +757,7 @@ padding: 10px;
     margin-left: 10px;
 }
 span.my-gift-store-icon-no {
-    position: absolute;
+    /* position: absolute;
     top: 0px;
     right: 32px;
     background: #fe7605;
@@ -769,7 +769,23 @@ span.my-gift-store-icon-no {
     border-radius: 50%;
     color: white;
     z-index: 99;
-    font-size: 12px;
+    font-size: 12px; */
+
+    position: absolute;
+    top: 2px;
+    right: 32px;
+    background: #fe7605;
+    padding: 2px 2px;
+    width: 20px;
+    height: 20px;
+    line-height: 14px;
+    border-radius: 50%;
+    color: white;
+    z-index: 99;
+    font-size: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .my-gift-store-main-hadding {
     color: #000;

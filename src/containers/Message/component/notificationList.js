@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/aria-role */
+/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
+/* eslint-disable jsx-a11y/tabindex-no-positive */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /**
  *
@@ -15,7 +18,7 @@ import Utils from '../../../utils/common';
 import Loader from '../../../components/Loader';
 
 export function conversationList({
-  getNotification, notificationData, inProcess, match
+  getNotification, notificationData, inProcess, match, deleteAll, readNotifications
 }) {
   const [tabMenu] = useState([{ name: 'Inbox', value: true }, { name: 'Activity', value: false }]);
   const [defaultValue, setDefault] = useState(false);
@@ -55,7 +58,7 @@ export function conversationList({
       // const hours = new Date(diff).getHours();
       return (
         <li key={keys} className="notifications-not-read">
-          <span className="notificationWrapper">
+          <span className="notificationWrapper" role="button" tabIndex={0} onClick={() => { readNotifications(item._id, defaultValue); }}>
             <div className="notifierWrap">
               <div className="notifier">
                 <span className="notification-icon">
@@ -112,6 +115,9 @@ export function conversationList({
   const menuTab = () => (
     <div className="buttonWrapper menuWrap actionWrap">
       <div className="listWrapper marginLeft">{menuList(tabMenu)}</div>
+      <div className="deleteButtonWrapp">
+        <span className="actionButton" role="butoon" tabIndex={1} onClick={() => deleteAll(defaultValue)}> Delete All </span>
+      </div>
     </div>
   );
 
@@ -135,6 +141,8 @@ conversationList.propTypes = {
   getNotification: PropTypes.func.isRequired,
   inProcess: PropTypes.bool.isRequired,
   match: PropTypes.object.isRequired,
+  deleteAll: PropTypes.func.isRequired,
+  readNotifications: PropTypes.func.isRequired,
 };
 
 

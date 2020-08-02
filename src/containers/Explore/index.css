@@ -43,7 +43,7 @@
 
 .buttonWrapper .active {
     color: #f07015 !important;
-    border: 1px solid #f07015;
+    border-color: #f07015;
 }
 
 .actionSpan {cursor: pointer;}

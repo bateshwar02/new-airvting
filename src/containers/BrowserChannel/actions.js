@@ -50,9 +50,10 @@ export function bookMarkAction({ id }) {
   };
 }
 
-export function followAction(id) {
+export function followAction(id, isFollow) {
   return {
     type: FOLLOW_ACTION,
-    id
+    id,
+    isFollow
   };
 }

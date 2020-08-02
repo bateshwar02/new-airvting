@@ -66,12 +66,16 @@ function* getCommentSaga({ id }) {
   }
 }
 
-function* followUserSaga({ id }) {
+function* followUserSaga({ id, isFollow }) {
   yield put(updateFallowInProcess(true));
   try {
     const follow = yield call(api.followUser, id);
     if (follow.success) {
-      yield put(notifySuccess('Follow Action Success.'));
+      if (isFollow) {
+        yield put(notifySuccess('Unfollow Action Successfully done.'));
+      } else {
+        yield put(notifySuccess('Follow Action Successfully done.'));
+      }
       yield put(updateFallowInProcess(false));
       return;
     }
@@ -120,13 +124,16 @@ function* getStoreGiftSaga() {
   }
 }
 
-function* likeActionSaga({ post_id }) {
+function* likeActionSaga({ post_id, isLike }) {
   yield put(updateStoreProcess(true));
   try {
     const callGift = yield call(api.likePostAction, post_id);
     if (callGift.success) {
-      console.log('like === ', callGift);
-      yield put(notifySuccess('Liked Post'));
+      if (isLike) {
+        yield put(notifySuccess('Unlike Post.'));
+      } else {
+        yield put(notifySuccess('Like Post.'));
+      }
       yield put(getVideoDetails(post_id));
       yield put(updateStoreProcess(false));
       return;

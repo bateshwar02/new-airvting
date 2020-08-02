@@ -52,10 +52,11 @@ export function updateCommentData({ commentData }) {
   };
 }
 
-export function followAction(id) {
+export function followAction(id, isFollow) {
   return {
     type: FOLLOW_ACTION,
     id,
+    isFollow
   };
 }
 
@@ -106,10 +107,11 @@ export function updateStoreProcess(storeProccess) {
   };
 }
 
-export function likeAction(post_id) {
+export function likeAction(post_id, isLike) {
   return {
     type: LIKE_ACTION_POST,
-    post_id
+    post_id,
+    isLike
   };
 }
 

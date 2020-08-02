@@ -5,7 +5,7 @@
  */
 
 import {
-  UPDATE_DATA, UPDATE_IN_PROCESS, GET_CONVERSATION_DATA, ADD_CONVERSATION, ADD_CONVERSATION_REPLLY, UPDATE_CONVERSATION, GET_CONVERSATION_BY_ID, IS_ADD_MESSAGE, ADD_MESSAGE_ACTION, UPDATE_NOTIFICATIONS, GET_NOTIFICATION
+  UPDATE_DATA, UPDATE_IN_PROCESS, GET_CONVERSATION_DATA, ADD_CONVERSATION, ADD_CONVERSATION_REPLLY, UPDATE_CONVERSATION, GET_CONVERSATION_BY_ID, IS_ADD_MESSAGE, ADD_MESSAGE_ACTION, UPDATE_NOTIFICATIONS, GET_NOTIFICATION, DELETE_ALL, READ_NOTIFICATION
 } from './constants';
 
 export function updateData(messageData) {
@@ -81,6 +81,21 @@ export function updateNotifications(notificationData) {
 export function getNotification(status) {
   return {
     type: GET_NOTIFICATION,
+    status
+  };
+}
+
+export function deleteAll(status) {
+  return {
+    type: DELETE_ALL,
+    status
+  };
+}
+
+export function readNotifications(id, status) {
+  return {
+    type: READ_NOTIFICATION,
+    id,
     status
   };
 }

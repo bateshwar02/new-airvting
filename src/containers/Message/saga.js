@@ -1,12 +1,14 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import Utils from '../../utils/common';
-import { notifyError, notifySuccess } from '../App/action';
+import {
+  notifyError, notifySuccess, getNotification as notificationCount, getMessage
+} from '../App/action';
 
 import {
-  GET_CONVERSATION_DATA, ADD_CONVERSATION, GET_CONVERSATION_BY_ID, ADD_CONVERSATION_REPLLY, GET_NOTIFICATION
+  GET_CONVERSATION_DATA, ADD_CONVERSATION, GET_CONVERSATION_BY_ID, ADD_CONVERSATION_REPLLY, GET_NOTIFICATION, DELETE_ALL, READ_NOTIFICATION
 } from './constants';
 import {
-  updateData, updateInProcess, updateConversationById, getConversationById, getConversation, addMessageAction, messageAction, updateNotifications
+  updateData, updateInProcess, updateConversationById, getConversationById, getConversation, addMessageAction, messageAction, updateNotifications, getNotification
 } from './actions';
 import api from './api';
 
@@ -90,6 +92,45 @@ function* getNotifications({ status }) {
   }
 }
 
+function* deleteSaga({ status }) {
+  yield put(updateInProcess(true));
+  try {
+    const para = { isMessage: `${status}` };
+    const apiCall = yield call(api.deleteNotification, para);
+    if (apiCall.success) {
+      yield put(getNotification(status));
+      if (status) {
+        yield put(getMessage());
+      } else {
+        yield put(notificationCount());
+      }
+    }
+    yield put(updateInProcess(false));
+  } catch (e) {
+    yield put(updateInProcess(false));
+    yield put(notifyError(e));
+  }
+}
+
+function* readNotification({ id, status }) {
+  yield put(updateInProcess(true));
+  try {
+    const apiCall = yield call(api.readNotification, id);
+    if (apiCall.success) {
+      yield put(getNotification(status));
+      if (status) {
+        yield put(getMessage());
+      } else {
+        yield put(notificationCount());
+      }
+    }
+    yield put(updateInProcess(false));
+  } catch (e) {
+    yield put(updateInProcess(false));
+    yield put(notifyError(e));
+  }
+}
+
 
 export default function* followingSaga() {
   yield takeLatest(GET_CONVERSATION_DATA, getConversationDeatils);
@@ -97,4 +138,6 @@ export default function* followingSaga() {
   yield takeLatest(ADD_CONVERSATION_REPLLY, addReply);
   yield takeLatest(ADD_CONVERSATION, addConversation);
   yield takeLatest(GET_NOTIFICATION, getNotifications);
+  yield takeLatest(DELETE_ALL, deleteSaga);
+  yield takeLatest(READ_NOTIFICATION, readNotification);
 }

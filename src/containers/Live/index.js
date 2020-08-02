@@ -36,7 +36,6 @@ export function Live({ postData, userData }) {
     const c = document.getElementById('capture-canvas');
     const d = c.toDataURL('image/png');
     setImage(d);
-    console.log('image=====', d);
   };
 
   const captureImage = () => {
@@ -101,7 +100,7 @@ export function Live({ postData, userData }) {
           console.error(error);
         });
     }
-  }, []);
+  }, [postData, userData]);
 
   const getContent = () => (
     <div className="main_content content-expand">

@@ -64,7 +64,7 @@ export function User({
                   {' '}
                   <div>
                     <div className="toggle3" aria-hidden="false">
-                      <button className="button default circle px-5 btn-subs channal-btn " type="button" onClick={() => followAction(userDetail._id)}>
+                      <button className="button default circle px-5 btn-subs channal-btn " type="button" onClick={() => followAction(userDetail._id, userDetail.isFollow)}>
                         {userDetail.isFollow ? 'Unfollow' : 'Follow' }
                         {inProcess && (
                         <div className="loaderWrapper">

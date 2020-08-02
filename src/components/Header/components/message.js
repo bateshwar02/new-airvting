@@ -48,10 +48,6 @@ function Message({ message, getMessage }) {
               <strong>{item.notifier.displayName}</strong>
               <p>{item.notifyMessage}</p>
               <br />
-              <span className="message">
-                {item.notifyMessage}
-              </span>
-              <br />
               <span className="time-ago">
                 {Utils.formatDateAndTime(date1.getTime())}
                 {/* {' '}
@@ -95,7 +91,7 @@ function Message({ message, getMessage }) {
 
         <div className="dropdown-notifications-footer">
           { count > 3 && (
-            <Link to="/message">
+            <Link to="/message/true">
               <span>
                 {' '}
                 Show All

@@ -34,7 +34,8 @@ export default function setBrowserInfo(state = initialState, action) {
     case UPDATE_POST_DATA:
       return {
         ...state,
-        postData: action.postData
+        postData: action.postData,
+        isAddPost: action.isAddPost
       };
     case UPDATE_PRODUCT_OPTION:
       return {

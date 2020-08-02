@@ -51,7 +51,7 @@ export function Following({
               </Link>
               <div className="text-center">
                 <div className="toggle1" aria-hidden="false">
-                  <button className="button default custom-btn" type="button" uk-toggle="target: .toggle1" onClick={() => followAction(item._id)}>
+                  <button className="button default custom-btn" type="button" onClick={() => followAction(item._id)}>
                     Remove
                   </button>
                 </div>

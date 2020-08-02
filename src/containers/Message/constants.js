@@ -16,3 +16,5 @@ export const ADD_MESSAGE_ACTION = 'app/MyChannel/ADD_MESSAGE_ACTION';
 export const GET_NOTIFICATION = 'app/MyChannel/GET_NOTIFICATION';
 export const UPDATE_NOTIFICATIONS = 'app/MyChannel/UPDATE_NOTIFICATIONS';
 export const UPDATE_INBOX = 'app/MyChannel/UPDATE_INBOX';
+export const DELETE_ALL = 'app/MyChannel/DELETE_ALL';
+export const READ_NOTIFICATION = 'app/MyChannel/READ_NOTIFICATION';

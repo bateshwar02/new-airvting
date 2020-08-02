@@ -1,3 +1,4 @@
+import cookie from 'cookies-js';
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import GoogleLogin from 'react-google-login';
@@ -21,6 +22,7 @@ function Google({ socialLogin }) {
     formData.socialToken = !Utils.isUndefinedOrNullOrEmpty(tokenId) ? tokenId : '';
     formData.socialType = 'google';
     formData.username = '';
+    cookie.set('gaLogin', true, { expires: Infinity });
     socialLogin(formData);
   };
 
@@ -35,7 +37,7 @@ function Google({ socialLogin }) {
         buttonText="Google Login"
         onSuccess={responseGoogle}
         onFailure={error}
-        cookiePolicy="single_host_origin"
+        // cookiePolicy="single_host_origin"
       />
     </div>
   );
