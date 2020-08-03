@@ -26,7 +26,7 @@ function* getVideoDataSaga({ id }) {
     return;
   } catch (e) {
     yield put(updateInProcess(false));
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 
@@ -44,7 +44,7 @@ function* addVideoCommentSaga({ formData, postId }) {
     yield put(updateActionInProcess(false));
     return;
   } catch (e) {
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 
@@ -62,7 +62,7 @@ function* getCommentSaga({ id }) {
     return;
   } catch (e) {
     yield put(updateInProcess(false));
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 
@@ -84,7 +84,7 @@ function* followUserSaga({ id, isFollow }) {
     return;
   } catch (e) {
     yield put(updateFallowInProcess(false));
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 
@@ -101,7 +101,7 @@ function* getMyGiftSaga() {
     yield put(updateStoreProcess(false));
     return;
   } catch (e) {
-    yield put(notifyError(e));
+    console.log(e);
     yield put(updateStoreProcess(false));
   }
 }
@@ -119,7 +119,7 @@ function* getStoreGiftSaga() {
     yield put(updateStoreProcess(false));
     return;
   } catch (e) {
-    yield put(notifyError(e));
+    console.log(e);
     yield put(updateStoreProcess(false));
   }
 }
@@ -142,7 +142,7 @@ function* likeActionSaga({ post_id, isLike }) {
     yield put(updateStoreProcess(false));
     return;
   } catch (e) {
-    yield put(notifyError(e));
+    console.log(e);
     yield put(updateStoreProcess(false));
   }
 }

@@ -21,7 +21,7 @@ function* getLickedVideos() {
     return;
   } catch (e) {
     yield put(updateInProcess({ inProcess: false }));
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 
@@ -38,15 +38,15 @@ function* bookMarkActionSaga({ id }) {
     yield put(updateInProcess({ inProcess: false }));
   } catch (e) {
     yield put(updateInProcess({ inProcess: false }));
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 
 function* updateVideoObjSaga({ mediaObj }) {
   try {
-    updateMediaObj({ mediaObj });
+   yield put(updateMediaObj({ mediaObj }));
   } catch (e) {
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 

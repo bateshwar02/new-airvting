@@ -4,7 +4,7 @@
 
 import { takeLatest, call, put } from 'redux-saga/effects';
 import Utils from '../../utils/common';
-import { notifyError, updateMediaObj } from '../App/action';
+import { updateMediaObj } from '../App/action';
 
 import { GET_HISTORY_DATA, UPDATE_VIDEO, GET_BOOKMARK_DATA } from './constants';
 import { updateData, updateInProcess, updateBookmar } from './actions';
@@ -22,15 +22,15 @@ function* getFeatured() {
     return;
   } catch (e) {
     yield put(updateInProcess({ inProcess: false }));
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 
 function* updateVideoObjSaga({ mediaObj }) {
   try {
-    updateMediaObj({ mediaObj });
+    yield put(updateMediaObj({ mediaObj }));
   } catch (e) {
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 
@@ -47,7 +47,7 @@ function* getBookmarkSaga() {
     return;
   } catch (e) {
     yield put(updateInProcess({ inProcess: false }));
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 

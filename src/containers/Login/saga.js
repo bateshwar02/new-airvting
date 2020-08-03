@@ -30,7 +30,7 @@ function* signUpSaga({ formData }) {
     yield put(updateProcessAction(false));
   } catch (e) {
     yield put(updateProcessAction(false));
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 
@@ -51,7 +51,7 @@ function* signInSaga({ formData }) {
     yield put(notifyError({ message: signInCall.message }));
   } catch (e) {
     yield put(updateProcessAction(false));
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 
@@ -72,7 +72,7 @@ function* socialLoginSaga({ formData }) {
     yield put(notifyError({ message: signInCall.message }));
   } catch (e) {
     yield put(updateProcessAction(false));
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 
@@ -92,7 +92,7 @@ function* sedEmailToResetPass({ formData }) {
     yield put(notifyError({ message: signInCall.message }));
   } catch (e) {
     yield put(updateProcessAction(false));
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 

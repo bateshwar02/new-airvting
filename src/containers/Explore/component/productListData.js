@@ -29,6 +29,7 @@ function Product({ id, productLikedAction }) {
       });
     }
   }, []);
+
   const getContent = () => {
     if (Utils.isUndefinedOrNullOrEmptyList(childData) && !isProcess) {
       return (
@@ -57,7 +58,7 @@ function Product({ id, productLikedAction }) {
                   $
                   {Utils.convertCurrency(Utils.getRoundOfValue(item.priceSale, 2))}
                 </p>
-                <p className="time-ago">
+                <p className="time-ago product">
                   <i className="fa fa-clock-o" aria-hidden="true" />
                   <span>
                     {' '}

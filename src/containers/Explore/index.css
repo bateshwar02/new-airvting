@@ -81,3 +81,6 @@ button.button.default.circle.px-5.btn-subs.channal-btn.followButton {
     justify-content: center;
 }
 
+p.time-ago.product {
+    display: contents;
+}

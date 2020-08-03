@@ -27,7 +27,7 @@ function* getTokenSaga({ formData }) {
     yield put(updateProcessAction(false));
   } catch (e) {
     yield put(updateProcessAction(false));
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 

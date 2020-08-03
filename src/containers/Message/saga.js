@@ -24,7 +24,7 @@ function* getConversationDeatils() {
     return;
   } catch (e) {
     yield put(updateInProcess(false));
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 
@@ -41,7 +41,7 @@ function* getConversationDeatilsById({ id }) {
     return;
   } catch (e) {
     yield put(updateInProcess(false));
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 
@@ -57,7 +57,7 @@ function* addReply({ formData, id }) {
     return;
   } catch (e) {
     yield put(updateInProcess(false));
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 

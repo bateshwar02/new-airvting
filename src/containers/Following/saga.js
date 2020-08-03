@@ -18,27 +18,13 @@ function* getFollowing() {
       if (!Utils.isUndefinedOrNullOrEmptyObject(followingData.data) && !Utils.isUndefinedOrNullOrEmptyList(followingData.data.userDetail)) {
         yield put(updateFollowingData({ followingData: followingData.data.userDetail }));
       }
-    } else {
-      const arrData = [
-        {
-          _id: '30cef825-9131-11ea-93ad-fa163eeeaebe',
-          createdAt: null,
-          displayName: 'Ajay Yadav',
-          featuredImage: 'https://vridhisoftech.co.in/sh/airvtingApis/public/uploads/usersProfile/1589631288.jpeg',
-          firstName: 'Ajay',
-          isLive: false,
-          lastName: 'Yadav',
-          username: 'Ajay',
-        },
-      ];
-
-      yield put(updateFollowingData({ followingData: arrData }));
     }
+
     yield put(updateInProcess(false));
     return;
   } catch (e) {
     yield put(updateInProcess(false));
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 
@@ -57,7 +43,7 @@ function* followUserSaga({ id }) {
     return;
   } catch (e) {
     yield put(updateInProcess(false));
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 

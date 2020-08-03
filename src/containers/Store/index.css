@@ -22,3 +22,19 @@
     .main_content_inner { min-height: 40 vh;}
 
     .video-grid-slider.mt-4.uk-slider.uk-slider-container{ margin-top: 45px !important;}
+
+    .airToken.dropdown-option-nav.buyToken {
+        min-width: 100px !important;
+        height: 40px;
+        margin-right: -12px;
+    }
+
+    .modalInnerContent.tokenModal {
+        max-width: 300px;
+        min-height: 210px !important;
+    }
+
+    .modalInnerContent .uk-grid-margin{
+        margin-top: 30px;
+    }
+

@@ -33,7 +33,7 @@ import Storegift from './components/storeGift';
 import './index.css';
 
 export function DetailsVideos({
-  match, getVideoDetails, videoData, inProcess, followAction, addVideoComment, actionInProcess, fallowInProcess, userData, likeAction
+  match, getVideoDetails, videoData, inProcess, followAction, actionInProcess, fallowInProcess, userData, likeAction, getComment
 }) {
   const { id } = match.params;
   const [isOpen, setOpen] = useState(false);
@@ -255,7 +255,7 @@ export function DetailsVideos({
           </div>
           <hr />
           {!Utils.isUndefinedOrNullOrEmpty(_id) && <GetComment /> }
-          {!Utils.isUndefinedOrNullOrEmpty(_id) && <Comment actionInProcess={actionInProcess} id={_id} addVideoComment={addVideoComment} userData={userData} /> }
+          {!Utils.isUndefinedOrNullOrEmpty(_id) && <Comment actionInProcess={actionInProcess} id={_id} getComment={getComment} userData={userData} /> }
         </div>
       </div>
       <Footer />
@@ -282,11 +282,11 @@ DetailsVideos.propTypes = {
   videoData: PropTypes.object.isRequired,
   inProcess: PropTypes.bool.isRequired,
   followAction: PropTypes.func.isRequired,
-  addVideoComment: PropTypes.func.isRequired,
   actionInProcess: PropTypes.bool.isRequired,
   fallowInProcess: PropTypes.bool.isRequired,
   userData: PropTypes.object.isRequired,
   likeAction: PropTypes.func.isRequired,
+  getComment: PropTypes.func.isRequired,
 };
 
 

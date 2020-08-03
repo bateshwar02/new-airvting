@@ -23,7 +23,7 @@ function* updateUserData({ userData, id }) {
     return;
   } catch (e) {
     yield put(updateInProcess({ inProcess: false }));
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 
@@ -41,7 +41,7 @@ function* updatePassData({ passData }) {
     return;
   } catch (e) {
     yield put(updateInProcess({ inProcess: false }));
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 
@@ -60,7 +60,7 @@ function* resetPassSaga({ passData }) {
     return;
   } catch (e) {
     yield put(updateInProcess({ inProcess: false }));
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 
@@ -79,7 +79,7 @@ function* verifyEmailSaga({ token }) {
     return;
   } catch (e) {
     yield put(updateInProcess({ inProcess: false }));
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 
@@ -103,7 +103,7 @@ function* getGiftSaga() {
     return;
   } catch (e) {
     yield put(updateInProcess({ inProcess: false }));
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 
@@ -121,7 +121,7 @@ function* deactivateAccountSaga() {
     return;
   } catch (e) {
     yield put(updateInProcess({ inProcess: false }));
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 

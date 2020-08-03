@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/label-has-for */
+/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /**
  *
@@ -5,26 +7,80 @@
  *
  */
 
-import React, { memo, useEffect } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose, bindActionCreators } from 'redux';
 import Utils from '../../../utils/common';
 import * as Actions from '../actions';
+import Modal from '../../../components/Modal';
 
 function TokenList({ aitTokenList, getAirToken, buyAirToken }) {
+  const [isToken, setToken] = useState(false);
+  const [tokenNumber, setTokenNumber] = useState(0);
+  const [isValidate, setValidate] = useState(false);
+  const [tokenData, setTokenData] = useState({});
+  const [error, setError] = useState('Please enter your query.');
+
   useEffect(() => {
     if (Utils.isUndefinedOrNullOrEmptyObject(aitTokenList)) {
       getAirToken();
     }
   }, [aitTokenList]);
 
-  const buyAirTokenData = (data) => {
+  const onChange = (e) => {
+    const { value } = e.target;
+    if (Utils.isUndefinedOrNull(value)) {
+      setValidate(true);
+      return;
+    }
+    setTokenNumber(e.target.value);
+    setValidate(false);
+  };
+
+  const buyAirTokenData = (evt) => {
+    evt.preventDefault();
+    if (isValidate) {
+      return;
+    }
+    if (Utils.isUndefinedOrNullOrEmpty(tokenNumber) || tokenNumber === 0) {
+      setError('Please eneter less than token quantity.');
+      setValidate(true);
+      return;
+    }
+    if (Number(tokenNumber) > Number(tokenData.quantity)) {
+      setError('Please eneter less than token quantity.');
+      setValidate(true);
+      return;
+    }
+    setValidate(false);
     const dataObj = {
-      Purchase: { receipt: 'transactionId.Web.Test' }, airTokenId: data._id, currency: 'INR', price: data.price, quantityToBuy: data.quantity, title: data.title
+      Purchase: { receipt: 'transactionId.Web.Test' }, airTokenId: tokenData._id, currency: 'INR', price: tokenData.price, quantityToBuy: tokenNumber, title: tokenData.title
     };
     buyAirToken(dataObj);
+    setToken(false);
   };
+
+  const getContenetToken = () => (
+    <div className="uk-grid-small uk-grid">
+      <div className="uk-width-1-1@s">
+        <div className="form-group form-group-depth-1 form-group-comment">
+          <label htmlFor="tfid-0-0" className="control-label">
+            <span>Token Number</span>
+          </label>
+          <div className="input-group">
+            <input placeholder="Enter token number" name="comment" type="number" className="form-control" value={tokenNumber} onChange={onChange} />
+          </div>
+          {isValidate && <span className="help-block error-block">{error}</span>}
+        </div>
+      </div>
+      <div className="uk-grid-margin">
+        <span type="button" className="button warning submitButton" role="button" tabIndex={0} onClick={buyAirTokenData}>
+          Submit
+        </span>
+      </div>
+    </div>
+  );
 
   const getContent = () => {
     if (Utils.isUndefinedOrNullOrEmptyObject(aitTokenList)) {
@@ -47,10 +103,10 @@ function TokenList({ aitTokenList, getAirToken, buyAirToken }) {
             <span className="btn-option butonWrap">
               <i className="icon-feather-more-vertical" />
             </span>
-            <div className="airToken dropdown-option-nav" uk-dropdown="pos: bottom-right ;mode : hover ;animation: uk-animation-slide-bottom-small">
+            <div className="airToken dropdown-option-nav buyToken" uk-dropdown="pos: bottom-right ;mode : hover ;animation: uk-animation-slide-bottom-small">
               <ul>
                 <li>
-                  <span onClick={() => buyAirTokenData(item)} role="button" tabIndex={0}> Buy Token </span>
+                  <span onClick={() => { setTokenData(item); setToken(true); }} role="button" tabIndex={0}> Buy Token </span>
                 </li>
               </ul>
             </div>
@@ -75,6 +131,8 @@ function TokenList({ aitTokenList, getAirToken, buyAirToken }) {
       <div className="contentWrap">
         {getContent()}
       </div>
+      { isToken && <Modal modalClass="tokenModal" onCancel={() => setToken(false)} modalHeader="" modalContent={getContenetToken()} hasFooter={false} /> }
+
     </div>
   );
 }

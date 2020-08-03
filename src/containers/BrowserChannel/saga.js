@@ -27,7 +27,7 @@ function* getChannelUser({ id }) {
     yield put(updateInProcess(false));
   } catch (e) {
     yield put(updateInProcess(false));
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 
@@ -44,7 +44,7 @@ function* getPostDataByUser({ id }) {
     yield put(updateInProcess(false));
   } catch (e) {
     yield put(updateInProcess(false));
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 
@@ -61,7 +61,7 @@ function* bookMarkActionSaga({ id }) {
     yield put(updateInProcess(false));
   } catch (e) {
     yield put(updateInProcess(false));
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 
@@ -84,7 +84,7 @@ function* followUserSaga({ id, isFollow }) {
     return;
   } catch (e) {
     yield put(updateInProcess(false));
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 

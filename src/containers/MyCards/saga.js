@@ -26,7 +26,7 @@ function* addCardSaga({ formData }) {
     yield put(updateProcessAction(false));
   } catch (e) {
     yield put(updateProcessAction(false));
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 
@@ -44,7 +44,7 @@ function* getCardSaga() {
     yield put(notifyError({ message: apiData.message }));
   } catch (e) {
     yield put(updateProcessAction(false));
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 
@@ -63,7 +63,7 @@ function* deleteCardSaga({ id }) {
     yield put(notifyError({ message: apiData.message }));
   } catch (e) {
     yield put(updateProcessAction(false));
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 
@@ -83,7 +83,7 @@ function* getCardDetailsSaga({ id }) {
     yield put(notifyError({ message: apiData.message }));
   } catch (e) {
     yield put(updateProcessAction(false));
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 

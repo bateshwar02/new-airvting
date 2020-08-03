@@ -1,6 +1,6 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import Utils from '../../utils/common';
-import { notifyError, notifySuccess } from '../App/action';
+import { notifySuccess } from '../App/action';
 import { CONTACT_US } from './constants';
 import { updateInProcess, submitAction } from './actions';
 import Navigation from '../../utils/navigation';
@@ -21,7 +21,7 @@ function* setContactUs({ data }) {
   } catch (e) {
     yield put(updateInProcess(false));
     yield put(submitAction(false));
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 

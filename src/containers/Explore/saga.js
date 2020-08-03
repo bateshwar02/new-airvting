@@ -26,7 +26,7 @@ function* getExploreDataSaga({ filter }) {
     yield put(updateInProcess({ inProcess: false }));
   } catch (e) {
     yield put(updateInProcess({ inProcess: false }));
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 
@@ -43,7 +43,7 @@ function* bookMarkActionSaga({ id }) {
     yield put(updateInProcess(false));
   } catch (e) {
     yield put(updateInProcess(false));
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 
@@ -54,7 +54,7 @@ function* getDataByFilterSaga({ filter }) {
     yield put(getExploreData(filter));
   } catch (e) {
     yield put(updateInProcess(false));
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 
@@ -73,7 +73,7 @@ function* getPeopleDataSaga({ filter }) {
     yield put(updateInProcess(false));
   } catch (e) {
     yield put(updateInProcess(false));
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 
@@ -91,7 +91,7 @@ function* getFollowActionSaga({ id }) {
     return;
   } catch (e) {
     yield put(updateFollowProcess(false));
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 
@@ -109,7 +109,7 @@ function* getProductDataSaga() {
     return;
   } catch (e) {
     yield put(updateInProcess(false));
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 
@@ -117,7 +117,7 @@ function* getCategorySaga() {
   try {
     yield put(getCategoryData(true));
   } catch (e) {
-    yield put(notifyError(e));
+    console.log(e);
   }
 }
 
